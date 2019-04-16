@@ -1,0 +1,108 @@
+.trial-window {
+    height: 100%;
+
+    .logo-text {
+        user-select: none;
+        display: block;
+        font-size: 16px;
+        font-family: 'Montserrat Regular';
+        font-weight: var(--font-weight);
+        color: var(--content-color);
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        display: block;
+        margin: auto;
+        max-width: 80%;
+        height: auto;
+        margin-bottom: 20px;
+        -webkit-user-drag: none;
+    }
+
+    .slide {
+        display: block;
+        margin: auto;
+        max-width: 100%;
+        height: auto;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-color: var(--content-color);
+        -webkit-user-drag: none;
+    }
+
+    .action-button {
+        margin: 20px;
+
+        .button-buy, 
+        .button-activate,
+        .button-continue {
+            border: 0;
+            outline: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: var(--font-weight);
+            font-family: 'Montserrat Regular';
+            color: var(--content-color);
+
+            &:active:not(:disabled) {
+                background-color: transparent !important;
+                border-radius: 0px;
+                filter: invert(50%);
+            }
+        }
+
+        .button-buy {
+            width: 105px;
+            height: 30px;
+            background-color: #3E3E3E;
+        }
+
+        .button-activate {
+            width: 170px;
+            height: 30px;
+            background-color: #3E3E3E;
+        }
+
+        .button-continue {
+            width: 150px;
+            height: 30px;
+            background-color: #00A1FF;
+        }
+    }
+
+    .overlay {
+        position: absolute;
+        width: 146px;
+        height: 100px;
+        z-index: 10;
+        right: 0;
+        border: 2px solid #00A1FF;
+        margin-right: 20px; 
+        background-color: rgba(0,0,0,0.5);
+
+        .days-remaining {
+            display: block;
+            user-select: none;
+            font-size: 46px;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 2px;
+            color: var(--content-color);
+            font-family: 'Nunito Bold';
+            font-weight: var(--font-weight);
+        }
+
+        .days-remaining-text {
+            display: block;
+            user-select: none;
+            font-size: 14px;
+            text-align: center;
+            color: var(--content-color);
+            font-family: 'Montserrat Regular';
+            font-weight: var(--font-weight);
+        }
+      }
+}

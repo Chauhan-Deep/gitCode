@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root{
+    --content-color: #ffffff;
+    --dialog-text-color: #ffffff;
+    --font-size: 18px;
+    --font-weight: 100;
+    --button-focus-color: #0E98E1;
+}
+
+@font-face {
+    font-family:"Montserrat Regular";
+    font-weight:100;
+    src: url("assets/fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+    font-family:"Montserrat Bold";
+    font-weight:100;
+    src: url("assets/fonts/Montserrat-Bold.ttf");
+}
+
+@font-face {
+    font-family:"Nunito Bold";
+    font-weight:100;
+    src: url("assets/fonts/Nunito-Bold.ttf");
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: #2A2A2A;
+}
+
+body {
+    overflow: hidden;
+}
