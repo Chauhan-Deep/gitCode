@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'qrk-trial-screen',
@@ -6,22 +6,11 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./trial-screen.component.scss']
 })
 export class TrialScreenComponent implements OnInit {
-  @ViewChild('continueTrialBtn')
-  continueBtnElRef: ElementRef;
-  @ViewChild('overlay')
-  overlayElRef: ElementRef;
-
   daysRemaining = 29;
 
-  constructor() { }
-
   ngOnInit() {
-    this.daysRemaining = ((<any>window).XPress) ? (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : 29;
-  }
-
-  isLoaded() {
-    this.overlayElRef.nativeElement.style.top = this.continueBtnElRef.nativeElement.offsetTop -
-      this.overlayElRef.nativeElement.offsetHeight + 8 + 'px';
+    this.daysRemaining = ((<any>window).XPress) ?
+      (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : this.daysRemaining;
   }
 
   buyNow() {
@@ -32,7 +21,7 @@ export class TrialScreenComponent implements OnInit {
     }
   }
 
-  continueTrial() {
+  closeDialog() {
     if ((<any>window).app) {
       (<any>window).app.dialogs.closeDialog();
     }

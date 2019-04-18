@@ -1,25 +1,18 @@
 <div class="trial-window">
-  <span class="logo-text">Thank you for trying</span>
-  <img class='logo' src="assets/qxp-logo.png" />
-  <img class='slide' src="assets/slide-01.png" (load)="isLoaded()"/>
-
-  <div class="action-button" fxLayoutAlign="space-between" fxLayout="row">
-    <div fxLayoutAlign="start" fxLayoutGap="20px">
-      <button class="button-buy" (click)="buyNow()">
-        <span>BUY NOW</span>
-      </button>
-      <button class="button-activate" (click)="activateLicense()">
-        <span>ACTIVATE LICENSE</span>
-      </button>
-    </div>
-    <div #continueTrialBtn fxLayoutAlign="end">
-      <button class="button-continue" (click)="continueTrial()">
-        <span>CONTINUE TRIAL</span>
-      </button>
+  <div class="background-container">
+    <img class='background' src="assets/images/background.png" />
+    <img class='logo' src="assets/images/logo.png" />
+    <img class='close' src="assets/images/close.png" (click)="closeDialog()" />
+    <div class='trial-text-container'>
+      <span class="days-number">{{daysRemaining}} Days</span>
+      <span class="days-remaining-text">remaining in your free trial.</span>
+      <span class="trial-text">Your trial of QuarkXPress is about to expire. Visit our store to buy now.</span>
+      <span class="qx-advantage">Save 25% with QuarkXPress Advantage.</span>
     </div>
   </div>
-  <div #overlay class="overlay">
-    <span class="days-remaining">{{daysRemaining}}</span>
-    <span class="days-remaining-text">Days Remaining</span>
+
+  <div class="action-button">
+    <div class="button-buy" (click)="buyNow()">Buy Now ></div>
+    <div class="button-activate" (click)="activateLicense()">Activate License</div>
   </div>
 </div>
