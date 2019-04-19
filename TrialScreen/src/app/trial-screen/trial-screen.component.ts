@@ -16,10 +16,12 @@ export class TrialScreenComponent implements OnInit {
   buyNow() {
     if ((<any>window).app) {
       (<any>window).app.launchApp(
-        'https://shop.quark.com/default.aspx?utm_source=QXP_App&utm_medium=PopUp&utm_campaign=Trial_Conversion&utm_content=Countdown.v1');
+        'https://www.quark.com/qxp-trial-purchase' +
+        '?utm_source=QXP_App&utm_medium=PopUp&utm_campaign=Trial_Conversion&utm_content=Countdown.v1');
     } else {
       window.open(
-        'https://shop.quark.com/default.aspx?utm_source=QXP_App&utm_medium=PopUp&utm_campaign=Trial_Conversion&utm_content=Countdown.v1',
+        'https://www.quark.com/qxp-trial-purchase' +
+        '?utm_source=QXP_App&utm_medium=PopUp&utm_campaign=Trial_Conversion&utm_content=Countdown.v1',
         '_blank');
     }
   }
