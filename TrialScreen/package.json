@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "build": "ng lint && ng build --prod --base-href ./ --aot true --output-hashing none --extract-licenses false",
+    "build": "ng lint TrialScreen && ng build --prod --base-href ./ --aot true --output-hashing none --extract-licenses false",
     "scmbuild": "npm install && npm run build",
     "test": "ng test",
     "lint": "ng lint",
