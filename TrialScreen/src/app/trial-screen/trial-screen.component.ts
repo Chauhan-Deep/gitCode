@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
+import { TranslateService } from '../translate/translate.service';
+
 @Component({
   selector: 'qrk-trial-screen',
   templateUrl: './trial-screen.component.html',
   styleUrls: ['./trial-screen.component.scss']
 })
 export class TrialScreenComponent implements OnInit {
-  daysRemaining = 29;
+  daysRemaining;
+
+  constructor(private translateService: TranslateService) { }
 
   ngOnInit() {
-    this.daysRemaining = ((<any>window).XPress) ?
-      (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : this.daysRemaining;
+    const days = ((<any>window).XPress) ?
+      (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : 29;
+    this.daysRemaining = this.translateService.localize('days').replace('^1', days);
   }
 
   buyNow() {

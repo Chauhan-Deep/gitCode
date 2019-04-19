@@ -4,15 +4,15 @@
     <img class='logo' src="assets/images/logo.png" />
     <img class='close' src="assets/images/close.png" (click)="closeDialog()" />
     <div class='trial-text-container'>
-      <span class="days-number">{{daysRemaining}} Days</span>
-      <span class="days-remaining-text">remaining in your free trial.</span>
-      <span class="trial-text">Your trial of QuarkXPress is about to expire. Visit our store to buy now.</span>
-      <span class="qx-advantage">Save 25% with QuarkXPress Advantage.</span>
+      <span class="days-number">{{ daysRemaining }}</span>
+      <span class="days-remaining-text"> {{ "remainingText" | translate }}</span>
+      <span class="trial-text"> {{ "trialText" | translate }}</span>
+      <span class="qx-advantage"> {{ "qxAdvantage" | translate }}</span>
     </div>
   </div>
 
   <div class="action-button">
-    <div class="button-buy" (click)="buyNow()">Buy Now ></div>
-    <div class="button-activate" (click)="activateLicense()">Activate License</div>
+    <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}</div>
+    <div class="button-activate" (click)="activateLicense()"> {{ "activate" | translate }}</div>
   </div>
 </div>
