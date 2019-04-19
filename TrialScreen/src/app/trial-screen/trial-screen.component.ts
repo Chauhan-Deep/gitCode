@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import { TranslateService } from '../translate/translate.service';
 
@@ -43,4 +43,9 @@ export class TrialScreenComponent implements OnInit {
       (<any>window).app.dialogs.closeDialog();
     }
   }
+
+  @HostListener('window:keydown.escape', ['$event'])
+    onEscape(event) {
+        this.closeDialog();
+    }
 }
