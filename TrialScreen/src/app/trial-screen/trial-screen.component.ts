@@ -9,6 +9,7 @@ import { TranslateService } from '../translate/translate.service';
 })
 export class TrialScreenComponent implements OnInit {
   daysRemaining;
+  numOfDays: number;
 
   constructor(private translateService: TranslateService) { }
 
@@ -16,6 +17,7 @@ export class TrialScreenComponent implements OnInit {
     const days = ((<any>window).XPress) ?
       (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : 29;
     this.daysRemaining = this.translateService.localize('days').replace('^1', days);
+    this.numOfDays = parseInt(days, 10);
   }
 
   buyNow() {
@@ -33,7 +35,12 @@ export class TrialScreenComponent implements OnInit {
 
   closeDialog() {
     if ((<any>window).app) {
-      (<any>window).app.dialogs.closeDialog();
+      if (this.numOfDays > 0) {
+        (<any>window).app.dialogs.closeDialog();
+      } else {
+        (<any>window).app.dialogs.closeDialog();
+        (<any>window).XPress.api.invokeGuiApi('XTQuitXPress', '');
+      }
     }
   }
 

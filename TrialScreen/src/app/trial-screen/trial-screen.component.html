@@ -4,9 +4,9 @@
     <img class='logo' src="assets/images/logo.png" />
     <img class='close' src="assets/images/close.png" (click)="closeDialog()" />
     <div class='trial-text-container'>
-      <span class="days-number">{{ daysRemaining }}</span>
-      <span class="days-remaining-text"> {{ "remainingText" | translate }}</span>
-      <span class="trial-text"> {{ "trialText" | translate }}</span>
+      <span class="days-number" *ngIf="numOfDays > 0">{{ daysRemaining }}</span>
+      <span class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : "thanksText"] | translate }} </span>
+      <span class="trial-text" [ngClass]="{ 'trial-text-margin' : numOfDays === 0 }"> {{ [numOfDays > 0 ? "trialText" : "evalText"] | translate }}</span>
     </div>
     <div class="qx-advantage"> {{ "qxAdvantage" | translate }}</div>
   </div>

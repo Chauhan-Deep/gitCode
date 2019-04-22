@@ -27,12 +27,15 @@
         margin: auto;
         height: auto;
         -webkit-user-drag: none;
+        user-select: none;
     }
 
     .close {
         position: absolute;
         top: 2%;
         right: 1%;
+        -webkit-user-drag: none;
+        user-select: none;
     }
 
     .trial-text-container {
@@ -64,6 +67,10 @@
             color: #ffffff;
             margin-top: 20px;
         }
+
+        .trial-text-margin {
+            margin-top: 50px;
+        }
     }
 
     .qx-advantage {
@@ -72,9 +79,10 @@
         left: 50%;
         font-family: 'Roboto Bold';
         margin-top: 20px;
-        // white-space: nowrap;
+        user-select: none;
         font-size: 2.8vmin;
         color: #fb1e4e;
+        user-select: none;
     }
 
     .action-button {
