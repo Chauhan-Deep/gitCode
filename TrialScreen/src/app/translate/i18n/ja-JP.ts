@@ -3,6 +3,7 @@ export const LANG_JA_JP_NAME = 'ja-JP';
 
 export const LANG_JA_JP_TRANS = {
     'days': '^1 Days',
+    'day': '^1 Day',
     'remainingText': 'remaining in your free trial.',
     'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
     'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',

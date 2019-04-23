@@ -16,7 +16,11 @@ export class TrialScreenComponent implements OnInit {
   ngOnInit() {
     const days = ((<any>window).XPress) ?
       (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : 29;
-    this.daysRemaining = this.translateService.localize('days').replace('^1', days);
+    if (days > 1) {
+      this.daysRemaining = this.translateService.localize('days').replace('^1', days);
+    } else {
+      this.daysRemaining = this.translateService.localize('day').replace('^1', days);
+    }
     this.numOfDays = parseInt(days, 10);
   }
 
@@ -46,13 +50,13 @@ export class TrialScreenComponent implements OnInit {
 
   activateLicense() {
     if ((<any>window).XPress) {
-      (<any>window).XPress.api.invokeGuiApi('XTShowEditLicenseDialog', '');
       (<any>window).app.dialogs.closeDialog();
+      (<any>window).XPress.api.invokeGuiApi('XTShowEditLicenseDialog', '');
     }
   }
 
   @HostListener('window:keydown.escape', ['$event'])
-    onEscape(event) {
-        this.closeDialog();
-    }
+  onEscape(event) {
+    this.closeDialog();
+  }
 }
