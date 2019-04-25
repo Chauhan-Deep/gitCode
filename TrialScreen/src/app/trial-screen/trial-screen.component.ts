@@ -39,12 +39,7 @@ export class TrialScreenComponent implements OnInit {
 
   closeDialog() {
     if ((<any>window).app) {
-      if (this.numOfDays > 0) {
-        (<any>window).app.dialogs.closeDialog();
-      } else {
-        (<any>window).app.dialogs.closeDialog();
-        (<any>window).XPress.api.invokeGuiApi('XTQuitXPress', '');
-      }
+      (<any>window).app.dialogs.closeDialog();
     }
   }
 
