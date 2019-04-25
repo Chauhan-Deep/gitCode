@@ -25,8 +25,8 @@ export class TrialScreenComponent implements OnInit {
   }
 
   buyNow() {
-    const buyUrl = 'https://www.quark.com/qxp-trial-purchase' +
-      '?utm_source=QXP_App&utm_medium=PopUp&utm_campaign=Trial_Conversion&utm_content=Countdown.v1';
+    const buyUrl = 'https://www.quark.com/qxp-trial-purchase?utm_source=' +
+      encodeURIComponent('QXP_App&utm_medium=PopUp&utm_campaign=Trial_Conversion&utm_content=Countdown.v1');
 
     if ((<any>window).app) {
       (<any>window).app.launchApp(buyUrl);
