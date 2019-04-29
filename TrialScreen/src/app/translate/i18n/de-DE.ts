@@ -7,8 +7,8 @@ export const LANG_DE_DE_TRANS = {
     'remainingText': 'bis die kostenlose Testversion endet.',
     'trialText': 'Ihre Testversion läuft bald ab. Besuchen Sie unseren Webshop, um QuarkXPress zu erwerben.',
     'qxAdvantage': 'Sparen Sie 25% mit QuarkXPress Advantage!',
-    'thanksText': 'Thank you for trying QuarkXPress.',
-    'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
+    'thanksText': 'Vielen Dank, dass Sie QuarkXPress testen.',
+    'evalText': 'Der Testzeitraum von QuarkXPress ist abgelaufen. Bitte besuchen Sie unseren Webshop, um QuarkXPress weiterhin zu nutzen.',
     'buy': 'Jetzt kaufen >',
     'activate': 'Lizenz aktivieren'
 };

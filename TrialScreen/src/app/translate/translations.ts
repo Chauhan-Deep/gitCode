@@ -7,7 +7,7 @@ import { LANG_EN_GB_NAME, LANG_EN_GB_TRANS } from './i18n/en-GB';
 import { LANG_EN_US_NAME, LANG_EN_US_TRANS } from './i18n/en-us';
 import { LANG_ES_ES_NAME, LANG_ES_ES_TRANS } from './i18n/es-ES';
 import { LANG_FI_FI_NAME, LANG_FI_FI_TRANS } from './i18n/fi-FI';
-import { LANG_FR_FR_NAME, LANG_FR_FR_TRANS } from './i18n/fr-fr';
+import { LANG_FR_FR_NAME, LANG_FR_FR_TRANS } from './i18n/fr-FR';
 import { LANG_IT_IT_NAME, LANG_IT_IT_TRANS } from './i18n/it-IT';
 import { LANG_JA_JP_NAME, LANG_JA_JP_TRANS } from './i18n/ja-JP';
 import { LANG_KO_KR_NAME, LANG_KO_KR_TRANS } from './i18n/ko-KR';
