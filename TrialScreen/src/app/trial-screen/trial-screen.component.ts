@@ -43,8 +43,8 @@ export class TrialScreenComponent implements OnInit {
 
   activateLicense() {
     if ((<any>window).XPress) {
-      (<any>window).app.dialogs.closeDialog();
       (<any>window).XPress.api.invokeGuiApi('XTShowEditLicenseDialog', '');
+      (<any>window).app.dialogs.closeDialog();
     }
   }
 
