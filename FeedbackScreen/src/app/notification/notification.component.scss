@@ -1,0 +1,26 @@
+#notifications {
+  #messageBar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1200;
+    overflow: hidden;
+    background-color: #fb1e4e;
+    color: #ffffff;
+    height: 36px;
+    display: none;
+    font-size: 16px;
+    line-height: 36px;
+    font-weight: 600;
+    text-align: center;
+    user-select: none;
+  }
+  .close {
+    position: fixed;
+    display: none;
+    right: 10px;
+    top: 0;
+    font-size: 20px;
+  }
+}

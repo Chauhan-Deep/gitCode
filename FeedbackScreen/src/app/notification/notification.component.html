@@ -1,0 +1,6 @@
+<div id="notifications">
+  <div id="messageBar" [style.display]="displayMessage">
+    <span class="inner-message" [innerHtml]="message"></span>
+    <span class="close" [style.display]="closeButtonDisplay" (click)="hideNotification()">&times;</span>
+  </div>
+</div>

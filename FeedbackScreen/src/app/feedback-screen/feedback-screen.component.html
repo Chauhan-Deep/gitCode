@@ -1,0 +1,46 @@
+<div #nps class="npsWrapper">
+    <header class="npsHeader">
+        <img src="assets/images/qxp-logo.png" />
+        <p>
+            We are always looking for ways to improve QuarkXPress.
+            <br />
+            Please take a moment to tell us about your experience.
+        </p>
+    </header>
+
+    <main class="npsMain">
+        <h1>
+            How likely are you to recommend<br />QuarkXPress to a friend?
+        </h1>
+
+        <form class="npsForm" id="npsForm" (submit)="submitFeedback($event)">
+            <div class="npsInput-container">
+                <!-- NPS inputs (0 - 10) -->
+                <div class="npsInputWrapper" *ngFor="let rate of ratingNumbers">
+                    <input type="checkbox" class="npsCheckbox" id="nps_{{rate}}" name="nps_value" value={{rate}}
+                        (click)="selectCheckbox($event)">
+                    <label for="nps_{{rate}}">{{ rate }}</label>
+                </div>
+            </div>
+
+            <ul class="npsOption-description-container">
+                <li>Not likely</li>
+                <li>Very likely</li>
+            </ul>
+
+            <!-- NPS feedback -->
+            <textarea #textArea name="nps_feedback" class="npsFeedback"
+                placeholder="What can we do to improve experience?&#x0a;&#x0a;Your message will be passed directly to Product Management / Technical Support teams and help improve the product for everyone."></textarea>
+
+            <!-- NPS submit -->
+            <input type="submit" class="npsSubmit" value="SEND" [disabled]='disabled'
+                [ngClass]="{ 'disabled' : disabled }" />
+        </form>
+
+    </main>
+</div>
+<div id="loaderScreen" [style.display]="loaderDisplay">
+    <div [style.display]="loaderDisplay" id="loadingLogo">
+        <img [style.opacity]="imageOpacity" id="loadingImage" src="assets/images/spinner.gif">
+    </div>
+</div>
