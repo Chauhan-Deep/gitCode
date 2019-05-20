@@ -37,12 +37,12 @@ export class SalesforceService {
         return this.http.get<any>(endpoint, httpOptions);
     }
 
-    sendFeedback(token, userRating, userComments, productVersion, productSerialNumber, productName) {
+    sendFeedback(token, userRating, userEmail, userComments, productVersion, productSerialNumber, productName) {
         const endpoint = 'https://quarksoftware--playground.my.salesforce.com/services/data/v20.0/sobjects/Product_Survey__c';
         const body = {
             'Comments__c': userComments,
             'Product_Version__c': productVersion,
-            'User_Detail__c': 'ygulati@quark.com',
+            'User_Detail__c': userEmail,
             'Product_Score__c': userRating,
             'License__c': productSerialNumber,
             'name': productName

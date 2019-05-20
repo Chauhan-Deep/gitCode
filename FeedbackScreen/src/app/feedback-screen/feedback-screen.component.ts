@@ -19,11 +19,12 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
 
   @ViewChild('nps') npsEl;
   @ViewChild('textArea') textAreaEl;
+  @ViewChild('email') emailTextEl;
 
   constructor(private salesforceService: SalesforceService, private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.ratingNumbers = Array(10).fill(1).map((x, i) => i + 1);
+    this.ratingNumbers = Array(11).fill(1).map((x, i) => i);
     window.addEventListener('online', this.showConnectionStatus.bind(this));
     window.addEventListener('offline', this.showConnectionStatus.bind(this));
   }
@@ -84,9 +85,13 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
     if (((<any>window).XPress)) {
       const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
 
-      this.salesforceService.sendFeedback(this._token, this._userRating, this.textAreaEl.nativeElement.value,
-        productInfo.version, success.records[0].Id, productInfo.name)
-        .subscribe(this.submitSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
+      try {
+        this.salesforceService.sendFeedback(this._token, this._userRating, this.textAreaEl.nativeElement.value,
+          this.emailTextEl.nativeElement.value, productInfo.version, success.records[0].Id, productInfo.name)
+          .subscribe(this.submitSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
+      } catch (error) {
+        this.submitFailureHandler(error);
+      }
     }
   }
 
@@ -121,5 +126,15 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
   @HostListener('window:keydown.escape', ['$event'])
   onEscape(event) {
     this.closeDialog();
+  }
+
+  openPrivacyPolicy() {
+    const privacyPolicyUrl = 'http://www.quark.com/en/About_Quark/Legal/Privacy_Policy.aspx';
+
+    if ((<any>window).app) {
+      (<any>window).app.launchApp(privacyPolicyUrl);
+    } else {
+      window.open(privacyPolicyUrl, '_blank');
+    }
   }
 }
