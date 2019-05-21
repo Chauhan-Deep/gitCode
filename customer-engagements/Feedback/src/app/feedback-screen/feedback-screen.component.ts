@@ -127,8 +127,8 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
         if (!this.emailTextEl.nativeElement.disabled) {
           userEmail = this.emailTextEl.nativeElement.value;
         }
-        this.salesforceService.sendFeedback(this._token, this._userRating, this.textAreaEl.nativeElement.value,
-          userEmail, productInfo.version, success.records[0].Id, productInfo.name)
+        this.salesforceService.sendFeedback(this._token, this._userRating, userEmail,
+          this.textAreaEl.nativeElement.value, productInfo.version, success.records[0].Id, productInfo.name, productInfo.build)
           .subscribe(this.submitSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
       } catch (error) {
         this.submitFailureHandler(error);

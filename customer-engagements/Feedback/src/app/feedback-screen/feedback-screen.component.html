@@ -69,7 +69,7 @@
                 <input #contactCheckbox type="checkbox" name="nps_contact-confirm" class="nps__contact-confirm"
                     id="nps_contact-confirm" (click)='contactMe($event)' />
                 <label for="nps_contact-confirm">{{ 'contactText' | translate}}</label>
-                <input #email title='' required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" type="email"
+                <input #email title='' required spellcheck="false" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" type="email"
                     name="nps_contact" class="nps__contact" id="nps_contact" (invalid)="showError()"
                     placeholder="{{ 'emailPlaceholder' | translate}}" />
             </div>
