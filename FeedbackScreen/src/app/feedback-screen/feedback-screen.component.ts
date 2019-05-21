@@ -14,6 +14,10 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
   ratingNumbers;
   disabled = true;
 
+  headerMessage;
+  mainHeader;
+  disclaimer;
+
   private _userRating;
   private _token;
 
@@ -21,7 +25,11 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
   @ViewChild('textArea') textAreaEl;
   @ViewChild('email') emailTextEl;
 
-  constructor(private salesforceService: SalesforceService, private notificationService: NotificationService) { }
+  constructor(private salesforceService: SalesforceService, private notificationService: NotificationService) {
+    this.headerMessage = 'headerMessage';
+    this.mainHeader = 'mainHeader';
+    this.disclaimer = 'disclaimer';
+   }
 
   ngOnInit() {
     this.ratingNumbers = Array(11).fill(1).map((x, i) => i);
@@ -37,7 +45,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
       this.notificationService.hide();
     } else {
       this.disabled = true;
-      this.notificationService.alwaysShow('No Internet Connection');
+      this.notificationService.alwaysShow('notification-offline');
     }
   }
 
@@ -98,7 +106,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
   submitSuccessHandler(success) {
     console.log(success);
     this.loaderDisplay = 'none';
-    this.notificationService.show('Your feedback is submitted succesfully');
+    this.notificationService.show('notification-success');
     if ((<any>window).app) {
       setTimeout(() => {
         (<any>window).app.dialogs.closeDialog();
@@ -109,9 +117,9 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
 
   submitFailureHandler(error) {
     if (navigator.onLine) {
-      this.notificationService.alwaysShow('Failed to submit your feedback.');
+      this.notificationService.alwaysShow('notification-failure');
     } else {
-      this.notificationService.alwaysShow('No Internet Connection.');
+      this.notificationService.alwaysShow('notification-offline');
     }
     console.log(error);
     this.loaderDisplay = 'none';

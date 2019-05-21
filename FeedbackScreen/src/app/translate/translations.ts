@@ -4,7 +4,7 @@ import { LANG_CS_CZ_NAME, LANG_CS_CZ_TRANS } from './i18n/cs-CZ';
 import { LANG_DA_DK_NAME, LANG_DA_DK_TRANS } from './i18n/da-DK';
 import { LANG_DE_DE_NAME, LANG_DE_DE_TRANS } from './i18n/de-DE';
 import { LANG_EN_GB_NAME, LANG_EN_GB_TRANS } from './i18n/en-GB';
-import { LANG_EN_US_NAME, LANG_EN_US_TRANS } from './i18n/en-us';
+import { LANG_EN_US_NAME, LANG_EN_US_TRANS } from './i18n/en-US';
 import { LANG_ES_ES_NAME, LANG_ES_ES_TRANS } from './i18n/es-ES';
 import { LANG_FI_FI_NAME, LANG_FI_FI_TRANS } from './i18n/fi-FI';
 import { LANG_FR_FR_NAME, LANG_FR_FR_TRANS } from './i18n/fr-FR';
