@@ -21,14 +21,6 @@
         </h1>
 
         <form class="npsForm" id="npsForm" (submit)="submitFeedback($event)">
-            <div class="npsInput-container">
-                <!-- NPS inputs (0 - 10) -->
-                <div class="npsInputWrapper" *ngFor="let rate of ratingNumbers">
-                    <input type="checkbox" class="npsCheckbox nps__{{rate}}" id="nps__{{rate}}" name="nps_value" value={{rate}}
-                        (click)="selectCheckbox($event)">
-                    <label for="nps__{{rate}}">{{ rate }}</label>
-                </div>
-            </div>
             <ul class="npsOption-description-container">
                 <li>
                     <svg class="nps__emoji-frown" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -59,6 +51,15 @@
                     </svg>
                 </li>
             </ul>
+
+            <div class="npsInput-container">
+                <!-- NPS inputs (0 - 10) -->
+                <div class="npsInputWrapper" *ngFor="let rate of ratingNumbers">
+                    <input type="checkbox" class="npsCheckbox nps__{{rate}}" id="nps__{{rate}}" name="nps_value"
+                        value={{rate}} (click)="selectCheckbox($event)">
+                    <label for="nps__{{rate}}">{{ rate }}</label>
+                </div>
+            </div>
 
             <!-- NPS feedback -->
             <div class="nps__feedback-container">
