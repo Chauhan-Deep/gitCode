@@ -79,12 +79,13 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
   showError() {
     this.notificationService.hide();
     if (this.emailTextEl.nativeElement.value.length) {
-      this.emailTextEl.nativeElement.validity.patternMismatch ?
-        this.notificationService.show('invalid-email-error') : '';
+      if (this.emailTextEl.nativeElement.validity.patternMismatch) {
+        this.notificationService.show('invalid-email-error');
+      }
     } else {
       this.notificationService.show('empty-email-error');
     }
-    
+
     this.emailTextEl.nativeElement.focus();
     return false;
   }
@@ -142,7 +143,6 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
   submitSuccessHandler(success) {
     console.log(success);
     this.loaderDisplay = 'none';
-    this.notificationService.show('notification-success');
     if ((<any>window).app) {
       setTimeout(() => {
         (<any>window).app.dialogs.closeDialog();
