@@ -20,7 +20,9 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
   private _userRating;
   private _token;
+  private _recordId;
   private _isEscapeOnEl = false;
+  private _doSubmit = false;
 
   @ViewChild('nps') npsEl;
   @ViewChild('textArea') textAreaEl;
@@ -44,6 +46,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngAfterViewInit() {
     this.el.nativeElement.getElementsByClassName('privacy-statement')[0].addEventListener('click', this.openPrivacyPolicy.bind(this));
+    this.getToken();
   }
 
   showConnectionStatus() {
@@ -107,10 +110,43 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   submitFeedback(event) {
     this.loaderDisplay = 'block';
     this.notificationService.hide();
+    
     if (navigator.onLine) {
-      this.salesforceService.getToken().subscribe(this.getTokenSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
+      if (((<any>window).XPress)) {
+        const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
+
+        try {
+          let userEmail = '';
+
+          if (!this.emailTextEl.nativeElement.disabled) {
+            userEmail = this.emailTextEl.nativeElement.value;
+          }
+          if (!this._doSubmit && (this._token === undefined || this._recordId === undefined)) {
+            this._doSubmit = true;
+            this.getToken();
+          } else {
+            this.salesforceService.sendFeedback(this._token, this._userRating, userEmail,
+              this.textAreaEl.nativeElement.value, productInfo.version, this._recordId, productInfo.name, productInfo.build)
+              .subscribe(this.submitSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
+          }
+        } catch (error) {
+          this.submitFailureHandler(error);
+        }
+      }
     }
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+  }
+
+  getToken() {
+    if (navigator.onLine) {
+      if (this._doSubmit) {
+        this.salesforceService.getToken().subscribe(this.getTokenSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
+      } else {
+        this.salesforceService.getToken().subscribe(this.getTokenSuccessHandler.bind(this));
+      }
+    }
   }
 
   getTokenSuccessHandler(success) {
@@ -118,29 +154,23 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     this._token = success.access_token;
     if (((<any>window).XPress)) {
       const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
-      this.salesforceService.getSerialNumber(success.access_token, productInfo.fullSerialNumber)
-        .subscribe(this.getSerialNumberSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
+
+      if (this._doSubmit) {
+        this.salesforceService.getSerialNumber(success.access_token, productInfo.fullSerialNumber)
+          .subscribe(this.getSerialNumberSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
+      } else {
+        this.salesforceService.getSerialNumber(success.access_token, productInfo.fullSerialNumber)
+          .subscribe(this.getSerialNumberSuccessHandler.bind(this));
+      }
     }
   }
 
   getSerialNumberSuccessHandler(success) {
     console.log(success);
-    if (((<any>window).XPress)) {
-      const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
-
-      try {
-        let userEmail = '';
-
-        if (!this.emailTextEl.nativeElement.disabled) {
-          userEmail = this.emailTextEl.nativeElement.value;
-        }
-        this.salesforceService.sendFeedback(this._token, this._userRating, userEmail,
-          this.textAreaEl.nativeElement.value, productInfo.version, success.records[0].Id, productInfo.name, productInfo.build)
-          .subscribe(this.submitSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
-      } catch (error) {
-        this.submitFailureHandler(error);
-      }
+    if (this._doSubmit) {
+      this.submitFeedback(null);
     }
+    this._recordId = success.records[0].Id
   }
 
   submitSuccessHandler(success) {
