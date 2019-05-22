@@ -110,7 +110,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   submitFeedback(event) {
     this.loaderDisplay = 'block';
     this.notificationService.hide();
-    
+
     if (navigator.onLine) {
       if (((<any>window).XPress)) {
         const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
@@ -170,7 +170,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     if (this._doSubmit) {
       this.submitFeedback(null);
     }
-    this._recordId = success.records[0].Id
+    this._recordId = success.records[0].Id;
   }
 
   submitSuccessHandler(success) {
