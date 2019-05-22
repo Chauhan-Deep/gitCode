@@ -1,15 +1,14 @@
-import { Component, OnInit, HostListener, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 
 import { SalesforceService } from '../salesforce/salesforce.service';
 import { NotificationService } from '../notification/notification.service';
-import { TranslateService } from '../translate/translate.service';
 
 @Component({
   selector: 'qrk-feedback-screen',
   templateUrl: './feedback-screen.component.html',
   styleUrls: ['./feedback-screen.component.scss']
 })
-export class FeedbackScreenComponent implements OnInit, OnDestroy {
+export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit {
   imageOpacity = 1;
   loaderDisplay = 'none';
   ratingNumbers;
@@ -21,7 +20,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
 
   private _userRating;
   private _token;
-  private _emailId;
+  private _isEscapeOnEl = false;
 
   @ViewChild('nps') npsEl;
   @ViewChild('textArea') textAreaEl;
@@ -30,7 +29,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
 
   constructor(private salesforceService: SalesforceService,
     private notificationService: NotificationService,
-    private translateService: TranslateService) {
+    private el: ElementRef) {
     this.headerMessage = 'headerMessage';
     this.mainHeader = 'mainHeader';
     this.disclaimer = 'disclaimer';
@@ -41,6 +40,10 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
     window.addEventListener('online', this.showConnectionStatus.bind(this));
     window.addEventListener('offline', this.showConnectionStatus.bind(this));
     this.emailTextEl.nativeElement.disabled = true;
+  }
+
+  ngAfterViewInit() {
+    this.el.nativeElement.getElementsByClassName('privacy-statement')[0].addEventListener('click', this.openPrivacyPolicy.bind(this));
   }
 
   showConnectionStatus() {
@@ -169,7 +172,17 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown.escape', ['$event'])
   onEscape(event) {
-    this.closeDialog();
+    if (this._isEscapeOnEl) {
+      this._isEscapeOnEl = false;
+      this.textAreaEl.nativeElement.blur();
+      this.emailTextEl.nativeElement.blur();
+    } else {
+      this.closeDialog();
+    }
+  }
+
+  onBlur(event) {
+    this._isEscapeOnEl = true;
   }
 
   openPrivacyPolicy() {

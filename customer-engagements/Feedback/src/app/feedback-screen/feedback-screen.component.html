@@ -61,7 +61,7 @@
             <div class="nps__feedback-container">
                 <label for="nps_feedback"></label>
                 <textarea #textArea name="nps_feedback" class="npsFeedback" id="nps_feedback"
-                    placeholder="{{ 'placeholderText' | translate}}"></textarea>
+                    placeholder="{{ 'placeholderText' | translate}}" (keydown.escape)='onBlur($event)'></textarea>
             </div>
 
             <!-- Email Address -->
@@ -72,7 +72,7 @@
                 <input #email title='' required spellcheck="false" autocomplete="off"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" type="email" name="nps_contact"
                     class="nps__contact" id="nps_contact" (invalid)="showError()"
-                    placeholder="{{ 'emailPlaceholder' | translate}}" />
+                    placeholder="{{ 'emailPlaceholder' | translate}}" (keydown.escape)='onBlur($event)' />
             </div>
 
             <!-- NPS submit -->

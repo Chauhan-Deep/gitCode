@@ -8,7 +8,7 @@ export const LANG_EN_US_TRANS = {
     'contactText': 'For additional details regarding my feedback, Quark can contact me via email.',
     'emailPlaceholder': 'Your email address',
     'sendText': 'Send Feedback',
-    'disclaimer': 'By giving us feedback, you agree that Quark can use your feedback to improve our products and services. <a (click)=\'openPrivacyPolicy()\' href=\'\'>Privacy Statement.</a>',
+    'disclaimer': 'By giving us feedback, you agree that Quark can use your feedback to improve our products and services. <a class=\'privacy-statement\'>Privacy Statement.</a>',
     'notification-offline': 'No Internet Connection.',
     'notification-failure': 'Failed to submit your feedback.',
     'notification-success': 'Your feedback is submitted succesfully.',
