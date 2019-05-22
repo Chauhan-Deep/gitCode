@@ -4,7 +4,7 @@ import { TrialScreenComponent } from './trial-screen/trial-screen.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'trialscreen', pathMatch: 'full' },
-  { path: 'Trial.html', redirectTo: 'trialscreen', pathMatch: 'full', data: { title: 'Trial Screen' } },
+  { path: 'TrialScreen.html', redirectTo: 'trialscreen', pathMatch: 'full', data: { title: 'Trial Screen' } },
   { path: 'trialscreen', component: TrialScreenComponent }
 ];
 

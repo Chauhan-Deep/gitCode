@@ -8,7 +8,7 @@ import { TranslateService } from './translate/translate.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Trial';
+  title = 'TrialScreen';
 
   constructor(private translateService: TranslateService) {
     let browserLang = 'en-US';
