@@ -77,15 +77,16 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
   }
 
   showError() {
-    let errorMsg;
-
+    this.notificationService.hide();
     if (this.emailTextEl.nativeElement.value.length) {
-      errorMsg = this.emailTextEl.nativeElement.validity.patternMismatch ?
-        this.translateService.localize('invalid-email-error') : '';
+      this.emailTextEl.nativeElement.validity.patternMismatch ?
+        this.notificationService.show('invalid-email-error') : '';
     } else {
-      errorMsg = this.translateService.localize('empty-email-error');
+      this.notificationService.show('empty-email-error');
     }
-    this.emailTextEl.nativeElement.setCustomValidity(errorMsg);
+    
+    this.emailTextEl.nativeElement.focus();
+    return false;
   }
 
   contactMe(event) {
@@ -95,11 +96,13 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy {
       emailEl.disabled = true;
     } else {
       emailEl.disabled = false;
+      emailEl.focus();
     }
   }
 
   submitFeedback(event) {
     this.loaderDisplay = 'block';
+    this.notificationService.hide();
     if (navigator.onLine) {
       this.salesforceService.getToken().subscribe(this.getTokenSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
     }
