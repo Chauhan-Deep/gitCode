@@ -111,7 +111,7 @@ Description:
                     cachedData['License__c'] = responseJson.records[0].Id;
                     delete cachedData['submitted'];
 
-                    salesforce.sendFeedback(cachedData, sendFeedbackHandler);
+                    salesforce.sendFeedback(JSON.stringify(cachedData), sendFeedbackHandler);
                 }
             } else {
                 if (!checkForFeedbackStatus) {
