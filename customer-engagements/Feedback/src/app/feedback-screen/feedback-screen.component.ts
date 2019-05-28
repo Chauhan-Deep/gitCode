@@ -24,7 +24,8 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   private _isEscapeOnEl = false;
   private _doSubmit = false;
   private _sessionCreated = false;
-  private _userData = {};
+  private _feedbackData = {};
+  private _productInfo;
 
   @ViewChild('nps') npsEl;
   @ViewChild('textArea') textAreaEl;
@@ -47,6 +48,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngAfterViewInit() {
     this.el.nativeElement.getElementsByClassName('privacy-statement')[0].addEventListener('click', this.openPrivacyPolicy.bind(this));
+    this._productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
     this.getAccessToken();
   }
 
@@ -63,9 +65,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
     if (JSON.parse(response).request_status === this.SUCCESS) {
       this._sessionCreated = true;
-      const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
-
-      (<any>window).salesforce.getLicense(productInfo.fullSerialNumber, this.getLicenseHandler.bind(this));
+      (<any>window).salesforce.getLicense(this._productInfo.fullSerialNumber, this.getLicenseHandler.bind(this));
     } else {
       this._sessionCreated = false;
       if (this._doSubmit) {
@@ -96,7 +96,6 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     this.notificationService.hide();
 
     if (navigator.onLine && ((<any>window).XPress)) {
-      const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
       let userEmail = '';
 
       if (!this.emailTextEl.nativeElement.disabled) {
@@ -104,15 +103,15 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       }
       const body = {
         'Comments__c': this.textAreaEl.nativeElement.value,
-        'Product_Version__c': productInfo.version,
+        'Product_Version__c': this._productInfo.version,
         'User_Detail__c': userEmail,
         'Product_Score__c': this._userRating,
-        'Build_Number__c': productInfo.build,
+        'Build_Number__c': this._productInfo.build,
         'License__c': this._recordId ? this._recordId : -1,
-        'name': productInfo.name
+        'name': this._productInfo.name
       };
 
-      this._userData = body;
+      this._feedbackData = body;
 
       this.saveUserFeedback(true);
 
@@ -241,10 +240,11 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   saveUserFeedback(submitted) {
-    this._userData['submitted'] = submitted;
+    this._feedbackData['Product_Version__c'] = this._productInfo.version;
+    this._feedbackData['submitted'] = submitted;
 
     const file = (<any>window).XPress.api.invokeApi('XTGetPreferencesDir', '').dir + '/Feedback.json';
-    (<any>window).fs.writeFileSync(file, JSON.stringify(this._userData));
+    (<any>window).fs.writeFileSync(file, JSON.stringify(this._feedbackData));
   }
 
   ngOnDestroy() {
