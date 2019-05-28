@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 
-import { SalesforceService } from '../salesforce/salesforce.service';
 import { NotificationService } from '../notification/notification.service';
 
 @Component({
@@ -9,6 +8,8 @@ import { NotificationService } from '../notification/notification.service';
   styleUrls: ['./feedback-screen.component.scss']
 })
 export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit {
+  SUCCESS = 1;
+
   imageOpacity = 1;
   loaderDisplay = 'none';
   ratingNumbers;
@@ -19,18 +20,18 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   disclaimer;
 
   private _userRating;
-  private _token;
   private _recordId;
   private _isEscapeOnEl = false;
   private _doSubmit = false;
+  private _sessionCreated = false;
+  private _userData = {};
 
   @ViewChild('nps') npsEl;
   @ViewChild('textArea') textAreaEl;
   @ViewChild('email') emailTextEl;
   @ViewChild('contactCheckbox') contactCheckboxEl;
 
-  constructor(private salesforceService: SalesforceService,
-    private notificationService: NotificationService,
+  constructor(private notificationService: NotificationService,
     private el: ElementRef) {
     this.headerMessage = 'headerMessage';
     this.mainHeader = 'mainHeader';
@@ -46,7 +47,125 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngAfterViewInit() {
     this.el.nativeElement.getElementsByClassName('privacy-statement')[0].addEventListener('click', this.openPrivacyPolicy.bind(this));
-    this.getToken();
+    this.getAccessToken();
+  }
+
+  getAccessToken() {
+    if (navigator.onLine && ((<any>window).XPress)) {
+      (<any>window).salesforce.getAccessToken(this.getAccessTokenHandler.bind(this));
+    } else {
+      this._sessionCreated = false;
+    }
+  }
+
+  getAccessTokenHandler(response) {
+    console.log('AccessTokenResponse: ' + response);
+
+    if (JSON.parse(response).request_status === this.SUCCESS) {
+      this._sessionCreated = true;
+      const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
+
+      (<any>window).salesforce.getLicense(productInfo.fullSerialNumber, this.getLicenseHandler.bind(this));
+    } else {
+      this._sessionCreated = false;
+      if (this._doSubmit) {
+        this.closeDialog();
+      }
+    }
+  }
+
+  getLicenseHandler(response) {
+    console.log('GetLicenseResponse: ' + response);
+    const responseJson = JSON.parse(response);
+
+    if (responseJson.request_status === this.SUCCESS && responseJson.totalSize > 0) {
+      this._recordId = responseJson.records[0].Id;
+      if (this._doSubmit) {
+        this.submitFeedback(null);
+      }
+    } else {
+      this._sessionCreated = false;
+      if (this._doSubmit) {
+        this.closeDialog();
+      }
+    }
+  }
+
+  submitFeedback(event) {
+    this.loaderDisplay = 'block';
+    this.notificationService.hide();
+
+    if (navigator.onLine && ((<any>window).XPress)) {
+      const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
+      let userEmail = '';
+
+      if (!this.emailTextEl.nativeElement.disabled) {
+        userEmail = this.emailTextEl.nativeElement.value;
+      }
+      const body = {
+        'Comments__c': this.textAreaEl.nativeElement.value,
+        'Product_Version__c': productInfo.version,
+        'User_Detail__c': userEmail,
+        'Product_Score__c': this._userRating,
+        'Build_Number__c': productInfo.build,
+        'License__c': this._recordId ? this._recordId : -1,
+        'name': productInfo.name
+      };
+
+      this._userData = body;
+
+      this.saveUserFeedback(true);
+
+      if (this._sessionCreated) {
+        (<any>window).salesforce.sendFeedback(body, this.sendFeedbackHandler.bind(this));
+      } else if (!this._doSubmit) {
+        this._doSubmit = true;
+        this.getAccessToken();
+      } else {
+        this.closeDialog();
+      }
+    }
+    if (event) {
+      event.preventDefault();
+    }
+  }
+
+  sendFeedbackHandler(response) {
+    console.log('SendFeedbackResponse: ' + response);
+    const responseJson = JSON.parse(response);
+
+    if (responseJson.request_status === this.SUCCESS) {
+      if (responseJson.salesforce_error) {
+        const error = JSON.parse(responseJson.salesforce_error);
+
+        if (error.errorCode === 'INVALID_SESSION_ID') {
+          this._doSubmit = true;
+          this.loaderDisplay = 'block';
+          this.getAccessToken();
+        } else {
+          this.handleSubmitResult(true);
+        }
+      }
+      if (responseJson.success) {
+        this.handleSubmitResult(false);
+      }
+    } else {
+      this.handleSubmitResult(true);
+    }
+  }
+
+  handleSubmitResult(showError) {
+    this.loaderDisplay = 'none';
+    if (showError) {
+      this.saveUserFeedback(false);
+      this.notificationService.alwaysShow('notification-failure');
+    } else {
+      this.saveUserFeedback(true);
+    }
+    setTimeout(() => {
+      (<any>window).app.dialogs.closeDialog();
+    },
+      1000);
   }
 
   showConnectionStatus() {
@@ -59,11 +178,6 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       this.disabled = true;
       this.notificationService.alwaysShow('notification-offline');
     }
-  }
-
-  ngOnDestroy() {
-    window.removeEventListener('online', this.showConnectionStatus.bind(this));
-    window.removeEventListener('offline', this.showConnectionStatus.bind(this));
   }
 
   selectCheckbox(event) {
@@ -84,6 +198,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
   showError() {
     this.notificationService.hide();
+
     if (this.emailTextEl.nativeElement.value.length) {
       if (this.emailTextEl.nativeElement.validity.patternMismatch) {
         this.notificationService.show('invalid-email-error');
@@ -107,95 +222,9 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     }
   }
 
-  submitFeedback(event) {
-    this.loaderDisplay = 'block';
-    this.notificationService.hide();
-
-    if (navigator.onLine) {
-      if (((<any>window).XPress)) {
-        const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
-
-        try {
-          let userEmail = '';
-
-          if (!this.emailTextEl.nativeElement.disabled) {
-            userEmail = this.emailTextEl.nativeElement.value;
-          }
-          if (!this._doSubmit && (this._token === undefined || this._recordId === undefined)) {
-            this._doSubmit = true;
-            this.getToken();
-          } else {
-            this.salesforceService.sendFeedback(this._token, this._userRating, userEmail,
-              this.textAreaEl.nativeElement.value, productInfo.version, this._recordId, productInfo.name, productInfo.build)
-              .subscribe(this.submitSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
-          }
-        } catch (error) {
-          this.submitFailureHandler(error);
-        }
-      }
-    }
-    if (event) {
-      event.preventDefault();
-    }
-  }
-
-  getToken() {
-    if (navigator.onLine) {
-      if (this._doSubmit) {
-        this.salesforceService.getToken().subscribe(this.getTokenSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
-      } else {
-        this.salesforceService.getToken().subscribe(this.getTokenSuccessHandler.bind(this));
-      }
-    }
-  }
-
-  getTokenSuccessHandler(success) {
-    console.log(success.access_token);
-    this._token = success.access_token;
-    if (((<any>window).XPress)) {
-      const productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
-
-      if (this._doSubmit) {
-        this.salesforceService.getSerialNumber(success.access_token, productInfo.fullSerialNumber)
-          .subscribe(this.getSerialNumberSuccessHandler.bind(this), this.submitFailureHandler.bind(this));
-      } else {
-        this.salesforceService.getSerialNumber(success.access_token, productInfo.fullSerialNumber)
-          .subscribe(this.getSerialNumberSuccessHandler.bind(this));
-      }
-    }
-  }
-
-  getSerialNumberSuccessHandler(success) {
-    console.log(success);
-    if (this._doSubmit) {
-      this.submitFeedback(null);
-    }
-    this._recordId = success.records[0].Id;
-  }
-
-  submitSuccessHandler(success) {
-    console.log(success);
-    this.loaderDisplay = 'none';
+  closeDialog(submitted = false) {
     if ((<any>window).app) {
-      setTimeout(() => {
-        (<any>window).app.dialogs.closeDialog();
-      },
-        1000);
-    }
-  }
-
-  submitFailureHandler(error) {
-    if (navigator.onLine) {
-      this.notificationService.alwaysShow('notification-failure');
-    } else {
-      this.notificationService.alwaysShow('notification-offline');
-    }
-    console.log(error);
-    this.loaderDisplay = 'none';
-  }
-
-  closeDialog() {
-    if ((<any>window).app) {
+      this.saveUserFeedback(submitted);
       (<any>window).app.dialogs.closeDialog();
     }
   }
@@ -207,8 +236,20 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       this.textAreaEl.nativeElement.blur();
       this.emailTextEl.nativeElement.blur();
     } else {
-      this.closeDialog();
+      this.closeDialog(true);
     }
+  }
+
+  saveUserFeedback(submitted) {
+    this._userData['submitted'] = submitted;
+
+    const file = (<any>window).XPress.api.invokeApi('XTGetPreferencesDir', '').dir + '/Feedback.json';
+    (<any>window).fs.writeFileSync(file, JSON.stringify(this._userData));
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('online', this.showConnectionStatus.bind(this));
+    window.removeEventListener('offline', this.showConnectionStatus.bind(this));
   }
 
   onBlur(event) {

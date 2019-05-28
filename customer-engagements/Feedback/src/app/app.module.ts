@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { FeedbackScreenComponent } from './feedback-screen/feedback-screen.component';
 import { NotificationComponent } from './notification/notification.component';
 
-import { SalesforceService } from './salesforce/salesforce.service';
 import { NotificationService } from './notification/notification.service';
 import { TranslateService } from './translate/translate.service';
 import { TranslatePipe } from './translate/translate.pipe';
@@ -25,7 +24,7 @@ import { TRANSLATION_PROVIDERS } from './translate/translations';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [SalesforceService, NotificationService, [TRANSLATION_PROVIDERS, TranslateService]],
+  providers: [NotificationService, [TRANSLATION_PROVIDERS, TranslateService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
