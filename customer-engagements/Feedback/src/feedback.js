@@ -24,6 +24,8 @@ Description:
             if (!cachedData.submitted) {
                 checkForFeedbackStatus = false;
                 salesforce.getAccessToken(getAccessTokenHandler);
+            } else {
+                console.log('User feedback is already submitted.')
             }
         } else {
             getFeedback();
