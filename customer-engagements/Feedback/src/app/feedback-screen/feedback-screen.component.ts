@@ -111,12 +111,13 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
         'name': this._productInfo.name
       };
 
+      const feedbackBodyString = JSON.stringify(body);
       this._feedbackData = body;
 
       this.saveUserFeedback(true);
 
       if (this._sessionCreated) {
-        (<any>window).salesforce.sendFeedback(JSON.stringify(body), this.sendFeedbackHandler.bind(this));
+        (<any>window).salesforce.sendFeedback(feedbackBodyString, this.sendFeedbackHandler.bind(this));
       } else if (!this._doSubmit) {
         this._doSubmit = true;
         this.getAccessToken();
