@@ -202,6 +202,7 @@ a:visited {
     background-color: #ffffff;
     border-color: none;
     color: #393939;
+    cursor: default;
 }
 
 .nps__contact-container {
@@ -256,7 +257,7 @@ a:visited {
     cursor: pointer;
     color: #999;
     display: block;
-    height: 40px;
+    height: 35px;
     font-family: inherit;
     opacity: 0.4;
     font-size: 0.9em;
@@ -279,7 +280,7 @@ a:visited {
     font-size: 0.9em;
     font-weight: 600;
     letter-spacing: 1px;
-    margin: 2em 0 0;
+    margin: 1.5em 0 0;
     outline: none;
     padding: 0.75em;
     transition: opacity 0.2s;

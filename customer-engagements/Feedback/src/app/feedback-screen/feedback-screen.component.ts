@@ -14,6 +14,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   loaderDisplay = 'none';
   ratingNumbers;
   disabled = true;
+  isOnline = navigator.onLine;
 
   headerMessage;
   mainHeader;
@@ -112,9 +113,9 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       };
 
       const feedbackBodyString = JSON.stringify(body);
-      this._feedbackData = body;
+      this._feedbackData['feedback'] = body;
 
-      this.saveUserFeedback(true);
+      this.saveUserFeedback(false);
 
       if (this._sessionCreated) {
         (<any>window).salesforce.sendFeedback(feedbackBodyString, this.sendFeedbackHandler.bind(this));
@@ -148,6 +149,8 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       }
       if (responseJson.success) {
         this.handleSubmitResult(false);
+      } else {
+        this.handleSubmitResult(true);
       }
     } else {
       this.handleSubmitResult(true);
@@ -169,12 +172,15 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   showConnectionStatus() {
+    this.loaderDisplay = 'none';
     if (navigator.onLine) {
+      this.isOnline = true;
       if (this._userRating !== '') {
         this.disabled = false;
       }
       this.notificationService.hide();
     } else {
+      this.isOnline = false;
       this.disabled = true;
       this.notificationService.alwaysShow('notification-offline');
     }
@@ -236,13 +242,27 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       this.textAreaEl.nativeElement.blur();
       this.emailTextEl.nativeElement.blur();
     } else {
-      this.closeDialog(true);
+      this.closeDialog(navigator.onLine);
     }
   }
 
   saveUserFeedback(submitted) {
-    this._feedbackData['Product_Version__c'] = this._productInfo.version;
-    this._feedbackData['submitted'] = submitted;
+    let feedback = this._feedbackData['feedback'];
+    if (feedback) {
+      feedback['Product_Version__c'] = this._productInfo.version;
+    } else {
+      feedback = {
+        'Product_Version__c': this._productInfo.version
+      };
+      this._feedbackData['feedback'] = feedback;
+    }
+
+    const appdata = {
+      'submitted': submitted,
+      'version_rule': 2,
+      'days_rule': 7
+    };
+    this._feedbackData['appdata'] = appdata;
 
     const file = (<any>window).XPress.api.invokeApi('XTGetPreferencesDir', '').dir + '/Feedback.json';
     (<any>window).fs.writeFileSync(file, JSON.stringify(this._feedbackData));

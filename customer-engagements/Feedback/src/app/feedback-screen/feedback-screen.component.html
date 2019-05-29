@@ -1,5 +1,5 @@
 <div #nps class="npsWrapper">
-    <a class="npsClose" (click)='closeDialog(true)'>
+    <a class="npsClose" (click)="closeDialog(isOnline)">
         <svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 15 15">
             <path
                 d="M1.594-9,7.406-3.187A.348.348,0,0,1,7.5-2.93a.348.348,0,0,1-.094.258L6.328-1.594A.348.348,0,0,1,6.07-1.5a.348.348,0,0,1-.258-.094L0-7.406-5.813-1.594A.348.348,0,0,1-6.07-1.5a.348.348,0,0,1-.258-.094L-7.406-2.672A.348.348,0,0,1-7.5-2.93a.348.348,0,0,1,.094-.258L-1.594-9l-5.812-5.812A.348.348,0,0,1-7.5-15.07a.348.348,0,0,1,.094-.258l1.078-1.078A.348.348,0,0,1-6.07-16.5a.348.348,0,0,1,.258.094L0-10.594l5.812-5.812A.348.348,0,0,1,6.07-16.5a.348.348,0,0,1,.258.094l1.078,1.078a.348.348,0,0,1,.094.258.348.348,0,0,1-.094.258l-.984.984Z"
@@ -60,7 +60,7 @@
             <!-- NPS feedback -->
             <div class="nps__feedback-container">
                 <label for="nps_feedback"></label>
-                <textarea #textArea name="nps_feedback" class="npsFeedback" id="nps_feedback"
+                <textarea #textArea name="nps_feedback" class="npsFeedback" id="nps_feedback" maxlength="2000"
                     placeholder="{{ 'placeholderText' | translate}}" (keydown.escape)='onBlur($event)'></textarea>
             </div>
 
@@ -71,7 +71,7 @@
                 <label for="nps_contact-confirm">{{ 'contactText' | translate}}</label>
                 <input #email title='' required spellcheck="false" autocomplete="off"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" type="email" name="nps_contact"
-                    class="nps__contact" id="nps_contact" (invalid)="showError()"
+                    class="nps__contact" id="nps_contact" (invalid)="showError()" maxlength="100"
                     placeholder="{{ 'emailPlaceholder' | translate}}" (keydown.escape)='onBlur($event)' />
             </div>
 
