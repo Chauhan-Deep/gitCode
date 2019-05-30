@@ -9,6 +9,7 @@ try {
         const FEEDBACK_FILE = XPress.api.invokeApi('XTGetPreferencesDir', '').dir + '/Feedback.json';
         let cachedData;
         let checkForFeedbackStatus = false;
+        let canShowDialog = false;
 
         checkForFeedback();
 
@@ -52,7 +53,7 @@ try {
                 const dateDiff = date1970.getTime() - date1904.getTime();
                 const currentDate = (Date.now() + dateDiff) / 1000;
 
-                const daysDiff = Date.daysBetween(appModifiedDate, currentDate);
+                const daysDiff = daysBetween(appModifiedDate.mdate, currentDate);
                 const appdata = cachedData.appdata;
                 let days = 7;
                 if (appdata) {
@@ -66,7 +67,8 @@ try {
                 }
 
                 if (daysDiff >= days) {
-                    showFeedbackDialog();
+                    canShowDialog = true;
+                    // showFeedbackDialog();
                 }
             }
         }
@@ -95,7 +97,7 @@ try {
             return oldVersion.length == newVersion.length ? 0 : (oldVersion.length < newVersion.length ? 1 : -1);
         }
 
-        Date.daysBetween = function (date1, date2) {
+        function daysBetween(date1, date2) {
             //Get 1 day in seconds
             var one_day = 60 * 60 * 24;
 
@@ -189,24 +191,28 @@ try {
                         cachedData = json;
                         checkForVersion(responseJson.records[0]['Product_Version__c']);
                     } else {
-                        showFeedbackDialog();
+                        canShowDialog = true;
+                        // showFeedbackDialog();
                     }
                 } else if (responseJson.salesforce_error) {
-                    console.log('Salesforce Error: '+responseJson.salesforce_error);
+                    console.log('Salesforce Error: ' + responseJson.salesforce_error);
                 }
             }
         }
 
         function showFeedbackDialog() {
-            let appUiFolder = XPress.api.invokeApi('XTGetApplicationWebDir', '').webDir;
-            const feedbackHtmlFile = appUiFolder + '/customer-engagements/Feedback/Feedback.html';
+            if (canShowDialog) {
+                canShowDialog = false;
+                let appUiFolder = XPress.api.invokeApi('XTGetApplicationWebDir', '').webDir;
+                const feedbackHtmlFile = appUiFolder + '/customer-engagements/Feedback/Feedback.html';
 
-            if (fs.existsSync(feedbackHtmlFile)) {
-                app.dialogs.openDialog(feedbackHtmlFile, '', 'height=650,width=600,titlebar=no');
+                if (fs.existsSync(feedbackHtmlFile)) {
+                    app.dialogs.openDialog(feedbackHtmlFile, '', 'height=650,width=600,titlebar=no');
+                }
             }
         }
 
-        // XPress.checkForFeedback = checkForFeedback;
+        XPress.showFeedbackDialog = showFeedbackDialog;
     })();
 } catch (e) {
     console.log(e);
