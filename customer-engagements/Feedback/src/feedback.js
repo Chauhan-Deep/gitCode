@@ -174,24 +174,25 @@ try {
             let responseJson = JSON.parse(response);
 
             if (responseJson.request_status === SUCCESS) {
-                if (responseJson.totalSize > 0) {
-                    let json = {};
-                    json.feedback = responseJson.records[0];
-                    const appdata = {
-                        'submitted': true,
-                        'version_rule': 2,
-                        'days_rule': 7
-                    }
-                    json.appdata = appdata;
-                    fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(json));
+                if (responseJson.done) {
+                    if (responseJson.totalSize > 0) {
+                        let json = {};
+                        json.feedback = responseJson.records[0];
+                        const appdata = {
+                            'submitted': true,
+                            'version_rule': 2,
+                            'days_rule': 7
+                        }
+                        json.appdata = appdata;
+                        fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(json));
 
-                    cachedData = json;
-                    checkForVersion(responseJson.records[0]['Product_Version__c']);
-                } else if (responseJson.salesforce_error) {
-                    const error = JSON.parse(responseJson.salesforce_error);
-                    if (error.errorCode === 'INVALID_QUERY_FILTER_OPERATOR') {
+                        cachedData = json;
+                        checkForVersion(responseJson.records[0]['Product_Version__c']);
+                    } else {
                         showFeedbackDialog();
                     }
+                } else if (responseJson.salesforce_error) {
+                    console.log('Salesforce Error: '+responseJson.salesforce_error);
                 }
             }
         }
