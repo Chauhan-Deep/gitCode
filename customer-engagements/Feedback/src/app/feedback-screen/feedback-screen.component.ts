@@ -93,37 +93,39 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   submitFeedback(event) {
-    this.loaderDisplay = 'block';
-    this.notificationService.hide();
+    if (this._doSubmit || !this.validateEmail()) {
+      this.loaderDisplay = 'block';
+      this.notificationService.hide();
 
-    if (navigator.onLine && ((<any>window).XPress)) {
-      let userEmail = '';
+      if (navigator.onLine && ((<any>window).XPress)) {
+        let userEmail = '';
 
-      if (!this.emailTextEl.nativeElement.disabled) {
-        userEmail = this.emailTextEl.nativeElement.value;
-      }
-      const body = {
-        'Comments__c': this.textAreaEl.nativeElement.value,
-        'Product_Version__c': this._productInfo.version,
-        'User_Detail__c': userEmail,
-        'Product_Score__c': this._userRating,
-        'Build_Number__c': this._productInfo.build,
-        'License__c': this._recordId ? this._recordId : -1,
-        'name': this._productInfo.name
-      };
+        if (!this.emailTextEl.nativeElement.disabled) {
+          userEmail = this.emailTextEl.nativeElement.value;
+        }
+        const body = {
+          'Comments__c': this.textAreaEl.nativeElement.value,
+          'Product_Version__c': this._productInfo.version,
+          'User_Detail__c': userEmail,
+          'Product_Score__c': this._userRating,
+          'Build_Number__c': this._productInfo.build,
+          'License__c': this._recordId ? this._recordId : -1,
+          'name': this._productInfo.name
+        };
 
-      const feedbackBodyString = JSON.stringify(body);
-      this._feedbackData['feedback'] = body;
+        const feedbackBodyString = JSON.stringify(body);
+        this._feedbackData['feedback'] = body;
 
-      this.saveUserFeedback(false);
+        this.saveUserFeedback(false);
 
-      if (this._sessionCreated) {
-        (<any>window).salesforce.sendFeedback(feedbackBodyString, this.sendFeedbackHandler.bind(this));
-      } else if (!this._doSubmit) {
-        this._doSubmit = true;
-        this.getAccessToken();
-      } else {
-        this.closeDialog();
+        if (this._sessionCreated) {
+          (<any>window).salesforce.sendFeedback(feedbackBodyString, this.sendFeedbackHandler.bind(this));
+        } else if (!this._doSubmit) {
+          this._doSubmit = true;
+          this.getAccessToken();
+        } else {
+          this.closeDialog();
+        }
       }
     }
     if (event) {
@@ -202,18 +204,26 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     }
   }
 
-  showError() {
+  validateEmail() {
+    if (!this.contactCheckboxEl.nativeElement.checked) {
+      return false;
+    }
     this.notificationService.hide();
 
     if (this.emailTextEl.nativeElement.value.length) {
-      if (this.emailTextEl.nativeElement.validity.patternMismatch) {
+      const regexPattern = new RegExp('^[a-zA-Z](\.?[a-zA-Z0-9_-]+)*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})+$');
+
+      if (!regexPattern.test(this.emailTextEl.nativeElement.value)) {
         this.notificationService.show('invalid-email-error');
+        this.emailTextEl.nativeElement.focus();
+        return true;
       }
     } else {
       this.notificationService.show('empty-email-error');
+      this.emailTextEl.nativeElement.focus();
+      return true;
     }
 
-    this.emailTextEl.nativeElement.focus();
     return false;
   }
 
@@ -242,7 +252,9 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       this.textAreaEl.nativeElement.blur();
       this.emailTextEl.nativeElement.blur();
     } else {
-      this.closeDialog(navigator.onLine);
+      if (this.loaderDisplay !== 'block') {
+        this.closeDialog(navigator.onLine);
+      }
     }
   }
 
