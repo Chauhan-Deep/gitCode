@@ -22,7 +22,7 @@ try {
             if (!navigator.onLine) {
                 return;
             }
-            alreadyChecked = true;
+
             if (fs.existsSync(FEEDBACK_FILE)) {
                 const jsonData = fs.readFileSync(FEEDBACK_FILE);
                 if (jsonData) {
@@ -43,6 +43,7 @@ try {
         }
 
         function checkForVersion(oldVersion) {
+            alreadyChecked = true;
             const productInfo = XPress.api.invokeApi('XTGetProductInfo', '');
             const newVersion = productInfo.version;
 
@@ -182,6 +183,7 @@ try {
 
             if (responseJson.request_status === SUCCESS) {
                 if (responseJson.done) {
+                    alreadyChecked = true;
                     if (responseJson.totalSize > 0) {
                         let json = {};
                         json.feedback = responseJson.records[0];
