@@ -10,6 +10,7 @@ try {
         let cachedData;
         let checkForFeedbackStatus = false;
         let canShowDialog = false;
+        let alreadyChecked = false;
 
         checkForFeedback();
 
@@ -21,6 +22,7 @@ try {
             if (!navigator.onLine) {
                 return;
             }
+            alreadyChecked = true;
             if (fs.existsSync(FEEDBACK_FILE)) {
                 const jsonData = fs.readFileSync(FEEDBACK_FILE);
                 if (jsonData) {
@@ -67,8 +69,11 @@ try {
                 }
 
                 if (daysDiff >= days) {
-                    canShowDialog = true;
-                    // showFeedbackDialog();
+                    if (canShowDialog) {
+                        showFeedbackDialog();
+                    } else {
+                        canShowDialog = true;
+                    }
                 }
             }
         }
@@ -191,8 +196,11 @@ try {
                         cachedData = json;
                         checkForVersion(responseJson.records[0]['Product_Version__c']);
                     } else {
-                        canShowDialog = true;
-                        // showFeedbackDialog();
+                        if (canShowDialog) {
+                            showFeedbackDialog();
+                        } else {
+                            canShowDialog = true;
+                        }
                     }
                 } else if (responseJson.salesforce_error) {
                     console.log('Salesforce Error: ' + responseJson.salesforce_error);
@@ -201,14 +209,19 @@ try {
         }
 
         function showFeedbackDialog() {
-            if (canShowDialog) {
-                canShowDialog = false;
-                let appUiFolder = XPress.api.invokeApi('XTGetApplicationWebDir', '').webDir;
-                const feedbackHtmlFile = appUiFolder + '/customer-engagements/Feedback/Feedback.html';
+            if (alreadyChecked) {
+                if (canShowDialog) {
+                    canShowDialog = false;
+                    let appUiFolder = XPress.api.invokeApi('XTGetApplicationWebDir', '').webDir;
+                    const feedbackHtmlFile = appUiFolder + '/customer-engagements/Feedback/Feedback.html';
 
-                if (fs.existsSync(feedbackHtmlFile)) {
-                    app.dialogs.openDialog(feedbackHtmlFile, '', 'height=650,width=600,titlebar=no');
+                    if (fs.existsSync(feedbackHtmlFile)) {
+                        app.dialogs.openDialog('file:///' + feedbackHtmlFile, '', 'height=650,width=600,titlebar=no');
+                    }
                 }
+            } else {
+                canShowDialog = true;
+                checkForFeedback();
             }
         }
 
