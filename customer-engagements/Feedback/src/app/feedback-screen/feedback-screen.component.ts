@@ -103,13 +103,18 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
         if (!this.emailTextEl.nativeElement.disabled) {
           userEmail = this.emailTextEl.nativeElement.value;
         }
+        const userName = (<any>window).XPress.api.invokeApi('XTGetUserName', '').name;
+        const platformName = (<any>window).XPress.api.invokeApi('XTGetPlatform', '').name;
+
         const body = {
           'Comments__c': this.textAreaEl.nativeElement.value,
           'Product_Version__c': this._productInfo.version,
-          'User_Detail__c': userEmail,
+          'User_Detail__c': userName,
           'Product_Score__c': this._userRating,
           'Build_Number__c': this._productInfo.build,
           'License__c': this._recordId ? this._recordId : -1,
+          'Contact_Email__c': userEmail,
+          'Platform__c': platformName,
           'name': this._productInfo.name
         };
 

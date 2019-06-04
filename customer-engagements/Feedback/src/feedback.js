@@ -143,7 +143,9 @@ try {
             if (responseJson.request_status === SUCCESS) {
                 if (responseJson.totalSize > 0) {
                     if (checkForFeedbackStatus) {
-                        salesforce.getFeedback(responseJson.records[0].Id, getFeedbackHandler);
+                        const userName = XPress.api.invokeApi('XTGetUserName','').name;
+
+                        salesforce.getFeedback(responseJson.records[0].Id, userName, getFeedbackHandler);
                     } else {
                         cachedData['feedback']['License__c'] = responseJson.records[0].Id;
 
