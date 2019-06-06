@@ -87,7 +87,7 @@ a:visited {
 }
 
 .npsForm .npsInput-container label {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border: 1px solid;
     border-radius: 4px;
     cursor: pointer;
@@ -97,56 +97,55 @@ a:visited {
     transition: transform 0.1s linear;
 }
 
+.npsInput-container .npsInputWrapper input[type=checkbox] + label {
+    color: #fff;
+    font-weight: 600;
+}
+
 .npsInput-container .npsInputWrapper .nps__0 + label,
 .npsInput-container .npsInputWrapper .nps__1 + label,
 .npsInput-container .npsInputWrapper .nps__2 + label,
 .npsInput-container .npsInputWrapper .nps__3 + label {
-    background: #f3d7d7;
-    border-color: #e2b9b9;
-    color: #a43333;
+    background: #f12d2d;
+    border-color: #f12d2d;
 }
 
 .npsInput-container .npsInputWrapper .nps__4 + label,
 .npsInput-container .npsInputWrapper .nps__5 + label,
 .npsInput-container .npsInputWrapper .nps__6 + label,
 .npsInput-container .npsInputWrapper .nps__7 + label {
-    background: #eee3c1;
-    border-color: #decd9d;
-    color: #ae9035;
+    background: #FF8C00;
+    border-color: #FF8C00;
 }
 
 .npsInput-container .npsInputWrapper .nps__8 + label,
 .npsInput-container .npsInputWrapper .nps__9 + label,
 .npsInput-container .npsInputWrapper .nps__10 + label {
-    background: #cbeebd;
-    border-color: #9cda84;
-    color: #38831b;
+    background: #279c07;
+    border-color: #279c07;
 }
 
 .npsInput-container .npsInputWrapper .nps__0 + label:hover,
 .npsInput-container .npsInputWrapper .nps__1 + label:hover,
 .npsInput-container .npsInputWrapper .nps__2 + label:hover,
 .npsInput-container .npsInputWrapper .nps__3 + label:hover {
-    background-color: #a43333;
-    border-color: #a43333;
-    color: #fff;
+    background-color: #DC143C;
+    border-color: #DC143C;
 }
 
 .npsInput-container .npsInputWrapper .nps__4 + label:hover,
 .npsInput-container .npsInputWrapper .nps__5 + label:hover,
 .npsInput-container .npsInputWrapper .nps__6 + label:hover,
 .npsInput-container .npsInputWrapper .nps__7 + label:hover {
-    background-color: #cea938;
-    border-color: #cea938;
-    color: #fff;
+    background-color: #fb6733;
+    border-color: #fb6733;
 }
 
 .npsInput-container .npsInputWrapper .nps__8 + label:hover,
 .npsInput-container .npsInputWrapper .nps__9 + label:hover,
 .npsInput-container .npsInputWrapper .nps__10 + label:hover {
-    background-color: #38831b;
-    border-color: #38831b;
-    color: #fff;
+    background-color: #008000;
+    border-color: #008000;
 }
 
 // .npsForm .npsInput-container .npsInputWrapper label:hover {
@@ -164,23 +163,23 @@ a:visited {
 .npsInput-container .npsInputWrapper .nps__1:checked + label,
 .npsInput-container .npsInputWrapper .nps__2:checked + label,
 .npsInput-container .npsInputWrapper .nps__3:checked + label {
-    background-color: #a43333;
-    border-color: #a43333;
+    background-color: #DC143C;
+    border-color: #DC143C;
 }
 
 .npsInput-container .npsInputWrapper .nps__4:checked + label,
 .npsInput-container .npsInputWrapper .nps__5:checked + label,
 .npsInput-container .npsInputWrapper .nps__6:checked + label,
 .npsInput-container .npsInputWrapper .nps__7:checked + label {
-    background-color: #cea938;
-    border-color: #cea938;
+    background-color: #fb6733;
+    border-color: #fb6733;
 }
 
 .npsInput-container .npsInputWrapper .nps__8:checked + label,
 .npsInput-container .npsInputWrapper .nps__9:checked + label,
 .npsInput-container .npsInputWrapper .nps__10:checked + label {
-    background-color: #38831b;
-    border-color: #38831b;
+    background-color: #008000;
+    border-color: #008000;
 }
 
 .npsOption-description-container {
