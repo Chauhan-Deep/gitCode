@@ -14,7 +14,6 @@ a:visited {
 
 .npsWrapper {
     background-color: #ffffff;
-    border: 1px solid #eee;
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
@@ -312,7 +311,6 @@ a:visited {
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    line-height: 1.15;
     font-family: inherit;
     font-size: 0.9em;
     font-weight: 600;
@@ -338,6 +336,8 @@ a:visited {
     font-size: 80%;
     display: block;
     padding: 0 2em 1em;
+    position: fixed;
+    bottom: 0;
 }
 
 .nps__disclaimer a {
