@@ -12,8 +12,14 @@ try {
         let canShowDialog = false;
         let alreadyChecked = false;
 
-        checkForFeedback();
+        const FEEDBACK = {
+            SUBMITTED: 1,
+            NEVER_SHOW: 2,
+            PENDING: 3,
+            NOT_SUBMITTED: 4
+        };
 
+        checkForFeedback();
         //*****************====================================Functions used in the JavaScript===============================****************//
 
         /* Function to check for user feedback */
@@ -31,11 +37,23 @@ try {
             }
 
             if (cachedData && cachedData['appdata']) {
-                if (!cachedData['appdata']['submitted']) {
-                    checkForFeedbackStatus = false;
-                    salesforce.getAccessToken(getAccessTokenHandler);
-                } else {
-                    checkForVersion(cachedData['feedback']['Product_Version__c']);
+                switch (cachedData['appdata']['submitted']) {
+                    case FEEDBACK.SUBMITTED:
+                    case FEEDBACK.NEVER_SHOW: {
+                        checkForVersion(cachedData['feedback']['Product_Version__c']);
+                    }
+                        break;
+                    case FEEDBACK.PENDING: {
+                        if (compareDays()) {
+                            openDialog();
+                        }
+                    }
+                        break;
+                    case FEEDBACK.NOT_SUBMITTED: {
+                        checkForFeedbackStatus = false;
+                        salesforce.getAccessToken(getAccessTokenHandler);
+                    }
+                        break;
                 }
             } else {
                 getFeedback();
@@ -48,28 +66,7 @@ try {
             const newVersion = productInfo.version;
 
             if (compareVersion(oldVersion, newVersion) === 1) {
-                const filePath = { path: app.dir };
-                const appModifiedDate = XPress.api.invokeApi('XTGetFileInfo', filePath);
-                const date1904 = new Date(1904, 0, 1);
-                const date1970 = new Date(1970, 0, 1);
-
-                const dateDiff = date1970.getTime() - date1904.getTime();
-                const currentDate = (Date.now() + dateDiff) / 1000;
-
-                const daysDiff = daysBetween(appModifiedDate.mdate, currentDate);
-                const appdata = cachedData.appdata;
-                let days = 7;
-                if (appdata) {
-                    days = cachedData.appdata['days_rule'];
-                    if (days) {
-                        days = parseInt(days, 10);
-                        if (isNaN(days)) {
-                            days = 7;
-                        }
-                    }
-                }
-
-                if (daysDiff >= days) {
+                if (compareDays()) {
                     if (canShowDialog) {
                         showFeedbackDialog();
                     } else {
@@ -77,6 +74,34 @@ try {
                     }
                 }
             }
+        }
+
+        function compareDays() {
+            const filePath = { path: app.dir };
+            const appModifiedDate = XPress.api.invokeApi('XTGetFileInfo', filePath);
+            const date1904 = new Date(1904, 0, 1);
+            const date1970 = new Date(1970, 0, 1);
+
+            const dateDiff = date1970.getTime() - date1904.getTime();
+            const currentDate = (Date.now() + dateDiff) / 1000;
+
+            const daysDiff = daysBetween(appModifiedDate.mdate, currentDate);
+            let days = 7;
+            if (cachedData && cachedData['appdata']) {
+                days = cachedData.appdata['days_rule'];
+                if (days) {
+                    days = parseInt(days, 10);
+                    if (isNaN(days)) {
+                        days = 7;
+                    }
+                }
+            }
+
+            if (daysDiff >= days) {
+                return true;
+            }
+
+            return false;
         }
 
         function compareVersion(oldVersion, newVersion) {
@@ -126,7 +151,7 @@ try {
                 getLicense();
             } else {
                 if (!checkForFeedbackStatus) {
-                    saveFeedbackStatus(false);
+                    saveFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
                 }
             }
         }
@@ -143,7 +168,7 @@ try {
             if (responseJson.request_status === SUCCESS) {
                 if (responseJson.totalSize > 0) {
                     if (checkForFeedbackStatus) {
-                        const userName = XPress.api.invokeApi('XTGetUserName','').name;
+                        const userName = XPress.api.invokeApi('XTGetUserName', '').name;
 
                         salesforce.getFeedback(responseJson.records[0].Id, userName, getFeedbackHandler);
                     } else {
@@ -153,7 +178,7 @@ try {
                     }
                 } else {
                     if (!checkForFeedbackStatus) {
-                        saveFeedbackStatus(false);
+                        saveFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
                     }
                 }
             }
@@ -165,12 +190,12 @@ try {
 
             if (responseJson.request_status === SUCCESS) {
                 if (responseJson.success) {
-                    saveFeedbackStatus(true);
+                    saveFeedbackStatus(FEEDBACK.SUBMITTED);
                 } else {
-                    saveFeedbackStatus(false);
+                    saveFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
                 }
             } else {
-                saveFeedbackStatus(false);
+                saveFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
             }
         }
 
@@ -190,7 +215,7 @@ try {
                         let json = {};
                         json.feedback = responseJson.records[0];
                         const appdata = {
-                            'submitted': true,
+                            'submitted': FEEDBACK.SUBMITTED,
                             'version_rule': 2,
                             'days_rule': 7
                         }
@@ -200,10 +225,21 @@ try {
                         cachedData = json;
                         checkForVersion(responseJson.records[0]['Product_Version__c']);
                     } else {
-                        if (canShowDialog) {
-                            showFeedbackDialog();
+                        if (compareDays()) {
+                            if (canShowDialog) {
+                                showFeedbackDialog();
+                            } else {
+                                canShowDialog = true;
+                            }
                         } else {
-                            canShowDialog = true;
+                            let json = {};
+                            const appdata = {
+                                'submitted': FEEDBACK.PENDING,
+                                'version_rule': 2,
+                                'days_rule': 7
+                            }
+                            json.appdata = appdata;
+                            fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(json));
                         }
                     }
                 } else if (responseJson.salesforce_error) {
@@ -212,16 +248,20 @@ try {
             }
         }
 
+        function openDialog() {
+            let appUiFolder = XPress.api.invokeApi('XTGetApplicationWebDir', '').webDir;
+            const feedbackHtmlFile = appUiFolder + '/customer-engagements/Feedback/Feedback.html';
+
+            if (fs.existsSync(feedbackHtmlFile)) {
+                app.dialogs.openDialog('file:///' + feedbackHtmlFile + '?autoPopup=true', '', 'height=650,width=600,titlebar=no');
+            }
+        }
+
         function showFeedbackDialog() {
             if (alreadyChecked) {
                 if (canShowDialog) {
                     canShowDialog = false;
-                    let appUiFolder = XPress.api.invokeApi('XTGetApplicationWebDir', '').webDir;
-                    const feedbackHtmlFile = appUiFolder + '/customer-engagements/Feedback/Feedback.html';
-
-                    if (fs.existsSync(feedbackHtmlFile)) {
-                        app.dialogs.openDialog('file:///' + feedbackHtmlFile, '', 'height=650,width=600,titlebar=no');
-                    }
+                    openDialog();
                 }
             } else {
                 canShowDialog = true;

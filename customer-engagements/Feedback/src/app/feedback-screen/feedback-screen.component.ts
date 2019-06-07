@@ -2,6 +2,13 @@ import { Component, OnInit, ElementRef, HostListener, ViewChild, OnDestroy, Afte
 
 import { NotificationService } from '../notification/notification.service';
 
+enum FEEDBACK {
+  SUBMITTED = 1,
+  NEVER_SHOW,
+  PENDING,
+  NOT_SUBMITTED
+}
+
 @Component({
   selector: 'qrk-feedback-screen',
   templateUrl: './feedback-screen.component.html',
@@ -14,7 +21,6 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   loaderDisplay = 'none';
   ratingNumbers;
   disabled = true;
-  isOnline = navigator.onLine;
 
   headerMessage;
   mainHeader;
@@ -48,6 +54,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   ngAfterViewInit() {
+    this.showConnectionStatus();
     this.el.nativeElement.getElementsByClassName('privacy-statement')[0].addEventListener('click', this.openPrivacyPolicy.bind(this));
     this._productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
     this.getAccessToken();
@@ -94,10 +101,9 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
   submitFeedback(event) {
     if (this._doSubmit || !this.validateEmail()) {
-      this.loaderDisplay = 'block';
-      this.notificationService.hide();
-
       if (navigator.onLine && ((<any>window).XPress)) {
+        this.notificationService.hide();
+        this.loaderDisplay = 'block';
         let userEmail = '';
 
         if (!this.emailTextEl.nativeElement.disabled) {
@@ -121,7 +127,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
         const feedbackBodyString = JSON.stringify(body);
         this._feedbackData['feedback'] = body;
 
-        this.saveUserFeedback(false);
+        this.saveUserFeedback(FEEDBACK.NOT_SUBMITTED);
 
         if (this._sessionCreated) {
           (<any>window).salesforce.sendFeedback(feedbackBodyString, this.sendFeedbackHandler.bind(this));
@@ -167,10 +173,10 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   handleSubmitResult(showError) {
     this.loaderDisplay = 'none';
     if (showError) {
-      this.saveUserFeedback(false);
+      this.saveUserFeedback(FEEDBACK.NOT_SUBMITTED);
       this.notificationService.alwaysShow('notification-failure');
     } else {
-      this.saveUserFeedback(true);
+      this.saveUserFeedback(FEEDBACK.SUBMITTED);
     }
     setTimeout(() => {
       (<any>window).app.dialogs.closeDialog();
@@ -181,13 +187,13 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   showConnectionStatus() {
     this.loaderDisplay = 'none';
     if (navigator.onLine) {
-      this.isOnline = true;
-      if (this._userRating !== '') {
+      if (this._userRating && this._userRating !== '') {
         this.disabled = false;
+      } else {
+        this.disabled = true;
       }
       this.notificationService.hide();
     } else {
-      this.isOnline = false;
       this.disabled = true;
       this.notificationService.alwaysShow('notification-offline');
     }
@@ -201,7 +207,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       }
     }
     if (event.currentTarget.checked) {
-      this.disabled = false;
+      this.disabled = navigator.onLine ? false : true;
       this._userRating = event.currentTarget.value;
     } else {
       this._userRating = '';
@@ -243,9 +249,13 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     }
   }
 
-  closeDialog(submitted = false) {
+  closeDialog(submitted: FEEDBACK = FEEDBACK.NOT_SUBMITTED) {
     if ((<any>window).app) {
-      this.saveUserFeedback(submitted);
+      if (submitted === FEEDBACK.NEVER_SHOW && this.getQueryString('autoPopup')) {
+        this.saveUserFeedback(submitted);
+      } else if (submitted === FEEDBACK.NOT_SUBMITTED) {
+        this.saveUserFeedback(submitted);
+      }
       (<any>window).app.dialogs.closeDialog();
     }
   }
@@ -258,7 +268,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       this.emailTextEl.nativeElement.blur();
     } else {
       if (this.loaderDisplay !== 'block') {
-        this.closeDialog(navigator.onLine);
+        this.closeDialog(FEEDBACK.NEVER_SHOW);
       }
     }
   }
@@ -302,5 +312,13 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     } else {
       window.open(privacyPolicyUrl, '_blank');
     }
+  }
+
+  getQueryString(field) {
+    const url = new URL(window.location.href);
+    const query_string = url.search;
+    const search_params = new URLSearchParams(query_string);
+
+    return search_params.get(field);
   }
 }
