@@ -2,13 +2,13 @@
 export const LANG_ZH_CHS_NAME = 'zh-CHS';
 
 export const LANG_ZH_CHS_TRANS = {
-    'days': '^1 Days',
-    'day': '^1 Day',
-    'remainingText': 'remaining in your free trial.',
-    'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
-    'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',
-    'thanksText': 'Thank you for trying QuarkXPress.',
-    'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
-    'buy': 'Buy Now >',
-    'activate': 'Activate License'
+    'days': '^1 天数',
+    'day': '^1 日',
+    'remainingText': '保留在免费试用版中。',
+    'trialText': '您对 QuarkXPress 的试用即将到期。访问我们的商店立即购买。',
+    'qxAdvantage': '使用 QuarkXPress Advantage 保存25%。',
+    'thanksText': '感谢您尝试 QuarkXPress。',
+    'evalText': '此 QuarkXPress 副本的试用期已过期。访问我们的商店立即购买。',
+    'buy': '立即购买 >',
+    'activate': '激活许可证'
 };

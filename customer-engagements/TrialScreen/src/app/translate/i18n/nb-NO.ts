@@ -2,13 +2,13 @@
 export const LANG_NB_NO_NAME = 'nb-NO';
 
 export const LANG_NB_NO_TRANS = {
-    'days': '^1 Days',
-    'day': '^1 Day',
-    'remainingText': 'remaining in your free trial.',
-    'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
-    'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',
-    'thanksText': 'Thank you for trying QuarkXPress.',
-    'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
-    'buy': 'Buy Now >',
-    'activate': 'Activate License'
+    'days': '^1 Dager',
+    'day': '^1 Dag',
+    'remainingText': 'gjenstår av prøveversjonen din.',
+    'trialText': 'Prøveversjonen av QuarkXPress er i ferd med å utløpe. Besøk butikken vår for å kjøpe nå.',
+    'qxAdvantage': 'Lagre 25% med QuarkXPress Advantage.',
+    'thanksText': 'Takk for at du prøvde QuarkXPress.',
+    'evalText': 'Evalueringsperioden for denne versjonen av QuarkXPress har nå utløpt. Besøk butikken vår for å kjøpe nå.',
+    'buy': 'Kjøp nå >',
+    'activate': 'Aktiver lisens'
 };

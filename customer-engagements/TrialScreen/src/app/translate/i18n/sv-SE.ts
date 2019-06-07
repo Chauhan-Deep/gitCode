@@ -2,13 +2,13 @@
 export const LANG_SV_SE_NAME = 'sv-SE';
 
 export const LANG_SV_SE_TRANS = {
-    'days': '^1 Days',
-    'day': '^1 Day',
-    'remainingText': 'remaining in your free trial.',
-    'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
-    'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',
-    'thanksText': 'Thank you for trying QuarkXPress.',
-    'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
-    'buy': 'Buy Now >',
-    'activate': 'Activate License'
+    'days': '^1 dagar',
+    'day': '^1 Dag',
+    'remainingText': 'kvarstår i din gratisperiod.',
+    'trialText': 'Provperioden på QuarkXPress är snart till ända. Besök vår butik för att handla nu.',
+    'qxAdvantage': 'Spara 25% med QuarkXPress Advantage.',
+    'thanksText': 'Tack för att du prövar QuarkXPress.',
+    'evalText': 'Utvärderingsperioden för det här exemplaret av QuarkXPress har upphört. Besök vår butik för att handla nu.',
+    'buy': 'Köp nu >',
+    'activate': 'Aktivera licens'
 };

@@ -2,13 +2,13 @@
 export const LANG_ES_ES_NAME = 'es-ES';
 
 export const LANG_ES_ES_TRANS = {
-    'days': '^1 Days',
-    'day': '^1 Day',
-    'remainingText': 'remaining in your free trial.',
-    'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
-    'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',
-    'thanksText': 'Thank you for trying QuarkXPress.',
-    'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
-    'buy': 'Buy Now >',
-    'activate': 'Activate License'
+    'days': '^1 Días',
+    'day': '^1 Día',
+    'remainingText': 'restantes de su periodo de prueba gratuita.',
+    'trialText': 'Su periodo de prueba de QuarkXPress está a punto de expirar. Visite nuestra tienda para comprar ahora.',
+    'qxAdvantage': 'Guardar 25% con QuarkXPress Advantage.',
+    'thanksText': 'Gracias por probar QuarkXPress.',
+    'evalText': 'El periodo de evaluación para esta copia de QuarkXPress ha expirado. Visite nuestra tienda para comprar ahora.',
+    'buy': 'Comprar ahora >',
+    'activate': 'Activar licencia'
 };

@@ -2,13 +2,13 @@
 export const LANG_RU_RU_NAME = 'ru-RU';
 
 export const LANG_RU_RU_TRANS = {
-    'days': '^1 Days',
-    'day': '^1 Day',
-    'remainingText': 'remaining in your free trial.',
-    'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
-    'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',
-    'thanksText': 'Thank you for trying QuarkXPress.',
-    'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
-    'buy': 'Buy Now >',
-    'activate': 'Activate License'
+    'days': '^1 Дн.',
+    'day': '^1 дней',
+    'remainingText': 'бесплатного пробного периода.',
+    'trialText': 'Период пробного использования QuarkXPress истекает. Посетите наш магазин, чтобы купить продукт.',
+    'qxAdvantage': 'Сэкономьте 25% с QuarkXPress Advantage.',
+    'thanksText': 'Благодарим вас за интерес к программе QuarkXPress.',
+    'evalText': 'Срок действия данной ознакомительной версии программы QuarkXPress истек. Посетите наш магазин, чтобы купить продукт.',
+    'buy': 'Купить >',
+    'activate': 'Активировать лицензию'
 };

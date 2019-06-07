@@ -2,13 +2,13 @@
 export const LANG_JA_JP_NAME = 'ja-JP';
 
 export const LANG_JA_JP_TRANS = {
-    'days': '^1 Days',
-    'day': '^1 Day',
-    'remainingText': 'remaining in your free trial.',
-    'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
-    'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',
-    'thanksText': 'Thank you for trying QuarkXPress.',
-    'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
-    'buy': 'Buy Now >',
-    'activate': 'Activate License'
+    'days': '^1 日数',
+    'day': '^1 日',
+    'remainingText': '無料試用期間の残り',
+    'trialText': 'QuarkXPressの試用期間が間もなく終了します。当社のストアにアクセスし、今すぐご購入ください。',
+    'qxAdvantage': 'QuarkXPress Advantageで25%を保存',
+    'thanksText': 'QuarkXPressをお試しいただき、ありがとうございます。',
+    'evalText': 'QuarkXPressの試用期間が終了しました。当社のストアにアクセスし、今すぐご購入ください。',
+    'buy': '今すぐ購入 >',
+    'activate': 'ライセンスをアクティブ化'
 };

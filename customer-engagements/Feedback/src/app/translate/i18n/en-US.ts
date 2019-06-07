@@ -11,7 +11,6 @@ export const LANG_EN_US_TRANS = {
     'disclaimer': 'By giving us feedback, you agree that Quark can use your feedback to improve our products and services. <a class=\'privacy-statement\'>Privacy Statement.</a>',
     'notification-offline': 'No Internet Connection.',
     'notification-failure': 'An unexpected error occurred while submitting the feedback. Your feedback has been recorded and will be submitted later.',
-    'notification-success': 'Your feedback is submitted succesfully.',
     'invalid-email-error': 'Invalid email address',
     'empty-email-error': 'Please enter your email address.'
 };
