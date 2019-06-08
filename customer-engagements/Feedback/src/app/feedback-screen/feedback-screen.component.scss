@@ -371,3 +371,55 @@ a:visited {
       }
     }
 }
+
+.npsFormBig {
+    margin-top: 1em;
+
+    .npsInput-container {
+        padding-top: 5px;
+    }
+
+    .nps__feedback-container {
+        padding: 1px 0 1.5em;
+
+        .npsFeedback {
+            height: 120px;
+        }
+    }
+    
+    .nps__contact-container {
+        .nps__contact {
+            margin: 0.5em 0 0;
+        }
+    }
+
+    .npsSubmit {
+        margin: 1.5em 0 0;
+    }
+}
+
+.npsFormMedium {
+    margin-top: 1em;
+
+    .npsInput-container {
+        padding-top: 5px;
+    }
+
+    .nps__feedback-container {
+        padding: 0px 0 1.5em;
+
+        .npsFeedback {
+            height: 120px;
+        }
+    }
+    
+    .nps__contact-container {
+        .nps__contact {
+            margin: 0.5em 0 0;
+        }
+    }
+
+    .npsSubmit {
+        margin: 1.5em 0 0;
+    }
+}

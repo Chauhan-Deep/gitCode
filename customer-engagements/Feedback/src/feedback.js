@@ -253,7 +253,7 @@ try {
             const feedbackHtmlFile = appUiFolder + '/customer-engagements/Feedback/Feedback.html';
 
             if (fs.existsSync(feedbackHtmlFile)) {
-                app.dialogs.openDialog('file:///' + feedbackHtmlFile + '?autoPopup=true', '', 'height=650,width=600,titlebar=no');
+                app.dialogs.openDialog('file:///' + feedbackHtmlFile + '?autoPopup=true', '', 'height=700,width=600,titlebar=no');
             }
         }
 

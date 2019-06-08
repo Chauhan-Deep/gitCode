@@ -21,6 +21,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   loaderDisplay = 'none';
   ratingNumbers;
   disabled = true;
+  wrapperVisibility = 'hidden';
 
   headerMessage;
   mainHeader;
@@ -56,6 +57,22 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   ngAfterViewInit() {
     this.showConnectionStatus();
     this.el.nativeElement.getElementsByClassName('privacy-statement')[0].addEventListener('click', this.openPrivacyPolicy.bind(this));
+
+    setTimeout(() => {
+      const disclaimerTop = this.el.nativeElement.getElementsByClassName('nps__disclaimer')[0].offsetTop;
+      const sendTop = this.el.nativeElement.getElementsByClassName('npsSubmit')[0].offsetTop;
+      const sendHeight = this.el.nativeElement.getElementsByClassName('npsSubmit')[0].offsetHeight;
+
+      const difference = disclaimerTop - (sendTop + sendHeight);
+
+      if (difference > 50) {
+        this.el.nativeElement.getElementsByClassName('npsForm')[0].classList.add('npsFormBig');
+      } else if (difference > 25) {
+        this.el.nativeElement.getElementsByClassName('npsForm')[0].classList.add('npsFormMedium');
+      }
+      this.wrapperVisibility = 'visible';
+    });
+
     this._productInfo = (<any>window).XPress.api.invokeApi('XTGetProductInfo', '');
     this.getAccessToken();
   }
