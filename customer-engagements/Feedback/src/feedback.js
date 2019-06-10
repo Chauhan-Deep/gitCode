@@ -45,7 +45,8 @@ try {
                         break;
                     case FEEDBACK.PENDING: {
                         if (compareDays()) {
-                            openDialog();
+                            alreadyChecked = true;
+                            canShowDialog = true;
                         }
                     }
                         break;
