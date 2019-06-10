@@ -173,6 +173,8 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
           this._doSubmit = true;
           this.loaderDisplay = 'block';
           this.getAccessToken();
+        } else if (error.errorCode === 'JSON_PARSER_ERROR') {
+          this.handleSubmitResult(false);
         } else {
           this.handleSubmitResult(true);
         }
@@ -210,6 +212,9 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
         this.disabled = true;
       }
       this.notificationService.hide();
+      if (!this.emailTextEl.nativeElement.disabled) {
+        this.validateEmail();
+      }
     } else {
       this.disabled = true;
       this.notificationService.alwaysShow('notification-offline');
@@ -239,19 +244,22 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     this.notificationService.hide();
 
     if (this.emailTextEl.nativeElement.value.length) {
-      const regexPattern = new RegExp('^[a-zA-Z](\.?[a-zA-Z0-9_-]+)*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})+$');
+      const regexPattern = new RegExp('^[a-zA-Z](\\.?[a-zA-Z0-9_-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]{2,})+$');
 
       if (!regexPattern.test(this.emailTextEl.nativeElement.value)) {
-        this.notificationService.show('invalid-email-error');
+        this.notificationService.alwaysShow('invalid-email-error');
         this.emailTextEl.nativeElement.focus();
+        this.disabled = true;
         return true;
       }
     } else {
-      this.notificationService.show('empty-email-error');
+      this.notificationService.alwaysShow('empty-email-error');
       this.emailTextEl.nativeElement.focus();
+      this.disabled = true;
       return true;
     }
 
+    this.disabled = false;
     return false;
   }
 
@@ -260,6 +268,8 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
     if (!this.contactCheckboxEl.nativeElement.checked) {
       emailEl.disabled = true;
+      this.notificationService.hide();
+      this.showConnectionStatus();
     } else {
       emailEl.disabled = false;
       emailEl.focus();
@@ -304,7 +314,9 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     const appdata = {
       'submitted': submitted,
       'version_rule': 2,
-      'days_rule': 7
+      'days_rule': 7,
+      'total_retries': 5,
+      'retries': 0
     };
     this._feedbackData['appdata'] = appdata;
 

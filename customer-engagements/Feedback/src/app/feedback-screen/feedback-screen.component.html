@@ -70,7 +70,7 @@
                     id="nps_contact-confirm" (click)='contactMe($event)' />
                 <label for="nps_contact-confirm">{{ 'contactText' | translate}}</label>
                 <input #email title='' spellcheck="false" autocomplete="off" type="text" name="nps_contact"
-                    class="nps__contact" id="nps_contact" maxlength="100"
+                    class="nps__contact" id="nps_contact" maxlength="100" (blur)="validateEmail();"
                     placeholder="{{ 'emailPlaceholder' | translate}}" (keydown.escape)='onBlur($event)' />
             </div>
 

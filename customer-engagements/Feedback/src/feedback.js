@@ -51,8 +51,13 @@ try {
                     }
                         break;
                     case FEEDBACK.NOT_SUBMITTED: {
-                        checkForFeedbackStatus = false;
-                        salesforce.getAccessToken(getAccessTokenHandler);
+                        const totalRetries = cachedData['appdata']['total_retries'];
+                        const retry = cachedData['appdata']['retries'];
+
+                        if (retry < totalRetries) {
+                            checkForFeedbackStatus = false;
+                            salesforce.getAccessToken(getAccessTokenHandler);
+                        }
                     }
                         break;
                 }
@@ -67,6 +72,8 @@ try {
             const newVersion = productInfo.version;
 
             if (compareVersion(oldVersion, newVersion) === 1) {
+                updateFeedbackStatus(FEEDBACK.PENDING);
+
                 if (compareDays()) {
                     if (canShowDialog) {
                         showFeedbackDialog();
@@ -78,16 +85,22 @@ try {
         }
 
         function compareDays() {
-            const filePath = { path: app.dir };
-            const appModifiedDate = XPress.api.invokeApi('XTGetFileInfo', filePath);
             const date1904 = new Date(1904, 0, 1);
             const date1970 = new Date(1970, 0, 1);
-
             const dateDiff = date1970.getTime() - date1904.getTime();
             const currentDate = (Date.now() + dateDiff) / 1000;
 
-            const daysDiff = daysBetween(appModifiedDate.mdate, currentDate);
+            let fileModifiedDate = currentDate;
+
+            if (fs.existsSync(FEEDBACK_FILE)) {
+                const filePath = { path: FEEDBACK_FILE };
+                const fileDate = XPress.api.invokeApi('XTGetFileInfo', filePath);
+                fileModifiedDate = fileDate.mdate;
+            }
+
+            const daysDiff = daysBetween(fileModifiedDate, currentDate);
             let days = 7;
+
             if (cachedData && cachedData['appdata']) {
                 days = cachedData.appdata['days_rule'];
                 if (days) {
@@ -151,8 +164,10 @@ try {
             if (JSON.parse(response).request_status === SUCCESS) {
                 getLicense();
             } else {
-                if (!checkForFeedbackStatus) {
-                    saveFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
+                if (checkForFeedbackStatus) {
+                    writeFeedbackStatus(FEEDBACK.PENDING);
+                } else {
+                    updateFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
                 }
             }
         }
@@ -178,8 +193,10 @@ try {
                         salesforce.sendFeedback(JSON.stringify(cachedData.feedback), sendFeedbackHandler);
                     }
                 } else {
-                    if (!checkForFeedbackStatus) {
-                        saveFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
+                    if (checkForFeedbackStatus) {
+                        writeFeedbackStatus(FEEDBACK.PENDING);
+                    } else {
+                        updateFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
                     }
                 }
             }
@@ -191,18 +208,35 @@ try {
 
             if (responseJson.request_status === SUCCESS) {
                 if (responseJson.success) {
-                    saveFeedbackStatus(FEEDBACK.SUBMITTED);
+                    updateFeedbackStatus(FEEDBACK.SUBMITTED);
                 } else {
-                    saveFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
+                    updateFeedbackStatus(FEEDBACK.NOT_SUBMITTED, true);
                 }
             } else {
-                saveFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
+                updateFeedbackStatus(FEEDBACK.NOT_SUBMITTED);
             }
         }
 
-        function saveFeedbackStatus(isSubmitted) {
+        function updateFeedbackStatus(isSubmitted, updateRetryCount) {
             cachedData['appdata']['submitted'] = isSubmitted;
+            if (updateRetryCount) {
+                const retry = cachedData['appdata']['retries'];
+                cachedData['appdata']['retries'] = retry + 1;
+            }
             fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(cachedData));
+        }
+
+        function writeFeedbackStatus(status) {
+            let json = {};
+            const appdata = {
+                'submitted': status,
+                'version_rule': 2,
+                'days_rule': 7,
+                'total_retries': 5,
+                'retries': 0
+            }
+            json.appdata = appdata;
+            fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(json));
         }
 
         function getFeedbackHandler(response) {
@@ -218,7 +252,9 @@ try {
                         const appdata = {
                             'submitted': FEEDBACK.SUBMITTED,
                             'version_rule': 2,
-                            'days_rule': 7
+                            'days_rule': 7,
+                            'total_retries': 5,
+                            'retries': 0
                         }
                         json.appdata = appdata;
                         fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(json));
@@ -226,26 +262,25 @@ try {
                         cachedData = json;
                         checkForVersion(responseJson.records[0]['Product_Version__c']);
                     } else {
+                        let writeFile = true;
                         if (compareDays()) {
                             if (canShowDialog) {
+                                writeFile = false;
                                 showFeedbackDialog();
                             } else {
                                 canShowDialog = true;
                             }
-                        } else {
-                            let json = {};
-                            const appdata = {
-                                'submitted': FEEDBACK.PENDING,
-                                'version_rule': 2,
-                                'days_rule': 7
-                            }
-                            json.appdata = appdata;
-                            fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(json));
+                        }
+                        if (writeFile) {
+                            writeFeedbackStatus(FEEDBACK.PENDING);
                         }
                     }
                 } else if (responseJson.salesforce_error) {
                     console.log('Salesforce Error: ' + responseJson.salesforce_error);
+                    writeFeedbackStatus(FEEDBACK.PENDING);
                 }
+            } else {
+                writeFeedbackStatus(FEEDBACK.PENDING);
             }
         }
 
