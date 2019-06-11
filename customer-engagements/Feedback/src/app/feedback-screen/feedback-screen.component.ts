@@ -166,10 +166,13 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     const responseJson = JSON.parse(response);
 
     if (responseJson.request_status === this.SUCCESS) {
+      let doHandle = true;
       if (responseJson.salesforce_error) {
-        const error = JSON.parse(responseJson.salesforce_error);
+        let error = JSON.parse(responseJson.salesforce_error);
 
+        error = error[0];
         if (error.errorCode === 'INVALID_SESSION_ID') {
+          doHandle = false;
           this._doSubmit = true;
           this.loaderDisplay = 'block';
           this.getAccessToken();
@@ -179,13 +182,17 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
           this.handleSubmitResult(true);
         }
       }
-      if (responseJson.success) {
-        this.handleSubmitResult(false);
-      } else {
-        this.handleSubmitResult(true);
+      if (doHandle) {
+        if (responseJson.success) {
+          this.handleSubmitResult(false);
+        } else {
+          this.handleSubmitResult(true);
+        }
       }
     } else {
-      this.handleSubmitResult(true);
+      if (navigator.onLine) {
+        this.handleSubmitResult(true);
+      }
     }
   }
 
@@ -244,7 +251,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     this.notificationService.hide();
 
     if (this.emailTextEl.nativeElement.value.length) {
-      const regexPattern = new RegExp('^[a-zA-Z](\\.?[a-zA-Z0-9_-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]{2,})+$');
+      const regexPattern = new RegExp('^[a-zA-Z](\\.?[a-zA-Z0-9_-]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9-]{2,})+$');
 
       if (!regexPattern.test(this.emailTextEl.nativeElement.value)) {
         this.notificationService.alwaysShow('invalid-email-error');
