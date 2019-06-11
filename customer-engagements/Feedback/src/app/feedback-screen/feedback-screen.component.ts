@@ -249,17 +249,14 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       if (!regexPattern.test(this.emailTextEl.nativeElement.value)) {
         this.notificationService.alwaysShow('invalid-email-error');
         this.emailTextEl.nativeElement.focus();
-        this.disabled = true;
         return true;
       }
     } else {
       this.notificationService.alwaysShow('empty-email-error');
       this.emailTextEl.nativeElement.focus();
-      this.disabled = true;
       return true;
     }
 
-    this.disabled = false;
     return false;
   }
 
