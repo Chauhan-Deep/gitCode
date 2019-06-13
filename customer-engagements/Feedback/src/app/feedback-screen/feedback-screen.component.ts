@@ -264,7 +264,6 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
       return true;
     }
 
-    this.showConnectionStatus();
     return false;
   }
 
