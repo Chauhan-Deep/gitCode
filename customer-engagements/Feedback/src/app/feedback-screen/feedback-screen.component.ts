@@ -29,6 +29,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
   private _userRating;
   private _recordId;
+  private _accountId;
   private _isEscapeOnEl = false;
   private _doSubmit = false;
   private _sessionCreated = false;
@@ -105,6 +106,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
     if (responseJson.request_status === this.SUCCESS && responseJson.totalSize > 0) {
       this._recordId = responseJson.records[0].Id;
+      this._accountId = responseJson.records[0].Account__c;
       if (this._doSubmit) {
         this.submitFeedback(null);
       }
@@ -136,6 +138,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
           'Product_Score__c': this._userRating,
           'Build_Number__c': this._productInfo.build,
           'License__c': this._recordId ? this._recordId : -1,
+          'Account__c': this._accountId ? this._accountId : -1,
           'Contact_Email__c': userEmail,
           'Platform__c': platformName,
           'name': this._productInfo.name
