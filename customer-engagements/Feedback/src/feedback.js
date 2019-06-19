@@ -189,7 +189,8 @@ try {
                         salesforce.getFeedback(responseJson.records[0].Id, userName, getFeedbackHandler);
                     } else {
                         cachedData['feedback']['License__c'] = responseJson.records[0].Id;
-
+                        cachedData['feedback']['Account__c'] = responseJson.records[0].Account__c;
+                        
                         salesforce.sendFeedback(JSON.stringify(cachedData.feedback), sendFeedbackHandler);
                     }
                 } else {
