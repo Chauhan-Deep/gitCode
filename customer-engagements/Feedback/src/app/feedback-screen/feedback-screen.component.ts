@@ -341,7 +341,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   openPrivacyPolicy() {
-    const privacyPolicyUrl = 'http://www.quark.com/About_Quark/Legal/Privacy_Policy.aspx';
+    const privacyPolicyUrl = 'https://www.quark.com/About_Quark/Legal/Privacy_Policy.aspx';
 
     if ((<any>window).app) {
       (<any>window).app.launchApp(privacyPolicyUrl);
