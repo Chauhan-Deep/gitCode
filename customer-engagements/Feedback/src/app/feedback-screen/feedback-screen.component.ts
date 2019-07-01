@@ -352,7 +352,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
 
     if ((<any>window).app) {
       const langCode = ((<any>window).app.language.code).split('-')[0];
-      
+
       if (this.isLanguageSupported(langCode)) {
         privacyPolicyUrl = privacyPolicyUrl.replace('lang_code', langCode);
       } else {
