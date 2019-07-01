@@ -340,21 +340,16 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     this._isEscapeOnEl = true;
   }
 
-  isLanguageSupported(langCode) {
-    if (langCode === 'fr' || langCode === 'de' || langCode === 'jp') {
-      return true;
-    }
-    return false;
-  }
-
   openPrivacyPolicy() {
     let privacyPolicyUrl = 'https://www.quark.com/lang_code/About_Quark/Legal/Privacy_Policy.aspx';
 
     if ((<any>window).app) {
       const langCode = ((<any>window).app.language.code).split('-')[0];
 
-      if (this.isLanguageSupported(langCode)) {
+      if (langCode === 'fr' || langCode === 'de') {
         privacyPolicyUrl = privacyPolicyUrl.replace('lang_code', langCode);
+      } else if (langCode === 'ja') {
+        privacyPolicyUrl = privacyPolicyUrl.replace('lang_code', 'jp');
       } else {
         privacyPolicyUrl = privacyPolicyUrl.replace('/lang_code', '');
       }
