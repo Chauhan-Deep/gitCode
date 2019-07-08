@@ -99,14 +99,14 @@ try {
             }
 
             const daysDiff = daysBetween(fileModifiedDate, currentDate);
-            let days = 7;
+            let days = 5;
 
             if (cachedData && cachedData['appdata']) {
                 days = cachedData.appdata['days_rule'];
                 if (days) {
                     days = parseInt(days, 10);
                     if (isNaN(days)) {
-                        days = 7;
+                        days = 5;
                     }
                 }
             }
@@ -232,7 +232,7 @@ try {
             const appdata = {
                 'submitted': status,
                 'version_rule': 2,
-                'days_rule': 7,
+                'days_rule': 5,
                 'total_retries': 5,
                 'retries': 0
             }
@@ -253,7 +253,7 @@ try {
                         const appdata = {
                             'submitted': FEEDBACK.SUBMITTED,
                             'version_rule': 2,
-                            'days_rule': 7,
+                            'days_rule': 5,
                             'total_retries': 5,
                             'retries': 0
                         }

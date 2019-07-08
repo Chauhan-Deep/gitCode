@@ -321,7 +321,7 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     const appdata = {
       'submitted': submitted,
       'version_rule': 2,
-      'days_rule': 7,
+      'days_rule': 5,
       'total_retries': 5,
       'retries': 0
     };
