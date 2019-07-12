@@ -13,7 +13,7 @@ export class TabComponent implements OnInit {
     ngOnInit() {
     }
 
-    tabChangeHandlerVertical(currentTab) {
+    tabChangeHandler(currentTab) {
         this.activeTabIndex = currentTab.id;
     }
 }
