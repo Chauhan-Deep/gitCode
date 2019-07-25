@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, HostListener, ViewChild, OnDestroy, Afte
 
 import { NotificationService } from '../notification/notification.service';
 
+import isEmail from 'validator/lib/isEmail';
+
 enum FEEDBACK {
   SUBMITTED = 1,
   NEVER_SHOW,
@@ -254,9 +256,14 @@ export class FeedbackScreenComponent implements OnInit, OnDestroy, AfterViewInit
     this.notificationService.hide();
 
     if (this.emailTextEl.nativeElement.value.length) {
-      const regexPattern = new RegExp('^[a-zA-Z](\\.?[a-zA-Z0-9_-]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9-]{2,})+$');
+      // old regex
+      // const regexPattern = new RegExp('^[a-zA-Z](\\.?[a-zA-Z0-9_-]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9-]{2,})+$');
 
-      if (!regexPattern.test(this.emailTextEl.nativeElement.value)) {
+      // updated regex
+      // const regexPattern = new RegExp('^((".+")|(\w+([\.\+-]?\w+)*))@\w+([\.-]?\w+)*(\.\w{2,})+$');
+
+      // replace 'isEmail' with 'regexPattern.test' if you want to follow the regex approach
+      if (!isEmail(this.emailTextEl.nativeElement.value)) {
         this.notificationService.alwaysShow('invalid-email-error');
         this.emailTextEl.nativeElement.focus();
         return true;
