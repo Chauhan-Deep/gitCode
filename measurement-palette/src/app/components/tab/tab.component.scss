@@ -1,3 +1,48 @@
 qx-tabs {
     height: calc(100% - 2px);
+    overflow: hidden;
+}
+
+qx-label {
+    font-size: 11px;
+}
+
+.box-angle, .box-skew {
+    display: flex;
+
+    qx-label {
+        text-align: right;
+        width: 60px;
+        align-self: center;
+    }
+    qx-textbox {
+        margin-left: 10px;
+        width: 70px;
+    }
+}
+
+.box-properties {
+    display: flex;
+    margin-bottom: 4px;
+    align-items: center;
+
+    qx-label {
+        text-align: right;
+        width: 80px;
+    }
+
+    qx-textbox {
+        margin-left: 10px;
+        width: 90px;
+        align-self: flex-end;
+    }
+}
+
+.box-angle {
+    margin-bottom: 5px;
+}
+
+.home-block {
+    margin-bottom: 10px;
+    width: 200px;
 }

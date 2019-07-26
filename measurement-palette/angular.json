@@ -29,7 +29,8 @@
             ],
             "styles": [
               "node_modules/@quark/xpressng/styles/qx.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/material-design-icons/iconfont/material-icons.css"
             ],
             "scripts": []
           },

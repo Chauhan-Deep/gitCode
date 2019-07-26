@@ -3,10 +3,50 @@
         <tab-heading [tooltip]="'Home'"><img src="assets/tab-icons/Inverted_home.png" class="icon">
         </tab-heading>
         <tab-content fxLayout="column">
-            <qx-block [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
-                <qx-block-title>HOME</qx-block-title>
-                <qx-block-content>
+            <qx-block class='home-block' [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>PROPERTIES</qx-block-title>
+                <qx-block-content class='block-content'>
+                    <div class='box-properties'>
+                        <qx-label>Origin Across:</qx-label>
+                        <qx-textbox [unit]='unit.HDEFUNITS' [minValue]='minValueLength' [maxValue]='maxValueLength' 
+                        (textChange)='handleTextChange($event)' [currentValue]='currentValueOriginX'>
+                        </qx-textbox>
+                    </div>
+                    <div class='box-properties'>
+                        <qx-label>Origin Down:</qx-label>
+                        <qx-textbox [unit]='unit.VDEFUNITS' [minValue]='minValueLength' [maxValue]='maxValueLength' 
+                        (textChange)='handleTextChange($event)' [currentValue]='currentValueOriginY'>
+                        </qx-textbox>
+                    </div>
+                    <div class='box-properties'>
+                        <qx-label>Width:</qx-label>
+                        <qx-textbox [unit]='unit.HDEFUNITS' [minValue]='minValueLength' [maxValue]='maxValueLength' 
+                        (textChange)='handleTextChange($event)' [currentValue]='currentValueWidth'>
+                        </qx-textbox>
+                    </div>
+                    <div class='box-properties'>
+                        <qx-label>Height:</qx-label>
+                        <qx-textbox [unit]='unit.VDEFUNITS' [minValue]='minValueLength' [maxValue]='maxValueLength' 
+                        [currentValue]='currentValueHeight'>
+                        </qx-textbox>
+                    </div>
+                </qx-block-content>
+            </qx-block>
 
+            <qx-block class='home-block' [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>BOX ANGLE PROPERTIES</qx-block-title>
+                <qx-block-content>
+                    <div class='box-angle'>
+                        <qx-label>Box Angle:</qx-label>
+                        <qx-textbox [unit]='unit.ANGLE' [minValue]='minValueAngle' [maxValue]='maxValueAngle' [spinner]='true' 
+                        (textChange)='handleTextChange($event)' [currentValue]='currentValueAngle'>
+                        </qx-textbox>
+                    </div>
+                    <div class='box-skew'>
+                        <qx-label>Box Skew:</qx-label>
+                        <qx-textbox [unit]='unit.ANGLE' [minValue]='minValueSkew' [maxValue]='maxValueSkew' [spinner]='true' [currentValue]='currentValueSkew'>
+                        </qx-textbox>
+                    </div>
                 </qx-block-content>
             </qx-block>
         </tab-content>
