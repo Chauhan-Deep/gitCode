@@ -17,12 +17,10 @@
     "@angular/compiler": "~8.1.0",
     "@angular/core": "~8.1.0",
     "@angular/forms": "~8.1.0",
-    "@angular/material": "^8.0.1",
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
-    "@quark/xpressng": "^2.0.0-snapshot.126",
-    "material-design-icons": "^3.0.1",
+    "@quark/xpressng": "^2.0.0-snapshot.128",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
