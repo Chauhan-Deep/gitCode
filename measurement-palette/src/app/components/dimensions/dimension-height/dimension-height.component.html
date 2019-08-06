@@ -1,0 +1,6 @@
+<div class="dimension-height properties" *ngIf='currentValueHeight'>
+    <qx-label>{{ 'height' | translate }}:</qx-label>
+    <qx-editable-dropdown #height [unit]='unit.VDEFUNITS' [dataList]='dataList' [minValue]='minValueLength' [maxValue]='maxValueLength'
+      [currentValue]='currentValueHeight' [selectedItem]='selectedItem' (itemChange)='onItemChangeHandler($event, height)' [dropdownType]='dropdownType'>
+    </qx-editable-dropdown>
+</div>

@@ -1,0 +1,16 @@
+.dimension-height {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    qx-label {
+        font-size: 11px;
+        width: 80px;
+        text-align: right;
+    }
+
+    qx-editable-dropdown {
+        width: 90px;
+        margin-left: 10px;
+    }
+}
