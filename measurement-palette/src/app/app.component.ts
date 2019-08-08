@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MeasurementValuesService } from './services/measurement-values.service';
+import { MeasurementPropertiesService } from './services/measurement-properties.service';
 import { TranslateService } from './translate/translate.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { TranslateService } from './translate/translate.service';
 export class AppComponent implements OnInit {
   title = 'Measurement Palette';
 
-  constructor(private measurementValuesService: MeasurementValuesService,
+  constructor(private measurementPropertiesService: MeasurementPropertiesService,
               private translateService: TranslateService) {
     let browserLang = 'en-US';
 
@@ -23,6 +23,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.measurementValuesService.getMeasurementValues();
+    this.measurementPropertiesService.getMeasurementProperties();
   }
 }

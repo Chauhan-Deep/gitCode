@@ -1,32 +1,35 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { measurementUnitTypes } from '@quark/xpressng';
-import { MeasurementValuesService } from 'src/app/services/measurement-values.service';
+import { MeasurementPropertiesService } from '../../../services/measurement-properties.service';
 
 @Component({
     selector: 'qrk-origin-across',
     templateUrl: './origin-across.component.html',
-    styleUrls: ['./origin-across.scss']
+    styleUrls: ['./origin-across.component.scss']
 })
 export class OriginAcrossComponent implements OnInit, OnDestroy {
-    xpressEnv = (<any> window).app ? true : false;
+    private xpressEnv = (<any> window).app ? true : false;
+
     unit = measurementUnitTypes;
+    minValue = this.xpressEnv ? 0 << 16 : 0;
+    maxValue = this.xpressEnv ? 10000 << 16 : 240;
+    currentOriginAcross = '0in';
 
-    minValueLength = this.xpressEnv ? 0 << 16 : 0;
-    maxValueLength = this.xpressEnv ? 10000 << 16 : 240;
-
-    currentValueOriginX = '0in';
-
-    constructor(private measurementValuesService: MeasurementValuesService,
-                private changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private measurementPropertiesService: MeasurementPropertiesService,
+                private changeDetectorRef: ChangeDetectorRef) { }
 
     ngOnInit() {
-    this.measurementValuesService.cbSubject.subscribe((response) => {
-        this.currentValueOriginX = response['positionX'];
-        this.changeDetectorRef.detectChanges();
-    });
-   }
+        this.measurementPropertiesService.measurementProperties.subscribe((response) => {
+            this.setCurrentOriginAcross(response['positionX']);
+        });
+    }
 
-   ngOnDestroy() {
-       this.measurementValuesService.cbSubject.unsubscribe();
-   }
+    setCurrentOriginAcross(value) {
+        this.currentOriginAcross = value;
+        this.changeDetectorRef.detectChanges();
+    }
+
+    ngOnDestroy() {
+        this.measurementPropertiesService.measurementProperties.unsubscribe();
+    }
 }

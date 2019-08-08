@@ -1,11 +1,10 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { measurementUnitTypes } from '@quark/xpressng';
-import { MeasurementValuesService } from 'src/app/services/measurement-values.service';
+import { MeasurementPropertiesService } from '../../../services/measurement-properties.service';
 
 @Component({
     selector: 'qrk-origin-down',
-    templateUrl: './origin-down.component.html',
-    styleUrls: ['./origin-down.scss']
+    templateUrl: './origin-down.component.html'
 })
 export class OriginDownComponent implements OnInit, OnDestroy {
     xpressEnv = (<any> window).app ? true : false;
@@ -14,19 +13,23 @@ export class OriginDownComponent implements OnInit, OnDestroy {
     minValueLength = this.xpressEnv ? 0 << 16 : 0;
     maxValueLength = this.xpressEnv ? 10000 << 16 : 240;
 
-    currentValueOriginY = '0in';
+    currentOriginDown = '0in';
 
-    constructor(private measurementValuesService: MeasurementValuesService,
+    constructor(private measurementPropertiesService: MeasurementPropertiesService,
                 private changeDetectorRef: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.measurementValuesService.cbSubject.subscribe((response) => {
-            this.currentValueOriginY = response['positionY'];
-            this.changeDetectorRef.detectChanges();
+        this.measurementPropertiesService.measurementProperties.subscribe((response) => {
+            this.setCurrentOriginDown(response['positionY']);
         });
     }
 
+    setCurrentOriginDown(value) {
+        this.currentOriginDown = value;
+        this.changeDetectorRef.detectChanges();
+    }
+
     ngOnDestroy() {
-        this.measurementValuesService.cbSubject.unsubscribe();
+        this.measurementPropertiesService.measurementProperties.unsubscribe();
     }
 }

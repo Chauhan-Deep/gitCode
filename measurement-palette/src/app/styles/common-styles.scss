@@ -1,4 +1,4 @@
-.origin-across {
+.box-dimensions, .origin {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -12,5 +12,12 @@
     qx-textbox {
         width: 90px;
         margin-left: 10px;
+    }
+
+    qx-editable-dropdown {
+        width: 100px;
+        a {
+            border: 0 !important;
+        }
     }
 }

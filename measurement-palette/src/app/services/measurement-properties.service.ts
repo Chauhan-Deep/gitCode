@@ -2,14 +2,14 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable()
-export class MeasurementValuesService implements OnDestroy {
-    cbSubject = new Subject();
-    measurementCallbackHandlerID: number;
+export class MeasurementPropertiesService implements OnDestroy {
+    private measurementCallbackHandlerID: number;
+    measurementProperties = new Subject();
 
-    getMeasurementValues() {
+    getMeasurementProperties() {
         const callbackListener = (response) => {
             response = JSON.parse(response);
-            this.cbSubject.next(response);
+            this.measurementProperties.next(response);
         };
 
         if ((<any> window).app) {
