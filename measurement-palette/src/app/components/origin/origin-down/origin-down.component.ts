@@ -19,13 +19,11 @@ export class OriginDownComponent implements OnInit, OnDestroy {
                 private changeDetectorRef: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.measurementPropertiesService.measurementProperties.subscribe((response) => {
-            this.setCurrentOriginDown(response['positionY']);
-        });
+        this.measurementPropertiesService.measurementProperties.subscribe(this.setCurrentOriginDown.bind(this));
     }
 
     setCurrentOriginDown(value) {
-        this.currentOriginDown = value;
+        this.currentOriginDown = value.positionY;
         this.changeDetectorRef.detectChanges();
     }
 

@@ -4,8 +4,7 @@ import { MeasurementPropertiesService } from '../../../services/measurement-prop
 
 @Component({
     selector: 'qrk-origin-across',
-    templateUrl: './origin-across.component.html',
-    styleUrls: ['./origin-across.component.scss']
+    templateUrl: './origin-across.component.html'
 })
 export class OriginAcrossComponent implements OnInit, OnDestroy {
     private xpressEnv = (<any> window).app ? true : false;
@@ -19,13 +18,11 @@ export class OriginAcrossComponent implements OnInit, OnDestroy {
                 private changeDetectorRef: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.measurementPropertiesService.measurementProperties.subscribe((response) => {
-            this.setCurrentOriginAcross(response['positionX']);
-        });
+        this.measurementPropertiesService.measurementProperties.subscribe(this.setCurrentOriginAcross.bind(this));
     }
 
     setCurrentOriginAcross(value) {
-        this.currentOriginAcross = value;
+        this.currentOriginAcross = value.positionX;
         this.changeDetectorRef.detectChanges();
     }
 

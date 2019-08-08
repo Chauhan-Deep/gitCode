@@ -28,23 +28,11 @@ export class BoxWidthComponent implements OnInit, OnDestroy {
 
     constructor(private measurementPropertiesService: MeasurementPropertiesService,
                 private changeDetectorRef: ChangeDetectorRef,
-                private translateService: TranslateService) {}
+                private translateService: TranslateService) { }
 
     ngOnInit() {
         this.selectedItem = this.dataList[0];
-
-        this.measurementPropertiesService.measurementProperties.subscribe((response) => {
-            if (response['autofit-width']) {
-                this.dataList.forEach(element => {
-                    if (element.id === 999) {
-                        this.setCurrentWidth(element.name);
-                        return;
-                    }
-                });
-            } else {
-                this.setCurrentWidth(response['width']);
-            }
-        });
+        this.measurementPropertiesService.measurementProperties.subscribe(this.setCurrentWidth.bind(this));
     }
 
     ngOnDestroy() {
@@ -52,7 +40,16 @@ export class BoxWidthComponent implements OnInit, OnDestroy {
     }
 
     setCurrentWidth(value) {
-        this.currentWidth = value;
+        if (value['autofit-width']) {
+            this.dataList.forEach(element => {
+                if (element.id === 999) {
+                    this.currentWidth = element.name;
+                    this.selectedItem = element;
+                }
+            });
+        } else {
+            this.currentWidth = value['width'];
+        }
         this.changeDetectorRef.detectChanges();
     }
 

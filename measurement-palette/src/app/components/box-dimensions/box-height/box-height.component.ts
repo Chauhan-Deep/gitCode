@@ -28,18 +28,7 @@ export class BoxHeightComponent implements OnInit, OnDestroy {
                 private translateService: TranslateService) { }
 
     ngOnInit() {
-        this.measurementPropertiesService.measurementProperties.subscribe((response) => {
-            if (response['autofit-height']) {
-                this.dataList.forEach(element => {
-                    if (element.id === 999) {
-                        this.setCurrentHeight(element.name);
-                        return;
-                    }
-                });
-            } else {
-                this.setCurrentHeight(response['height']);
-            }
-        });
+        this.measurementPropertiesService.measurementProperties.subscribe(this.setCurrentHeight.bind(this));
     }
 
     ngOnDestroy() {
@@ -47,7 +36,16 @@ export class BoxHeightComponent implements OnInit, OnDestroy {
     }
 
     setCurrentHeight(value) {
-        this.currentHeight = value;
+        if (value['autofit-height']) {
+            this.dataList.forEach(element => {
+                if (element.id === 999) {
+                    this.currentHeight = element.name;
+                    this.selectedItem = element;
+                }
+            });
+        } else {
+            this.currentHeight = value['height'];
+        }
         this.changeDetectorRef.detectChanges();
     }
 
