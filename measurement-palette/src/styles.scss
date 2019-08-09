@@ -9,12 +9,6 @@ body {
 body {
     background-color: var(--palette-background-color, #666666);
     margin: 0;
-    .qx-block-content {
-      align-self: center;
-      .properties {
-          margin-bottom: 3px;
-      }
-    }
 
     qx-editable-dropdown {
       height: 20px !important;
