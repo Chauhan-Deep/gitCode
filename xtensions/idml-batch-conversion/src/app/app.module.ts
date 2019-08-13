@@ -4,10 +4,12 @@ import { QxModule } from '@quark/xpressng';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LaunchScreenComponent
   ],
   imports: [
     BrowserModule,

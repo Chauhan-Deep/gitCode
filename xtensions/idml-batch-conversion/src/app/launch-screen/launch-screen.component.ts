@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-launch-screen',
+  selector: 'qrk-launch-screen',
   templateUrl: './launch-screen.component.html',
-  styleUrls: ['./launch-screen.component.css']
+  styleUrls: ['./launch-screen.component.scss']
 })
 export class LaunchScreenComponent implements OnInit {
 
@@ -11,12 +11,10 @@ export class LaunchScreenComponent implements OnInit {
 
   ngOnInit() {
   }
-  nextScreen()
-  {
-    window.alert("next screen");
+  nextScreen() {
+    window.alert('next screen');
   }
-  skip()
-  {
-    window.alert("skip clicked");
+  skip() {
+    window.alert('skip clicked');
   }
 }
