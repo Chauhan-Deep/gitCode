@@ -1,2 +1,19 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<qrk-launch-screen></qrk-launch-screen>
+<mat-horizontal-stepper id="QXStepper" linear #stepper>
+    <mat-step class="QXStep" editable="false">
+        <ng-template matStepLabel><b>Get Started</b></ng-template>
+        <qrk-launch-screen [stepper]="stepper"></qrk-launch-screen>
+    </mat-step>
+    <mat-step class="QXStep" editable="false">
+        <ng-template matStepLabel><b>Select Files</b></ng-template>
+        <p>Content 2</p>
+    </mat-step>
+    <mat-step class="QXStep" editable="false">
+        <ng-template matStepLabel><b>Convert</b></ng-template>
+        <p>Content 3</p>
+    </mat-step>
+    <mat-step class="QXStep" editable="false">
+        <ng-template matStepLabel><b>Finish</b></ng-template>
+        <p>Final Step</p>
+    </mat-step>
+</mat-horizontal-stepper>

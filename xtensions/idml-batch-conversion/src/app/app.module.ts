@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatIconModule, MatButtonModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +18,12 @@ import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    QxModule
+    QxModule,
+    MatStepperModule,
+    MatIconModule,
+    MatButtonModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

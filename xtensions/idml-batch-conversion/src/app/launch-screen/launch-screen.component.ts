@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'qrk-launch-screen',
@@ -6,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./launch-screen.component.scss']
 })
 export class LaunchScreenComponent implements OnInit {
-
+  @Input() stepper: MatStepper;
   constructor() { }
 
   ngOnInit() {
   }
   nextScreen() {
-    window.alert('next screen');
+    this.stepper.next();
   }
   skip() {
     window.alert('skip clicked');
