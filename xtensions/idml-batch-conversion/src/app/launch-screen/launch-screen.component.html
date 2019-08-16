@@ -1,0 +1,34 @@
+<div class="IDML-Launch-window">
+    <div class="background-container">
+        <div class="idmlLogo-arrow-container">
+            <p>
+                <img class="ConvertLogo" src="\assets\images\img-brand.png" />
+            </p>
+        </div>
+        <div class="Text-Container">
+            <qx-label class="sub-text">
+                <p>Welcome to the
+                    <br />
+                    QuarkXPress Migration Tool
+                </p>
+            </qx-label>
+        </div>
+        <div class="Internal-Text-Container">
+            <qx-label class="sub-text">
+                <p>Convert your Adobe InDesign projects
+                    <br />
+                    into QuarkXPress files in a few easy steps.
+                </p>
+            </qx-label>
+
+        </div>
+    </div>
+    <div class="action-button">
+        <qx-button class="skip-button" [disabled]="false" [name]="'Skip'" [tooltip]="'Skip Button'" [showBackground]='true'
+            [isSelected]='false' (click)="skip()">
+        </qx-button>
+        <qx-button class="continue-button" [disabled]="false" [name]="'Continue'" [tooltip]="'Continue Button'" [showBackground]='true'
+            [isSelected]='true' (click)="nextScreen()">
+        </qx-button>
+    </div>
+</div>
