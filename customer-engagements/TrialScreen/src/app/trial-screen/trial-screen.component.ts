@@ -13,7 +13,8 @@ export class TrialScreenComponent implements OnInit {
   constructor(private translateService: TranslateService) { }
 
   ngOnInit() {
-    this.thankYouMessage = this.translateService.localize('thankYouMsg').replace('^1', '<img src="assets/images/qxp-logo.png" />');
+    this.thankYouMessage = this.translateService.localize('thankYouMsg')
+      .replace('^1', '<img class=\'qxp-logo\' src="assets/images/qxp-logo.png" />');
   }
 
   closeDialog() {
