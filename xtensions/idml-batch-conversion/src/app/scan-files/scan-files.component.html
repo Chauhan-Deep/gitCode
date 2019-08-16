@@ -27,7 +27,7 @@
             <br>
             <qx-button class="manual-select-files-button" [disabled]="false" [name]="'Manually select files'"
                 [tooltip]="'Manual select files Button'" [showBackground]='true' [isSelected]='false' (click)="fileInput.click()">
-                <input #fileInput type="file" (change)="onFileInput($event)" />
+                <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
             </qx-button>
         </p>
     </div>
