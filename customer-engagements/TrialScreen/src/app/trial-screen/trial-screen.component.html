@@ -1,18 +1,47 @@
 <div class="trial-window">
   <div class="background-container">
     <img class='background' src="assets/images/background.png" />
-    <img class='logo' src="assets/images/logo.png" />
+    <div class='thanks-container'>
+    <span class="thank-you-text" [innerHtml]="thankYouMessage | translate"></span>
+  </div>
+    <span class="trial-end-text"> {{ "trialEndMsg" | translate }}</span>
     <img class='close' src="assets/images/close.png" (click)="closeDialog()" />
-    <div class='trial-text-container'>
-      <span class="days-number" *ngIf="numOfDays > 0">{{ daysRemaining }}</span>
-      <span class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : "thanksText"] | translate }} </span>
-      <span class="trial-text" [ngClass]="{ 'trial-text-margin' : numOfDays === 0 }"> {{ [numOfDays > 0 ? "trialText" : "evalText"] | translate }}</span>
+    <div class='welcome-kit-container'>
+      <span class="message">{{ "welcomeKitMsg" | translate }}</span>
+      <ul class="kit-includes">
+        <li><span>{{ "serialNumber" | translate }}</span></li>
+        <li><span>{{ "validationCode" | translate }}</span></li>
+        <li><span>{{ "activationInstruction" | translate }}</span></li>
+      </ul>
     </div>
-    <div class="qx-advantage"> {{ "qxAdvantage" | translate }}</div>
+    <div class='contact-container'>
+      <span class="message">{{ "contactDetails" | translate }}</span>
+      <div class="contact-details-container">
+        <div class="contact-us details">
+          <span class="location">{{ "contact1Location" | translate }}</span>
+          <span class="time">{{ "contact1Time" | translate }}</span>
+          <span class="number">{{ "contact1Phone" | translate }}</span>
+        </div>
+        <div class="contact-uk details">
+          <span class="location">{{ "contact2Location" | translate }}</span>
+          <span class="time">{{ "contact2Time" | translate }}</span>
+          <span class="number">{{ "contact2Phone" | translate }}</span>
+        </div>
+        <div class="contact-de details">
+          <span class="location">{{ "contact3Location" | translate }}</span>
+          <span class="time">{{ "contact3Time" | translate }}</span>
+          <span class="number">{{ "contact3Phone" | translate }}</span>
+        </div>
+        <div class="contact-fr details">
+          <span class="location">{{ "contact4Location" | translate }}</span>
+          <span class="time">{{ "contact4Time" | translate }}</span>
+          <span class="number">{{ "contact4Phone" | translate }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="action-button">
-    <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}</div>
-    <div class="button-activate" (click)="activateLicense()"> {{ "activate" | translate }}</div>
+    <div class="button-activate" (click)="activateLicense()"> {{ "activateLicense" | translate }}</div>
   </div>
 </div>

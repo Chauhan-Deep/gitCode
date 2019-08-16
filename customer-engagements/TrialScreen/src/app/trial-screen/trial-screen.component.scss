@@ -10,24 +10,77 @@
 
     .background {
         display: block;
-        margin: auto;
-        max-width: 100%;
-        height: 100%;
-        width: 100%;
+        height: 110%;
         -webkit-user-drag: none;
+        width: 100%;
     }
 
-    .logo {
+    .thanks-container {
         position: absolute;
         top: 5%;
-        left: 23%;
         width: 100%;
-        max-width: 50%;
         display: block;
-        margin: auto;
         height: auto;
+        text-align: center;
         -webkit-user-drag: none;
         user-select: none;
+
+        .thank-you-text {
+            font-family: 'Roboto Bold';
+            font-size: 3.25vmin;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+    }
+
+    .welcome-kit-container {
+        position: absolute;
+        top: 28%;
+        left: 30%;
+        font-family: 'Roboto Regular';
+        font-size: 2.6vmin;
+        color: #ffffff;
+        line-height: 1.4;
+        padding-right: 20px;
+
+        ul {
+            list-style: none; /* Remove default bullets */
+            padding: 0;
+            margin-top: 10px;
+        }
+          
+        ul li::before {
+            content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+            color: #1796e8; /* Change the color */
+            font-weight: bold; /* If you want it to be bold */
+            display: inline-block; /* Needed to add space between the bullet and the text */ 
+            width: 0.6em; /* Also needed for space (tweak if needed) */
+            margin-left: 0.5em; /* Also needed for space (tweak if needed) */
+        }
+
+        ul li:first-child::before {
+            margin-left: 0;
+        }
+
+        li {
+            float: left;
+        }
+    }
+
+    .trial-end-text {
+        position: absolute;
+        top: 14%;
+        width: 100%;
+        display: block;
+        height: auto;
+        text-align: center;
+        white-space: pre-wrap;
+        -webkit-user-drag: none;
+        user-select: none;
+        font-family: 'Roboto Regular';
+        font-size: 3vmin;
+        color: #ffffff;
+        margin-top: 10px;
     }
 
     .close {
@@ -38,69 +91,50 @@
         user-select: none;
     }
 
-    .trial-text-container {
+    .contact-container {
         position: absolute;
-        top: 30%;
-        left: 50%;
+        top: 45%;
+        left: 30%;
         display: flex;
         flex-direction: column;
         user-select: none;
-        margin-right: 10px;
+        line-height: 1.65;
+        color: #ffffff;
+        font-family: 'Roboto Regular';
+        font-size: 2.8vmin;
 
-        .days-number {
-            white-space: nowrap;
-            font-family: 'Roboto Bold';
-            font-size: 12vmin;
-            color: #1796e8;
+        .message {  
+            padding-top: 20px;
         }
 
-        .days-remaining-text {
-            font-family: 'Roboto Regular';
-            font-size: 3vmin;
-            color: #1796e8;
-        }
+        .contact-details-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
 
-        .trial-text {
-            font-family: 'Roboto Regular';
-            font-size: 3.25vmin;
-            color: #ffffff;
-            margin-top: 20px;
-        }
+            .details {
+                display: flex;
+                flex-direction: column;
+                flex-basis: 50%;
+                font-size: 2.5vmin;
+                margin-top: 20px;
 
-        .trial-text-margin {
-            margin-top: 50px;
+                .location {
+                    font-size: 2.8vmin;
+                    font-family: 'Roboto Bold';
+                    color: #1796e8;
+                }
+            }
         }
-    }
-
-    .qx-advantage {
-        top: 78%;
-        position: absolute;
-        left: 50%;
-        font-family: 'Roboto Bold';
-        margin-top: 20px;
-        margin-right: 10px;
-        user-select: none;
-        font-size: 2.7vmin;
-        color: #fb1e4e;
-        user-select: none;
     }
 
     .action-button {
         width: 100%;
-        height: 20%;
+        height: 12%;
         display: flex;
         user-select: none;
-
-        .button-buy {
-            flex-grow: 3;
-            background-color: #fb1e4e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 6vmin;
-            font-family: 'Roboto Bold';
-            color: #ffffff;
-        }
+        position: fixed;
+        bottom: 0;
 
         .button-activate {
             flex-grow: 1;
@@ -108,8 +142,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: underline;
-            font-size: 4.5vmin;
+            font-size: 5vmin;
             font-family: 'Roboto Regular';
             color: #ffffff;
         }
