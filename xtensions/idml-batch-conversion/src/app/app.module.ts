@@ -9,11 +9,13 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule, MatButtonModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ScanFilesComponent } from './scan-files/scan-files.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LaunchScreenComponent
+    LaunchScreenComponent,
+    ScanFilesComponent
   ],
   imports: [
     BrowserModule,
