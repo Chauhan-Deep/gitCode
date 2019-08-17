@@ -3,7 +3,7 @@ export const LANG_FR_FR_NAME = 'fr-FR';
 
 export const LANG_FR_FR_TRANS = {
     'thankYouMsg': 'Merci d’avoir exploré ^1 !',
-    'trialEndMsg': 'Votre période d’évaluation a pris fin et vous pouvez sans plus tarder activer votre licence perpétuelle.',
+    'trialEndMsg': 'Votre période d’évaluation a pris fin et vous pouvez \r\n sans plus tarder activer votre licence perpétuelle.',
     'welcomeKitMsg': 'Dans votre boîte de réception, vous trouverez votre Kit de bienvenue QuarkXPress, qui contient :',
     'serialNumber': 'Numéro de série',
     'validationCode': 'Code de validation',
