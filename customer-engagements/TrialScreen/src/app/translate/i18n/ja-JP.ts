@@ -21,4 +21,5 @@ export const LANG_JA_JP_TRANS = {
     'contact4Location': 'フランス',
     'contact4Time': '午前8時30分-午後5時30分（CEST）',
     'contact4Phone': '800-913-457',
+    'activateLicense': 'ライセンスをアクティブ化 >',
 };
