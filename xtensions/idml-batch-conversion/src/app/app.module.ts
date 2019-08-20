@@ -1,34 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule, MatButtonModule } from '@angular/material';
+
 import { QxModule } from '@quark/xpressng';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatIconModule, MatButtonModule} from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { ScanFilesComponent } from './scan-files/scan-files.component';
+import { DynamicContainerComponent } from './dynamic-container/dynamic-container.component';
+import { DynamicComponentDirective } from './dynamic-component.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LaunchScreenComponent,
-    ScanFilesComponent
+    ScanFilesComponent,
+    DynamicContainerComponent,
+    DynamicComponentDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    QxModule,
+    BrowserAnimationsModule,
+    FormsModule,
     MatStepperModule,
     MatIconModule,
     MatButtonModule,
-    FormsModule,
-    BrowserAnimationsModule
+    QxModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [
+    ScanFilesComponent]
 })
 export class AppModule { }

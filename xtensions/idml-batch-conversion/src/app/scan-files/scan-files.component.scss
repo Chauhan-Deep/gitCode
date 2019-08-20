@@ -1,24 +1,31 @@
-.Text-Container {
-    font-family: "Helvetica Neue", Light;
-    font-size: 60px;
+.background-container {
+    .text-container {
+        font-family: "Helvetica Neue", Light;
+        font-size: 60px;       
+    }
+
+    .scan-image-container {
+        text-align: center;
+    }
+
+    .internal-text-container {
+        font-family: "Helvetica Neue", Regular;
+        font-size: 30px;
+    }
+
+    .sub-text {
+        position: center;
+        text-align: center;
+    }
 }
-.Internal-Text-Container {
-    font-family: "Helvetica Neue", Regular;
-    font-size: 30px;
-}
-.scan-image-container {
-    text-align: center;
-}
-.sub-text {
-    position: center;
-    text-align: center;
-}
+
 .action-button {
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.smart-scan-button {
-    display: inline-grid;
+
+    .smart-scan-button {
+        display: inline-grid;
+    }
 }

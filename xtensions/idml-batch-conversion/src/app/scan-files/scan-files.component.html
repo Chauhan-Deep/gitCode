@@ -1,22 +1,21 @@
-<div class="IDML-Scan-window">
+<div class="idml-scan-window">
     <div class="background-container">
-        <div class="Text-Container">
+        <div class="text-container">
             <qx-label class="sub-text">
                 <p>Select files to convert
                 </p>
             </qx-label>
         </div>
         <div class="scan-image-container">
-            <img class="ScanLogo" src="\assets\images\img-smart-scan.png" />
+            <img class="scan-logo" src="\assets\images\img-smart-scan.png" />
         </div>
-        <div class="Internal-Text-Container">
+        <div class="internal-text-container">
             <qx-label class="sub-text">
                 <p>Smart Scan will find all Adobe InDesign files,
                     <br />
                     including .INDD and .IDML
                 </p>
             </qx-label>
-
         </div>
     </div>
     <div class="action-button">
@@ -26,8 +25,9 @@
             </qx-button>
             <br>
             <qx-button class="manual-select-files-button" [disabled]="false" [name]="'Manually select files'"
-                [tooltip]="'Manual select files Button'" [showBackground]='true' [isSelected]='false' (click)="fileInput.click()">
-                <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+                [tooltip]="'Manual select files Button'" [showBackground]='true' [isSelected]='false'
+                (click)="fileInput.click()">
+                <input #fileInput type="file" style="display:none;" />
             </qx-button>
         </p>
     </div>

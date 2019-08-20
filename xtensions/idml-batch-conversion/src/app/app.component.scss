@@ -1,13 +1,18 @@
-#QXStepper {
+.stepper-class {
     background: #C0C0C0;
+
+    .qx-step {
+        height: 100%;
+    }
+
+    .mat-horizontal-content-container {
+        height: 100%;
+    }
+    
+    .mat-horizontal-stepper-content {
+        height: 100%;
+        display: flex;
+    }
 }
-.QXStep {
-    height:100%;
-}
-.mat-horizontal-content-container {
-    height: 100%;
-}
-.mat-horizontal-stepper-content {
-    height: 100%;
-    display: flex;
-}
+
+
