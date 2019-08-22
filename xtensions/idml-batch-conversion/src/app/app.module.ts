@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatIconModule, MatButtonModule } from '@angular/material';
 
 import { QxModule } from '@quark/xpressng';
 
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
 import { ScanFilesComponent } from './scan-files/scan-files.component';
@@ -25,10 +24,7 @@ import { DynamicComponentDirective } from './dynamic-component.directive';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     MatStepperModule,
-    MatIconModule,
-    MatButtonModule,
     QxModule,
     AppRoutingModule,
   ],

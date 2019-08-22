@@ -6,7 +6,6 @@ import { MatStepper } from '@angular/material/stepper';
   templateUrl: './launch-screen.component.html',
   styleUrls: ['./launch-screen.component.scss']
 })
-
 export class LaunchScreenComponent implements OnInit {
   @Input() stepper: MatStepper;
 

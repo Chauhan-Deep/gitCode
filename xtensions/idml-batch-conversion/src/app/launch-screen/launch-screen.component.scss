@@ -24,7 +24,6 @@
         }
 
         .sub-text {
-            position: center;
             text-align: center;
         }
     }
@@ -33,15 +32,9 @@
         display: flex;
         justify-content: flex-end;
 
-        .skip-button {
+        .button {
             margin: 5px;
             padding: 5px;
-            text-align: center;
-        }
-
-        .continue-button {
-            padding: 5px;
-            margin: 5px;
             text-align: center;
         }
     }

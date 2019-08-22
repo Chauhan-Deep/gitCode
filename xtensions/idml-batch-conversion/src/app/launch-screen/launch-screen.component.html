@@ -1,33 +1,25 @@
 <div class="idml-launch-window">
     <div class="background-container">
         <div class="idml-logo-arrow-container">
-            <p>
-                <img class="convert-logo" src="\assets\images\img-brand.png" />
-            </p>
+            <img class="convert-logo" src="\assets\images\img-brand.png" />
         </div>
         <div class="text-container">
-            <qx-label class="sub-text">
-                <p>Welcome to the
-                    <br />
-                    QuarkXPress Migration Tool
-                </p>
+            <qx-label class="sub-text" [multiline]="true">
+                Welcome to the QuarkXPress Migration Tool
             </qx-label>
         </div>
         <div class="internal-text-container">
-            <qx-label class="sub-text">
-                <p>Convert your Adobe InDesign projects
-                    <br />
-                    into QuarkXPress files in a few easy steps.
-                </p>
+            <qx-label class="sub-text" [multiline]="true">
+                Convert your Adobe InDesign projects into QuarkXPress files in a few easy steps.
             </qx-label>
 
         </div>
     </div>
     <div class="action-button">
-        <qx-button class="skip-button" [disabled]="false" [name]="'Skip'" [tooltip]="'Skip Button'"
+        <qx-button class="button" [disabled]="false" [name]="'Skip'" [tooltip]="'Skip Button'"
             [showBackground]='true' [isSelected]='false' (click)="skip()">
         </qx-button>
-        <qx-button class="continue-button" [disabled]="false" [name]="'Continue'" [tooltip]="'Continue Button'"
+        <qx-button class="button" [disabled]="false" [name]="'Continue'" [tooltip]="'Continue Button'"
             [showBackground]='true' [isSelected]='true' (click)="nextScreen()">
         </qx-button>
     </div>
