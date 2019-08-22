@@ -10,16 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
 import { ScanFilesComponent } from './scan-files/scan-files.component';
-import { DynamicContainerComponent } from './dynamic-container/dynamic-container.component';
-import { DynamicComponentDirective } from './dynamic-component.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LaunchScreenComponent,
     ScanFilesComponent,
-    DynamicContainerComponent,
-    DynamicComponentDirective
   ],
   imports: [
     BrowserModule,
