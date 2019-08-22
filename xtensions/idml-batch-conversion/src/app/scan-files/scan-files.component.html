@@ -15,16 +15,15 @@
         </div>
     </div>
     <div class="action-button">
-        <p>
-            <qx-button class="smart-scan-button" [disabled]="false" [name]="'Run Smart Scan'"
-                [tooltip]="'Smart Scan Button'" [showBackground]='true' [isSelected]='true'>
-            </qx-button>
-            <br>
-            <qx-button class="manual-select-files-button" [disabled]="false" [name]="'Manually select files'"
-                [tooltip]="'Manual select files Button'" [showBackground]='true' [isSelected]='false'
-                (click)="fileInput.click()">
-                <input #fileInput type="file" style="display:none;" />
-            </qx-button>
-        </p>
+        <qx-button class="smart-scan-button" [disabled]="false" [name]="'Run Smart Scan'"
+            [tooltip]="'Smart Scan Button'" [showBackground]='true' [isSelected]='true'>
+        </qx-button>
+    </div>
+    <div class="action-button">
+        <qx-button class="manual-select-files-button" [disabled]="false" [name]="'Manually select files'"
+            [tooltip]="'Manual select files Button'" [showBackground]='true' [isSelected]='false'
+            (click)="fileInput.click()">
+            <input #fileInput type="file" style="display:none;" />
+        </qx-button>
     </div>
 </div>
