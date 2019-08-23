@@ -1,4 +1,4 @@
-<div class="idml-scan-window">
+<div *ngIf="smartScanWindow" class="idml-scan-window" fxFlex="100">
     <div class="background-container">
         <div class="text-container">
             <qx-label class="sub-text">
@@ -16,7 +16,7 @@
     </div>
     <div class="action-button">
         <qx-button class="smart-scan-button" [disabled]="false" [name]="'Run Smart Scan'"
-            [tooltip]="'Smart Scan Button'" [showBackground]='true' [isSelected]='true'>
+            [tooltip]="'Smart Scan Button'" [showBackground]='true' [isSelected]='true' (click)="performSystemScan()">
         </qx-button>
     </div>
     <div class="action-button">
@@ -24,6 +24,23 @@
             [tooltip]="'Manual select files Button'" [showBackground]='true' [isSelected]='false'
             (click)="fileInput.click()">
             <input #fileInput type="file" style="display:none;" />
+        </qx-button>
+    </div>
+</div>
+<div *ngIf="searchingWindow" class="idml-scan-window">
+    <div class="background-container">
+        <div class="internal-text-container">
+            <qx-label class="sub-text">
+                Searching for files...
+            </qx-label>
+        </div>
+        <div class="search-image-container" style="text-align:center">
+            <img class="scan-logo" src="\assets\images\img-searching.png" />
+        </div>
+    </div>
+    <div class="action-button">
+        <qx-button class="cancel-button" [disabled]="false" [name]="'Cancel'" [tooltip]="'Cancel Button'"
+            [showBackground]='true' [isSelected]='false'>
         </qx-button>
     </div>
 </div>
