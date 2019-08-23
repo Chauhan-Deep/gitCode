@@ -44,3 +44,34 @@
         </qx-button>
     </div>
 </div>
+<div *ngIf="searchResultWindow" class="idml-scan-window">
+    <div class="background-container">
+        <div class="internal-text-container">
+            <qx-label class="sub-text">
+                Files found!
+            </qx-label>
+        </div>
+        <div class="files-result-container">
+            <qx-label class="sub-text">
+                {{numOfFiles}}
+            </qx-label>
+            <div>
+                <span>
+                    <qx-label class="button-text">
+                        {{numOfINDDFiles}} INDD
+                    </qx-label>
+                </span>
+                <span>
+                    <qx-label class="button-text">
+                        {{numOfIDMLFiles}} IDML
+                    </qx-label>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="cancel-button">
+        <qx-button class="cancel-button" [disabled]="false" [name]="'Cancel'" [tooltip]="'Cancel Button'"
+            [showBackground]='true' [isSelected]='false'>
+        </qx-button>
+    </div>
+</div>
