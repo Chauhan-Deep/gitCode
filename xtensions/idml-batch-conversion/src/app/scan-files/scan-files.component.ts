@@ -18,31 +18,31 @@ export class ScanFilesComponent implements OnInit {
   SUCCESS = 1;
 
   dummydata = [{
-    title: "INDD",
+    title: 'INDD',
     files: [{
-      "name": 'ABC',
-      "pathUrl": './ABC'
+      name: 'ABC',
+      pathUrl: './ABC'
     },
     {
-      "name": 'ABC2',
-      "pathUrl": './ABC2'
+      name: 'ABC2',
+      pathUrl: './ABC2'
     }]
   },
   {
-    title: "IDML",
+    title: 'IDML',
     files: [{
-      "name": 'ABC',
-      "pathUrl": './ABC'
+      name: 'ABC',
+      pathUrl: './ABC'
     },
     {
-      "name": 'ABC2',
-      "pathUrl": './ABC2'
+      name: 'ABC2',
+      pathUrl: './ABC2'
     },
     {
-      "name": 'ABC2',
-      "pathUrl": './ABC2'
+      name: 'ABC3',
+      pathUrl: './ABC3'
     }]
-  }]
+  }];
 
   constructor() {
     this.smartScanWindow = true;
@@ -79,10 +79,10 @@ export class ScanFilesComponent implements OnInit {
     this.searchingWindow = false;
     this.searchResultWindow = true;
     this.filesListView = false;
-    //if (JSON.parse(response).request_status === this.SUCCESS) {
-      this.numOfFiles = response[0].files.length + response[1].files.length;
-      this.numOfINDDFiles = response[0].files.length;
-      this.numOfIDMLFiles = response[1].files.length;
-    //}
+    // if (JSON.parse(response).request_status === this.SUCCESS) {
+    this.numOfFiles = response[0].files.length + response[1].files.length;
+    this.numOfINDDFiles = response[0].files.length;
+    this.numOfIDMLFiles = response[1].files.length;
+    // }
   }
 }
