@@ -18,8 +18,6 @@
         <qx-button class="smart-scan-button" [disabled]="false" [name]="'Run Smart Scan'"
             [tooltip]="'Smart Scan Button'" [showBackground]='true' [isSelected]='true' (click)="performSystemScan()">
         </qx-button>
-    </div>
-    <div class="action-button">
         <qx-button class="manual-select-files-button" [disabled]="false" [name]="'Manually select files'"
             [tooltip]="'Manual select files Button'" [showBackground]='true' [isSelected]='false'
             (click)="fileInput.click()">
@@ -55,14 +53,14 @@
             <qx-label class="sub-text">
                 {{numOfFiles}}
             </qx-label>
-            <div>
-                <span>
-                    <qx-label class="button-text">
+            <div style="text-align: center; display: flex; justify-content: center;">
+                <span class="button-text">
+                    <qx-label>
                         {{numOfINDDFiles}} INDD
                     </qx-label>
                 </span>
-                <span>
-                    <qx-label class="button-text">
+                <span class="button-text">
+                    <qx-label>
                         {{numOfIDMLFiles}} IDML
                     </qx-label>
                 </span>

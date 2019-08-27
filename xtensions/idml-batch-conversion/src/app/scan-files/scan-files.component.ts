@@ -15,8 +15,36 @@ export class ScanFilesComponent implements OnInit {
   numOfFiles: number;
   numOfINDDFiles: number;
   numOfIDMLFiles: number;
+  SUCCESS = 1;
 
-  constructor() { 
+  dummydata = [{
+    title: "INDD",
+    files: [{
+      "name": 'ABC',
+      "pathUrl": './ABC'
+    },
+    {
+      "name": 'ABC2',
+      "pathUrl": './ABC2'
+    }]
+  },
+  {
+    title: "IDML",
+    files: [{
+      "name": 'ABC',
+      "pathUrl": './ABC'
+    },
+    {
+      "name": 'ABC2',
+      "pathUrl": './ABC2'
+    },
+    {
+      "name": 'ABC2',
+      "pathUrl": './ABC2'
+    }]
+  }]
+
+  constructor() {
     this.smartScanWindow = true;
     this.searchingWindow = false;
     this.searchResultWindow = false;
@@ -35,15 +63,26 @@ export class ScanFilesComponent implements OnInit {
 
   performSystemScan() {
     this.showSearchingWindow();
-    this.numOfFiles = 27;
-    this.numOfINDDFiles = 10;
-    this.numOfIDMLFiles = 17;
+    this.getFilesSearchResultHandler(this.dummydata);
+    // (<any>window) ? (<any>window).XPress.api.invokeApi('IDMLStartSystemScan', '', this.getFilesSearchResultHandler) : 0;
   }
 
   performCustomScan() {
     this.showSearchingWindow();
-    this.numOfFiles = 27;
-    this.numOfINDDFiles = 10;
-    this.numOfIDMLFiles = 17;
+    // (<any>window) ? (<any>window).XPress.api.invokeApi('IDMLStartSystemScan', '', this.getFilesSearchResultHandler) : 0;
+  }
+
+  getFilesSearchResultHandler(response) {
+    console.log('SearchResults: ' + response);
+
+    this.smartScanWindow = false;
+    this.searchingWindow = false;
+    this.searchResultWindow = true;
+    this.filesListView = false;
+    //if (JSON.parse(response).request_status === this.SUCCESS) {
+      this.numOfFiles = response[0].files.length + response[1].files.length;
+      this.numOfINDDFiles = response[0].files.length;
+      this.numOfIDMLFiles = response[1].files.length;
+    //}
   }
 }
