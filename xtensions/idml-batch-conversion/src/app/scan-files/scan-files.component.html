@@ -2,7 +2,7 @@
     <div class="background-container">
         <div class="text-container">
             <qx-label class="sub-text">
-                Select files to convert
+                {{'ids-lbl-scan-files-maintext' | translate}}
             </qx-label>
         </div>
         <div class="scan-image-container">
@@ -10,18 +10,19 @@
         </div>
         <div class="internal-text-container">
             <qx-label class="sub-text" [multiline]="true">
-                Smart Scan will find all Adobe InDesign files, including .INDD and .IDML
+                {{'ids-lbl-scan-files-subtext' | translate}}
             </qx-label>
         </div>
     </div>
     <div class="action-button">
-        <qx-button class="smart-scan-button" [disabled]="false" [name]="'Run Smart Scan'"
-            [tooltip]="'Smart Scan Button'" [showBackground]='true' [isSelected]='true'>
+        <qx-button class="smart-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
+            [tooltip]="'ids-ttp-run-smart-scan' | translate" [showBackground]='true' [isSelected]='true'>
         </qx-button>
     </div>
     <div class="action-button">
-        <qx-button class="manual-select-files-button" [disabled]="false" [name]="'Manually select files'"
-            [tooltip]="'Manual select files Button'" [showBackground]='true' [isSelected]='false'
+        <qx-button class="manual-select-files-button" [disabled]="false"
+            [name]="'ids-btnlabel-manually-select-files' | translate"
+            [tooltip]="'ids-ttp-manually-select-files' | translate" [showBackground]='true' [isSelected]='false'
             (click)="fileInput.click()">
             <input #fileInput type="file" style="display:none;" />
         </qx-button>

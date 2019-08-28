@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { TranslateService } from './translate/translate.service';
+
 @Component({
   selector: 'qrk-root',
   templateUrl: './app.component.html',
@@ -8,5 +10,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'idml-batch-conversion';
 
-  constructor() { }
+  constructor(private translateService: TranslateService) {
+    let browserLang = 'en-US';
+
+    if ((<any>window).app) {
+      browserLang = (<any>window).app.language.code;
+    }
+
+    this.translateService.use(browserLang);
+  }
 }
