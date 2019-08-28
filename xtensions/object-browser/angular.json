@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@quark/xpressng/styles/qx.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -88,8 +89,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/@quark/xpressng/styles/qx.css"
+              "node_modules/@quark/xpressng/styles/qx.css",
+              "src/styles.scss"
             ],
             "scripts": []
           }
