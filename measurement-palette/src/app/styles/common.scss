@@ -1,0 +1,27 @@
+.box-dimensions, .origin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    qx-label {
+        font-size: 11px;
+        width: 80px;
+        text-align: right;
+    }
+
+    qx-textbox {
+        width: 90px;
+        margin-left: 10px;
+    }
+
+    qx-editable-dropdown {
+        width: 100px;
+        a {
+            border: 0 !important;
+        }
+    }
+}
+
+.properties {
+    margin-bottom: 3px;
+}

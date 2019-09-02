@@ -11,11 +11,16 @@ import { AppComponent } from './app.component';
 import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
 import { ScanFilesComponent } from './scan-files/scan-files.component';
 
+import { TranslateService } from './translate/translate.service';
+import { TranslatePipe } from './translate/translate.pipe';
+import { TRANSLATION_PROVIDERS } from './translate/translations';
+
 @NgModule({
   declarations: [
     AppComponent,
     LaunchScreenComponent,
     ScanFilesComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,7 @@ import { ScanFilesComponent } from './scan-files/scan-files.component';
     QxModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [[TRANSLATION_PROVIDERS, TranslateService]],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [

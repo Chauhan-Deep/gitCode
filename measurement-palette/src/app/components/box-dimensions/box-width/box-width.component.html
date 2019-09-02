@@ -1,0 +1,7 @@
+<div class="box-dimensions properties" *ngIf='currentWidth'>
+  <qx-label class='measurement-label'>{{ 'width' | translate }}</qx-label>
+  <qx-editable-dropdown [unit]='unit.HDEFUNITS' [dataList]='dataList' [minValue]='minValue' [maxValue]='maxValue'
+    [currentValue]="currentWidth" [selectedItem]='selectedItem' (itemChange)='onItemChangeHandler($event)'
+    [dropdownType]='dropdownType'>
+  </qx-editable-dropdown>
+</div>

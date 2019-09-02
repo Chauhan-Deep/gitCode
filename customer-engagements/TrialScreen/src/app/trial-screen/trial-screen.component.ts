@@ -8,40 +8,18 @@ import { TranslateService } from '../translate/translate.service';
   styleUrls: ['./trial-screen.component.scss']
 })
 export class TrialScreenComponent implements OnInit {
-  daysRemaining;
-  numOfDays: number;
+  thankYouMessage;
 
   constructor(private translateService: TranslateService) { }
 
   ngOnInit() {
-    const days = ((<any>window).XPress) ?
-      (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : 29;
-    if (days > 1) {
-      this.daysRemaining = this.translateService.localize('days').replace('^1', days);
-    } else {
-      this.daysRemaining = this.translateService.localize('day').replace('^1', days);
-    }
-    this.numOfDays = parseInt(days, 10);
-  }
-
-  buyNow() {
-    const buyUrl = 'https://www.quark.com/qxp-trial-purchase?utm_source=' +
-      encodeURIComponent('QXP_App&utm_medium=PopUp&utm_campaign=Trial_Conversion&utm_content=Countdown.v1');
-
-    if ((<any>window).app) {
-      (<any>window).app.launchApp(buyUrl);
-    } else {
-      window.open(buyUrl, '_blank');
-    }
+    this.thankYouMessage = this.translateService.localize('thankYouMsg')
+      .replace('^1', '<img class=\'qxp-logo\' src="assets/images/qxp-logo.png" />');
   }
 
   closeDialog() {
     if ((<any>window).app) {
-      if (this.numOfDays > 0) {
-        (<any>window).app.dialogs.closeDialog();
-      } else {
-        (<any>window).XPress.api.invokeGuiApi('XTQuitXPress', '');
-      }
+      (<any>window).XPress.api.invokeGuiApi('XTQuitXPress', '');
     }
   }
 
