@@ -18,4 +18,7 @@ export const LANG_EN_US_TRANS = {
     'ids-step-selectfiles': 'Select Files',
     'ids-step-convert': 'Convert',
     'ids-step-finish': 'Finish',
+    'ids-lbl-searching-files': 'Searching for files...',
+    'ids-btnlabel-cancel': 'Cancel',
+    'ids-lbl-files-found': 'Files found!',
 };
