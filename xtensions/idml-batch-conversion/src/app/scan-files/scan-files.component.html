@@ -1,4 +1,4 @@
-<div *ngIf="smartScanWindow" class="idml-scan-window">
+<div class="idml-scan-window">
     <div class="background-container">
         <div class="text-container">
             <qx-label class="sub-text">
@@ -16,14 +16,14 @@
     </div>
     <div class="action-button">
         <qx-button class="smart-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
-            [tooltip]="'ids-ttp-run-smart-scan' | translate" [showBackground]='true' [isSelected]='true' (click)="performSystemScan()">
+            [tooltip]="'ids-ttp-run-smart-scan' | translate" [showBackground]='true' [isSelected]='true'>
         </qx-button>
         
         <qx-button class="manual-select-files-button" [disabled]="false"
             [name]="'ids-btnlabel-manually-select-files' | translate"
             [tooltip]="'ids-ttp-manually-select-files' | translate" [showBackground]='true' [isSelected]='false'
             (click)="fileInput.click()">
-            <input #fileInput type="file" style="display:none;" (change)="performCustomScan()"/>
+            <input #fileInput type="file" style="display:none;" />
         </qx-button>
     </div>
 </div>
@@ -31,7 +31,7 @@
     <div class="background-container">
         <div class="internal-text-container">
             <qx-label class="sub-text">
-                {{'ids-lbl-searching-files' | translate}}
+                Searching for files...
             </qx-label>
         </div>
         <div class="search-image-container" style="text-align:center">
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="action-button">
-        <qx-button class="cancel-button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate" 
+        <qx-button class="cancel-button" [disabled]="false" [name]="'Cancel'" [tooltip]="'Cancel Button'"
             [showBackground]='true' [isSelected]='false'>
         </qx-button>
     </div>
@@ -48,7 +48,7 @@
     <div class="background-container">
         <div class="internal-text-container">
             <qx-label class="sub-text">
-                {{'ids-lbl-files-found' | translate}}
+                Files found!
             </qx-label>
         </div>
         <div class="files-result-container">
@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="cancel-button">
-        <qx-button class="cancel-button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate"
+        <qx-button class="cancel-button" [disabled]="false" [name]="'Cancel'" [tooltip]="'Cancel Button'"
             [showBackground]='true' [isSelected]='false'>
         </qx-button>
     </div>
