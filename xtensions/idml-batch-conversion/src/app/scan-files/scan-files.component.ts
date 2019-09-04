@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
+import { TranslateService } from '../translate/translate.service';
+
 
 @Component({
   selector: 'qrk-scan-files',
@@ -8,14 +10,17 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class ScanFilesComponent implements OnInit {
   @Input() stepper: MatStepper;
-  smartScanWindow: boolean;
-  searchingWindow: boolean;
-  searchResultWindow: boolean;
+
+  imgSrc: string;
+  headingText: string;
+  hideImage: boolean;
+  hideScanView: boolean;
+  hideCancelButton: boolean;
+  hideResultWindow: boolean;
   filesListView: boolean;
   numOfFiles: number;
   numOfINDDFiles: number;
   numOfIDMLFiles: number;
-  SUCCESS = 1;
 
   dummydata = [{
     title: 'INDD',
@@ -44,21 +49,28 @@ export class ScanFilesComponent implements OnInit {
     }]
   }];
 
-  constructor() {
-    this.smartScanWindow = true;
-    this.searchingWindow = false;
-    this.searchResultWindow = false;
-    this.filesListView = false;
-  }
+  constructor(
+    private translateService: TranslateService) {  }
 
   ngOnInit() {
+    this.headingText = this.translateService.localize('ids-lbl-scan-files-maintext');
+    this.imgSrc = '\\assets\\images\\img-smart-scan.png';
+
+    this.hideCancelButton = true;
+    this.hideImage = false;
+    this.hideScanView = false;
+    this.hideResultWindow = true;
+    this.filesListView = false;
   }
 
   showSearchingWindow() {
-    this.smartScanWindow = false;
-    this.searchingWindow = true;
-    this.searchResultWindow = false;
+    this.headingText = this.translateService.localize('ids-lbl-searching-files');
+    this.imgSrc = '\\assets\\images\\img-searching.png';
+
     this.filesListView = false;
+    this.hideResultWindow = true;
+    this.hideCancelButton = false;
+    this.hideScanView = true;
   }
 
   performSystemScan() {
@@ -75,10 +87,13 @@ export class ScanFilesComponent implements OnInit {
   getFilesSearchResultHandler(response) {
     console.log('SearchResults: ' + response);
 
-    this.smartScanWindow = false;
-    this.searchingWindow = false;
-    this.searchResultWindow = true;
+    this.headingText = this.translateService.localize('ids-lbl-files-found');
+
+    this.hideScanView = true;
+    this.hideImage = true;
+    this.hideResultWindow = false;
     this.filesListView = false;
+
     // if (JSON.parse(response).request_status === this.SUCCESS) {
     this.numOfFiles = response[0].files.length + response[1].files.length;
     this.numOfINDDFiles = response[0].files.length;

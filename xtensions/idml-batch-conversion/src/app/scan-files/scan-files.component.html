@@ -1,73 +1,53 @@
-<div *ngIf="smartScanWindow" class="idml-scan-window">
-    <div class="background-container">
-        <div class="text-container">
-            <qx-label class="sub-text">
-                {{'ids-lbl-scan-files-maintext' | translate}}
-            </qx-label>
-        </div>
-        <div class="scan-image-container">
-            <img class="scan-logo" src="\assets\images\img-smart-scan.png" />
-        </div>
-        <div class="internal-text-container">
-            <qx-label class="sub-text" [multiline]="true">
-                {{'ids-lbl-scan-files-subtext' | translate}}
-            </qx-label>
+<div class="background-container">
+    <div class="text-container">
+        <qx-label class="sub-text">
+            {{headingText}}
+        </qx-label>
+    </div>
+    <div class="image-container" [ngClass]="{ 'hidden': hideImage }">
+        <img class="scan-logo" [src]="imgSrc" />
+    </div>
+    <div class="internal-text-container" [ngClass]="{ 'hidden': hideScanView }">
+        <qx-label class="sub-text" [multiline]="true">
+            {{'ids-lbl-scan-files-subtext' | translate}}
+        </qx-label>
+        <div class="action-button">
+            <qx-button class="smart-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
+                [tooltip]="'ids-ttp-run-smart-scan' | translate" [showBackground]='true' [isSelected]='true'
+                (click)="performSystemScan()">
+            </qx-button>
+            <qx-button class="manual-select-files-button" [disabled]="false"
+                [name]="'ids-btnlabel-manually-select-files' | translate"
+                [tooltip]="'ids-ttp-manually-select-files' | translate" [showBackground]='true' [isSelected]='false'
+                (click)="fileInput.click()">
+                <input #fileInput type="file" class="hidden" (change)="performCustomScan()" />
+            </qx-button>
         </div>
     </div>
-    <div class="action-button">
-        <qx-button class="smart-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
-            [tooltip]="'ids-ttp-run-smart-scan' | translate" [showBackground]='true' [isSelected]='true' (click)="performSystemScan()">
-        </qx-button>
-        
-        <qx-button class="manual-select-files-button" [disabled]="false"
-            [name]="'ids-btnlabel-manually-select-files' | translate"
-            [tooltip]="'ids-ttp-manually-select-files' | translate" [showBackground]='true' [isSelected]='false'
-            (click)="fileInput.click()">
-            <input #fileInput type="file" style="display:none;" (change)="performCustomScan()"/>
-        </qx-button>
-    </div>
+    <ng-container *ngTemplateOutlet="filesResultView"></ng-container>
+    <ng-container *ngTemplateOutlet="cancelButtonView"></ng-container>
 </div>
-<div *ngIf="searchingWindow" class="idml-scan-window">
-    <div class="background-container">
-        <div class="internal-text-container">
-            <qx-label class="sub-text">
-                {{'ids-lbl-searching-files' | translate}}
+
+<ng-template #filesResultView>
+    <div class="files-result-container" [ngClass]="{'hidden': hideResultWindow}">
+        <qx-label class="sub-text">
+            {{numOfFiles}}
+        </qx-label>
+        <div class="document-result">
+            <qx-label class="button-text">
+                {{numOfINDDFiles}} INDD
+            </qx-label>
+            <qx-label class="button-text">
+                {{numOfIDMLFiles}} IDML
             </qx-label>
         </div>
-        <div class="search-image-container" style="text-align:center">
-            <img class="scan-logo" src="\assets\images\img-searching.png" />
-        </div>
     </div>
-    <div class="action-button">
-        <qx-button class="cancel-button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate" 
-            [showBackground]='true' [isSelected]='false'>
+</ng-template>
+
+<ng-template #cancelButtonView>
+    <div class="cancel-button" *ngIf="!hideCancelButton">
+        <qx-button [disabled]="false" [name]="'ids-btnlabel-cancel' | translate" [showBackground]='true'
+            [isSelected]='false'>
         </qx-button>
     </div>
-</div>
-<div *ngIf="searchResultWindow" class="idml-scan-window">
-    <div class="background-container">
-        <div class="internal-text-container">
-            <qx-label class="sub-text">
-                {{'ids-lbl-files-found' | translate}}
-            </qx-label>
-        </div>
-        <div class="files-result-container">
-            <qx-label class="sub-text">
-                {{numOfFiles}}
-            </qx-label>
-            <div style="text-align: center; display: flex; justify-content: center;">
-                <qx-label class="button-text">
-                    {{numOfINDDFiles}} INDD
-                </qx-label>
-                <qx-label class="button-text">
-                    {{numOfIDMLFiles}} IDML
-                </qx-label>
-            </div>
-        </div>
-    </div>
-    <div class="cancel-button">
-        <qx-button class="cancel-button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate"
-            [showBackground]='true' [isSelected]='false'>
-        </qx-button>
-    </div>
-</div>
+</ng-template>
