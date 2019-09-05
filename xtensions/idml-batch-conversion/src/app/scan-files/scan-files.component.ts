@@ -11,16 +11,16 @@ import { TranslateService } from '../translate/translate.service';
 export class ScanFilesComponent implements OnInit {
   @Input() stepper: MatStepper;
 
-  private imgSrc: string;
-  private headingText: string;
-  private hideImage: boolean;
-  private hideScanView: boolean;
-  private showResultWindow: boolean;
-  private showCancelButton: boolean;
-  private filesListView: boolean;
-  private numOfFiles: number;
-  private numOfINDDFiles: number;
-  private numOfIDMLFiles: number;
+  imgSrc: string;
+  headingText: string;
+  hideImage: boolean;
+  hideScanView: boolean;
+  showResultWindow: boolean;
+  showCancelButton: boolean;
+  filesListView: boolean;
+  numOfFiles: number;
+  numOfINDDFiles: number;
+  numOfIDMLFiles: number;
 
   private dummydata = [{
     title: 'INDD',
