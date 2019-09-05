@@ -13,32 +13,16 @@ export class AppComponent {
 
   @ViewChild('qxTreeComponent', { static: false }) qxTreeComponent: QxTreeComponent;
 
-  title = 'PROJECT-NAME';
-  defaultCheckedKeys = ['10020'];
-  defaultSelectedKeys = ['10010', '10020'];
-  defaultExpandedKeys = ['100', '1001'];
+  title = 'object-browser';
  
   boxNodes = [
     {
-      title: 'Box1',
+      title: 'Root',
       key: '1',
       expanded: true,
-      children: [
-        {
-          title: 'Box1Children',
-          key: '0-0-0',
-          checked: true,
-          expanded: true,
-          children: [
-            { title: 'Box11', selected: true, key: '0-0-0-0', isLeaf: true },
-            { title: 'Box12', key: '0-0-0-1', isLeaf: true },
-            { title: 'Box13', key: '0-0-0-2', isLeaf: true }
-          ]
-        },
-      ]
-    },
+      children: []
+    }
   ];
-
 
   traverse_it(obj){
     for(var prop in obj){
@@ -52,12 +36,54 @@ export class AppComponent {
             }
         }
     }
-}
+}  
+
+  ngOnInit() {
+    console.log("ngOnInit");
+    
+    let boxID = (<any>window).app.activeBoxes().boxIDs[0];
+    console.log("boxID="+boxID);
+    let count = (<any>window).app.components.flex.getFlexChildCount(boxID);
+    console.log("count="+count);
+    let boxName = (<any>window).app.components.flex.getBoxName(boxID);
+    this.boxNodes[0].title = boxName;
+    this.boxNodes[0].key = boxID;
+    this.AddChidren(this.boxNodes[0].children, boxID);
+  }
+
+  AddChid(nodes, flexboxID)
+  {    
+    let childCount = (<any>window).app.components.flex.getFlexChildCount(flexboxID);
+    let boxName = (<any>window).app.components.flex.getBoxName(flexboxID);
+    var title = boxName;
+      var childdata = {
+        'title': title,
+        'key': flexboxID,
+        'expanded': true,
+        "children": [],
+        "isLeaf": (childCount == undefined) || childCount == 0
+    };
+    nodes.push(childdata); 
+    
+    if (childCount > 0) {
+      this.AddChidren(childdata.children, flexboxID);
+    }
+  }
+  
+  AddChidren(nodes, flexboxID)
+  {
+    let childCount = (<any>window).app.components.flex.getFlexChildCount(flexboxID);
+    console.log("childCount");
+    for (var j = 0; j < childCount; j++) {
+      let childboxID = (<any>window).app.components.flex.getFlexChildAtIndex(flexboxID, j);
+      this.AddChid(nodes, childboxID);
+    }
+  }
 
   qxEvent(event: QxTreeEmitEvent): void {
-    let selectedNodes = this.qxTreeComponent.getSelectedNodeList();
-   if (selectedNodes.length >0) {
-    console.log(selectedNodes[0].title);
-   }
+    console.log("qxEvent");
+    console.log(event.node.title);
+    this.boxNodes[0].title = event.node.title;
+    (<any>window).app.components.flex.setcurbox(event.node.key);
   }
 }
