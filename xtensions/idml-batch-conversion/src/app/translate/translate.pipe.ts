@@ -10,7 +10,7 @@ export class TranslatePipe implements PipeTransform {
 
     constructor(private translate: TranslateService) { }
 
-    transform(value: string, args: any[]): any {
+    transform(value: string): any {
         let translation = '';
         if (value) {
             translation = this.translate.localize(value);
