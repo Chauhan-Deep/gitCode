@@ -13,8 +13,8 @@ export class AppComponent {
   constructor(private translateService: TranslateService) {
     let browserLang = 'en-US';
 
-    if ((<any>window).app) {
-      browserLang = (<any>window).app.language.code;
+    if ((window as any).app) {
+      browserLang = (window as any).app.language.code;
     }
 
     this.translateService.use(browserLang);
