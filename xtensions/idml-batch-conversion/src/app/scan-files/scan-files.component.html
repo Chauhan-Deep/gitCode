@@ -29,7 +29,7 @@
 </div>
 
 <ng-template #filesResultView>
-    <div class="files-result-container" [ngClass]="{'hidden': hideResultWindow}">
+    <div class="files-result-container" *ngIf="showResultWindow">
         <qx-label class="sub-text">
             {{numOfFiles}}
         </qx-label>
@@ -45,7 +45,7 @@
 </ng-template>
 
 <ng-template #cancelButtonView>
-    <div class="cancel-button" *ngIf="!hideCancelButton">
+    <div class="cancel-button" *ngIf="showCancelButton">
         <qx-button [disabled]="false" [name]="'ids-btnlabel-cancel' | translate" [showBackground]='true'
             [isSelected]='false'>
         </qx-button>

@@ -11,18 +11,18 @@ import { TranslateService } from '../translate/translate.service';
 export class ScanFilesComponent implements OnInit {
   @Input() stepper: MatStepper;
 
-  imgSrc: string;
-  headingText: string;
-  hideImage: boolean;
-  hideScanView: boolean;
-  hideCancelButton: boolean;
-  hideResultWindow: boolean;
-  filesListView: boolean;
-  numOfFiles: number;
-  numOfINDDFiles: number;
-  numOfIDMLFiles: number;
+  private imgSrc: string;
+  private headingText: string;
+  private hideImage: boolean;
+  private hideScanView: boolean;
+  private showResultWindow: boolean;
+  private showCancelButton: boolean;
+  private filesListView: boolean;
+  private numOfFiles: number;
+  private numOfINDDFiles: number;
+  private numOfIDMLFiles: number;
 
-  dummydata = [{
+  private dummydata = [{
     title: 'INDD',
     files: [{
       name: 'ABC',
@@ -56,10 +56,10 @@ export class ScanFilesComponent implements OnInit {
     this.headingText = this.translateService.localize('ids-lbl-scan-files-maintext');
     this.imgSrc = '\\assets\\images\\img-smart-scan.png';
 
-    this.hideCancelButton = true;
+    this.showCancelButton = false;
     this.hideImage = false;
     this.hideScanView = false;
-    this.hideResultWindow = true;
+    this.showResultWindow = false;
     this.filesListView = false;
   }
 
@@ -68,9 +68,9 @@ export class ScanFilesComponent implements OnInit {
     this.imgSrc = '\\assets\\images\\img-searching.png';
 
     this.filesListView = false;
-    this.hideResultWindow = true;
-    this.hideCancelButton = false;
+    this.showResultWindow = false;
     this.hideScanView = true;
+    this.showCancelButton = true;
   }
 
   performSystemScan() {
@@ -91,7 +91,7 @@ export class ScanFilesComponent implements OnInit {
 
     this.hideScanView = true;
     this.hideImage = true;
-    this.hideResultWindow = false;
+    this.showResultWindow = true;
     this.filesListView = false;
 
     // if (JSON.parse(response).request_status === this.SUCCESS) {
