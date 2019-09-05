@@ -1,0 +1,19 @@
+<qx-tree #qxTreeComponent [qxData]="treeNodeOptions" [qxCheckable]=true (qxClick)="qxEvent($event)"
+    (qxCheckBoxChange)="qxCheck($event)" [qxTreeTemplate]="qxTreeTemplate">
+</qx-tree>
+
+<ng-template #qxTreeTemplate let-node>
+    <div class="qx-tree-node-content-wrapper">
+        <span class="qx-tree-title" *ngIf="node.isLeaf">
+            <img src="\assets\images\ico-file.png" />
+        </span>
+        <span class="qx-tree-title">
+            <qx-label class='node-name'>
+                {{ node.title }}
+            </qx-label>
+            <qx-label class='node-path'>
+                {{ node?.origin?.customNode | lowercase }}
+            </qx-label>
+        </span>
+    </div>
+</ng-template>

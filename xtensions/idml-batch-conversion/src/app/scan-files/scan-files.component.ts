@@ -3,6 +3,15 @@ import { MatStepper } from '@angular/material/stepper';
 import { TranslateService } from '../translate/translate.service';
 
 
+export interface QxFileNodeOptions {
+  name: string;
+  path: string;
+}
+export interface QxIDMLTreeNodeOptions {
+  indd?: QxFileNodeOptions[];
+  idml?: QxFileNodeOptions[];
+}
+
 @Component({
   selector: 'qrk-scan-files',
   templateUrl: './scan-files.component.html',
@@ -13,44 +22,20 @@ export class ScanFilesComponent implements OnInit {
 
   imgSrc: string;
   headingText: string;
+  hideHeading: boolean;
   hideImage: boolean;
   hideScanView: boolean;
   showResultWindow: boolean;
   showCancelButton: boolean;
-  filesListView: boolean;
   numOfFiles: number;
   numOfINDDFiles: number;
   numOfIDMLFiles: number;
-
-  private dummydata = [{
-    title: 'INDD',
-    files: [{
-      name: 'ABC',
-      pathUrl: './ABC'
-    },
-    {
-      name: 'ABC2',
-      pathUrl: './ABC2'
-    }]
-  },
-  {
-    title: 'IDML',
-    files: [{
-      name: 'ABC',
-      pathUrl: './ABC'
-    },
-    {
-      name: 'ABC2',
-      pathUrl: './ABC2'
-    },
-    {
-      name: 'ABC3',
-      pathUrl: './ABC3'
-    }]
-  }];
+  hideFilesListView: boolean;
+  filesEnumData: QxIDMLTreeNodeOptions[];
+  interval;
 
   constructor(
-    private translateService: TranslateService) {  }
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.headingText = this.translateService.localize('ids-lbl-scan-files-maintext');
@@ -60,44 +45,73 @@ export class ScanFilesComponent implements OnInit {
     this.hideImage = false;
     this.hideScanView = false;
     this.showResultWindow = false;
-    this.filesListView = false;
+    this.hideFilesListView = true;
+    this.hideHeading = false;
   }
 
   showSearchingWindow() {
     this.headingText = this.translateService.localize('ids-lbl-searching-files');
     this.imgSrc = '\\assets\\images\\img-searching.png';
 
-    this.filesListView = false;
+    this.hideFilesListView = true;
     this.showResultWindow = false;
     this.hideScanView = true;
     this.showCancelButton = true;
   }
 
   performSystemScan() {
+    const data = {};
+
     this.showSearchingWindow();
-    this.getFilesSearchResultHandler(this.dummydata);
-    // (<any>window) ? (<any>window).XPress.api.invokeApi('IDMLStartSystemScan', '', this.getFilesSearchResultHandler) : 0;
+    if (window as any) {
+      this.filesEnumData = (window as any).XPress.api.invokeXTApi(1146372945,
+        'IDMLImportEnumerateINDDAndIDMLFiles', data);
+      this.getFilesSearchResultHandler(this.filesEnumData);
+    }
   }
 
   performCustomScan() {
+    let folderUrl: string;
+
+    if (window as any) {
+      folderUrl = (window as any).app.dialogs.openFolderDialog();
+    }
     this.showSearchingWindow();
-    // (<any>window) ? (<any>window).XPress.api.invokeApi('IDMLStartSystemScan', '', this.getFilesSearchResultHandler) : 0;
+    if (window as any) {
+      const data = { searchDirectory: folderUrl };
+
+      this.filesEnumData = (window as any).XPress.api.invokeXTApi(1146372945,
+        'IDMLImportEnumerateINDDAndIDMLFiles', data);
+      this.getFilesSearchResultHandler(this.filesEnumData);
+    }
   }
 
   getFilesSearchResultHandler(response) {
     console.log('SearchResults: ' + response);
 
+    clearInterval(this.interval);
     this.headingText = this.translateService.localize('ids-lbl-files-found');
 
     this.hideScanView = true;
     this.hideImage = true;
     this.showResultWindow = true;
-    this.filesListView = false;
+    this.hideFilesListView = true;
 
-    // if (JSON.parse(response).request_status === this.SUCCESS) {
-    this.numOfFiles = response[0].files.length + response[1].files.length;
-    this.numOfINDDFiles = response[0].files.length;
-    this.numOfIDMLFiles = response[1].files.length;
-    // }
+    this.numOfFiles = response.indd.length + response.idml.length;
+    this.numOfINDDFiles = response.indd.length;
+    this.numOfIDMLFiles = response.idml.length;
+
+    this.interval = setInterval(() => {
+      this.startTimer();
+    }, 200);
+  }
+
+  startTimer() {
+    this.hideScanView = true;
+    this.hideImage = true;
+    this.showCancelButton = false;
+    this.showResultWindow = false;
+    this.hideHeading = true;
+    this.hideFilesListView = false;
   }
 }
