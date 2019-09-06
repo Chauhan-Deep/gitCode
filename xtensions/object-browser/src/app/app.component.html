@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<qx-tree #qxTreeComponent [qxData]="boxNodes" [qxMultiple]=false [qxShowExpand]=true
-        [qxCheckable]=false [qxDraggable]=true [qxHighlightOnHover]=true [qxBlockNode]=true
+<qx-tree #qxTreeComponent [qxData]="boxNodes" [qxMultiple]=false [qxShowExpand]=true [selectable] = true
+        [qxCheckable]=true [qxDraggable]=true [qxHighlightOnHover]=true [qxBlockNode]=true
         (qxOnDragStart)="qxEvent($event)" (qxOnDragEnter)="qxEvent($event)"
         (qxOnDragOver)="qxEvent($event)" (qxOnDragLeave)="qxEvent($event)" (qxOnDrop)="qxEvent($event)"
         (qxOnDragEnd)="qxEvent($event)" (qxClick)="qxEvent($event)" (qxExpandChange)="qxEvent($event)"
