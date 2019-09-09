@@ -1,7 +1,32 @@
-<qx-tree #qxTreeComponent [qxData]="treeNodeOptions" [qxCheckable]=true (qxClick)="qxEvent($event)"
-    (qxCheckBoxChange)="qxCheck($event)" [qxTreeTemplate]="qxTreeTemplate">
-</qx-tree>
-
+<div>
+    <span>
+        <qx-checkbox #totalFilesCheckboxButton [disabled]=false [name]="filesCountString" [state]="selectAllState"
+            [showElipsis]=false (stateChange)="onSelectAllChange($event)"></qx-checkbox>
+    </span>
+    <span>
+        <qx-label class="button-text">
+            {{numOfINDDFiles}} INDD
+        </qx-label>
+    </span>
+    <span>
+        <qx-label class="button-text">
+            {{numOfIDMLFiles}} IDML
+        </qx-label>
+    </span>
+</div>
+<div class="tree-view">
+    <qx-tree #qxTreeComponent [qxData]="treeNodeOptions" [qxCheckedKeys]="checkedKeysList" [qxCheckable]=true
+        (qxClick)="qxEvent($event)" (qxCheckBoxChange)="qxCheck($event)" [qxTreeTemplate]="qxTreeTemplate">
+    </qx-tree>
+</div>
+<div>
+    <qx-checkbox #selectDestCheckboxButton [disabled]=false [name]="'ids-lbl-select-destination' | translate"
+        [tooltip]="'ids-lbl-select-destination' | translate" [showElipsis]=false (stateChange)='onChange($event)'>
+    </qx-checkbox>
+    <qx-button [disabled]="false" [name]="'ids-lbl-convert-selected' | translate" [showBackground]='true'
+        [isSelected]='false' (click)="convertSelectedDocuments()">
+    </qx-button>
+</div>
 <ng-template #qxTreeTemplate let-node>
     <div class="qx-tree-node-content-wrapper">
         <span class="qx-tree-title" *ngIf="node.isLeaf">
@@ -12,7 +37,7 @@
                 {{ node.title }}
             </qx-label>
             <qx-label class='node-path'>
-                {{ node?.origin?.customNode | lowercase }}
+                {{ node?.origin?.pathURL | lowercase }}
             </qx-label>
         </span>
     </div>

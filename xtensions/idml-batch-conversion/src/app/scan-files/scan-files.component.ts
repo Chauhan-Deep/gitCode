@@ -1,16 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
+
 import { TranslateService } from '../translate/translate.service';
-
-
-export interface QxFileNodeOptions {
-  name: string;
-  path: string;
-}
-export interface QxIDMLTreeNodeOptions {
-  indd?: QxFileNodeOptions[];
-  idml?: QxFileNodeOptions[];
-}
+import { QxIDMLTreeNodeOptions } from '../util-interface';
 
 @Component({
   selector: 'qrk-scan-files',
