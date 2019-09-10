@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
+import { Component, ViewChild, NgZone, ChangeDetectorRef} from '@angular/core';
 import { QxTreeModule } from '@quark/xpressng';
 import { QxTreeComponent, QxTreeNode, QxTreeNodeOptions, QxTreeEmitEvent, QxTreeBeforeDropEvent } from '@quark/xpressng';
 
@@ -12,7 +12,7 @@ import { QxTreeComponent, QxTreeNode, QxTreeNodeOptions, QxTreeEmitEvent, QxTree
 export class AppComponent {
   ngZone : NgZone;
 
-  constructor(_ngZone: NgZone) {
+  constructor(_ngZone: NgZone, private ref:ChangeDetectorRef) {
     this.ngZone = _ngZone;
   }
 
@@ -97,19 +97,29 @@ export class AppComponent {
   }
 
   docStateChange() { 
-      let _this = this;
-      const callbackListener = (response) => {
-       response = JSON.parse(response);
-        let boxID = (<any>window).app.activeBoxes().boxIDs[0];
-        console.log("boxID="+boxID);
-        this.ngZone.run(() => {  
+    let _this = this;
+    const callbackListener = (response) => {
+      response = JSON.parse(response);
+      let boxID = (<any>window).app.activeBoxes().boxIDs[0];
+      console.log("boxID="+boxID);
+      let rootboxID = (<any>window).app.components.flex.getFlexRoot(boxID);
+      let boxName = (<any>window).app.components.flex.getBoxName(rootboxID);
+      let boxNodesUpdated = [];
+      boxNodesUpdated.push({title:boxName, key:rootboxID, expanded:true, selected:false, children:[]});
+      this.AddChidren(boxNodesUpdated[0].children, rootboxID);
+
+      // Update the model reference
+      this.boxNodes = boxNodesUpdated;
+      this.ref.detectChanges();
+
+      this.ngZone.run(() => {
         let node = this.qxTreeComponent.getTreeNodeByKey(boxID);
         if (node) {
           if (node.isSelectable) {
             node.isSelected = true; 
           }
         }
-      });
+        });
     }
 
   if ((<any> window).app) {
