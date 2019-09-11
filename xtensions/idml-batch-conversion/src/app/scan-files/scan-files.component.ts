@@ -22,8 +22,8 @@ export class ScanFilesComponent implements OnInit {
   numOfFiles: number;
   numOfINDDFiles: number;
   numOfIDMLFiles: number;
-  hideFilesListView: boolean;
-  filesEnumData: QxIDMLTreeNodeOptions[];
+  showFilesListView: boolean;
+  filesEnumData: QxIDMLTreeNodeOptions;
   interval;
 
   constructor(
@@ -37,7 +37,7 @@ export class ScanFilesComponent implements OnInit {
     this.hideImage = false;
     this.hideScanView = false;
     this.showResultWindow = false;
-    this.hideFilesListView = true;
+    this.showFilesListView = false;
     this.hideHeading = false;
   }
 
@@ -45,7 +45,7 @@ export class ScanFilesComponent implements OnInit {
     this.headingText = this.translateService.localize('ids-lbl-searching-files');
     this.imgSrc = '\\assets\\images\\img-searching.png';
 
-    this.hideFilesListView = true;
+    this.showFilesListView = false;
     this.showResultWindow = false;
     this.hideScanView = true;
     this.showCancelButton = true;
@@ -58,7 +58,7 @@ export class ScanFilesComponent implements OnInit {
     if (window as any) {
       this.filesEnumData = (window as any).XPress.api.invokeXTApi(1146372945,
         'IDMLImportEnumerateINDDAndIDMLFiles', data);
-      this.getFilesSearchResultHandler(this.filesEnumData);
+      this.getFilesSearchResultHandler();
     }
   }
 
@@ -74,36 +74,34 @@ export class ScanFilesComponent implements OnInit {
 
       this.filesEnumData = (window as any).XPress.api.invokeXTApi(1146372945,
         'IDMLImportEnumerateINDDAndIDMLFiles', data);
-      this.getFilesSearchResultHandler(this.filesEnumData);
+      this.getFilesSearchResultHandler();
     }
   }
 
-  getFilesSearchResultHandler(response) {
-    console.log('SearchResults: ' + response);
-
+  getFilesSearchResultHandler() {
     clearInterval(this.interval);
     this.headingText = this.translateService.localize('ids-lbl-files-found');
 
     this.hideScanView = true;
     this.hideImage = true;
     this.showResultWindow = true;
-    this.hideFilesListView = true;
+    this.showFilesListView = false;
 
-    this.numOfFiles = response.indd.length + response.idml.length;
-    this.numOfINDDFiles = response.indd.length;
-    this.numOfIDMLFiles = response.idml.length;
+    this.numOfFiles = this.filesEnumData.indd.length + this.filesEnumData.idml.length;
+    this.numOfINDDFiles = this.filesEnumData.indd.length;
+    this.numOfIDMLFiles = this.filesEnumData.idml.length;
 
-    this.interval = setInterval(() => {
-      this.startTimer();
-    }, 200);
+    setTimeout(() => {
+      this.showFileListView();
+    }, 2000);
   }
 
-  startTimer() {
+  showFileListView() {
     this.hideScanView = true;
     this.hideImage = true;
     this.showCancelButton = false;
     this.showResultWindow = false;
     this.hideHeading = true;
-    this.hideFilesListView = false;
+    this.showFilesListView = true;
   }
 }

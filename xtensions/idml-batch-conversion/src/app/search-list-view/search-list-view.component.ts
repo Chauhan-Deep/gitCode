@@ -13,6 +13,7 @@ import { QxIDMLTreeNodeOptions, QxFileNodeOptions } from '../util-interface';
 export class SearchListViewComponent implements OnInit {
   @ViewChild('qxTreeComponent', { static: false }) qxTreeComponent: QxTreeComponent;
   @ViewChild('totalFilesCheckboxButton', { static: false }) totalFilesCheckboxButton: QxCheckboxComponent;
+
   @Input() treeFilesEnumData: QxIDMLTreeNodeOptions;
 
   selectAllState: CheckboxState;
@@ -27,20 +28,15 @@ export class SearchListViewComponent implements OnInit {
   constructor(private translateService: TranslateService) { }
 
   ngOnInit() {
-    const parentInddKey = 0;
-    const parentIdmlKey = 1;
-
     this.selectAllState = CheckboxState.UNCHECKED;
     this.treeNodeOptions = [];
     this.checkedKeysList = [];
     this.initializeTreeData();
-    this.checkedKeysList.push(parentInddKey.toString());
-    this.checkedKeysList.push(parentIdmlKey.toString());
   }
 
   initializeTreeData(): void {
-    const parentInddKey = 0;
-    const parentIdmlKey = 1;
+    const parentInddKey = '0';
+    const parentIdmlKey = '1';
     const idmlTreeNodeChildren: QxTreeNodeOptions[] = [];
     const inddTreeNodeChildren: QxTreeNodeOptions[] = [];
 
@@ -67,14 +63,14 @@ export class SearchListViewComponent implements OnInit {
 
     let customNodeStr = '(' + (inddTreeNodeChildren.length).toString() + ')';
     let treeNodeData: QxTreeNodeOptions = {
-      title: 'INDD' + customNodeStr, key: parentInddKey.toString(),
+      title: 'INDD' + customNodeStr, key: parentInddKey,
       expanded: true, pathURL: '', children: inddTreeNodeChildren
     };
 
     this.treeNodeOptions.push(treeNodeData);
     customNodeStr = ')' + (idmlTreeNodeChildren.length).toString() + ')';
     treeNodeData = {
-      title: 'IDML' + customNodeStr, key: parentIdmlKey.toString(),
+      title: 'IDML' + customNodeStr, key: parentIdmlKey,
       expanded: true, pathURL: '', children: idmlTreeNodeChildren
     };
 
@@ -113,8 +109,8 @@ export class SearchListViewComponent implements OnInit {
   convertSelectedDocuments() {
     const idmlKeyBeginning = this.numOfINDDFiles + 2;
     const checkedKeyNodes: QxTreeNode[] = this.qxTreeComponent.getCheckedNodeList();
-    const idmlCheckedNodes: QxFileNodeOptions[] = [];
-    const inddCheckedNodes: QxFileNodeOptions[] = [];
+    let idmlCheckedNodes: QxFileNodeOptions[] = [];
+    let inddCheckedNodes: QxFileNodeOptions[] = [];
 
     checkedKeyNodes.forEach((treeNode): void => {
       const options: QxTreeNodeOptions = treeNode.origin;
@@ -134,7 +130,12 @@ export class SearchListViewComponent implements OnInit {
 
           idmlCheckedNodes.push(fileNode);
         }
+      } else if (key === 0) {
+        inddCheckedNodes = this.treeFilesEnumData.indd;
+      } else if (key === 1) {
+        idmlCheckedNodes = this.treeFilesEnumData.idml;
       }
+
     });
 
     const data = {

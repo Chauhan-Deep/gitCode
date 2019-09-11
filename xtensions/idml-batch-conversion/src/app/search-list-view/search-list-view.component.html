@@ -21,7 +21,7 @@
 </div>
 <div>
     <qx-checkbox #selectDestCheckboxButton [disabled]=false [name]="'ids-lbl-select-destination' | translate"
-        [tooltip]="'ids-lbl-select-destination' | translate" [showElipsis]=false (stateChange)='onChange($event)'>
+        [tooltip]="'ids-lbl-select-destination' | translate" [showElipsis]=false>
     </qx-checkbox>
     <qx-button [disabled]="false" [name]="'ids-lbl-convert-selected' | translate" [showBackground]='true'
         [isSelected]='false' (click)="convertSelectedDocuments()">
