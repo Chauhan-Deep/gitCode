@@ -14,12 +14,13 @@
             </qx-label>
         </div>
     </div>
+    <qx-divider></qx-divider>
     <div class="action-button">
         <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-skip' | translate" [tooltip]="'ids-ttp-skip' | translate"
             [showBackground]='true' [isSelected]='false' (click)="skip()">
         </qx-button>
         <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-continue' | translate" [tooltip]="'ids-ttp-continue' | translate"
-            [showBackground]='true' [isSelected]='true' (click)="nextScreen()">
+            [showBackground]='true' [isSelected]='true' [focus]='true' (click)="nextScreen()">
         </qx-button>
     </div>
 </div>
