@@ -1,9 +1,5 @@
 <div class="background-container">
-<<<<<<< HEAD
     <div class="text-container" [ngClass]="{ 'hidden': hideHeading }">
-=======
-    <div class="text-container">
->>>>>>> develop
         <qx-label class="sub-text">
             {{headingText}}
         </qx-label>
@@ -24,7 +20,6 @@
                 [name]="'ids-btnlabel-manually-select-files' | translate"
                 [tooltip]="'ids-ttp-manually-select-files' | translate" [showBackground]='true' [isSelected]='false'
                 (click)="performCustomScan()">
-                <input #fileInput type="file" class="hidden" (change)="performCustomScan()" />
             </qx-button>
         </div>
     </div>

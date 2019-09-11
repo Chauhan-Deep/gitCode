@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
-import { TranslateService } from '../translate/translate.service';
-
 
 import { TranslateService } from '../translate/translate.service';
 import { QxIDMLTreeNodeOptions } from '../util-interface';
