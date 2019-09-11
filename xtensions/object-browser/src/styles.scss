@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background: grey;
+    background: white;
+}
+
+.qx-tree li span.qx-tree-switcher.qx-tree-switcher_open .qx-tree-switcher-icon, 
+.qx-label {
+    color: black;
 }
