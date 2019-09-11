@@ -1,8 +1,19 @@
 .stepper-class {
     background: #C0C0C0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 ::ng-deep .mat-horizontal-stepper-header-container {
-    background: white;
+    background: #EEEEEE;
 }
 
+::ng-deep .mat-horizontal-content-container{
+    height: 100%;
+}
+
+::ng-deep .mat-horizontal-stepper-content{
+    height: 100%;
+}
