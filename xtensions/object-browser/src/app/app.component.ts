@@ -21,7 +21,10 @@ export class AppComponent {
   isDragStarted = false;
   draggedNodeKey = "";
   title = 'object-browser';
-  private CHGDOCSTATCallbackHandlerID: number;
+  private _XT_CHGDOCSTAT:number;
+  private _XT_FLEX_POST_ATTATCH_ITEM: number;
+  private _XT_FLEX_POST_DETATCH_ITEM: number;
+  private _XT_POST_DELETEITEM: number;
 
   boxNodes = [
     {
@@ -56,15 +59,18 @@ export class AppComponent {
     console.log("count=" + count);
     let rootboxID = (<any>window).app.components.flex.getFlexRoot(boxID);
     let boxName = (<any>window).app.components.flex.getBoxName(rootboxID);
+    boxName = boxName.charAt(0).toUpperCase() + boxName.slice(1);
     this.boxNodes[0].title = boxName;
     this.boxNodes[0].key = rootboxID;
     this.AddChidren(this.boxNodes[0].children, rootboxID);
     this.docStateChange();
+    this.updateTree();
   }
 
   AddChid(nodes, flexboxID) {
     let childCount = (<any>window).app.components.flex.getFlexChildCount(flexboxID);
     let boxName = (<any>window).app.components.flex.getBoxName(flexboxID);
+    boxName = boxName.charAt(0).toUpperCase() + boxName.slice(1);
     var title = boxName;
     var childdata = {
       'title': title,
@@ -90,21 +96,30 @@ export class AppComponent {
   }
 
   qxEvent(event: QxTreeEmitEvent): void {
-    this.draggedNodeKey = event.node.key;
+   
     console.log("-----------------------------------qxEvent----------------------------------");
     console.log(event.node.title);
     this.boxNodes[0].title = event.node.title;
     (<any>window).app.components.flex.setcurbox(event.node.key);
-    //this.RefreshTree();
+    let boxID = (<any>window).app.activeBoxes().boxIDs[0];
+    this.ngZone.run(() => {
+      let node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+      if (node) {
+        if (node.isSelectable) {
+          node.isSelected = true;
+        }
+      }
+    });
   }
 
-  RefreshTree() {
+  async RefreshTree() {
     var t0 = performance.now();
-
+  
     let boxID = (<any>window).app.activeBoxes().boxIDs[0];
     let rootboxID = (<any>window).app.components.flex.getFlexRoot(boxID);
     if (rootboxID) {
       let boxName = (<any>window).app.components.flex.getBoxName(rootboxID);
+      boxName = boxName.charAt(0).toUpperCase() + boxName.slice(1);
       let boxNodesUpdated = [];
       boxNodesUpdated.push({ title: boxName, key: rootboxID, expanded: true, selected: false, children: [] });
       this.AddChidren(boxNodesUpdated[0].children, rootboxID);
@@ -120,8 +135,9 @@ export class AppComponent {
 
   docStateChange() {
     const callbackListener = (response) => {
+      response = JSON.parse(response);
+      console.log("docStateChange called from XPress...");
       let boxID = (<any>window).app.activeBoxes().boxIDs[0];
-      this.RefreshTree();
       this.ngZone.run(() => {
         let node = this.qxTreeComponent.getTreeNodeByKey(boxID);
         if (node) {
@@ -130,24 +146,58 @@ export class AppComponent {
           }
         }
       });
+      return;
     }
 
     if ((<any>window).app) {
-      this.CHGDOCSTATCallbackHandlerID = (<any>window).XPress.registerQXPCallbackHandler(0, 668, callbackListener);
+      console.log("registerQXPCallbackHandler...");
+      this._XT_CHGDOCSTAT = (<any>window).XPress.registerQXPCallbackHandler(0, 668, callbackListener);
+    }
+  }
+
+  updateTree() {
+    const callbackListener = (response) => {
+      response = JSON.parse(response);
+      console.log("add/delete called from XPress...");
+      let boxID = (<any>window).app.activeBoxes().boxIDs[0];
+      (async () => {
+        this.RefreshTree();
+      })();
+      this.ngZone.run(() => {
+        let node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+        if (node) {
+          if (node.isSelectable) {
+            node.isSelected = true;
+          }
+        }
+      });
+      return;
+    }
+
+    if ((<any>window).app) {
+      console.log("registerQXPCallbackHandler...");
+      this._XT_FLEX_POST_ATTATCH_ITEM = (<any>window).XPress.registerQXPCallbackHandler(0, 1542, callbackListener);
+      this._XT_FLEX_POST_DETATCH_ITEM = (<any>window).XPress.registerQXPCallbackHandler(0, 1544, callbackListener);
+      this._XT_POST_DELETEITEM = (<any>window).XPress.registerQXPCallbackHandler(0, 1188, callbackListener);
     }
   }
 
   ngOnDestroy() {
-    (<any>window).XPress.deRegisterQXPCallbackHandler(0, 668, this.CHGDOCSTATCallbackHandlerID);
+    (<any>window).XPress.deRegisterQXPCallbackHandler(0, 668, this._XT_CHGDOCSTAT);
+    (<any>window).XPress.deRegisterQXPCallbackHandler(0, 1542, this._XT_FLEX_POST_ATTATCH_ITEM);
+    (<any>window).XPress.deRegisterQXPCallbackHandler(0, 1544, this._XT_FLEX_POST_DETATCH_ITEM);
+    (<any>window).XPress.deRegisterQXPCallbackHandler(0, 1188, this._XT_POST_DELETEITEM);
   }
 
   // Drag-Drop
 
   OnDragStart(event: QxTreeEmitEvent): void {
     console.log("OnDragStart=" + event.node.title);
+    this.draggedNodeKey = event.node.key;
+    this.isDragStarted = true;
   }
   OnDragEnter(event: QxTreeEmitEvent): void {
-    this.isDragStarted = true;
+   
     //console.log("OnDragEnter=" + event.node.title);
   }
   OnDragOver(event: QxTreeEmitEvent): void {
@@ -173,7 +223,6 @@ export class AppComponent {
       }
     }
     this.isDragStarted = false;
-    this.RefreshTree();
   }
   OnDragEnd(event: QxTreeEmitEvent): void {
     console.log("OnDragEnd=" + event.node.title);

@@ -1,9 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background: white;
+    background:gray;
 }
+// .qx-tree li ul {
+//     margin: 0;
+//     padding: 0 0 0 0px; 
+// }
 
+.qx-tree li span.qx-tree-switcher {
+    border-bottom : 10px transparent solid;
+    border-top : 2px transparent solid;
+    border-radius : 0px;
+    background:whitesmoke;
+}
+.qx-tree.qx-tree-block-node li .qx-tree-node-content-wrapper {
+    background:whitesmoke;
+    border-radius : 0px;
+}
+.qx-tree li .qx-tree-node-content-wrapper.qx-tree-node-highlight:hover,
+.qx-tree li .qx-tree-node-content-wrapper.qx-tree-node-selected {
+    background-color:RoyalBlue ;
+}
 .qx-tree li span.qx-tree-switcher.qx-tree-switcher_open .qx-tree-switcher-icon, 
 .qx-label {
-    color: black;
+    color:black;
+    font-size: 18px;
+    
 }
