@@ -6,15 +6,19 @@
     <mat-step class="qx-step" editable="false">
         <ng-template matStepLabel><b>{{'ids-step-selectfiles' | translate}}</b></ng-template>
         <div>
-            <qrk-scan-files></qrk-scan-files>
+            <qrk-scan-files [stepper]="stepper"></qrk-scan-files>
         </div>
     </mat-step>
     <mat-step class="qx-step" editable="false">
         <ng-template matStepLabel><b>{{'ids-step-convert' | translate}}</b></ng-template>
-        <p>Content 3</p>
+        <div>
+            <qrk-progress-bar [stepper]="stepper"></qrk-progress-bar>
+        </div>
     </mat-step>
     <mat-step class="qx-step" editable="false">
         <ng-template matStepLabel><b>{{'ids-step-finish' | translate}}</b></ng-template>
-        <p>Final Step</p>
+        <div>
+            <qrk-finish-results></qrk-finish-results>
+        </div>
     </mat-step>
 </mat-horizontal-stepper>

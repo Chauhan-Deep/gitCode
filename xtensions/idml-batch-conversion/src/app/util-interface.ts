@@ -3,6 +3,7 @@ export interface QxFileNodeOptions {
     path: string;
     status?: boolean;
 }
+
 export interface QxIDMLTreeNodeOptions {
     indd?: QxFileNodeOptions[];
     idml?: QxFileNodeOptions[];

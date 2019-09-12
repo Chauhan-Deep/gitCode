@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
 
 import { QxTreeComponent, QxTreeNodeOptions, QxTreeEmitEvent, QxCheckboxComponent, CheckboxState, QxTreeNode } from '@quark/xpressng';
 
 import { TranslateService } from '../translate/translate.service';
+import { FileConversionService } from '../file-conversion.service';
 import { QxIDMLTreeNodeOptions, QxFileNodeOptions } from '../util-interface';
 
 @Component({
@@ -14,6 +16,7 @@ export class SearchListViewComponent implements OnInit {
   @ViewChild('qxTreeComponent', { static: false }) qxTreeComponent: QxTreeComponent;
   @ViewChild('totalFilesCheckboxButton', { static: false }) totalFilesCheckboxButton: QxCheckboxComponent;
   @Input() treeFilesEnumData: QxIDMLTreeNodeOptions;
+  @Input() stepper: MatStepper;
 
   selectAllState: CheckboxState;
   checkedKeysList: string[];
@@ -24,7 +27,10 @@ export class SearchListViewComponent implements OnInit {
   numOfFiles: number;
   filesEnumData: QxIDMLTreeNodeOptions[];
 
-  constructor(private translateService: TranslateService) { }
+  constructor(
+    private translateService: TranslateService,
+    private fileConversionService: FileConversionService
+    ) { }
 
   ngOnInit() {
     const parentInddKey = 0;
@@ -141,10 +147,7 @@ export class SearchListViewComponent implements OnInit {
       indd: inddCheckedNodes, idml: idmlCheckedNodes
     };
 
-    if (window as any) {
-      this.filesEnumData = (window as any).XPress.api.invokeXTApi(1146372945,
-        'IDMLImportConvertINDDAndIDMLFilesToQXP', data);
-    }
-
+    this.stepper.next();
+    this.fileConversionService.callXPressFileConversion(data);
   }
 }
