@@ -4,6 +4,7 @@ import { MatStepper } from '@angular/material/stepper';
 
 import { TranslateService } from '../translate/translate.service';
 import { FileConversionService } from '../file-conversion.service';
+import { QxIDMLFileConversionData } from '../util-interface';
 
 @Component({
   selector: 'qrk-progress-bar',
@@ -26,12 +27,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
 
   constructor(
     private translateService: TranslateService,
-    private fileConversionService: FileConversionService) {
-
-    this.filePath = 'File url';
-    this.currentFileIndex = 1;
-    this.subscribeEvents();
-  }
+    private fileConversionService: FileConversionService) { }
 
   ngOnInit() {
     this.subscribeEvents();
@@ -64,7 +60,9 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
 
   }
 
-  updateProgressBar() {
+  updateProgressBar(data: QxIDMLFileConversionData) {
+    this.currentFileIndex = data.fileCount;
+    this.filePath = data.fileUrl;
     this.updateConversionRateMsg();
     this.getProgressValue();
   }

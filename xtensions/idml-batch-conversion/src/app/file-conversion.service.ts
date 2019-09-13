@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { QxIDMLTreeNodeOptions, QxFileNodeOptions } from './util-interface';
+import { QxIDMLTreeNodeOptions } from './util-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,15 @@ export class FileConversionService {
   constructor() { }
 
   callXPressFileConversion(data: QxIDMLTreeNodeOptions) {
-    if (window as any) {
+    if ((window as any).app) {
+      const notificationName = 'IDMLFileConversion';
       this.fileCount = data.indd.length + data.idml.length;
-     
+
+      (window as any).XPress.registerNotificationHandler(notificationName, this.notificationObserver.bind(this));
+
       (window as any).XPress.api.invokeXTApi(1146372945,
         'IDMLImportConvertINDDAndIDMLFilesToQXP', data, this.resultHandler.bind(this));
+
     }
   }
 
@@ -35,6 +39,11 @@ export class FileConversionService {
   resultHandler(response) {
     this.filesConversionResult = JSON.parse(response);
     this.showFinalResultEvent.emit();
+  }
+
+  notificationObserver(response) {
+    const jsonResponse = JSON.parse(response);
+    this.updateProgressBarEvent.emit(jsonResponse);
   }
 
 }

@@ -49,7 +49,7 @@ export class FinishResultsComponent implements OnInit, OnDestroy {
   }
 
   initializeTreeData(): void {
-    let tempTreeNodeOptions: QxTreeNodeOptions[] = [];
+    const tempTreeNodeOptions: QxTreeNodeOptions[] = [];
 
     const parentInddKey = 0;
     const parentIdmlKey = 1;
