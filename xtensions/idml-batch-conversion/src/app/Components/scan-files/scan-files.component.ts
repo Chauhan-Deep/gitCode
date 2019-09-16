@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 
-import { TranslateService } from '../translate/translate.service';
-import { QxIDMLTreeNodeOptions } from '../util-interface';
+import { TranslateService } from '../../translate/translate.service';
+import { QXIDMLFilesListData } from '../../Interface/idml-interface';
 
 @Component({
   selector: 'qrk-scan-files',
@@ -23,7 +23,7 @@ export class ScanFilesComponent implements OnInit {
   numOfINDDFiles: number;
   numOfIDMLFiles: number;
   showFilesListView: boolean;
-  filesEnumData: QxIDMLTreeNodeOptions;
+  filesEnumData: QXIDMLFilesListData;
   interval;
 
   constructor(

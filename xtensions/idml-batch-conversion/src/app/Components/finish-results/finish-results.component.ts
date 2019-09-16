@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 
 import { QxTreeNodeOptions } from '@quark/xpressng';
 
-import { TranslateService } from '../translate/translate.service';
-import { FileConversionService } from '../file-conversion.service';
-import { QxIDMLTreeNodeOptions } from '../util-interface';
+import { TranslateService } from '../../translate/translate.service';
+import { FileConversionService } from '../../Service/file-conversion.service';
+import { QXIDMLFilesListData } from '../../Interface/idml-interface';
 
 @Component({
   selector: 'qrk-finish-results',
@@ -20,7 +20,7 @@ export class FinishResultsComponent implements OnInit, OnDestroy {
   numOfFailedFiles: number;
   numOfPassedFiles: number;
   totalNumOfFiles: number;
-  treeFilesEnumData: QxIDMLTreeNodeOptions;
+  treeFilesEnumData: QXIDMLFilesListData;
 
   constructor(
     private translateService: TranslateService,

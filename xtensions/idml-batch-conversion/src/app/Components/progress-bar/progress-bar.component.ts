@@ -2,9 +2,9 @@ import { Component, Input, OnInit, AfterContentInit, OnDestroy } from '@angular/
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepper } from '@angular/material/stepper';
 
-import { TranslateService } from '../translate/translate.service';
-import { FileConversionService } from '../file-conversion.service';
-import { QxIDMLFileConversionData } from '../util-interface';
+import { TranslateService } from '../../translate/translate.service';
+import { FileConversionService } from '../../Service/file-conversion.service';
+import { QxIDMLFileConversionData } from '../../Interface/idml-interface';
 
 @Component({
   selector: 'qrk-progress-bar',

@@ -3,9 +3,9 @@ import { MatStepper } from '@angular/material/stepper';
 
 import { QxTreeComponent, QxTreeNodeOptions, QxTreeEmitEvent, QxCheckboxComponent, CheckboxState, QxTreeNode } from '@quark/xpressng';
 
-import { TranslateService } from '../translate/translate.service';
-import { FileConversionService } from '../file-conversion.service';
-import { QxIDMLTreeNodeOptions, QxFileNodeOptions } from '../util-interface';
+import { TranslateService } from '../../translate/translate.service';
+import { FileConversionService } from '../../Service/file-conversion.service';
+import { QXIDMLFilesListData, QXIDFileDetailsData } from '../../Interface/idml-interface';
 
 @Component({
   selector: 'qrk-search-list-view',
@@ -16,7 +16,7 @@ export class SearchListViewComponent implements OnInit {
   @ViewChild('qxTreeComponent', { static: false }) qxTreeComponent: QxTreeComponent;
   @ViewChild('totalFilesCheckboxButton', { static: false }) totalFilesCheckboxButton: QxCheckboxComponent;
 
-  @Input() treeFilesEnumData: QxIDMLTreeNodeOptions;
+  @Input() treeFilesEnumData: QXIDMLFilesListData;
   @Input() stepper: MatStepper;
 
   selectAllState: CheckboxState;
@@ -26,7 +26,7 @@ export class SearchListViewComponent implements OnInit {
   numOfINDDFiles: number;
   numOfIDMLFiles: number;
   numOfFiles: number;
-  filesEnumData: QxIDMLTreeNodeOptions[];
+  filesEnumData: QXIDMLFilesListData[];
 
   constructor(
     private translateService: TranslateService,
@@ -115,8 +115,8 @@ export class SearchListViewComponent implements OnInit {
   convertSelectedDocuments() {
     const idmlKeyBeginning = this.numOfINDDFiles + 2;
     const checkedKeyNodes: QxTreeNode[] = this.qxTreeComponent.getCheckedNodeList();
-    let idmlCheckedNodes: QxFileNodeOptions[] = [];
-    let inddCheckedNodes: QxFileNodeOptions[] = [];
+    let idmlCheckedNodes: QXIDFileDetailsData[] = [];
+    let inddCheckedNodes: QXIDFileDetailsData[] = [];
 
     checkedKeyNodes.forEach((treeNode): void => {
       const options: QxTreeNodeOptions = treeNode.origin;
@@ -124,13 +124,13 @@ export class SearchListViewComponent implements OnInit {
 
       if (key > 1) {
         if (key < idmlKeyBeginning) {
-          const fileNode: QxFileNodeOptions = {
+          const fileNode: QXIDFileDetailsData = {
             name: options.title, path: options.pathURL
           };
 
           inddCheckedNodes.push(fileNode);
         } else {
-          const fileNode: QxFileNodeOptions = {
+          const fileNode: QXIDFileDetailsData = {
             name: options.title, path: options.pathURL
           };
 

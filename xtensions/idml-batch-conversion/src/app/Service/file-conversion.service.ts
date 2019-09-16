@@ -1,13 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { QxIDMLTreeNodeOptions } from './util-interface';
+import { QXIDMLFilesListData } from '../Interface/idml-interface';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class FileConversionService {
-  filesConversionResult: QxIDMLTreeNodeOptions;
+  filesConversionResult: QXIDMLFilesListData;
   fileCount = 0;
 
   updateProgressBarEvent = new EventEmitter<any>();
@@ -15,7 +15,7 @@ export class FileConversionService {
 
   constructor() { }
 
-  callXPressFileConversion(data: QxIDMLTreeNodeOptions) {
+  callXPressFileConversion(data: QXIDMLFilesListData) {
     if ((window as any).app) {
       const notificationName = 'IDMLFileConversion';
       this.fileCount = data.indd.length + data.idml.length;
@@ -32,7 +32,7 @@ export class FileConversionService {
     return this.fileCount;
   }
 
-  getFileConversionResult(): QxIDMLTreeNodeOptions {
+  getFileConversionResult(): QXIDMLFilesListData {
     return this.filesConversionResult;
   }
 

@@ -1,12 +1,12 @@
-export interface QxFileNodeOptions {
+export interface QXIDFileDetailsData {
     name: string;
     path: string;
     status?: boolean;
 }
 
-export interface QxIDMLTreeNodeOptions {
-    indd?: QxFileNodeOptions[];
-    idml?: QxFileNodeOptions[];
+export interface QXIDMLFilesListData {
+    indd?: QXIDFileDetailsData[];
+    idml?: QXIDFileDetailsData[];
 }
 
 export interface QxIDMLFileConversionData {

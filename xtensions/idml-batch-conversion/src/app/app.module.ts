@@ -9,16 +9,16 @@ import { QxModule } from '@quark/xpressng';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
-import { ScanFilesComponent } from './scan-files/scan-files.component';
-import { SearchListViewComponent } from './search-list-view/search-list-view.component';
-import { ProgressBarComponent } from './progress-bar/progress-bar.component';
-import { FinishResultsComponent } from './finish-results/finish-results.component';
+import { LaunchScreenComponent } from './Components/launch-screen/launch-screen.component';
+import { ScanFilesComponent } from './Components/scan-files/scan-files.component';
+import { SearchListViewComponent } from './Components/search-list-view/search-list-view.component';
+import { ProgressBarComponent } from './Components/progress-bar/progress-bar.component';
+import { FinishResultsComponent } from './Components/finish-results/finish-results.component';
 
 import { TranslateService } from './translate/translate.service';
 import { TranslatePipe } from './translate/translate.pipe';
 import { TRANSLATION_PROVIDERS } from './translate/translations';
-import { FileConversionService } from './file-conversion.service';
+import { FileConversionService } from './Service/file-conversion.service';
 
 @NgModule({
   declarations: [
