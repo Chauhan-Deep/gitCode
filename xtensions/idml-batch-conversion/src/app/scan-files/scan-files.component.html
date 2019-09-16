@@ -26,7 +26,7 @@
     <ng-container *ngTemplateOutlet="filesResultView"></ng-container>
     <ng-container *ngTemplateOutlet="cancelButtonView"></ng-container>
     <div *ngIf="showFilesListView">
-        <qrk-search-list-view [treeFilesEnumData]="filesEnumData" ></qrk-search-list-view>
+        <qrk-search-list-view [treeFilesEnumData]="filesEnumData" [stepper]="stepper"></qrk-search-list-view>
     </div>
 </div>
 
