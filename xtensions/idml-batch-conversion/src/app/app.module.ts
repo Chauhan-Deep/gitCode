@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LaunchScreenComponent } from './launch-screen/launch-screen.component';
 import { ScanFilesComponent } from './scan-files/scan-files.component';
+import { FooterComponent } from './footer/footer.component';
 
 import { TranslateService } from './translate/translate.service';
 import { TranslatePipe } from './translate/translate.pipe';
@@ -20,6 +21,7 @@ import { TRANSLATION_PROVIDERS } from './translate/translations';
     AppComponent,
     LaunchScreenComponent,
     ScanFilesComponent,
+    FooterComponent,
     TranslatePipe
   ],
   imports: [
