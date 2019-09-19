@@ -29,4 +29,5 @@ export const LANG_EN_US_TRANS = {
     'ids-lbl-files-passed': 'Converted Successfully',
     'ids-lbl-files-failed': 'Failed',
     'ids-btn-lbl-close': 'Close and Finish',
+    'ids-btnlabel-help': 'Help!',
 };

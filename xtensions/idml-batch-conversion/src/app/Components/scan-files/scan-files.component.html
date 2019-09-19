@@ -24,10 +24,10 @@
         </div>
     </div>
     <ng-container *ngTemplateOutlet="filesResultView"></ng-container>
-    <ng-container *ngTemplateOutlet="cancelButtonView"></ng-container>
     <div *ngIf="showFilesListView">
         <qrk-list-view [loadSearchData]=true [allowCheckable]=true [stepper]="stepper" ></qrk-list-view>
     </div>
+    <ng-container *ngTemplateOutlet="windowFooterView"></ng-container>
 </div>
 
 <ng-template #filesResultView>
@@ -46,10 +46,12 @@
     </div>
 </ng-template>
 
-<ng-template #cancelButtonView>
-    <div class="cancel-button" *ngIf="showCancelButton">
-        <qx-button [disabled]="false" [name]="'ids-btnlabel-cancel' | translate" [showBackground]='true'
-            [isSelected]='false'>
-        </qx-button>
-    </div>
+<ng-template #windowFooterView>
+    <qrk-footer>
+        <div class="cancel-button" *ngIf="showCancelButton">
+            <qx-button [disabled]="false" [name]="'ids-btnlabel-cancel' | translate" [showBackground]='true'
+                [isSelected]='false'>
+            </qx-button>
+        </div>
+    </qrk-footer>
 </ng-template>
