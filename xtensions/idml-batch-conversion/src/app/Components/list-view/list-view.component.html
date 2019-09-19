@@ -6,15 +6,18 @@
         [qxCheckable]="allowCheckable" [qxTreeTemplate]="qxResultTreeTemplate">
     </qx-tree>
 </div>
-<div>
-    <qx-checkbox #overWriteCheckboxButton *ngIf="loadSearchData" [name]="'ids-lbl-overwrite-existing' | translate"
-        [tooltip]="'ids-lbl-overwrite-existing' | translate">
-    </qx-checkbox>
-    <qx-button [disabled]="false"
-        [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
-        [showBackground]='true' [isSelected]='false' (click)="convertSelectedDocuments()">
-    </qx-button>
-</div>
+
+<qrk-footer>
+    <div>
+            <qx-checkbox #overWriteCheckboxButton *ngIf="loadSearchData"
+                [name]="'ids-lbl-overwrite-existing' | translate" [tooltip]="'ids-lbl-overwrite-existing' | translate">
+            </qx-checkbox>
+            <qx-button [disabled]="false"
+                [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
+                [showBackground]='true' [isSelected]='false' (click)="convertSelectedDocuments()">
+            </qx-button>
+    </div>
+</qrk-footer>
 
 <ng-template #qxResultTreeTemplate let-node>
     <div class="qx-tree-node-content-wrapper">
