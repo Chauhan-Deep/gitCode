@@ -130,9 +130,11 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.filesCountString = (this.numOfFiles).toString() + this.translateService.localize('ids-lbl-files-found');
     tempTreeNodeOptions.push(treeNodeData);
 
+    //  this is done as if we fill up data member from callback(different thread), then UI change in not detected,
+    //  so in order to overcome this problem, create local object to store data instead of filling member object
+    //  and then copy data from local object to member object and call 'detectChanges' method of 'changeDetectorRef'
     this.treeNodeOptions = tempTreeNodeOptions;
     this.changeDetectorRef.detectChanges();
-
   }
 
   onSelectAllChange(event) {
