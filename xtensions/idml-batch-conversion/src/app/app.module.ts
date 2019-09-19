@@ -11,23 +11,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LaunchScreenComponent } from './Components/launch-screen/launch-screen.component';
 import { ScanFilesComponent } from './Components/scan-files/scan-files.component';
-import { SearchListViewComponent } from './Components/search-list-view/search-list-view.component';
+import { ListViewComponent } from './Components/list-view/list-view.component';
 import { ProgressBarComponent } from './Components/progress-bar/progress-bar.component';
-import { FinishResultsComponent } from './Components/finish-results/finish-results.component';
 
 import { TranslateService } from './translate/translate.service';
 import { TranslatePipe } from './translate/translate.pipe';
 import { TRANSLATION_PROVIDERS } from './translate/translations';
-import { FileConversionService } from './Service/file-conversion.service';
+import { FileListDataService } from './Service/file-list-data.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LaunchScreenComponent,
     ScanFilesComponent,
-    SearchListViewComponent,
+    ListViewComponent,
     ProgressBarComponent,
-    FinishResultsComponent,
     TranslatePipe
   ],
   imports: [
@@ -38,7 +36,7 @@ import { FileConversionService } from './Service/file-conversion.service';
     QxModule,
     AppRoutingModule,
   ],
-  providers: [[TRANSLATION_PROVIDERS, TranslateService], FileConversionService],
+  providers: [[TRANSLATION_PROVIDERS, TranslateService], FileListDataService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [

@@ -1,17 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 
 import { TranslateService } from '../../translate/translate.service';
 import { QXIDMLFilesListData } from '../../Interface/idml-interface';
+import { FileListDataService } from 'src/app/Service/file-list-data.service';
 
 @Component({
   selector: 'qrk-scan-files',
   templateUrl: './scan-files.component.html',
   styleUrls: ['./scan-files.component.scss']
 })
-export class ScanFilesComponent implements OnInit {
+export class ScanFilesComponent implements OnInit, OnDestroy {
   @Input() stepper: MatStepper;
 
+  private scanResultsEvent: any;
   imgSrc: string;
   headingText: string;
   hideHeading: boolean;
@@ -23,15 +25,14 @@ export class ScanFilesComponent implements OnInit {
   numOfINDDFiles: number;
   numOfIDMLFiles: number;
   showFilesListView: boolean;
-  filesEnumData: QXIDMLFilesListData;
-  interval;
 
   constructor(
-    private translateService: TranslateService) { }
+    private translateService: TranslateService,
+    private fileListService: FileListDataService) { }
 
   ngOnInit() {
     this.headingText = this.translateService.localize('ids-lbl-scan-files-maintext');
-    this.imgSrc = '\\assets\\images\\img-smart-scan.png';
+    this.imgSrc = 'assets\\images\\img-smart-scan.png';
 
     this.showCancelButton = false;
     this.hideImage = false;
@@ -39,11 +40,16 @@ export class ScanFilesComponent implements OnInit {
     this.showResultWindow = false;
     this.showFilesListView = false;
     this.hideHeading = false;
+    this.subscribeEvents();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeEvents();
   }
 
   showSearchingWindow() {
     this.headingText = this.translateService.localize('ids-lbl-searching-files');
-    this.imgSrc = '\\assets\\images\\img-searching.png';
+    this.imgSrc = 'assets\\images\\img-searching.png';
 
     this.showFilesListView = false;
     this.showResultWindow = false;
@@ -52,14 +58,8 @@ export class ScanFilesComponent implements OnInit {
   }
 
   performSystemScan() {
-    const data = {};
-
     this.showSearchingWindow();
-    if (window as any) {
-      this.filesEnumData = (window as any).XPress.api.invokeXTApi(1146372945,
-        'IDMLImportEnumerateINDDAndIDMLFiles', data);
-      this.getFilesSearchResultHandler();
-    }
+    this.fileListService.callXPressFileEnumeration('');
   }
 
   performCustomScan() {
@@ -69,17 +69,22 @@ export class ScanFilesComponent implements OnInit {
       folderUrl = (window as any).app.dialogs.openFolderDialog();
     }
     this.showSearchingWindow();
-    if (window as any) {
-      const data = { searchDirectory: folderUrl };
+    this.fileListService.callXPressFileEnumeration(folderUrl);
+  }
 
-      this.filesEnumData = (window as any).XPress.api.invokeXTApi(1146372945,
-        'IDMLImportEnumerateINDDAndIDMLFiles', data);
-      this.getFilesSearchResultHandler();
+  subscribeEvents() {
+    console.log('subscribe called');
+    this.scanResultsEvent = this.fileListService.showSystemScanResultEvent.subscribe(this.getFilesSearchResultHandler.bind(this));
+  }
+
+  unsubscribeEvents() {
+    if (this.scanResultsEvent) {
+      this.scanResultsEvent.unsubscribe();
+      this.scanResultsEvent = undefined;
     }
   }
 
   getFilesSearchResultHandler() {
-    clearInterval(this.interval);
     this.headingText = this.translateService.localize('ids-lbl-files-found');
 
     this.hideScanView = true;
@@ -87,9 +92,10 @@ export class ScanFilesComponent implements OnInit {
     this.showResultWindow = true;
     this.showFilesListView = false;
 
-    this.numOfFiles = this.filesEnumData.indd.length + this.filesEnumData.idml.length;
-    this.numOfINDDFiles = this.filesEnumData.indd.length;
-    this.numOfIDMLFiles = this.filesEnumData.idml.length;
+    this.fileListService.shouldRespondWithSearchData = true;
+    this.numOfFiles = this.fileListService.getFilesCount();
+    this.numOfINDDFiles = this.fileListService.getINDDFilesCount();
+    this.numOfIDMLFiles = this.fileListService.getIDMLFilesCount();
 
     setTimeout(() => {
       this.showFileListView();

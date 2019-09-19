@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchListViewComponent } from './search-list-view.component';
+import { ListViewComponent } from './list-view.component';
 
-describe('SearchListViewComponent', () => {
-  let component: SearchListViewComponent;
-  let fixture: ComponentFixture<SearchListViewComponent>;
+describe('ListViewComponent', () => {
+  let component: ListViewComponent;
+  let fixture: ComponentFixture<ListViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchListViewComponent ]
+      declarations: [ ListViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchListViewComponent);
+    fixture = TestBed.createComponent(ListViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

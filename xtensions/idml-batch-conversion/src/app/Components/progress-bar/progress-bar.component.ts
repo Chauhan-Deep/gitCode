@@ -3,8 +3,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepper } from '@angular/material/stepper';
 
 import { TranslateService } from '../../translate/translate.service';
-import { FileConversionService } from '../../Service/file-conversion.service';
-import { QxIDMLFileConversionData } from '../../Interface/idml-interface';
+import { FileListDataService } from '../../Service/file-list-data.service';
+import { QxIDMLFileConversionData, QXIDFileDetailsData } from '../../Interface/idml-interface';
 
 @Component({
   selector: 'qrk-progress-bar',
@@ -15,6 +15,7 @@ import { QxIDMLFileConversionData } from '../../Interface/idml-interface';
 export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit {
   @Input() stepper: MatStepper;
 
+  private initiateProgressBar: any;
   private updateProgressBarEvent: any;
   private showFinalResultEvent: any;
 
@@ -27,15 +28,15 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
 
   constructor(
     private translateService: TranslateService,
-    private fileConversionService: FileConversionService) { }
+    private fileListService: FileListDataService) { }
 
   ngOnInit() {
     this.subscribeEvents();
   }
 
   subscribeEvents() {
-    this.updateProgressBarEvent = this.fileConversionService.updateProgressBarEvent.subscribe(this.updateProgressBar.bind(this));
-    this.showFinalResultEvent = this.fileConversionService.showFinalResultEvent.subscribe(this.showFinalResult.bind(this));
+    this.updateProgressBarEvent = this.fileListService.updateProgressBarEvent.subscribe(this.updateProgressBar.bind(this));
+    this.showFinalResultEvent = this.fileListService.showFinalResultEvent.subscribe(this.showFinalResult.bind(this));
   }
 
   unsubscribeEvents() {
@@ -54,15 +55,12 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
   }
 
   ngAfterContentInit() {
-    this.totalFiles = this.fileConversionService.getFilesCount();
     this.fileConversionRate = this.translateService.localize('ids-lbl-progress-bar-file-converion-text');
-    this.fileConversionRate = this.fileConversionRate.replace('^2', this.totalFiles.toString());
-
   }
 
-  updateProgressBar(data: QxIDMLFileConversionData) {
-    this.currentFileIndex = data.fileCount;
-    this.filePath = data.fileUrl;
+  updateProgressBar(data: QXIDFileDetailsData) {
+    this.currentFileIndex = this.fileListService.getConversionIndex();
+    this.filePath = data.path + data.name;
     this.updateConversionRateMsg();
     this.getProgressValue();
   }
@@ -72,6 +70,8 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
   }
 
   updateConversionRateMsg() {
+    this.totalFiles = this.fileListService.getConversionListCount();
+    this.fileConversionRate = this.fileConversionRate.replace('^2', this.totalFiles.toString());
     this.currentFileConversionRate = this.fileConversionRate.replace('^1', this.currentFileIndex.toString());
   }
 

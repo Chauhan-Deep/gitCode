@@ -18,7 +18,8 @@
     <mat-step class="qx-step" editable="false">
         <ng-template matStepLabel><b>{{'ids-step-finish' | translate}}</b></ng-template>
         <div>
-            <qrk-finish-results></qrk-finish-results>
+            <qrk-list-view [loadSearchData]=false [allowCheckable]=false [stepper]="stepper" ></qrk-list-view>
+            <!-- <qrk-finish-results></qrk-finish-results> -->
         </div>
     </mat-step>
 </mat-horizontal-stepper>
