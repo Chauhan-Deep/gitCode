@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  helpIcon = 'assets/images/ico-help.png';
-
   constructor() { }
 
   ngOnInit() {
