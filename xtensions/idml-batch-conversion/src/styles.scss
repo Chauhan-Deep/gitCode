@@ -6,3 +6,67 @@ body {
     width: 100vw;
     margin: 0;
 }
+
+.background-container {    
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-container {
+    font-family: "Helvetica Neue", Light;
+    font-size: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.internal-text-container {
+    font-family: "Helvetica Neue", Regular;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sub-text {
+    text-align: center;
+}
+
+.button {
+    min-width: 100px;
+    margin: 5px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.cancel {
+    color: red !important; 
+    background-color: greenyellow !important;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.vertical-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;    
+}
+
+.centered-container {
+    text-align: center;
+
+    .image {
+        width: 10vw;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}

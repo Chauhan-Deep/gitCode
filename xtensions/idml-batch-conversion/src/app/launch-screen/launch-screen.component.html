@@ -1,7 +1,7 @@
 <div class="idml-launch-window">
     <div class="background-container">
-        <div class="idml-logo-arrow-container">
-            <img class="convert-logo" src="\assets\images\img-brand.png" />
+        <div class="centered-container">
+            <img class="image" src="\assets\images\img-brand.png" />
         </div>
         <div class="text-container">
             <qx-label class="sub-text" [multiline]="true">
@@ -14,15 +14,15 @@
             </qx-label>
         </div>
     </div>
-    <qrk-footer>
-        <div class="action-button">
-            <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-skip' | translate"
-                [tooltip]="'ids-ttp-skip' | translate" [showBackground]='true' [isSelected]='false' (click)="skip()">
-            </qx-button>
-            <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-continue' | translate"
-                [tooltip]="'ids-ttp-continue' | translate" [showBackground]='true' [isSelected]='true' [focus]='true'
-                (click)="nextScreen()">
-            </qx-button>
-        </div>
-    </qrk-footer>
 </div>
+<qrk-footer>
+    <div class="horizontal-container">
+        <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-skip' | translate"
+            [tooltip]="'ids-ttp-skip' | translate" [showBackground]='true' [isSelected]='false' (click)="skip()">
+        </qx-button>
+        <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-continue' | translate"
+            [tooltip]="'ids-ttp-continue' | translate" [showBackground]='true' [isSelected]='true' [focus]='true'
+            (click)="nextScreen()">
+        </qx-button>
+    </div>
+</qrk-footer>
