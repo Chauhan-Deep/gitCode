@@ -1,28 +1,28 @@
-<ng-container *ngTemplateOutlet="loadSearchData ? filesSearched: filesProcessed">
-</ng-container>
-
-<div class="tree-view">
-    <qx-tree #qxTreeComponent [qxData]="treeNodeOptions" [qxCheckedKeys]="checkedKeysList"
-        [qxCheckable]="allowCheckable" [qxTreeTemplate]="qxResultTreeTemplate">
-    </qx-tree>
+<div class="listView-container">
+    <ng-container *ngTemplateOutlet="loadSearchData ? filesSearched: filesProcessed">
+    </ng-container>
+    <qx-divider></qx-divider>
+    <div class="tree-view">
+        <qx-tree #qxTreeComponent [qxData]="treeNodeOptions" [qxCheckedKeys]="checkedKeysList"
+            [qxCheckable]="allowCheckable" [qxTreeTemplate]="qxResultTreeTemplate">
+        </qx-tree>
+    </div>
 </div>
-
 <qrk-footer>
-    <div>
-            <qx-checkbox #overWriteCheckboxButton *ngIf="loadSearchData"
-                [name]="'ids-lbl-overwrite-existing' | translate" [tooltip]="'ids-lbl-overwrite-existing' | translate">
-            </qx-checkbox>
-            <qx-button [disabled]="false"
-                [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
-                [showBackground]='true' [isSelected]='false' (click)="convertSelectedDocuments()">
-            </qx-button>
+    <div class="footer-section">
+        <qx-checkbox class="footer-content" #overWriteCheckboxButton *ngIf="loadSearchData" [name]="'ids-lbl-overwrite-existing' | translate"
+            [tooltip]="'ids-lbl-overwrite-existing' | translate">
+        </qx-checkbox>
+        <qx-button [disabled]="false"
+            [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
+            [showBackground]='true' [isSelected]='false' (click)="convertSelectedDocuments()">
+        </qx-button>
     </div>
 </qrk-footer>
-
 <ng-template #qxResultTreeTemplate let-node>
     <div class="qx-tree-node-content-wrapper">
         <span class="qx-tree-title">
-            <img *ngIf="node.isLeaf" src="assets/images/ico-file.png" />
+            <img *ngIf="node.isLeaf" src="assets/images/ico-file.png"/>
             <qx-label class=' node-name'>
                 {{ node.title }}
             </qx-label>
@@ -35,33 +35,36 @@
     </div>
 </ng-template>
 <ng-template #filesProcessed>
-    <div>
-        <span>
-            <qx-label>
-                {{totalNumOfFiles}} {{'ids-lbl-files-processed' | translate}}
-            </qx-label>
+    <div class="container">
+        <qx-label class="heading-text">
+            {{totalNumOfFiles}} {{'ids-lbl-files-processed' | translate}}
+        </qx-label>
+        <div class="file-status">
             <img class="img-valign" src="assets/images/ico-check-circle.png" />
             <qx-label class="inline-right-align-text">
                 {{numOfPassedFiles}} {{'ids-lbl-files-passed' | translate}}
             </qx-label>
+        </div>
+        <div class="file-status">
             <img class="img-valign" src="assets/images/ico-error-triangle.png" />
             <qx-label class="inline-right-align-text">
                 {{numOfFailedFiles}} {{'ids-lbl-files-failed' | translate}}
             </qx-label>
-        </span>
+        </div>
     </div>
 </ng-template>
 <ng-template #filesSearched>
-    <div>
-        <span>
-            <qx-checkbox #allFilesCheckboxButton [disabled]=false [name]="filesCountString" [state]="selectAllState"
-                [showElipsis]=false (stateChange)="onSelectAllChange($event)"></qx-checkbox>
-            <qx-label class="button-text">
+    <div class="container">
+        <qx-checkbox #allFilesCheckboxButton class="heading-text" [disabled]=false [name]="filesCountString"
+            [state]="selectAllState" [showElipsis]=false (stateChange)="onSelectAllChange($event)"
+            style="font-size: 30px"></qx-checkbox>
+        <div style="text-align: center; display:flex;">
+            <qx-label class="file-status">
                 {{numOfINDDFiles}} INDD
             </qx-label>
-            <qx-label class="button-text">
+            <qx-label class="file-status">
                 {{numOfIDMLFiles}} IDML
             </qx-label>
-        </span>
+        </div>
     </div>
 </ng-template>

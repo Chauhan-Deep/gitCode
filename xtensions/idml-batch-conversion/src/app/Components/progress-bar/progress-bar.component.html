@@ -1,6 +1,8 @@
-<qx-label>{{currentFileConversionRate}} </qx-label>
-<mat-progress-bar mode="determinate" value={{progressValue}}></mat-progress-bar>
-<qx-label>{{filePath}} </qx-label>
+<div class="container">
+    <qx-label class="progress-label">{{currentFileConversionRate}} </qx-label>
+    <mat-progress-bar mode="determinate" value={{progressValue}}></mat-progress-bar>
+    <qx-label class="progress-label">{{filePath}} </qx-label>
+</div>
 <qrk-footer>
     <div class="cancel-button">
         <qx-button [disabled]="false" [name]="'ids-btnlabel-cancel' | translate" [showBackground]='true'

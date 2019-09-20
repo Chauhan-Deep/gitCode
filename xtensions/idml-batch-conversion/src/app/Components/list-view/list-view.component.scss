@@ -1,9 +1,16 @@
 .node-name {
-    width: 50%;
+    width: 35%;
+}
+.node-path {
+    width: 45%;
 }
 
+.listView-container {
+    width: 100%;
+    height: 60vw;
+}
 .qx-tree-node-content-wrapper {
-    width: 100%; 
+    width: 90%; 
     display: inline-block
 }
 
@@ -12,6 +19,39 @@
 }
 
 .tree-view {
-    height: 400px;
-    overflow: scroll;
+    width: 100%;
+    overflow-y: auto;
+    height: 70vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .file-status {
+        display: flex;
+        text-align: right;
+        margin-right: 10px;
+    }
+    .heading-text {
+        font-family: "Helvetica Neue", Light;
+        margin-right: 20px;
+    }
+}
+
+img {
+    height: 17px; 
+    width: 17px;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    .footer-content {
+        margin-right: 10px;
+    }
 }

@@ -1,4 +1,4 @@
-<div class="background-container">
+<div class="background-container" *ngIf="!showFilesListView">
     <div class="text-container" [ngClass]="{ 'hidden': hideHeading }">
         <qx-label class="sub-text">
             {{headingText}}
@@ -24,10 +24,9 @@
         </div>
     </div>
     <ng-container *ngTemplateOutlet="filesResultView"></ng-container>
-    <div *ngIf="showFilesListView">
-        <qrk-list-view [loadSearchData]=true [allowCheckable]=true [stepper]="stepper" ></qrk-list-view>
-    </div>
-    <ng-container *ngTemplateOutlet="windowFooterView"></ng-container>
+</div>
+<div *ngIf="showFilesListView">
+    <qrk-list-view [loadSearchData]=true [allowCheckable]=true [stepper]="stepper"></qrk-list-view>
 </div>
 <ng-container *ngTemplateOutlet="windowFooterView"></ng-container>
 

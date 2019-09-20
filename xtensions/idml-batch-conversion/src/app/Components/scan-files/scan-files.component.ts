@@ -96,7 +96,6 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.numOfFiles = this.fileListService.getFilesCount();
     this.numOfINDDFiles = this.fileListService.getINDDFilesCount();
     this.numOfIDMLFiles = this.fileListService.getIDMLFilesCount();
-
     setTimeout(() => {
       this.showFileListView();
     }, 2000);
