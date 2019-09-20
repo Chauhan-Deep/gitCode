@@ -4,19 +4,19 @@
             {{headingText}}
         </qx-label>
     </div>
-    <div class="image-container" [ngClass]="{ 'hidden': hideImage }">
-        <img class="scan-logo" [src]="imgSrc" />
+    <div class="centered-container" [ngClass]="{ 'hidden': hideImage }">
+        <img class="image" [src]="imgSrc" />
     </div>
     <div class="internal-text-container" [ngClass]="{ 'hidden': hideScanView }">
         <qx-label class="sub-text" [multiline]="true">
             {{'ids-lbl-scan-files-subtext' | translate}}
         </qx-label>
-        <div class="action-button">
-            <qx-button class="smart-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
+        <div class="vertical-container">
+            <qx-button class="file-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
                 [tooltip]="'ids-ttp-run-smart-scan' | translate" [showBackground]='true' [isSelected]='true'
                 (click)="performSystemScan()">
             </qx-button>
-            <qx-button class="manual-select-files-button" [disabled]="false"
+            <qx-button class="file-scan-button" [disabled]="false"
                 [name]="'ids-btnlabel-manually-select-files' | translate"
                 [tooltip]="'ids-ttp-manually-select-files' | translate" [showBackground]='true' [isSelected]='false'
                 (click)="performCustomScan()">
@@ -29,12 +29,15 @@
     </div>
     <ng-container *ngTemplateOutlet="windowFooterView"></ng-container>
 </div>
+<ng-container *ngTemplateOutlet="windowFooterView"></ng-container>
 
 <ng-template #filesResultView>
     <div class="files-result-container" *ngIf="showResultWindow">
-        <qx-label class="sub-text">
-            {{numOfFiles}}
-        </qx-label>
+        <div class="internal-text-container ">
+            <qx-label class="sub-text">
+                {{numOfFiles}}
+            </qx-label>
+        </div>
         <div class="document-result">
             <qx-label class="button-text">
                 {{numOfINDDFiles}} INDD
@@ -47,10 +50,10 @@
 </ng-template>
 
 <ng-template #windowFooterView>
-    <qrk-footer>
-        <div class="cancel-button" *ngIf="showCancelButton">
-            <qx-button [disabled]="false" [name]="'ids-btnlabel-cancel' | translate" [showBackground]='true'
-                [isSelected]='false'>
+    <qrk-footer *ngIf="showCancelButton">
+        <div class="horizontal-container">
+            <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate"
+                [showBackground]='true' [isSelected]='false'>
             </qx-button>
         </div>
     </qrk-footer>

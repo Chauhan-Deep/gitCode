@@ -1,6 +1,9 @@
-<div class="background-container">
+<div class="footer-container">
     <qx-divider></qx-divider>
-    <qx-button [tooltip]="'ids-btnlabel-help' | translate" [icon]='helpIcon' [isSticky]=false (click)="helpBtnAction()">
-    </qx-button>
-    <ng-content></ng-content>
+    <div class="horizontal-container">
+        <qx-button class="help" [tooltip]="'ids-btnlabel-help' | translate" [icon]="'assets/images/ico-help.png'" [isSticky]=false
+            (click)="helpBtnAction()">
+        </qx-button>
+        <ng-content></ng-content>
+    </div>
 </div>
