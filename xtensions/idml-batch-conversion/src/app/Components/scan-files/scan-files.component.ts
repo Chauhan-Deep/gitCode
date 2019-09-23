@@ -65,11 +65,13 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
   performCustomScan() {
     let folderUrl: string;
 
-    if (window as any) {
+    if ((window as any).app) {
       folderUrl = (window as any).app.dialogs.openFolderDialog();
     }
-    this.showSearchingWindow();
-    this.fileListService.callXPressFileEnumeration(folderUrl);
+    if (folderUrl != null) {
+      this.showSearchingWindow();
+      this.fileListService.callXPressFileEnumeration(folderUrl);
+    }
   }
 
   subscribeEvents() {

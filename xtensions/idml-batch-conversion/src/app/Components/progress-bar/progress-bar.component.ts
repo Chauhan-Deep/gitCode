@@ -4,7 +4,7 @@ import { MatStepper } from '@angular/material/stepper';
 
 import { TranslateService } from '../../translate/translate.service';
 import { FileListDataService } from '../../Service/file-list-data.service';
-import { QxIDMLFileConversionData, QXIDFileDetailsData } from '../../Interface/idml-interface';
+import { QXIDFileDetailsData } from '../../Interface/idml-interface';
 
 @Component({
   selector: 'qrk-progress-bar',

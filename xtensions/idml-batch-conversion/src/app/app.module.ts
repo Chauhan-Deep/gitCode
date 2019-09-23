@@ -13,7 +13,7 @@ import { LaunchScreenComponent } from './Components/launch-screen/launch-screen.
 import { ScanFilesComponent } from './Components/scan-files/scan-files.component';
 import { ListViewComponent } from './Components/list-view/list-view.component';
 import { ProgressBarComponent } from './Components/progress-bar/progress-bar.component';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './Components/footer/footer.component';
 
 import { TranslateService } from './translate/translate.service';
 import { TranslatePipe } from './translate/translate.pipe';
