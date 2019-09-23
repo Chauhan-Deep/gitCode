@@ -66,7 +66,11 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
   }
 
   showFinalResult() {
-    this.stepper.next();
+    this.progressValue = 100; // full conversion
+    // show next screen after 1 second of showing full conversion in progress bar
+    setTimeout(() => {
+      this.stepper.next();
+    }, 1000);
   }
 
   updateConversionRateMsg() {
@@ -76,6 +80,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
   }
 
   getProgressValue() {
-    this.progressValue = (this.currentFileIndex * 100) / this.totalFiles;
+    this.progressValue = ((this.currentFileIndex - 1) * 100) / this.totalFiles; // 100% conversion for n-1 files
+    this.progressValue += (50 / this.totalFiles); // 50% conversion for nth file
   }
 }

@@ -50,7 +50,7 @@
 
 <ng-template #windowFooterView>
     <qrk-footer *ngIf="!showFilesListView">
-        <div class="horizontal-container">
+        <div class="horizontal-container" *ngIf="showCancelButton">
             <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate"
                 [showBackground]='true' [isSelected]='false'>
             </qx-button>
