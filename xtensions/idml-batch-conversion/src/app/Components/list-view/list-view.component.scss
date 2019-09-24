@@ -44,3 +44,14 @@ img {
     height: 17px; 
     width: 17px;
 }
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .footer-content {
+        margin-right: 40px;
+    }
+}
