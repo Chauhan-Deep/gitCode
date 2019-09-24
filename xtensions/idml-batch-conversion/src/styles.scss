@@ -66,3 +66,18 @@ body {
         margin-bottom: 10px;
     }
 }
+
+qrk-footer {
+    .footer-container {
+        .horizontal-container {
+            .help {
+                .qx-button {
+                    .qx-icon {
+                        height: 18px;
+                        width: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
