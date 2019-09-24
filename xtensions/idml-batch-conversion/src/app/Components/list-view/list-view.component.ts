@@ -191,4 +191,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.fileListService.shouldOverwriteExisting = overwrite;
     this.fileListService.callXPressFileConversion(data);
   }
+
+  closeDialog() {
+    if ((window as any).XPress) {
+      (window as any).app.dialogs.closeDialog();
+    }
+  }
 }

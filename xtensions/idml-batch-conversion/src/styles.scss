@@ -35,11 +35,27 @@ body {
 }
 
 .button {
-    min-width: 100px;
     margin: 5px;
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    min-width: 100px;
+}
+
+.qx-button {
+    border-radius: 0;
+    font-size: 14px;
+}
+
+.footer-container {
+    .button {
+        .qx-button {
+            padding: 3px 10px;
+        }
+    }
+}
+
+.file-scan-button {
+    .qx-button {
+        padding: 10px 20px;
+    }
 }
 
 .horizontal-container {

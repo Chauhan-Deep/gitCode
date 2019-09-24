@@ -9,20 +9,21 @@
     </div>
 </div>
 <qrk-footer>
-    <div class="footer-section">
-        <qx-checkbox class="footer-content" #overWriteCheckboxButton *ngIf="loadSearchData" [name]="'ids-lbl-overwrite-existing' | translate"
-            [tooltip]="'ids-lbl-overwrite-existing' | translate">
+    <div class="horizontal-container">
+        <qx-checkbox class="footer-content" #overWriteCheckboxButton *ngIf="loadSearchData"
+            [name]="'ids-lbl-overwrite-existing' | translate" [tooltip]="'ids-lbl-overwrite-existing' | translate">
         </qx-checkbox>
-        <qx-button [disabled]="false"
+        <qx-button [disabled]="false" class="button"
             [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
-            [showBackground]='true' [isSelected]='false' (click)="convertSelectedDocuments()">
+            [showBackground]='true' [isSelected]='false'
+            (click)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
         </qx-button>
     </div>
 </qrk-footer>
 <ng-template #qxResultTreeTemplate let-node>
     <div class="qx-tree-node-content-wrapper">
         <span class="qx-tree-title">
-            <img *ngIf="node.isLeaf" src="assets/images/ico-file.png"/>
+            <img *ngIf="node.isLeaf" src="assets/images/ico-file.png" />
             <qx-label class=' node-name'>
                 {{ node.title }}
             </qx-label>
