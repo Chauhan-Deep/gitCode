@@ -15,6 +15,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   nextScreen() {
+    this.stepper.selected.completed = true;
     this.stepper.next();
   }
 

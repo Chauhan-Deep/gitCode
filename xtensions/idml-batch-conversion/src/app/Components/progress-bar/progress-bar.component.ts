@@ -69,6 +69,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
     this.progressValue = 100; // full conversion
     // show next screen after 1 second of showing full conversion in progress bar
     setTimeout(() => {
+      this.stepper.selected.completed = true;
       this.stepper.next();
     }, 1000);
   }

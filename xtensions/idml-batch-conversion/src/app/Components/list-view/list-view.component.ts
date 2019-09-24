@@ -186,6 +186,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     };
     const overwrite: boolean = this.overwriteCheckboxButton.state === CheckboxState.CHECKED;
 
+    this.stepper.selected.completed = true;
     this.stepper.next();
     this.fileListService.shouldOverwriteExisting = overwrite;
     this.fileListService.callXPressFileConversion(data);
