@@ -23,16 +23,16 @@ body {
 
 .text-container {
     font-family: "Helvetica Neue", Light;
-    font-size: 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-size: 30pt;
+    margin-top: 7.5pt;
+    margin-bottom: 7.5pt;
 }
 
 .internal-text-container {
     font-family: "Helvetica Neue", Regular;
-    font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-size: 14.5pt;
+    margin-top: 7.5pt;
+    margin-bottom: 7.5pt;
 }
 
 .sub-text {
@@ -40,26 +40,26 @@ body {
 }
 
 .button {
-    margin: 5px;
-    min-width: 100px;
+    margin: 3.75pt;
+    min-width: 72.5pt;
 }
 
 .qx-button {
     border-radius: 0;
-    font-size: 14px;
+    font-size: 10.5pt;
 }
 
 .footer-container {
     .button {
         .qx-button {
-            padding: 3px 10px;
+            padding: 2.5pt 7.5pt;
         }
     }
 }
 
 .file-scan-button {
     .qx-button {
-        padding: 10px 20px;
+        padding: 7.5pt 14.5pt;
     }
 }
 
@@ -71,7 +71,7 @@ body {
 }
 
 .vertical-container {
-    margin-top: 10px;
+    margin-top: 7.5pt;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -83,8 +83,8 @@ body {
 
     .image {
         width: 10vw;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 7.5pt;
+        margin-bottom: 7.5pt;
     }
 }
 
@@ -94,8 +94,8 @@ qrk-footer {
             .help {
                 .qx-button {
                     .qx-icon {
-                        height: 18px;
-                        width: 18px;
+                        height: 11.5pt;
+                        width: 11.5pt;
                     }
                 }
             }
@@ -108,7 +108,7 @@ qrk-footer {
         .display {
             display: inline-block;
             font-family: "Helvetica Neue", Light;
-            font-size: 20px;
+            font-size: 14.5pt;
         } 
     }
 }
