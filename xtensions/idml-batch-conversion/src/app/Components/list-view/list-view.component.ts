@@ -127,7 +127,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.numOfIDMLFiles = idmlTreeNodeChildren.length;
     this.numOfINDDFiles = inddTreeNodeChildren.length;
     this.numOfFiles = this.numOfIDMLFiles + this.numOfINDDFiles;
-    this.filesCountString = (this.numOfFiles).toString() + this.translateService.localize('ids-lbl-files-found');
+    this.filesCountString = (this.numOfFiles).toString() + ' ' + this.translateService.localize('ids-lbl-files-found');
     tempTreeNodeOptions.push(treeNodeData);
 
     //  this is done as if we fill up data member from callback(different thread), then UI change in not detected,
