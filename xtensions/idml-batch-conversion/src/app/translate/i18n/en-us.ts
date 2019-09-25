@@ -30,4 +30,5 @@ export const LANG_EN_US_TRANS = {
     'ids-lbl-files-failed': 'Failed',
     'ids-btn-lbl-close': 'Close and Finish',
     'ids-btnlabel-help': 'Help!',
+    'ids-alert-indesign-usage': 'You have selected INDD files to be converted, which requires Adobe InDesign. Please don’t use Adobe InDesign while this operation is in process.',
 };

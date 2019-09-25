@@ -1,4 +1,4 @@
-<div class="listView-container">
+<div class="list-container">
     <ng-container *ngTemplateOutlet="loadSearchData ? filesSearched: filesProcessed">
     </ng-container>
     <qx-divider></qx-divider>
@@ -23,15 +23,17 @@
 <ng-template #qxResultTreeTemplate let-node>
     <div class="qx-tree-node-content-wrapper">
         <span class="qx-tree-title">
-            <img *ngIf="node.isLeaf" src="assets/images/ico-file.png" />
-            <qx-label class=' node-name'>
+            <img class="file-icon" *ngIf="node.isLeaf" src="assets/images/ico-file.png" />
+            <qx-label class="node-name">
                 {{ node.title }}
             </qx-label>
-            <qx-label class='node-path'>
-                {{ node?.origin?.pathURL }}
-            </qx-label>
-            <img *ngIf="node.origin?.fileConverted"
-                [src]="node?.origin?.fileConverted ? 'assets/images/ico-check-circle.png' : 'assets/images/ico-error-triangle.png'" />
+            <div class="node-path">
+                <qx-label>
+                    {{ node?.origin?.pathURL }}
+                </qx-label>
+                <img class="status-icon" *ngIf="node.origin?.fileConverted"
+                    [src]="node?.origin?.fileConverted ? 'assets/images/ico-check-circle.png' : 'assets/images/ico-error-triangle.png'" />
+            </div>
         </span>
     </div>
 </ng-template>

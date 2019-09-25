@@ -154,6 +154,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     const treeFilesEnumData = this.fileListService.getFileList();
     let idmlCheckedNodes: QXIDFileDetailsData[] = [];
     let inddCheckedNodes: QXIDFileDetailsData[] = [];
+    let allowInDesignUsage: boolean;
 
     checkedKeyNodes.forEach((node): void => {
       const options: QxTreeNodeOptions = node.origin;
@@ -180,6 +181,16 @@ export class ListViewComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+    if (inddCheckedNodes.length > 0 && ((window as any).app)) {
+      allowInDesignUsage = (window as any).app.dialogs.confirm(this.translateService.localize('ids-alert-indesign-usage'),
+        (window as any).app.constants.alertTypes.kNoteAlert);
+    }
+
+    if (!allowInDesignUsage) {
+      // Remove In-Design files and convert only IDML files.
+      inddCheckedNodes = [];
+    }
 
     const data = {
       indd: inddCheckedNodes, idml: idmlCheckedNodes

@@ -1,33 +1,50 @@
-.node-name {
-    width: 35%;
-}
-.node-path {
-    width: 45%;
+.list-container {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    // width: 100vw;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
 }
 
-.listView-container {
-    width: 100%;
-    height: 60vw;
-}
 .qx-tree-node-content-wrapper {
     width: 90%; 
-    display: inline-block
+    display: inline-block;
 }
 
 .qx-tree-title {
     width: 80%;
+    font-size: 12px;
+
+    .file-icon {
+        margin-right: 8px;
+    }
+
+    .node-name {
+        text-align: left;
+    }
+    
+    .node-path {
+        margin-right: 10px;
+        float: right;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    }
+
+    .status-icon {
+        margin-left: 20px;
+        margin-right: 5px;
+    }
 }
 
 .tree-view {
-    width: 100%;
     overflow-y: auto;
-    height: 70vh;
 }
 
 .container {
     display: flex;
     flex-direction: row;
-    width: 100%;
 
     .file-status {
         display: flex;
