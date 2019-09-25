@@ -13,7 +13,7 @@
         <qx-checkbox class="footer-content" #overWriteCheckboxButton *ngIf="loadSearchData"
             [name]="'ids-lbl-overwrite-existing' | translate" [tooltip]="'ids-lbl-overwrite-existing' | translate">
         </qx-checkbox>
-        <qx-button [disabled]="false" class="button"
+        <qx-button [disabled]="false" class="button" [focus]='true'
             [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
             [showBackground]='true' [isSelected]='false'
             (click)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
@@ -38,36 +38,36 @@
     </div>
 </ng-template>
 <ng-template #filesProcessed>
-    <div class="container">
+    <div class="header-container">
         <qx-label class="heading-text">
             {{totalNumOfFiles}} {{'ids-lbl-files-processed' | translate}}
         </qx-label>
-        <div class="file-status">
-            <img class="img-valign" src="assets/images/ico-check-circle.png" />
-            <qx-label class="inline-right-align-text">
-                {{numOfPassedFiles}} {{'ids-lbl-files-passed' | translate}}
-            </qx-label>
-        </div>
-        <div class="file-status">
-            <img class="img-valign" src="assets/images/ico-error-triangle.png" />
-            <qx-label class="inline-right-align-text">
-                {{numOfFailedFiles}} {{'ids-lbl-files-failed' | translate}}
-            </qx-label>
+        <div class="file-status-container">
+            <div class="file-status">
+                <img class="img-valign" src="assets/images/ico-check-circle.png" />
+                <qx-label class="inline-right-align-text">
+                    {{numOfPassedFiles}} {{'ids-lbl-files-passed' | translate}}
+                </qx-label>
+            </div>
+            <div class="file-status">
+                <img class="img-valign" src="assets/images/ico-error-triangle.png" />
+                <qx-label class="inline-right-align-text">
+                    {{numOfFailedFiles}} {{'ids-lbl-files-failed' | translate}}
+                </qx-label>
+            </div>
         </div>
     </div>
 </ng-template>
 <ng-template #filesSearched>
-    <div class="container">
+    <div class="header-container">
         <qx-checkbox #allFilesCheckboxButton class="heading-text" [disabled]=false [name]="filesCountString"
             [state]="selectAllState" [showElipsis]=false (stateChange)="onSelectAllChange($event)"
             style="font-size: 30px"></qx-checkbox>
-        <div style="text-align: center; display:flex;">
-            <qx-label class="file-status">
-                {{numOfINDDFiles}} INDD
-            </qx-label>
-            <qx-label class="file-status">
-                {{numOfIDMLFiles}} IDML
-            </qx-label>
-        </div>
+        <qx-label class="file-status">
+            {{numOfINDDFiles}} INDD
+        </qx-label>
+        <qx-label class="file-status">
+            {{numOfIDMLFiles}} IDML
+        </qx-label>
     </div>
 </ng-template>
