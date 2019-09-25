@@ -19,7 +19,9 @@ export class LaunchScreenComponent implements OnInit {
     this.stepper.next();
   }
 
-  skip() {
-    window.alert('skip clicked');
+  closeDialog() {
+    if ((window as any).XPress) {
+      (window as any).app.dialogs.closeDialog();
+    }
   }
 }
