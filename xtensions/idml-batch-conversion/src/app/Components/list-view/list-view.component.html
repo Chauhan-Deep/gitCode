@@ -31,7 +31,7 @@
                 <qx-label>
                     {{ node?.origin?.pathURL }}
                 </qx-label>
-                <img class="status-icon" *ngIf="node.origin?.fileConverted"
+                <img class="status-icon" *ngIf="node.origin?.fileConverted != undefined"
                     [src]="node?.origin?.fileConverted ? 'assets/images/ico-check-circle.png' : 'assets/images/ico-error-triangle.png'" />
             </div>
         </span>
