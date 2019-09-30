@@ -21,7 +21,6 @@ export const LANG_EN_US_TRANS = {
     'ids-lbl-searching-files': 'Searching for files...',
     'ids-btnlabel-cancel': 'Cancel',
     'ids-lbl-files-found': 'Files found!',
-    'ids-lbl-select-destination': 'Select Destination',
     'ids-lbl-overwrite-existing': 'Overwrite existing',
     'ids-lbl-convert-selected': 'Convert selected',
     'ids-lbl-progress-bar-file-converion-text': 'Converting ^1 of ^2 files',
