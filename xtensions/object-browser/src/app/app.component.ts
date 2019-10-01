@@ -139,7 +139,7 @@ export class AppComponent implements OnInit, OnDestroy {
       const boxNodesUpdated = [];
       boxNodesUpdated.push({ title: boxName, key: rootboxID, expanded: true, selected: false, children: [] });
       this.AddChidren(boxNodesUpdated[0].children, rootboxID);
-      let t1 = performance.now();
+      const t1 = performance.now();
       console.log('Call to make tree took ' + (t1 - t0) + ' milliseconds.');
 
       // Update the model reference
