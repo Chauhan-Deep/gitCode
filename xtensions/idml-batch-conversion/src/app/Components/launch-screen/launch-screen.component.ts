@@ -15,10 +15,13 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   nextScreen() {
+    this.stepper.selected.completed = true;
     this.stepper.next();
   }
 
-  skip() {
-    window.alert('skip clicked');
+  closeDialog() {
+    if ((window as any).XPress) {
+      (window as any).app.dialogs.closeDialog();
+    }
   }
 }
