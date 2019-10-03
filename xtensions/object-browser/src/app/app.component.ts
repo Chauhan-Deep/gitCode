@@ -104,7 +104,7 @@ export class AppComponent implements OnInit, OnDestroy {
       event.node.isSelected = true;
     }
 
-    (window as any).app.menus.showContextMenu(event.node.key, event.event.screenX, event.event.screenY);
+    (window as any).app.components.flex.showContextMenu(event.node.key, event.event.screenX, event.event.screenY);
   }
 
 
@@ -114,7 +114,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.boxNodes[0].title = event.node.title;
     (window as any).app.components.flex.setcurbox(event.node.key);
     const boxID = (window as any).app.activeBoxes().boxIDs[0];
-    (window as any).app.menus.updateMenu(false);
+    (window as any).app.components.flex.updateMenu(false);
     if (boxID) {
       const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
       if (node) {
@@ -156,18 +156,18 @@ export class AppComponent implements OnInit, OnDestroy {
   // }
 
   async RebuildModel() {
-    var t0 = performance.now();
-    let boxId = (<any>window).app.activeBoxes().boxIDs[0];
+    const t0 = performance.now();
+    const boxId = (window as any).app.activeBoxes().boxIDs[0];
     if (boxId) {
-      let newModel = (<any>window).app.components.flex.getFlexDataModel(boxId);
+      const newModel = (window as any).app.components.flex.getFlexDataModel(boxId);
       const t1 = performance.now();
-      console.log("Call to make tree took " + (t1 - t0) + " milliseconds.");
+      console.log('Call to make tree took ' + (t1 - t0) + ' milliseconds.');
 
       // Update the model reference
       this.boxNodes = newModel;
       this.ref.detectChanges();
       const t2 = performance.now();
-      console.log("Call to RebuildModel took " + (t2 - t0) + " milliseconds.");
+      console.log('Call to RebuildModel took ' + (t2 - t0) + ' milliseconds.');
     }
   }
 
@@ -179,12 +179,12 @@ export class AppComponent implements OnInit, OnDestroy {
         this.RebuildModel();
       })();
       this.isDirty = false;
-      (window as any).app.menus.updateMenu(false);
+      (window as any).app.components.flex.updateMenu(false);
     }
-    let boxID = (window as any).app.activeBoxes().boxIDs[0];
-    
+    const boxID = (window as any).app.activeBoxes().boxIDs[0];
+
     if (boxID) {
-      let node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+      const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
       if (node) {
         if (node.isSelectable && !node.isSelected) {
           node.isSelected = true;
