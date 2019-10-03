@@ -156,18 +156,18 @@ export class AppComponent implements OnInit, OnDestroy {
   // }
 
   async RebuildModel() {
-    var t0 = performance.now();
-    let boxId = (<any>window).app.activeBoxes().boxIDs[0];
+    const t0 = performance.now();
+    const boxId = (window as any).app.activeBoxes().boxIDs[0];
     if (boxId) {
-      let newModel = (<any>window).app.components.flex.getFlexDataModel(boxId);
+      const newModel = (window as any).app.components.flex.getFlexDataModel(boxId);
       const t1 = performance.now();
-      console.log("Call to make tree took " + (t1 - t0) + " milliseconds.");
+      console.log('Call to make tree took ' + (t1 - t0) + ' milliseconds.');
 
       // Update the model reference
       this.boxNodes = newModel;
       this.ref.detectChanges();
       const t2 = performance.now();
-      console.log("Call to RebuildModel took " + (t2 - t0) + " milliseconds.");
+      console.log('Call to RebuildModel took ' + (t2 - t0) + ' milliseconds.');
     }
   }
 
@@ -181,10 +181,10 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isDirty = false;
       (window as any).app.components.flex.updateMenu(false);
     }
-    let boxID = (window as any).app.activeBoxes().boxIDs[0];
-    
+    const boxID = (window as any).app.activeBoxes().boxIDs[0];
+
     if (boxID) {
-      let node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+      const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
       if (node) {
         if (node.isSelectable && !node.isSelected) {
           node.isSelected = true;
