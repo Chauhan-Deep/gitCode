@@ -109,7 +109,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   qxEvent(event: QxTreeEmitEvent): void {
-
     console.log('-----------------------------------qxEvent----------------------------------');
     console.log(event.node.title);
     this.boxNodes[0].title = event.node.title;
@@ -117,44 +116,58 @@ export class AppComponent implements OnInit, OnDestroy {
     const boxID = (window as any).app.activeBoxes().boxIDs[0];
     (window as any).app.menus.updateMenu(false);
     if (boxID) {
-      this.ngZone.run(() => {
-        const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
-        if (node) {
-          if (node.isSelectable) {
-            node.isSelected = true;
-          }
-        }
-      });
-    }
-  }
-
-  async RebuildModel() {
-    const t0 = performance.now();
-
-    const boxID = (window as any).app.activeBoxes().boxIDs[0];
-    const rootboxID = (window as any).app.components.flex.getFlexRoot(boxID);
-    if (rootboxID) {
-      let boxName = (window as any).app.components.flex.getBoxName(rootboxID);
-      boxName = boxName.charAt(0).toUpperCase() + boxName.slice(1);
-      const boxNodesUpdated = [];
-      boxNodesUpdated.push({ title: boxName, key: rootboxID, expanded: true, selected: false, children: [] });
-      this.AddChidren(boxNodesUpdated[0].children, rootboxID);
-      const t1 = performance.now();
-      console.log('Call to make tree took ' + (t1 - t0) + ' milliseconds.');
-
-      // Update the model reference
-      this.boxNodes = boxNodesUpdated;
-
       const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
       if (node) {
         if (node.isSelectable) {
           node.isSelected = true;
         }
       }
-      this.ref.detectChanges();
+    }
+  }
 
+  // async RebuildModel() {
+  //   const t0 = performance.now();
+
+  //   const boxID = (window as any).app.activeBoxes().boxIDs[0];
+  //   const rootboxID = (window as any).app.components.flex.getFlexRoot(boxID);
+  //   if (rootboxID) {
+  //     let boxName = (window as any).app.components.flex.getBoxName(rootboxID);
+  //     boxName = boxName.charAt(0).toUpperCase() + boxName.slice(1);
+  //     const boxNodesUpdated = [];
+  //     boxNodesUpdated.push({ title: boxName, key: rootboxID, expanded: true, selected: false, children: [] });
+  //     this.AddChidren(boxNodesUpdated[0].children, rootboxID);
+  //     const t1 = performance.now();
+  //     console.log('Call to make tree took ' + (t1 - t0) + ' milliseconds.');
+
+  //     // Update the model reference
+  //     this.boxNodes = boxNodesUpdated;
+
+  //     const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+  //     if (node) {
+  //       if (node.isSelectable) {
+  //         node.isSelected = true;
+  //       }
+  //     }
+  //     this.ref.detectChanges();
+
+  //     const t2 = performance.now();
+  //     console.log('Call to RebuildModel took ' + (t2 - t0) + ' milliseconds.');
+  //   }
+  // }
+
+  async RebuildModel() {
+    var t0 = performance.now();
+    let boxId = (<any>window).app.activeBoxes().boxIDs[0];
+    if (boxId) {
+      let newModel = (<any>window).app.components.flex.getFlexDataModel(boxId);
+      const t1 = performance.now();
+      console.log("Call to make tree took " + (t1 - t0) + " milliseconds.");
+
+      // Update the model reference
+      this.boxNodes = newModel;
+      this.ref.detectChanges();
       const t2 = performance.now();
-      console.log('Call to RebuildModel took ' + (t2 - t0) + ' milliseconds.');
+      console.log("Call to RebuildModel took " + (t2 - t0) + " milliseconds.");
     }
   }
 
@@ -166,17 +179,16 @@ export class AppComponent implements OnInit, OnDestroy {
         this.RebuildModel();
       })();
       this.isDirty = false;
-      const boxID = (window as any).app.activeBoxes().boxIDs[0];
       (window as any).app.menus.updateMenu(false);
-      if (boxID) {
-        this.ngZone.run(() => {
-          const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
-          if (node) {
-            if (node.isSelectable) {
-              node.isSelected = true;
-            }
-          }
-        });
+    }
+    let boxID = (window as any).app.activeBoxes().boxIDs[0];
+    
+    if (boxID) {
+      let node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+      if (node) {
+        if (node.isSelectable && !node.isSelected) {
+          node.isSelected = true;
+        }
       }
     }
   }
@@ -186,13 +198,13 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('register RegisterQXPCallBacks...');
       this._XT_CHGDOCSTAT = (window as any).XPress.registerQXPCallbackHandler(0, 668, this.docStateChangeHandler.bind(this));
       this._XT_FLEX_POST_ATTATCH_ITEM
-          = (window as any).XPress.registerQXPCallbackHandler(0, 1542, this.PostAttachItemCallBackHandler.bind(this));
+        = (window as any).XPress.registerQXPCallbackHandler(0, 1542, this.PostAttachItemCallBackHandler.bind(this));
       this._XT_FLEX_POST_DETATCH_ITEM
-          = (window as any).XPress.registerQXPCallbackHandler(0, 1544, this.PostDetachItemCallBackHandler.bind(this));
+        = (window as any).XPress.registerQXPCallbackHandler(0, 1544, this.PostDetachItemCallBackHandler.bind(this));
       this._XT_FLEX_POST_REPARENT_ITEM
-          = (window as any).XPress.registerQXPCallbackHandler(0, 1548, this.PostReparentItemCallBackHandler.bind(this));
+        = (window as any).XPress.registerQXPCallbackHandler(0, 1548, this.PostReparentItemCallBackHandler.bind(this));
       this._XT_POST_DELETEITEM
-          = (window as any).XPress.registerQXPCallbackHandler(0, 1188, this.PostDeleteItemCallBackHandler.bind(this));
+        = (window as any).XPress.registerQXPCallbackHandler(0, 1188, this.PostDeleteItemCallBackHandler.bind(this));
 
       // Undo/Redo
       this._XT_UNDO = (window as any).XPress.registerQXPCallbackHandler(0, 488, this.UndoItemCallBackHandler.bind(this));
@@ -203,18 +215,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   docStateChangeHandler(response) {
     console.log('docStateChange called from XPress...' + response);
-    this.isDirty = true;
-    if ((window as any).app.activeBoxes()) {
-      const boxID = (window as any).app.activeBoxes().boxIDs[0];
-      this.ngZone.run(() => {
-        const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
-        if (node) {
-          if (node.isSelectable) {
-            node.isSelected = true;
-          }
-        }
-      });
-    }
   }
 
   PostAttachItemCallBackHandler(response) {
