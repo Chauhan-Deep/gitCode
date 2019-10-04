@@ -1,0 +1,28 @@
+<div class="idml-launch-window">
+    <div class="background-container">
+        <div class="centered-container">
+            <img class="image" src="assets\images\img-brand.png" />
+        </div>
+        <div class="text-container">
+            <qx-label class="sub-text" [multiline]="true">
+                {{'ids-lbl-launch-screen-maintext' | translate}}
+            </qx-label>
+        </div>
+        <div class="internal-text-container">
+            <qx-label class="sub-text" [multiline]="true">
+                {{'ids-lbl-launch-screen-subtext' | translate}}
+            </qx-label>
+        </div>
+    </div>
+</div>
+<qrk-footer>
+    <div class="horizontal-container">
+        <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-skip' | translate"
+            [tooltip]="'ids-ttp-skip' | translate" [showBackground]='true' (click)="closeDialog()">
+        </qx-button>
+        <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-continue' | translate"
+            [tooltip]="'ids-ttp-continue' | translate" [showBackground]='true' [focus]='true'
+            (click)="nextScreen()">
+        </qx-button>
+    </div>
+</qrk-footer>

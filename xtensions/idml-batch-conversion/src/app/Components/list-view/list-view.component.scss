@@ -1,0 +1,90 @@
+.list-container {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
+}
+
+.qx-tree-node-content-wrapper {
+    width: 90%; 
+    display: inline-block;
+}
+
+.qx-tree-title {
+    width: 80%;
+    font-size: 9pt;
+
+    .file-icon {
+        margin-right: 6pt;
+    }
+
+    .node-name {
+        text-align: left;
+        vertical-align: middle;
+    }
+    
+    .node-path {
+        margin-right: 7.5pt;
+        float: right;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    }
+
+    .status-icon {
+        margin-left: 15pt;
+        margin-right: 3.75pt;
+    }
+}
+
+.tree-view {
+    overflow-y: auto;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: baseline;
+    width: 100%;
+    padding: 3.755pt;
+    margin-bottom: 4pt;
+    .file-status {
+        display: flex;
+        margin-right: 14.5pt;
+        font-size: 10pt;
+
+        .inline-right-align-text {
+            margin-left: 5pt;
+            font-size: 10pt;
+        }
+    }
+    .heading-text {
+        font-size: 14.5pt;
+        margin-right: 30pt;
+    }
+    .file-status-container {
+        position: absolute;
+        right: 14.5pt;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+
+img {
+    height: 13pt; 
+    width: 13pt;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .footer-content {
+        margin-right: 30pt;
+    }
+}

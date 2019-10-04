@@ -1,0 +1,24 @@
+<mat-horizontal-stepper class="stepper-class" [@.disabled]="true" [linear]=true #stepper>
+    <mat-step class="qx-step" editable="false" completed=false>
+        <ng-template matStepLabel><b>{{'ids-step-getstarted' | translate}}</b></ng-template>
+        <qrk-launch-screen [stepper]="stepper"></qrk-launch-screen>
+    </mat-step>
+    <mat-step class="qx-step" editable="false" completed=false>
+        <ng-template matStepLabel><b>{{'ids-step-selectfiles' | translate}}</b></ng-template>
+        <div>
+            <qrk-scan-files [stepper]="stepper"></qrk-scan-files>
+        </div>
+    </mat-step>
+    <mat-step class="qx-step" editable="false" completed=false>
+        <ng-template matStepLabel><b>{{'ids-step-convert' | translate}}</b></ng-template>
+        <div>
+            <qrk-progress-bar [stepper]="stepper" ></qrk-progress-bar>
+        </div>
+    </mat-step>
+    <mat-step class="qx-step" editable="false" completed=false>
+        <ng-template matStepLabel><b>{{'ids-step-finish' | translate}}</b></ng-template>
+        <div>
+            <qrk-list-view [loadSearchData]=false [allowCheckable]=false [stepper]="stepper"></qrk-list-view>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>
