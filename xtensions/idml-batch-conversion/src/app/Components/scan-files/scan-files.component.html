@@ -1,0 +1,59 @@
+<div class="background-container" *ngIf="!showFilesListView">
+    <div class="text-container" [ngClass]="{ 'hidden': hideHeading }">
+        <qx-label class="sub-text">
+            {{headingText}}
+        </qx-label>
+    </div>
+    <div class="centered-container" [ngClass]="{ 'hidden': hideImage }">
+        <img class="image" [src]="imgSrc" />
+    </div>
+    <div class="internal-text-container" [ngClass]="{ 'hidden': hideScanView }">
+        <qx-label class="sub-text" [multiline]="true">
+            {{'ids-lbl-scan-files-subtext' | translate}}
+        </qx-label>
+        <div class="vertical-container">
+            <qx-button class="file-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
+                [focus]='true' [tooltip]="'ids-ttp-run-smart-scan' | translate" [showBackground]='true'
+                (click)="performSystemScan()">
+            </qx-button>
+            <qx-button class="file-scan-button" [disabled]="false"
+                [name]="'ids-btnlabel-manually-select-files' | translate"
+                [tooltip]="'ids-ttp-manually-select-files' | translate" [showBackground]='true'
+                (click)="performCustomScan()">
+            </qx-button>
+        </div>
+    </div>
+    <ng-container *ngTemplateOutlet="filesResultView"></ng-container>
+</div>
+<div *ngIf="showFilesListView">
+    <qrk-list-view [loadSearchData]=true [allowCheckable]=true [stepper]="stepper"></qrk-list-view>
+</div>
+<ng-container *ngTemplateOutlet="windowFooterView"></ng-container>
+
+<ng-template #filesResultView>
+    <div class="files-result-container" *ngIf="showResultWindow">
+        <div class="internal-text-container ">
+            <qx-label class="sub-text">
+                {{numOfFiles}}
+            </qx-label>
+        </div>
+        <div class="document-result">
+            <qx-label class="button-text">
+                {{numOfINDDFiles}} INDD
+            </qx-label>
+            <qx-label class="button-text">
+                {{numOfIDMLFiles}} IDML
+            </qx-label>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #windowFooterView>
+    <qrk-footer *ngIf="!showFilesListView">
+        <div class="horizontal-container" *ngIf="showCancelButton">
+            <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate"
+                [showBackground]='true' [isSelected]='false'>
+            </qx-button>
+        </div>
+    </qrk-footer>
+</ng-template>

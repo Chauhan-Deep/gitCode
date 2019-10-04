@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import './app/styles/common.scss';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+    background-color: var(--palette-background-color, #666666);
+    margin: 0;
+
+    qx-editable-dropdown {
+      height: 20px !important;
+    }
+}

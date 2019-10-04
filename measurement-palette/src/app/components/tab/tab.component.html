@@ -1,0 +1,99 @@
+<qx-tabs (tabChange)="tabChangeHandler($event)" [showVerticalTabs]="true" [activeTabIndex]="activeTabIndex">
+    <qx-tab>
+        <tab-heading [tooltip]="'Home'"><img src="assets/tab-icons/Inverted_home.png" class="icon">
+        </tab-heading>
+        <tab-content fxLayout="column">
+            <qx-block class='home-block' [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>{{ 'properties' | translate }}</qx-block-title>
+                <qx-block-content>
+                    <qrk-origin-across></qrk-origin-across>
+                    <qrk-origin-down></qrk-origin-down>
+                    <qrk-box-width></qrk-box-width>
+                    <qrk-box-height></qrk-box-height>
+                </qx-block-content> 
+            </qx-block>
+
+            <qx-block class='home-block' [collapsible]="false" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>BOX ANGLE PROPERTIES</qx-block-title>
+                <qx-block-content>
+                    <!-- <div class='box-angle'>
+                        <qx-label>Box Angle:</qx-label>
+                        <qx-textbox [unit]='unit.ANGLE' [minValue]='minValueAngle' [maxValue]='maxValueAngle' [spinner]='true' 
+                        (textChange)='handleTextChange($event)' [currentValue]='currentValueAngle'>
+                        </qx-textbox>
+                    </div>
+                    <div class='box-skew'>
+                        <qx-label>Box Skew:</qx-label>
+                        <qx-textbox [unit]='unit.ANGLE' [minValue]='minValueSkew' [maxValue]='maxValueSkew' [spinner]='true' [currentValue]='currentValueSkew'>
+                        </qx-textbox>
+                    </div> -->
+                </qx-block-content>
+            </qx-block>
+        </tab-content>
+    </qx-tab>
+
+    <qx-tab>
+        <tab-heading [tooltip]="'Character'"><img src="assets/tab-icons/Inverted_Character.png" class="icon">
+        </tab-heading>
+        <tab-content>
+            <qx-block [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>CHARACTER</qx-block-title>
+                <qx-block-content>
+
+                </qx-block-content>
+            </qx-block>
+        </tab-content>
+    </qx-tab>
+
+    <qx-tab>
+        <tab-heading [tooltip]="'Paragraph'"><img src="assets/tab-icons/Inverted_Paragraph.png" class="icon">
+        </tab-heading>
+        <tab-content>
+            <qx-block [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>PARAGRAPH</qx-block-title>
+                <qx-block-content>
+
+                </qx-block-content>
+            </qx-block>
+        </tab-content>
+    </qx-tab>
+
+    <qx-tab>
+        <tab-heading [tooltip]="'Rules'"><img src="assets/tab-icons/Inverted_ParagraphRule.png" class="icon">
+        </tab-heading>
+        <tab-content>
+            <qx-block [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>RULES</qx-block-title>
+                <qx-block-content>
+
+                </qx-block-content>
+            </qx-block>
+        </tab-content>
+    </qx-tab>
+
+    <qx-tab>
+        <tab-heading [tooltip]="'Column Flow'"><img src="assets/tab-icons/Inverted_ColumnsTab.png" class="icon">
+        </tab-heading>
+        <tab-content>
+            <qx-block [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>COLUMN FLOW</qx-block-title>
+                <qx-block-content>
+
+                </qx-block-content>
+            </qx-block>
+        </tab-content>
+    </qx-tab>
+
+    <qx-tab>
+        <tab-heading [tooltip]="'Tabs'"><img src="assets/tab-icons/Inverted_Tabs.png" class="icon">
+        </tab-heading>
+        <tab-content>
+            <qx-block [collapsible]="true" fxLayoutAlign="end" [blockSeparatorType]='BLOCK_SEPARATOR_TYPE'>
+                <qx-block-title>TABS</qx-block-title>
+                <qx-block-content>
+
+                </qx-block-content>
+            </qx-block>
+        </tab-content>
+    </qx-tab>
+</qx-tabs>
