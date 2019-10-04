@@ -88,11 +88,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
         title: childItem.name, key: 'indd_' + index,
         pathURL: childItem.path, isLeaf: true
       };
-      if (childItem.status === true) {
-        this.numOfPassedFiles++;
-        treeNodeChildrenData.fileConverted = childItem.status;
-      } else if (childItem.status === false) {
-        this.numOfFailedFiles++;
+      if (!this.loadSearchData) {
+        childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
         treeNodeChildrenData.fileConverted = childItem.status;
       }
       inddTreeNodeChildren.push(treeNodeChildrenData);
@@ -104,7 +101,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
         title: childItem.name, key: 'idml_' + index,
         pathURL: childItem.path, isLeaf: true
       };
-      if (childItem.status) {
+      if (!this.loadSearchData) {
         childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
         treeNodeChildrenData.fileConverted = childItem.status;
       }
