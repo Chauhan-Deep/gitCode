@@ -18,6 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('qxTreeComponent', { static: false }) qxTreeComponent: QxTreeComponent;
 
+  mlayoutID = -1;
+  mCurPage = -1;
   isDirty = false;
   isDragStarted = false;
   draggedNodeKey = '';
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private _XT_FLEX_POST_DETATCH_ITEM: number;
   private _XT_FLEX_POST_REPARENT_ITEM: number;
   private _XT_POST_DELETEITEM: number;
+  private _XT_OPEN: number;
   private _XT_UNDO: number;
   private _XT_REDO: number;
 
@@ -57,16 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     console.log('ngOnInit');
 
-    const boxID = (window as any).app.activeBoxes().boxIDs[0];
-    console.log('boxID=' + boxID);
-    const count = (window as any).app.components.flex.getFlexChildCount(boxID);
-    console.log('count=' + count);
-    const rootboxID = (window as any).app.components.flex.getFlexRoot(boxID);
-    let boxName = (window as any).app.components.flex.getBoxName(rootboxID);
-    boxName = boxName.charAt(0).toUpperCase() + boxName.slice(1);
-    this.boxNodes[0].title = boxName;
-    this.boxNodes[0].key = rootboxID;
-    this.AddChidren(this.boxNodes[0].children, rootboxID);
+    this.RebuildModel();
     this.RegisterQXPCallBacks();
   }
 
@@ -157,9 +151,23 @@ export class AppComponent implements OnInit, OnDestroy {
 
   async RebuildModel() {
     const t0 = performance.now();
-    const boxId = (window as any).app.activeBoxes().boxIDs[0];
-    if (boxId) {
-      const newModel = (window as any).app.components.flex.getFlexDataModel(boxId);
+    const activeboxes = (window as any).app.activeBoxes();
+    if (activeboxes) {
+      const boxId = (window as any).app.activeBoxes().boxIDs[0];
+      if (boxId) {
+        const newModel = (window as any).app.components.flex.getFlexDataModel(boxId);
+        const t1 = performance.now();
+        console.log('Call to make tree took ' + (t1 - t0) + ' milliseconds.');
+
+        // Update the model reference
+        this.boxNodes = newModel;
+        this.ref.detectChanges();
+        const t2 = performance.now();
+        console.log('Call to RebuildModel took ' + (t2 - t0) + ' milliseconds.');
+      }
+    }
+    else {
+      const newModel = (window as any).app.components.flex.getFlexDataModel(0);
       const t1 = performance.now();
       console.log('Call to make tree took ' + (t1 - t0) + ' milliseconds.');
 
@@ -172,7 +180,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   PeriodicRefresh(text: string): void {
+    let layout = (window as any).app.activeLayout();
+    let layoutID = layout.layoutID;
+    let curPage = layout.getCurrentPage();
+
+    if (this.mlayoutID == layoutID) {
+      if (this.mCurPage != curPage) {
+        this.isDirty = true;
+        this.mCurPage = curPage;
+      }
+    }
+    else {
+        this.isDirty = true;
+        this.mlayoutID = layoutID;
+    }
     console.log('PeriodicRefresh');
+
     if (this.isDirty) {
       console.log('PeriodicRefresh is Dirty');
       (async () => {
@@ -209,6 +232,9 @@ export class AppComponent implements OnInit, OnDestroy {
       // Undo/Redo
       this._XT_UNDO = (window as any).XPress.registerQXPCallbackHandler(0, 488, this.UndoItemCallBackHandler.bind(this));
       this._XT_REDO = (window as any).XPress.registerQXPCallbackHandler(0, 489, this.RedoItemCallBackHandler.bind(this));
+
+      // open/Close doc
+      this._XT_OPEN = (window as any).XPress.registerQXPCallbackHandler(0, 46, this.OpenDocCallBackHandler.bind(this));
     }
     setInterval(() => this.PeriodicRefresh('Repeat'), 10);
   }
@@ -246,6 +272,10 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log('RedoItemCallBackHandler' + response);
     this.isDirty = true;
   }
+  OpenDocCallBackHandler(response) {
+    console.log('OpenDocCallBackHandler' + response);
+    this.isDirty = true;
+  }
 
   ngOnDestroy() {
     console.log('ngOnDestroy...');
@@ -257,6 +287,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // undo/Redo
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
+    // open/close doc
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 46, this._XT_OPEN);
   }
 
   // Drag-Drop
