@@ -165,8 +165,7 @@ export class AppComponent implements OnInit, OnDestroy {
         const t2 = performance.now();
         console.log('Call to RebuildModel took ' + (t2 - t0) + ' milliseconds.');
       }
-    }
-    else {
+    } else {
       const newModel = (window as any).app.components.flex.getFlexDataModel(0);
       const t1 = performance.now();
       console.log('Call to make tree took ' + (t1 - t0) + ' milliseconds.');
@@ -180,17 +179,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   PeriodicRefresh(text: string): void {
-    let layout = (window as any).app.activeLayout();
-    let layoutID = layout.layoutID;
-    let curPage = layout.getCurrentPage();
+    const layout = (window as any).app.activeLayout();
+    const layoutID = layout.layoutID;
+    const curPage = layout.getCurrentPage();
 
-    if (this.mlayoutID == layoutID) {
-      if (this.mCurPage != curPage) {
+    if (this.mlayoutID === layoutID) {
+      if (this.mCurPage !== curPage) {
         this.isDirty = true;
         this.mCurPage = curPage;
       }
-    }
-    else {
+    } else {
         this.isDirty = true;
         this.mlayoutID = layoutID;
     }
