@@ -91,7 +91,9 @@ export class ListViewComponent implements OnInit, OnDestroy {
       if (!this.loadSearchData) {
         childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
         treeNodeChildrenData.fileConverted = childItem.status;
-        treeNodeChildrenData.qxpFileName = childItem.qxpPath.replace(childItem.path, '');
+        if (childItem.qxpPath !== undefined) {
+          treeNodeChildrenData.qxpFileName = childItem.qxpPath.replace(childItem.path, '');
+        }
       }
       inddTreeNodeChildren.push(treeNodeChildrenData);
     });
@@ -105,7 +107,9 @@ export class ListViewComponent implements OnInit, OnDestroy {
       if (!this.loadSearchData) {
         childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
         treeNodeChildrenData.fileConverted = childItem.status;
-        treeNodeChildrenData.qxpFileName = childItem.qxpPath.replace(childItem.path, '');
+        if (childItem.qxpPath !== undefined) {
+          treeNodeChildrenData.qxpFileName = childItem.qxpPath.replace(childItem.path, '');
+        }
       }
       idmlTreeNodeChildren.push(treeNodeChildrenData);
     });
