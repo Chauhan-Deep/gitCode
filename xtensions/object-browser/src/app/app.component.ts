@@ -199,13 +199,8 @@ export class AppComponent implements OnInit, OnDestroy {
         this.mCurPage = curPage;
       }
     } else {
-<<<<<<< HEAD
       this.isDirty = true;
       this.mlayoutID = layoutID;
-=======
-        this.isDirty = true;
-        this.mlayoutID = layoutID;
->>>>>>> develop
     }
     console.log('PeriodicRefresh');
 
@@ -217,7 +212,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isDirty = false;
       (window as any).app.components.flex.updateMenu(false);
     }
-<<<<<<< HEAD
     const activeboxes = (window as any).app.activeBoxes();
     if (activeboxes) {
       const boxID = (window as any).app.activeBoxes().boxIDs[0];
@@ -234,15 +228,6 @@ export class AppComponent implements OnInit, OnDestroy {
               inline: 'center'
           });
           }
-=======
-    const boxID = (window as any).app.activeBoxes().boxIDs[0];
-
-    if (boxID) {
-      const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
-      if (node) {
-        if (node.isSelectable && !node.isSelected) {
-          node.isSelected = true;
->>>>>>> develop
         }
       }
     }
@@ -308,10 +293,6 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log('OpenDocCallBackHandler' + response);
     this.isDirty = true;
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
 
   ngOnDestroy() {
      if (this.mInterval) {
@@ -326,17 +307,10 @@ export class AppComponent implements OnInit, OnDestroy {
      (window as any).XPress.deRegisterQXPCallbackHandler(0, 1548, this._XT_FLEX_POST_REPARENT_ITEM);
      (window as any).XPress.deRegisterQXPCallbackHandler(0, 1188, this._XT_POST_DELETEITEM);
     // undo/Redo
-<<<<<<< HEAD
      (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
      (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
     // open/close doc
      (window as any).XPress.deRegisterQXPCallbackHandler(0, 46, this._XT_OPEN);
-=======
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
-    // open/close doc
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 46, this._XT_OPEN);
->>>>>>> develop
   }
 
   // Drag-Drop
