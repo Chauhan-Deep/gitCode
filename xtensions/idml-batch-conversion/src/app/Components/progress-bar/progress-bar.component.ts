@@ -84,4 +84,8 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
     this.progressValue = ((this.currentFileIndex - 1) * 100) / this.totalFiles; // 100% conversion for n-1 files
     this.progressValue += (50 / this.totalFiles); // 50% conversion for nth file
   }
+
+  cancelConversion() {
+    this.fileListService.cancelDocumentsConversion(true);
+  }
 }
