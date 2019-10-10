@@ -36,4 +36,5 @@ export const LANG_EN_US_TRANS = {
     'ids-lbl-source': 'Source',
     'ids-lbl-destination': 'Destination',
     'ids-alert-indesign-usage': 'You have selected INDD files to be converted, which requires Adobe InDesign. Please don’t use Adobe InDesign while this operation is in process.',
+    'ids-alert-indesign-not-available': 'Adobe InDesign not available.\nYou have selected INDD files to be converted, which requires Adobe InDesign.',
 };

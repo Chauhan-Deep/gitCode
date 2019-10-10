@@ -1,6 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { QXIDMLFilesListData, QXIDFileDetailsData } from '../Interface/idml-interface';
+import { TranslateService } from '../translate/translate.service';
+
+import { QXIDMLFilesListData, QXIDFileDetailsData, ErrorCode } from '../Interface/idml-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +18,14 @@ export class FileListDataService {
   private convertIDMLIndex = 0;
   private fileCount = 0;
   private fileConversionIndex = 0;
+  ignoreINDDFiles = false;
   shouldOverwriteExisting = false;
   shouldRespondWithSearchData = true;
   updateProgressBarEvent = new EventEmitter<any>();
   showFinalResultEvent = new EventEmitter<any>();
   showSystemScanResultEvent = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private translateService: TranslateService) { }
 
   getINDDFilesCount(): number {
     return this.filesList.indd.length;
@@ -64,35 +67,57 @@ export class FileListDataService {
   inddConversionResultHandler(response) {
     const jsonResponse = JSON.parse(response);
 
-    this.fileConversionIndex++;
-    if (this.convertFilesList.indd.length > 0) {
-      let object = this.convertFilesList.indd[this.convertINDDIndex];
+    if ((jsonResponse.status === ErrorCode.ERR_INDESIGN_NOTFOUND
+      || jsonResponse.status === ErrorCode.ERR_INDESIGN_ERROR)
+      && ((window as any).app)) {
+      this.ignoreINDDFiles = true;
 
-      object.qxpPath = jsonResponse.qxpPath;
-      object.status = jsonResponse.status;
-      this.convertFilesList.indd[this.convertINDDIndex] = object;
-      this.convertINDDIndex++;
+      if (jsonResponse.status === ErrorCode.ERR_INDESIGN_NOTFOUND) {
+        this.ignoreINDDFiles = (window as any).app.dialogs.confirm(this.translateService.localize('ids-alert-indesign-not-available'),
+          (window as any).app.constants.alertTypes.kNoteAlert);
+      }
 
-      if (this.convertINDDIndex < this.convertFilesList.indd.length) {
-        object = this.convertFilesList.indd[this.convertINDDIndex];
-        object.overwrite = this.shouldOverwriteExisting;
-        this.updateProgressBarEvent.emit(object);
-        if ((window as any).XPress) {
-          (window as any).XPress.api.invokeXTApi(1146372945,
-            'IDMLImportConvertINDDAndIDMLFilesToQXP', object, this.inddConversionResultHandler.bind(this));
+      if (this.ignoreINDDFiles) {
+        this.ignoreINDDFiles = true;
+        this.fileConversionIndex = this.convertFilesList.indd.length;
+        this.convertINDDIndex = this.convertFilesList.indd.length;
+        this.convertFilesList.indd.forEach((childItem): void => {
+          childItem.status = false;
+        });
+
+        this.callXPressFileConversion(this.convertFilesList);
+      }
+    } else {
+      this.fileConversionIndex++;
+      if (this.convertFilesList.indd.length > 0) {
+        let object = this.convertFilesList.indd[this.convertINDDIndex];
+
+        object.qxpPath = jsonResponse.qxpPath;
+        object.status = (jsonResponse.status === ErrorCode.ERR_SUCCESS);
+        this.convertFilesList.indd[this.convertINDDIndex] = object;
+        this.convertINDDIndex++;
+
+        if (this.convertINDDIndex < this.convertFilesList.indd.length) {
+          object = this.convertFilesList.indd[this.convertINDDIndex];
+          object.overwrite = this.shouldOverwriteExisting;
+          this.updateProgressBarEvent.emit(object);
+          if ((window as any).XPress) {
+            (window as any).XPress.api.invokeXTApi(1146372945,
+              'IDMLImportConvertINDDAndIDMLFilesToQXP', object, this.inddConversionResultHandler.bind(this));
+          }
+        } else if (this.convertIDMLIndex < this.convertFilesList.idml.length) {
+          this.convertIDMLIndex = 0;
+          object = this.convertFilesList.idml[this.convertIDMLIndex];
+          object.overwrite = this.shouldOverwriteExisting;
+          this.updateProgressBarEvent.emit(object);
+          if ((window as any).XPress) {
+            (window as any).XPress.api.invokeXTApi(1146372945,
+              'IDMLImportConvertINDDAndIDMLFilesToQXP', object, this.idmlConversionResultHandler.bind(this));
+          }
+        } else {
+          this.shouldRespondWithSearchData = false;
+          this.showFinalResultEvent.emit();
         }
-      } else if (this.convertIDMLIndex < this.convertFilesList.idml.length) {
-        this.convertIDMLIndex = 0;
-        object = this.convertFilesList.idml[this.convertIDMLIndex];
-        object.overwrite = this.shouldOverwriteExisting;
-        this.updateProgressBarEvent.emit(object);
-        if ((window as any).XPress) {
-          (window as any).XPress.api.invokeXTApi(1146372945,
-            'IDMLImportConvertINDDAndIDMLFilesToQXP', object, this.idmlConversionResultHandler.bind(this));
-        }
-      } else {
-        this.shouldRespondWithSearchData = false;
-        this.showFinalResultEvent.emit();
       }
     }
   }
@@ -105,7 +130,7 @@ export class FileListDataService {
       let object = this.convertFilesList.idml[this.convertIDMLIndex];
 
       object.qxpPath = jsonResponse.qxpPath;
-      object.status = jsonResponse.status;
+      object.status = (jsonResponse.status === ErrorCode.ERR_SUCCESS);
       this.convertFilesList.idml[this.convertIDMLIndex] = object;
       this.convertIDMLIndex++;
 
@@ -148,7 +173,7 @@ export class FileListDataService {
 
     if ((window as any).XPress) {
       this.fileConversionIndex++;
-      if (this.convertFilesList.indd.length > 0) {
+      if (!this.ignoreINDDFiles && this.convertFilesList.indd.length > 0) {
         this.convertINDDIndex = 0;
         object = this.convertFilesList.indd[this.convertINDDIndex];
         object.overwrite = this.shouldOverwriteExisting;
