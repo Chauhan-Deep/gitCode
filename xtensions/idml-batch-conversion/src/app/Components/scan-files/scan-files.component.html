@@ -13,13 +13,11 @@
         </qx-label>
         <div class="vertical-container">
             <qx-button class="file-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
-                [focus]='true' [tooltip]="'ids-ttp-run-smart-scan' | translate" [showBackground]='true'
-                (click)="performSystemScan()">
+                [focus]='true' [showBackground]='true' (click)="performSystemScan()">
             </qx-button>
             <qx-button class="file-scan-button" [disabled]="false"
                 [name]="'ids-btnlabel-manually-select-files' | translate"
-                [tooltip]="'ids-ttp-manually-select-files' | translate" [showBackground]='true'
-                (click)="performCustomScan()">
+                [showBackground]='true' (click)="performCustomScan()">
             </qx-button>
         </div>
     </div>
