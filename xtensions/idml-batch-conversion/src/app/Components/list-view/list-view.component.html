@@ -11,7 +11,7 @@
 <qrk-footer>
     <div class="horizontal-container">
         <qx-checkbox class="footer-content" #overWriteCheckboxButton *ngIf="loadSearchData"
-            [name]="'ids-lbl-overwrite-existing' | translate" [tooltip]="'ids-lbl-overwrite-existing' | translate">
+            [name]="'ids-lbl-overwrite-existing' | translate">
         </qx-checkbox>
         <qx-button [disabled]="false" class="button" [focus]='true'
             [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"

@@ -18,7 +18,8 @@ export class FileListDataService {
   private convertIDMLIndex = 0;
   private fileCount = 0;
   private fileConversionIndex = 0;
-  ignoreINDDFiles = false;
+  private ignoreINDDFiles = false;
+  private isConversionCancelled = false;
   shouldOverwriteExisting = false;
   shouldRespondWithSearchData = true;
   updateProgressBarEvent = new EventEmitter<any>();
@@ -27,6 +28,9 @@ export class FileListDataService {
 
   constructor(private translateService: TranslateService) { }
 
+  cancelDocumentsConversion(cancel: boolean): void {
+    this.isConversionCancelled = cancel;
+  }
   getINDDFilesCount(): number {
     return this.filesList.indd.length;
   }
@@ -139,6 +143,11 @@ export class FileListDataService {
       this.convertFilesList.idml[this.convertIDMLIndex] = object;
       this.convertIDMLIndex++;
 
+      if (this.isConversionCancelled) {
+        this.shouldRespondWithSearchData = false;
+        this.showFinalResultEvent.emit();
+        return;
+      }
       if (this.convertIDMLIndex < this.convertFilesList.idml.length) {
         this.convertIDMLIndex = 0;
         this.convertInDesignFileToQXP(false, this.convertIDMLIndex);
@@ -149,6 +158,26 @@ export class FileListDataService {
     }
   }
 
+  changeDocumentsStatusForCancelled(): void {
+    if (this.isConversionCancelled) {
+      const inddIndex = this.convertINDDIndex;
+      const idmlIndex = this.convertIDMLIndex;
+
+      this.convertFilesList.indd.forEach((childItem, index): void => {
+        if (index > inddIndex) {
+          childItem.status = false;
+        }
+      });
+      this.convertFilesList.idml.forEach((childItem, index): void => {
+        if (index > idmlIndex) {
+          childItem.status = false;
+        }
+      });
+      this.shouldRespondWithSearchData = false;
+      this.showFinalResultEvent.emit();
+      return;
+    }
+  }
   scanResultHandler(response) {
     this.filesList = JSON.parse(response);
     this.fileCount = this.filesList.indd.length + this.filesList.idml.length;
