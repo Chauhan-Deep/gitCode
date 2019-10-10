@@ -1,3 +1,5 @@
+export const IDMLImportXTID = 1146372945;
+
 export interface QXIDFileDetailsData {
     name: string;
     path: string;

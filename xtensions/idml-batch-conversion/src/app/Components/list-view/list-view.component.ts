@@ -5,7 +5,7 @@ import { QxTreeComponent, QxTreeNodeOptions, QxTreeEmitEvent, QxCheckboxComponen
 
 import { TranslateService } from '../../translate/translate.service';
 import { FileListDataService } from '../../Service/file-list-data.service';
-import { QXIDMLFilesListData, QXIDFileDetailsData } from '../../Interface/idml-interface';
+import { QXIDMLFilesListData, QXIDFileDetailsData, IDMLImportXTID } from '../../Interface/idml-interface';
 
 @Component({
   selector: 'qrk-list-view',
@@ -154,7 +154,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     if ((window as any).XPress) {
       const data = { qxpFilePath: (treeNode.origin.pathURL + treeNode.origin.qxpFileName) };
 
-      (window as any).XPress.api.invokeXTApi(1146372945, 'IDMLImportBrowseToFile', data);
+      (window as any).XPress.api.invokeXTApi(IDMLImportXTID, 'IDMLImportBrowseToFile', data);
     }
   }
 
