@@ -1,5 +1,5 @@
-import { Component, ViewChild, NgZone, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
-import { QxTreeModule } from '@quark/xpressng';
+import { Component, ViewChild, NgZone, ChangeDetectorRef, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { QxTreeModule, QxTreeNodeComponent } from '@quark/xpressng';
 import { QxTreeComponent, QxTreeNode, QxTreeNodeOptions, QxTreeEmitEvent, QxTreeBeforeDropEvent } from '@quark/xpressng';
 
 @Component({
@@ -10,14 +10,15 @@ import { QxTreeComponent, QxTreeNode, QxTreeNodeOptions, QxTreeEmitEvent, QxTree
 
 
 export class AppComponent implements OnInit, OnDestroy {
-  ngZone: NgZone;
 
   constructor(ngZone: NgZone, private ref: ChangeDetectorRef) {
     this.ngZone = ngZone;
   }
+  ngZone: NgZone;
 
   @ViewChild('qxTreeComponent', { static: false }) qxTreeComponent: QxTreeComponent;
 
+  mInterval;
   mlayoutID = -1;
   mCurPage = -1;
   isDirty = false;
@@ -42,6 +43,12 @@ export class AppComponent implements OnInit, OnDestroy {
       children: []
     }
   ];
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event) {
+    if (this.mInterval) {
+      clearInterval(this.mInterval);
+    }
+  }
 
   traverse_it(obj) {
     for (const prop in obj) {
@@ -189,8 +196,8 @@ export class AppComponent implements OnInit, OnDestroy {
         this.mCurPage = curPage;
       }
     } else {
-        this.isDirty = true;
-        this.mlayoutID = layoutID;
+      this.isDirty = true;
+      this.mlayoutID = layoutID;
     }
     console.log('PeriodicRefresh');
 
@@ -202,13 +209,22 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isDirty = false;
       (window as any).app.components.flex.updateMenu(false);
     }
-    const boxID = (window as any).app.activeBoxes().boxIDs[0];
+    const activeboxes = (window as any).app.activeBoxes();
+    if (activeboxes) {
+      const boxID = (window as any).app.activeBoxes().boxIDs[0];
 
-    if (boxID) {
-      const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
-      if (node) {
-        if (node.isSelectable && !node.isSelected) {
-          node.isSelected = true;
+      if (boxID) {
+        const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+        if (node) {
+          if (node.isSelectable && !node.isSelected) {
+            node.isSelected = true;
+            const dcom = (node.component);
+            (dcom as any).elRef.nativeElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+              inline: 'center'
+          });
+          }
         }
       }
     }
@@ -234,7 +250,7 @@ export class AppComponent implements OnInit, OnDestroy {
       // open/Close doc
       this._XT_OPEN = (window as any).XPress.registerQXPCallbackHandler(0, 46, this.OpenDocCallBackHandler.bind(this));
     }
-    setInterval(() => this.PeriodicRefresh('Repeat'), 10);
+    this.mInterval = setInterval(() => this.PeriodicRefresh('Repeat'), 10);
   }
 
   docStateChangeHandler(response) {
@@ -275,18 +291,24 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isDirty = true;
   }
 
+
   ngOnDestroy() {
-    console.log('ngOnDestroy...');
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 668, this._XT_CHGDOCSTAT);
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1542, this._XT_FLEX_POST_ATTATCH_ITEM);
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1544, this._XT_FLEX_POST_DETATCH_ITEM);
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1548, this._XT_FLEX_POST_REPARENT_ITEM);
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1188, this._XT_POST_DELETEITEM);
+     if (this.mInterval) {
+       clearInterval(this.mInterval);
+     }
+     console.log('ngOnDestroy...');
+
+
+     (window as any).XPress.deRegisterQXPCallbackHandler(0, 668, this._XT_CHGDOCSTAT);
+     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1542, this._XT_FLEX_POST_ATTATCH_ITEM);
+     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1544, this._XT_FLEX_POST_DETATCH_ITEM);
+     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1548, this._XT_FLEX_POST_REPARENT_ITEM);
+     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1188, this._XT_POST_DELETEITEM);
     // undo/Redo
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
+     (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
+     (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
     // open/close doc
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 46, this._XT_OPEN);
+     (window as any).XPress.deRegisterQXPCallbackHandler(0, 46, this._XT_OPEN);
   }
 
   // Drag-Drop

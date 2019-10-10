@@ -1,18 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background:gray;
-}
-
-.qx-tree li span.qx-tree-switcher.qx-tree-switcher_open .qx-tree-switcher-icon, 
-.qx-label {
-    color:black;
-    font-size: 14px;
-}
-.qx-tree-node {
-    background: white;
-    border-radius : 1px;
-}
-
-.qx-tree {
-    --selected-row-color: SteelBlue  ;
+    background: var(--palette-background-color, #666666);
 }
