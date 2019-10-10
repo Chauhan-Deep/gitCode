@@ -28,15 +28,21 @@
                 {{ node.title }}
             </qx-label>
             <div class="node-path">
-                <qx-label>
+                <qx-label *ngIf="loadSearchData; else showQXPFileName">
                     {{ node?.origin?.pathURL }}
                 </qx-label>
+                <ng-template #showQXPFileName>
+                    <qx-label (click)="openFileLocation(node)">
+                        {{ node?.origin?.qxpFileName }}
+                    </qx-label>
+                </ng-template>
                 <img class="status-icon" *ngIf="node.origin?.fileConverted != undefined"
                     [src]="node?.origin?.fileConverted ? 'assets/images/ico-check-circle.png' : 'assets/images/ico-error-triangle.png'" />
             </div>
         </span>
     </div>
 </ng-template>
+
 <ng-template #filesProcessed>
     <div class="header-container">
         <qx-label class="heading-text">
@@ -58,6 +64,7 @@
         </div>
     </div>
 </ng-template>
+
 <ng-template #filesSearched>
     <div class="header-container">
         <qx-checkbox #allFilesCheckboxButton class="heading-text" [disabled]=false [name]="filesCountString"
