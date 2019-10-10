@@ -5,7 +5,7 @@ import { QxTreeComponent, QxTreeNodeOptions, QxTreeEmitEvent, QxCheckboxComponen
 
 import { TranslateService } from '../../translate/translate.service';
 import { FileListDataService } from '../../Service/file-list-data.service';
-import { QXIDMLFilesListData, QXIDFileDetailsData } from '../../Interface/idml-interface';
+import { QXIDMLFilesListData, QXIDFileDetailsData, IDMLImportXTID } from '../../Interface/idml-interface';
 
 @Component({
   selector: 'qrk-list-view',
@@ -88,12 +88,12 @@ export class ListViewComponent implements OnInit, OnDestroy {
         title: childItem.name, key: 'indd_' + index,
         pathURL: childItem.path, isLeaf: true
       };
-      if (childItem.status === true) {
-        this.numOfPassedFiles++;
+      if (!this.loadSearchData) {
+        childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
         treeNodeChildrenData.fileConverted = childItem.status;
-      } else if (childItem.status === false) {
-        this.numOfFailedFiles++;
-        treeNodeChildrenData.fileConverted = childItem.status;
+        if (childItem.qxpPath !== undefined) {
+          treeNodeChildrenData.qxpFileName = childItem.qxpPath.replace(childItem.path, '');
+        }
       }
       inddTreeNodeChildren.push(treeNodeChildrenData);
     });
@@ -104,9 +104,12 @@ export class ListViewComponent implements OnInit, OnDestroy {
         title: childItem.name, key: 'idml_' + index,
         pathURL: childItem.path, isLeaf: true
       };
-      if (childItem.status) {
+      if (!this.loadSearchData) {
         childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
         treeNodeChildrenData.fileConverted = childItem.status;
+        if (childItem.qxpPath !== undefined) {
+          treeNodeChildrenData.qxpFileName = childItem.qxpPath.replace(childItem.path, '');
+        }
       }
       idmlTreeNodeChildren.push(treeNodeChildrenData);
     });
@@ -144,6 +147,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
     if (state === CheckboxState.CHECKED) {
       this.checkedKeysList.push(this.inddKey);
       this.checkedKeysList.push(this.idmlKey);
+    }
+  }
+
+  openFileLocation(treeNode: QxTreeNodeOptions) {
+    if ((window as any).XPress) {
+      const data = { qxpFilePath: (treeNode.origin.pathURL + treeNode.origin.qxpFileName) };
+
+      (window as any).XPress.api.invokeXTApi(IDMLImportXTID, 'IDMLImportBrowseToFile', data);
     }
   }
 
@@ -207,5 +218,82 @@ export class ListViewComponent implements OnInit, OnDestroy {
     if ((window as any).XPress) {
       (window as any).app.dialogs.closeDialog();
     }
+  }
+
+  exportReport() {
+    let folderUrl: string;
+
+    if ((window as any).app) {
+      const titleStr: string = this.translateService.localize('ids-lbl-conversion-results');
+      const acceptTypes = [{ types: ['html'], typesName: 'HTML' }];
+
+      folderUrl = (window as any).app.dialogs.saveFileDialog(titleStr, '', acceptTypes, 'Results.html');
+    }
+
+    if (folderUrl != null) {
+      let htmlStr = '<HTML><HEAD><TITLE>Conversion Results</TITLE></HEAD>';
+
+      htmlStr += '<BODY BGCOLOR="#FFFFFF">';
+      htmlStr += '<H1>' + this.translateService.localize('ids-lbl-conversion-results') + '</H1>';
+
+      htmlStr += '<UL>';
+      htmlStr += '<LI><B>' + this.totalNumOfFiles + ' ' + this.translateService.localize('ids-lbl-files-processed') + '</B></LI>';
+      htmlStr += '<LI><B>' + this.numOfPassedFiles + ' ' + this.translateService.localize('ids-lbl-files-passed') + '</B></LI>';
+      htmlStr += '<LI><B>' + this.numOfFailedFiles + ' ' + this.translateService.localize('ids-lbl-files-failed') + '</B></LI>';
+      htmlStr += '</UL>';
+      htmlStr += '<hr>';
+
+      htmlStr += this.generateReportForCollection();
+      htmlStr += '</BODY>';
+      htmlStr += '</HTML>';
+      if ((window as any).fs) {
+        (window as any).fs.writeFileSync(folderUrl, htmlStr);
+      }
+    }
+  }
+
+  generateReportForCollection(): string {
+    const treeFilesEnumData: QXIDMLFilesListData = this.fileListService.getFileList();
+    let itemStr = '';
+
+    treeFilesEnumData.idml.forEach((childItem, index): void => {
+      if (childItem.status === true) {
+        itemStr += '<h3>';
+        itemStr += '<p><FONT color=green>' + this.translateService.localize('ids-lbl-success') + ': ' + '</FONT>' + childItem.name + '</p>';
+        itemStr += '</h3>';
+        itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
+        itemStr += '<p><B>' + this.translateService.localize('ids-lbl-destination') + ': </B>' + childItem.qxpPath + '</p>';
+        itemStr += '<hr width=85%>';
+      } else {
+        itemStr += '<h3>';
+        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed')
+          + ': ' + '</FONT>' + childItem.name + '</p>';
+        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed') + '</FONT></p>';
+        itemStr += '</h3>';
+        itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
+        itemStr += '<hr width=85%>';
+      }
+    });
+
+    treeFilesEnumData.indd.forEach((childItem, index): void => {
+      if (childItem.status === true) {
+        itemStr += '<h3>';
+        itemStr += '<p><FONT color=green>' + this.translateService.localize('ids-lbl-success')
+          + ': ' + '</FONT>' + childItem.name + '</p>';
+        itemStr += '</h3>';
+        itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
+        itemStr += '<p><B>' + this.translateService.localize('ids-lbl-destination') + ': </B>' + childItem.qxpPath + '</p>';
+        itemStr += '<hr width=85%>';
+      } else {
+        itemStr += '<h3>';
+        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed')
+          + ': ' + '</FONT>' + childItem.name + '</p>';
+        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed') + '</FONT></p>';
+        itemStr += '</h3>';
+        itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
+        itemStr += '<hr width=85%>';
+      }
+    });
+    return itemStr;
   }
 }
