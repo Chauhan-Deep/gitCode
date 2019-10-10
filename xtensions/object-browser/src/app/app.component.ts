@@ -18,10 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('qxTreeComponent', { static: false }) qxTreeComponent: QxTreeComponent;
 
-<<<<<<< HEAD
   mInterval;
-=======
->>>>>>> develop
   mlayoutID = -1;
   mCurPage = -1;
   isDirty = false;
