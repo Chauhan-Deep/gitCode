@@ -116,6 +116,11 @@ export class FileListDataService {
         this.convertFilesList.indd[this.convertINDDIndex] = object;
         this.convertINDDIndex++;
 
+        if (this.isConversionCancelled) {
+          this.convertIDMLIndex = 0;
+          this.changeDocumentsStatusForCancelled();
+          return;
+        }
         if (this.convertINDDIndex < this.convertFilesList.indd.length) {
           isIndd = true;
           this.convertInDesignFileToQXP(isIndd, this.convertINDDIndex);
@@ -144,12 +149,10 @@ export class FileListDataService {
       this.convertIDMLIndex++;
 
       if (this.isConversionCancelled) {
-        this.shouldRespondWithSearchData = false;
-        this.showFinalResultEvent.emit();
+        this.changeDocumentsStatusForCancelled();
         return;
       }
       if (this.convertIDMLIndex < this.convertFilesList.idml.length) {
-        this.convertIDMLIndex = 0;
         this.convertInDesignFileToQXP(false, this.convertIDMLIndex);
       } else {
         this.showFinalResultsScreen();
@@ -164,17 +167,16 @@ export class FileListDataService {
       const idmlIndex = this.convertIDMLIndex;
 
       this.convertFilesList.indd.forEach((childItem, index): void => {
-        if (index > inddIndex) {
+        if (index >= inddIndex) {
           childItem.status = false;
         }
       });
       this.convertFilesList.idml.forEach((childItem, index): void => {
-        if (index > idmlIndex) {
+        if (index >= idmlIndex) {
           childItem.status = false;
         }
       });
-      this.shouldRespondWithSearchData = false;
-      this.showFinalResultEvent.emit();
+      this.showFinalResultsScreen();
       return;
     }
   }
