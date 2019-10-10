@@ -91,6 +91,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
       if (!this.loadSearchData) {
         childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
         treeNodeChildrenData.fileConverted = childItem.status;
+        treeNodeChildrenData.qxpFileName = childItem.qxpPath.replace(childItem.path, '');
       }
       inddTreeNodeChildren.push(treeNodeChildrenData);
     });
@@ -104,6 +105,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
       if (!this.loadSearchData) {
         childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
         treeNodeChildrenData.fileConverted = childItem.status;
+        treeNodeChildrenData.qxpFileName = childItem.qxpPath.replace(childItem.path, '');
       }
       idmlTreeNodeChildren.push(treeNodeChildrenData);
     });
@@ -141,6 +143,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
     if (state === CheckboxState.CHECKED) {
       this.checkedKeysList.push(this.inddKey);
       this.checkedKeysList.push(this.idmlKey);
+    }
+  }
+
+  openFileLocation(treeNode: QxTreeNodeOptions) {
+    if ((window as any).XPress) {
+      const data = { qxpFilePath: (treeNode.origin.pathURL + treeNode.origin.qxpFileName) };
+
+      (window as any).XPress.api.invokeXTApi(1146372945, 'IDMLImportBrowseToFile', data);
     }
   }
 
