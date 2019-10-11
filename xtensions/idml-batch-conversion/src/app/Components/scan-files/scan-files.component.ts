@@ -111,4 +111,10 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.hideHeading = true;
     this.showFilesListView = true;
   }
+
+  closeWindow() {
+    if ((window as any).XPress) {
+      (window as any).app.dialogs.closeDialog();
+    }
+  }
 }
