@@ -86,7 +86,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     treeFilesEnumData.indd.forEach((childItem, index): void => {
       const treeNodeChildrenData: QxTreeNodeOptions = {
         title: childItem.name, key: 'indd_' + index,
-        pathURL: childItem.path, isLeaf: true
+        pathURL: childItem.path, isLeaf: true, selectable: false
       };
       if (!this.loadSearchData) {
         childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
@@ -102,7 +102,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     treeFilesEnumData.idml.forEach((childItem, index): void => {
       const treeNodeChildrenData: QxTreeNodeOptions = {
         title: childItem.name, key: 'idml_' + index,
-        pathURL: childItem.path, isLeaf: true
+        pathURL: childItem.path, isLeaf: true, selectable: false
       };
       if (!this.loadSearchData) {
         childItem.status ? this.numOfPassedFiles++ : this.numOfFailedFiles++;
@@ -116,14 +116,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
     let customNodeStr = '(' + inddTreeNodeChildren.length + ')';
     let treeNodeData: QxTreeNodeOptions = {
-      title: 'INDD' + customNodeStr, key: this.inddKey,
+      title: 'INDD' + customNodeStr, key: this.inddKey, selectable: false,
       expanded: true, pathURL: '', children: inddTreeNodeChildren
     };
 
     tempTreeNodeOptions.push(treeNodeData);
     customNodeStr = '(' + idmlTreeNodeChildren.length + ')';
     treeNodeData = {
-      title: 'IDML' + customNodeStr, key: this.idmlKey,
+      title: 'IDML' + customNodeStr, key: this.idmlKey, selectable: false,
       expanded: true, pathURL: '', children: idmlTreeNodeChildren
     };
 
