@@ -4,7 +4,7 @@
     <qx-divider></qx-divider>
     <div class="tree-view">
         <qx-tree #qxTreeComponent [qxData]="treeNodeOptions" [qxCheckedKeys]="checkedKeysList"
-            [qxCheckable]="allowCheckable" [qxTreeTemplate]="qxResultTreeTemplate">
+            [qxCheckable]="allowCheckable" [qxShowDivider]=true [qxTreeTemplate]="qxResultTreeTemplate">
         </qx-tree>
     </div>
 </div>
@@ -18,10 +18,8 @@
             [showBackground]='true' [isSelected]='false'
             (click)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
         </qx-button>
-        <qx-button [disabled]="false" class="button" *ngIf="!loadSearchData"
-            [name]="('ids-btn-lbl-export' | translate)"
-            [showBackground]='true' [isSelected]='false'
-            (click)="exportReport()">
+        <qx-button [disabled]="false" class="button" *ngIf="!loadSearchData" [name]="('ids-btn-lbl-export' | translate)"
+            [showBackground]='true' [isSelected]='false' (click)="exportReport()">
         </qx-button>
     </div>
 </qrk-footer>
