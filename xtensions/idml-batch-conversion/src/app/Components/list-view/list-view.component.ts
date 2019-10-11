@@ -34,6 +34,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   numOfFailedFiles: number;
   inddKey: string;
   idmlKey: string;
+  conversionDisabled: boolean;
 
   constructor(
     private translateService: TranslateService,
@@ -48,6 +49,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.idmlKey = 'idml';
     this.numOfFailedFiles = 0;
     this.numOfPassedFiles = 0;
+    this.conversionDisabled = true;
     this.fileListService.shouldRespondWithSearchData = this.loadSearchData;
     this.subscribeEvents();
     if (this.loadSearchData) {
@@ -295,5 +297,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
       }
     });
     return itemStr;
+  }
+  qxCheck() {
+    const checkedKeys: any[] = this.qxTreeComponent.getCheckedNodeList();
+
+    if (checkedKeys != null && checkedKeys.length > 0) {
+      this.conversionDisabled = false;
+    } else {
+      this.conversionDisabled = true;
+    }
   }
 }
