@@ -2,3 +2,7 @@
 body {
     background: var(--palette-background-color, #666666);
 }
+
+.qx-tree li .qx-tree-node.qx-tree-node-highlight:hover {
+    background: #{'rgba(var(--selected-row-color), 0.5)'};
+}

@@ -18,7 +18,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('qxTreeComponent', { static: false }) qxTreeComponent: QxTreeComponent;
 
+
   mInterval;
+
   mlayoutID = -1;
   mCurPage = -1;
   isDirty = false;
@@ -186,6 +188,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   PeriodicRefresh(text: string): void {
+    console.log('PeriodicRefresh');
+
     const layout = (window as any).app.activeLayout();
     const layoutID = layout.layoutID;
     const curPage = layout.getCurrentPage();
@@ -199,7 +203,16 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isDirty = true;
       this.mlayoutID = layoutID;
     }
-    console.log('PeriodicRefresh');
+    const selectedboxes = (window as any).app.activeBoxes();
+    if (selectedboxes) {
+      const boxId = (window as any).app.activeBoxes().boxIDs[0];
+      if (boxId) {
+        const rootBoxID = (window as any).app.components.flex.getFlexRoot(boxId);
+        if (this.boxNodes[0].key !== rootBoxID) {
+          this.isDirty = true;
+        }
+      }
+    }
 
     if (this.isDirty) {
       console.log('PeriodicRefresh is Dirty');
@@ -223,7 +236,7 @@ export class AppComponent implements OnInit, OnDestroy {
               behavior: 'smooth',
               block: 'center',
               inline: 'center'
-          });
+            });
           }
         }
       }
@@ -292,22 +305,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-     if (this.mInterval) {
-       clearInterval(this.mInterval);
-     }
-     console.log('ngOnDestroy...');
+    if (this.mInterval) {
+      clearInterval(this.mInterval);
+    }
+    console.log('ngOnDestroy...');
 
 
-     (window as any).XPress.deRegisterQXPCallbackHandler(0, 668, this._XT_CHGDOCSTAT);
-     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1542, this._XT_FLEX_POST_ATTATCH_ITEM);
-     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1544, this._XT_FLEX_POST_DETATCH_ITEM);
-     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1548, this._XT_FLEX_POST_REPARENT_ITEM);
-     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1188, this._XT_POST_DELETEITEM);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 668, this._XT_CHGDOCSTAT);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1542, this._XT_FLEX_POST_ATTATCH_ITEM);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1544, this._XT_FLEX_POST_DETATCH_ITEM);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1548, this._XT_FLEX_POST_REPARENT_ITEM);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1188, this._XT_POST_DELETEITEM);
     // undo/Redo
-     (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
-     (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
     // open/close doc
-     (window as any).XPress.deRegisterQXPCallbackHandler(0, 46, this._XT_OPEN);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 46, this._XT_OPEN);
   }
 
   // Drag-Drop
@@ -327,10 +340,13 @@ export class AppComponent implements OnInit, OnDestroy {
     // console.log("OnDragLeave=" + event.node.title);
   }
   OnDrop(event: QxTreeEmitEvent): void {
+    const UNDO_REPARENTFLEXITEM = 113;
+    const NOSUBUNDO = 0;
+
     console.log('OnDrop=' + event.node.title);
     if (this.isDragStarted) {
       const draggedParentboxID = (window as any).app.components.flex.getFlexParent(this.draggedNodeKey);
-
+      (window as any).app.undo.beginCompoundUndo(UNDO_REPARENTFLEXITEM, NOSUBUNDO);
       if (event.node.isLeaf) {
         const isContainerBox = (window as any).app.components.flex.isFlexContainer(event.node.key);
         if (isContainerBox) {
@@ -347,10 +363,25 @@ export class AppComponent implements OnInit, OnDestroy {
         (window as any).app.components.flex.flexRemoveChild(draggedParentboxID, this.draggedNodeKey);
         (window as any).app.components.flex.flexAddChild(event.node.key, this.draggedNodeKey, 0);
       }
+      (window as any).app.undo.endCompoundUndo();
+      this.SelectBox(this.draggedNodeKey);
     }
   }
   OnDragEnd(event: QxTreeEmitEvent): void {
     console.log('OnDragEnd=' + event.node.title);
     this.isDragStarted = false;
+  }
+
+  SelectBox(key: string) {
+    (window as any).app.components.flex.setcurbox(key);
+    const boxID = (window as any).app.activeBoxes().boxIDs[0];
+    if (boxID) {
+      const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+      if (node) {
+        if (node.isSelectable) {
+          node.isSelected = true;
+        }
+      }
+    }
   }
 }
