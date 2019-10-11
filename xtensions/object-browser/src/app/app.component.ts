@@ -188,6 +188,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   PeriodicRefresh(text: string): void {
+    console.log('PeriodicRefresh');
+
     const layout = (window as any).app.activeLayout();
     const layoutID = layout.layoutID;
     const curPage = layout.getCurrentPage();
@@ -201,7 +203,16 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isDirty = true;
       this.mlayoutID = layoutID;
     }
-    console.log('PeriodicRefresh');
+    const selectedboxes = (window as any).app.activeBoxes();
+    if (selectedboxes) {
+      const boxId = (window as any).app.activeBoxes().boxIDs[0];
+      if (boxId) {
+        const rootBoxID = (window as any).app.components.flex.getFlexRoot(boxId);
+        if (this.boxNodes[0].key !== rootBoxID) {
+          this.isDirty = true;
+        }
+      }
+    }
 
     if (this.isDirty) {
       console.log('PeriodicRefresh is Dirty');
@@ -353,10 +364,24 @@ export class AppComponent implements OnInit, OnDestroy {
         (window as any).app.components.flex.flexAddChild(event.node.key, this.draggedNodeKey, 0);
       }
       (window as any).app.undo.endCompoundUndo();
+      this.SelectBox(this.draggedNodeKey);
     }
   }
   OnDragEnd(event: QxTreeEmitEvent): void {
     console.log('OnDragEnd=' + event.node.title);
     this.isDragStarted = false;
+  }
+
+  SelectBox(key: string) {
+    (window as any).app.components.flex.setcurbox(key);
+    const boxID = (window as any).app.activeBoxes().boxIDs[0];
+    if (boxID) {
+      const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
+      if (node) {
+        if (node.isSelectable) {
+          node.isSelected = true;
+        }
+      }
+    }
   }
 }
