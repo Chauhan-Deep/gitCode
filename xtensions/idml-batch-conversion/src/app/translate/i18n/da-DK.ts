@@ -2,7 +2,7 @@
 export const LANG_DA_DK_NAME = 'da-DK';
 
 export const LANG_DA_DK_TRANS = {
-    'ids-btnlabel-continue': 'Continue >',
+    'ids-btnlabel-continue': 'Continue',
     'ids-btnlabel-skip': 'Skip',
     'ids-btnlabel-run-smart-scan': 'Run Smart Scan',
     'ids-btnlabel-manually-select-files': 'Manually Select Files',
