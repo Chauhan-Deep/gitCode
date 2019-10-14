@@ -256,7 +256,7 @@ export class AppComponent implements OnInit, OnDestroy {
         = (window as any).XPress.registerQXPCallbackHandler(0, 1548, this.PostReparentItemCallBackHandler.bind(this));
       this._XT_POST_DELETEITEM
         = (window as any).XPress.registerQXPCallbackHandler(0, 1188, this.PostDeleteItemCallBackHandler.bind(this));
-        this._XT_FLEX_POST_REORDER_ITEM
+      this._XT_FLEX_POST_REORDER_ITEM
         = (window as any).XPress.registerQXPCallbackHandler(0, 1546, this.PostReorderItemCallBackHandler.bind(this));
 
       // Undo/Redo
@@ -325,7 +325,7 @@ export class AppComponent implements OnInit, OnDestroy {
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1548, this._XT_FLEX_POST_REPARENT_ITEM);
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1188, this._XT_POST_DELETEITEM);
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 1546, this._XT_FLEX_POST_REORDER_ITEM);
-    
+
     // undo/Redo
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
