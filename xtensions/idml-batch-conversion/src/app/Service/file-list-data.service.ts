@@ -200,24 +200,14 @@ export class FileListDataService {
     this.convertFilesList.indd = data.indd;
     this.convertFilesList.idml = data.idml;
 
-    let object: QXIDFileDetailsData;
-
     if ((window as any).XPress) {
       this.fileConversionIndex++;
       if (!this.ignoreINDDFiles && this.convertFilesList.indd.length > 0) {
         this.convertINDDIndex = 0;
-        object = this.convertFilesList.indd[this.convertINDDIndex];
-        object.overwrite = this.shouldOverwriteExisting;
-        this.updateProgressBarEvent.emit(object);
-        (window as any).XPress.api.invokeXTApi(1146372945,
-          'IDMLImportConvertINDDAndIDMLFilesToQXP', object, this.inddConversionResultHandler.bind(this));
+        this.convertInDesignFileToQXP(true, this.convertINDDIndex);
       } else if (this.convertFilesList.idml.length > 0) {
         this.convertIDMLIndex = 0;
-        object = this.convertFilesList.idml[this.convertIDMLIndex];
-        object.overwrite = this.shouldOverwriteExisting;
-        this.updateProgressBarEvent.emit(object);
-        (window as any).XPress.api.invokeXTApi(1146372945,
-          'IDMLImportConvertINDDAndIDMLFilesToQXP', object, this.idmlConversionResultHandler.bind(this));
+        this.convertInDesignFileToQXP(false, this.convertIDMLIndex);
       } else {
         this.showFinalResultsScreen();
       }
