@@ -87,7 +87,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
   }
 
   getFilesSearchResultHandler() {
-    this.headingText = this.translateService.localize('ids-lbl-files-found');
+    this.headingText = this.translateService.localize('ids-lbl-scancompleted');
 
     this.hideScanView = true;
     this.hideImage = true;
