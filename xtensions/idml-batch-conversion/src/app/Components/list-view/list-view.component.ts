@@ -308,7 +308,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
       this.conversionDisabled = false;
       if (checkedKeys.length === 2) {
         const isINDD: boolean = (checkedKeys[0].key === 'indd') || (checkedKeys[1].key === 'indd');
-        const isIDML: boolean = (checkedKeys[0].key === 'idml') || (checkedKeys[1].key === 'idml');;
+        const isIDML: boolean = (checkedKeys[0].key === 'idml') || (checkedKeys[1].key === 'idml');
 
         allSelected = isINDD && isIDML;
       }
