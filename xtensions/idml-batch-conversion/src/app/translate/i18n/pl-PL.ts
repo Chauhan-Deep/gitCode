@@ -2,7 +2,7 @@
 export const LANG_PL_PL_NAME = 'pl-PL';
 
 export const LANG_PL_PL_TRANS = {
-    'ids-btnlabel-continue': 'Continue >',
+    'ids-btnlabel-continue': 'Continue',
     'ids-btnlabel-skip': 'Skip',
     'ids-btnlabel-run-smart-scan': 'Run Smart Scan',
     'ids-btnlabel-manually-select-files': 'Manually Select Files',

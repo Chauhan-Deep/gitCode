@@ -2,7 +2,7 @@
 export const LANG_ZH_CHS_NAME = 'zh-CHS';
 
 export const LANG_ZH_CHS_TRANS = {
-    'ids-btnlabel-continue': 'Continue >',
+    'ids-btnlabel-continue': 'Continue',
     'ids-btnlabel-skip': 'Skip',
     'ids-btnlabel-run-smart-scan': 'Run Smart Scan',
     'ids-btnlabel-manually-select-files': 'Manually Select Files',
