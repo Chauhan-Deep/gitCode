@@ -150,7 +150,9 @@ export class ListViewComponent implements OnInit, OnDestroy {
     if (state === CheckboxState.CHECKED) {
       this.checkedKeysList.push(this.inddKey);
       this.checkedKeysList.push(this.idmlKey);
-      this.conversionDisabled = false;
+      if (this.numOfFiles > 0) {
+        this.conversionDisabled = false;
+      }
     }
   }
 
@@ -303,7 +305,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   qxCheck() {
     const checkedKeys: any[] = this.qxTreeComponent.getCheckedNodeList();
 
-    if (checkedKeys != null && checkedKeys.length > 0) {
+    if ((this.numOfFiles > 0) && (checkedKeys != null) && (checkedKeys.length > 0)) {
       let allSelected = false;
       this.conversionDisabled = false;
       if (checkedKeys.length === 2) {
