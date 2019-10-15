@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 body {
     background: var(--palette-background-color, #666666);
+    overflow-x: hidden;
 }
 
 .qx-tree li .qx-tree-node.qx-tree-node-highlight:hover {
-    background: #{'rgba(var(--selected-row-color), 0.5)'};
+    background: #{'rgba(var(--selected-row-color-value), 0.5)'};
 }
