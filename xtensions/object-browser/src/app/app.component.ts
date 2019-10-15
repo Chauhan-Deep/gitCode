@@ -103,12 +103,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   OnRightCLick(event: QxTreeEmitEvent): void {
     console.log('-OnRightCLick-');
-    (window as any).app.components.flex.setcurbox(event.node.key);
-    if (event.node.isSelectable) {
-      event.node.isSelected = true;
-    }
+    // (window as any).app.components.flex.setcurbox(event.node.key);
+    // if (event.node.isSelectable) {
+    //   event.node.isSelected = true;
+    // }
 
-    (window as any).app.components.flex.showContextMenu(event.node.key, event.event.screenX, event.event.screenY);
+    // (window as any).app.components.flex.showContextMenu(event.node.key, event.event.screenX, event.event.screenY);
   }
 
 

@@ -54,7 +54,6 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.showFilesListView = false;
     this.showResultWindow = false;
     this.hideScanView = true;
-    this.showCancelButton = true;
   }
 
   performSystemScan() {
@@ -93,6 +92,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.hideImage = true;
     this.showResultWindow = true;
     this.showFilesListView = false;
+    this.showCancelButton = true;
 
     this.fileListService.shouldRespondWithSearchData = true;
     this.numOfFiles = this.fileListService.getFilesCount();
