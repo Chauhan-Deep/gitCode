@@ -146,9 +146,13 @@ export class ListViewComponent implements OnInit, OnDestroy {
     const state = this.allFilesCheckboxButton.state;
 
     this.checkedKeysList = [];
+    this.conversionDisabled = true;
     if (state === CheckboxState.CHECKED) {
       this.checkedKeysList.push(this.inddKey);
       this.checkedKeysList.push(this.idmlKey);
+      if (this.numOfFiles > 0) {
+        this.conversionDisabled = false;
+      }
     }
   }
 
@@ -301,9 +305,18 @@ export class ListViewComponent implements OnInit, OnDestroy {
   qxCheck() {
     const checkedKeys: any[] = this.qxTreeComponent.getCheckedNodeList();
 
-    if (checkedKeys != null && checkedKeys.length > 0) {
+    if ((this.numOfFiles > 0) && (checkedKeys != null) && (checkedKeys.length > 0)) {
+      let allSelected = false;
       this.conversionDisabled = false;
+      if (checkedKeys.length === 2) {
+        const isINDD: boolean = (checkedKeys[0].key === 'indd') || (checkedKeys[1].key === 'indd');
+        const isIDML: boolean = (checkedKeys[0].key === 'idml') || (checkedKeys[1].key === 'idml');
+
+        allSelected = isINDD && isIDML;
+      }
+      this.allFilesCheckboxButton.state = allSelected ? CheckboxState.CHECKED : CheckboxState.INDETERMINATE;
     } else {
+      this.allFilesCheckboxButton.state = CheckboxState.UNCHECKED;
       this.conversionDisabled = true;
     }
   }

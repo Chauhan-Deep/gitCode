@@ -54,7 +54,6 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.showFilesListView = false;
     this.showResultWindow = false;
     this.hideScanView = true;
-    this.showCancelButton = true;
   }
 
   performSystemScan() {
@@ -87,12 +86,13 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
   }
 
   getFilesSearchResultHandler() {
-    this.headingText = this.translateService.localize('ids-lbl-files-found');
+    this.headingText = this.translateService.localize('ids-lbl-scancompleted');
 
     this.hideScanView = true;
     this.hideImage = true;
     this.showResultWindow = true;
     this.showFilesListView = false;
+    this.showCancelButton = true;
 
     this.fileListService.shouldRespondWithSearchData = true;
     this.numOfFiles = this.fileListService.getFilesCount();
