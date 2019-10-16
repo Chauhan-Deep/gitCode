@@ -5,6 +5,7 @@ import { QxTreeComponent, QxTreeNodeOptions, QxTreeEmitEvent, QxCheckboxComponen
 
 import { TranslateService } from '../../translate/translate.service';
 import { FileListDataService } from '../../Service/file-list-data.service';
+import { CloseDialogService } from '../../Service/close-dialog.service';
 import { QXIDMLFilesListData, QXIDFileDetailsData, IDMLImportXTID } from '../../Interface/idml-interface';
 
 @Component({
@@ -39,7 +40,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
   constructor(
     private translateService: TranslateService,
     private changeDetectorRef: ChangeDetectorRef,
-    private fileListService: FileListDataService) { }
+    private fileListService: FileListDataService,
+    private closeDialogService: CloseDialogService) { }
 
   ngOnInit() {
     this.selectAllState = CheckboxState.UNCHECKED;
@@ -74,6 +76,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   initializeDataForConvertedFiles(): void {
     this.loadSearchData = false;
+    this.closeDialogService.showClose();
     this.initializeTreeData();
   }
   initializeTreeData(): void {
@@ -221,9 +224,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   closeDialog() {
-    if ((window as any).XPress) {
-      (window as any).app.dialogs.closeDialog();
-    }
+    this.closeDialogService.closeDialog();
   }
 
   exportReport() {

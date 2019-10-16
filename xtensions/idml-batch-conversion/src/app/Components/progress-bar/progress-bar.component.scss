@@ -16,10 +16,12 @@
     height: 70vh;
     width: 95vw;
     align-items: left;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 .progress-label {
     justify-content: left !important;
     text-align: left !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
