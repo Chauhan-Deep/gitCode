@@ -12,7 +12,7 @@
 </div>
 <qrk-footer>
     <div class="horizontal-container">
-        <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-skip' | translate"
+        <qx-button class="button" [disabled]="false" [name]="cancelString ? ('ids-btnlabel-cancel' | translate) : ('ids-btnlabel-skip' | translate)"
             [showBackground]='true' (qxClick)="closeDialog()">
         </qx-button>
         <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-continue' | translate"
