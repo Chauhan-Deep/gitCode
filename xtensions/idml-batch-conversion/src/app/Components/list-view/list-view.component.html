@@ -16,10 +16,10 @@
         <qx-button [disabled]="loadSearchData ? conversionDisabled : false" class="button" [focus]='true'
             [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
             [showBackground]='true' [isSelected]='false'
-            (click)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
+            (qxClick)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
         </qx-button>
         <qx-button [disabled]="false" class="button" *ngIf="!loadSearchData" [name]="('ids-btn-lbl-export' | translate)"
-            [showBackground]='true' [isSelected]='false' (click)="exportReport()">
+            [showBackground]='true' [isSelected]='false' (qxClick)="exportReport()">
         </qx-button>
     </div>
 </qrk-footer>

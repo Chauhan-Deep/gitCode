@@ -13,11 +13,11 @@
         </qx-label>
         <div class="vertical-container">
             <qx-button class="file-scan-button" [disabled]="false" [name]="'ids-btnlabel-run-smart-scan' | translate"
-                [focus]='true' [showBackground]='true' (click)="performSystemScan()">
+                [focus]='true' [showBackground]='true' (qxClick)="performSystemScan()">
             </qx-button>
             <qx-button class="file-scan-button" [disabled]="false"
                 [name]="'ids-btnlabel-manually-select-files' | translate"
-                [showBackground]='true' (click)="performCustomScan()">
+                [showBackground]='true' (qxClick)="performCustomScan()">
             </qx-button>
         </div>
     </div>
@@ -53,7 +53,7 @@
     <qrk-footer *ngIf="!showFilesListView">
         <div class="horizontal-container" *ngIf="showCancelButton">
             <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate"
-                [showBackground]='true' [isSelected]='false' (click)='closeWindow()'>
+                [showBackground]='true' [isSelected]='false' (qxClick)='closeWindow()'>
             </qx-button>
         </div>
     </qrk-footer>
