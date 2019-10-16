@@ -30,7 +30,7 @@
             <qx-label class="node-name">
                 {{ node.title }}
             </qx-label>
-            <div class="node-path">
+            <div class="node-path" [style.display]="node.origin?.fileConverted != undefined ? 'flex' : 'inline-block'">
                 <qx-label *ngIf="loadSearchData; else showQXPFileName">
                     {{ node?.origin?.pathURL }}
                 </qx-label>
