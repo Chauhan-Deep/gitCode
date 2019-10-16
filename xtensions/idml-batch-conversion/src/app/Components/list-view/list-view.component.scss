@@ -12,11 +12,6 @@
     display: inline-block;
 }
 
-.qx-tree-node {
-    height: 27px;
-    line-height: 27px;
-}
-
 .qx-tree-title {
     font-size: 9pt;
     display: flex;
@@ -54,6 +49,8 @@
 
 .tree-view {
     overflow-y: auto;
+    height: 100%;
+    background-color: var(--active-area-background-color);
 }
 
 .header-container {

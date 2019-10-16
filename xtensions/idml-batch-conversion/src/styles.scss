@@ -7,6 +7,12 @@ body {
     width: 100vw;
     margin: 0;
     overflow: hidden;
+    background-color: var(--dialog-background-color);
+}
+
+.qx-tree {
+    overflow-x: hidden;
+    height: 100%;
 }
 
 .qx-button-focus {
