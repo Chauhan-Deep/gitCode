@@ -18,3 +18,15 @@
 ::ng-deep .mat-horizontal-stepper-content{
     height: 100%;
 }
+
+.close {
+    position: absolute;
+    margin-top: 1px;
+    margin-right: 1px;
+    width: 20pt;
+    height: 20pt;
+    top: 0;
+    right: 0;
+    -webkit-user-drag: none;
+    user-select: none;
+}
