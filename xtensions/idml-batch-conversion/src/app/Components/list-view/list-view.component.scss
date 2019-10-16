@@ -12,10 +12,18 @@
     display: inline-block;
 }
 
-.qx-tree-title {
-    width: 80%;
-    font-size: 9pt;
+.qx-tree-node {
+    height: 27px;
+    line-height: 27px;
+}
 
+.qx-tree-title {
+    font-size: 9pt;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
     .file-icon {
         margin-right: 6pt;
     }
@@ -23,18 +31,24 @@
     .node-name {
         text-align: left;
         vertical-align: middle;
+        margin-right: 6pt;
     }
     
     .node-path {
-        margin-right: 7.5pt;
-        float: right;
+        text-overflow: ellipsis;
         overflow: hidden;
-        text-overflow: ellipsis; 
+
+        margin-left: auto;
+        flex-basis: 50%;
+
+        qx-label {
+            display: inline;
+        }
     }
 
     .status-icon {
-        margin-left: 15pt;
-        margin-right: 3.75pt;
+        margin-left: auto;
+        display: flex;
     }
 }
 
@@ -46,15 +60,16 @@
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    justify-content: baseline;
+    justify-content: flex-start;
     width: 100%;
     padding: 3.755pt;
-    margin-bottom: 4pt;
+    margin-bottom: 20px;
+    margin-top: 20px;
     .file-status {
-        display: flex;
         margin-right: 14.5pt;
         font-size: 10pt;
-
+        display: flex;
+        
         .inline-right-align-text {
             margin-left: 5pt;
             font-size: 10pt;
@@ -65,17 +80,16 @@
         margin-right: 30pt;
     }
     .file-status-container {
-        position: absolute;
-        right: 14.5pt;
         display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
+        justify-content: space-around;
+        width: 100%;
+        // right: 14.5pt;
     }
 }
 
 img {
-    height: 13pt; 
-    width: 13pt;
+    height: 12pt; 
+    width: 12pt;
 }
 
 .horizontal-container {

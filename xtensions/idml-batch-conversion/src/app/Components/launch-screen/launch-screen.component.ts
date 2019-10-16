@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 
+import { CloseDialogService } from '../../Service/close-dialog.service';
+
 @Component({
   selector: 'qrk-launch-screen',
   templateUrl: './launch-screen.component.html',
@@ -9,7 +11,7 @@ import { MatStepper } from '@angular/material/stepper';
 export class LaunchScreenComponent implements OnInit {
   @Input() stepper: MatStepper;
 
-  constructor() { }
+  constructor(private closeDialogService: CloseDialogService) { }
 
   ngOnInit() {
   }
@@ -20,8 +22,6 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   closeDialog() {
-    if ((window as any).XPress) {
-      (window as any).app.dialogs.closeDialog();
-    }
+    this.closeDialogService.closeDialog();
   }
 }

@@ -2,8 +2,8 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 
 import { TranslateService } from '../../translate/translate.service';
-import { QXIDMLFilesListData } from '../../Interface/idml-interface';
 import { FileListDataService } from 'src/app/Service/file-list-data.service';
+import { CloseDialogService } from 'src/app/Service/close-dialog.service';
 
 @Component({
   selector: 'qrk-scan-files',
@@ -28,7 +28,8 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
 
   constructor(
     private translateService: TranslateService,
-    private fileListService: FileListDataService) { }
+    private fileListService: FileListDataService,
+    private closeDialogService: CloseDialogService) { }
 
   ngOnInit() {
     this.headingText = this.translateService.localize('ids-lbl-scan-files-maintext');
@@ -47,18 +48,21 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.unsubscribeEvents();
   }
 
-  showSearchingWindow() {
+  showSearchingWindow(folderUrl: string) {
     this.headingText = this.translateService.localize('ids-lbl-searching-files');
     this.imgSrc = 'assets\\images\\img-searching.png';
 
     this.showFilesListView = false;
     this.showResultWindow = false;
     this.hideScanView = true;
+    this.closeDialogService.hideClose();
+    setTimeout(() => {
+      this.fileListService.callXPressFileEnumeration(folderUrl);
+    }, 1000);
   }
 
   performSystemScan() {
-    this.showSearchingWindow();
-    this.fileListService.callXPressFileEnumeration('');
+    this.showSearchingWindow('');
   }
 
   performCustomScan() {
@@ -68,8 +72,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
       folderUrl = (window as any).app.dialogs.openFolderDialog();
     }
     if (folderUrl != null) {
-      this.showSearchingWindow();
-      this.fileListService.callXPressFileEnumeration(folderUrl);
+      this.showSearchingWindow(folderUrl);
     }
   }
 
@@ -94,6 +97,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.showFilesListView = false;
     this.showCancelButton = true;
 
+    this.closeDialogService.showClose();
     this.fileListService.shouldRespondWithSearchData = true;
     this.numOfFiles = this.fileListService.getFilesCount();
     this.numOfINDDFiles = this.fileListService.getINDDFilesCount();
@@ -113,8 +117,6 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
   }
 
   closeWindow() {
-    if ((window as any).XPress) {
-      (window as any).app.dialogs.closeDialog();
-    }
+    this.closeDialogService.closeDialog();
   }
 }

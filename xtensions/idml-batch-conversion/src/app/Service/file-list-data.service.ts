@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 import { TranslateService } from '../translate/translate.service';
 
-import { QXIDMLFilesListData, QXIDFileDetailsData, ErrorCode, IDMLImportXTID } from '../Interface/idml-interface';
+import { QXIDMLFilesListData, ErrorCode, IDMLImportXTID } from '../Interface/idml-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -71,11 +71,14 @@ export class FileListDataService {
 
     object.overwrite = this.shouldOverwriteExisting;
     this.updateProgressBarEvent.emit(object);
-    if ((window as any).XPress) {
-      (window as any).XPress.api.invokeXTApi(IDMLImportXTID,
-        'IDMLImportConvertINDDAndIDMLFilesToQXP', object,
-        isIndd ? this.inddConversionResultHandler.bind(this) : this.idmlConversionResultHandler.bind(this));
-    }
+    // update progress bar screen then after 1000 milli-seconds call XPress file conversion API.
+    setTimeout(() => {
+      if ((window as any).XPress) {
+        (window as any).XPress.api.invokeXTApi(IDMLImportXTID,
+          'IDMLImportConvertINDDAndIDMLFilesToQXP', object,
+          isIndd ? this.inddConversionResultHandler.bind(this) : this.idmlConversionResultHandler.bind(this));
+      }
+    }, 500);
   }
 
   showFinalResultsScreen() {
