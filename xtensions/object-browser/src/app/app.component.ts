@@ -33,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private _XT_FLEX_POST_REPARENT_ITEM: number;
   private _XT_POST_DELETEITEM: number;
   private _XT_OPEN: number;
+  private _XT_CLOSE: number;
   private _XT_UNDO: number;
   private _XT_REDO: number;
   private _XT_FLEX_POST_REORDER_ITEM: number;
@@ -267,6 +268,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
       // open/Close doc
       this._XT_OPEN = (window as any).XPress.registerQXPCallbackHandler(0, 46, this.OpenDocCallBackHandler.bind(this));
+      this._XT_CLOSE = (window as any).XPress.registerQXPCallbackHandler(0, 32, this.CloseDocCallBackHandler.bind(this));
     }
     this.mInterval = setInterval(() => this.PeriodicRefresh('Repeat'), 10);
   }
@@ -311,6 +313,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   OpenDocCallBackHandler(response) {
     console.log('OpenDocCallBackHandler' + response);
+    this.isDirty = true;
+  }
+  CloseDocCallBackHandler(response) {
+    console.log('CloseDocCallBackHandler' + response);
     this.isDirty = true;
   }
 
