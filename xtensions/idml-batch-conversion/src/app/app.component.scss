@@ -5,6 +5,10 @@
     height: 100%;
     width: 100%;
     user-select: none;
+
+    .scan-files-content {
+        height: 100%;
+    }
 }
 
 ::ng-deep .mat-horizontal-stepper-header-container {

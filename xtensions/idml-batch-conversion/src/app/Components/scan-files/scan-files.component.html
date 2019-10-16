@@ -23,7 +23,7 @@
     </div>
     <ng-container *ngTemplateOutlet="filesResultView"></ng-container>
 </div>
-<div *ngIf="showFilesListView">
+<div *ngIf="showFilesListView" class="list-view">
     <qrk-list-view [loadSearchData]=true [allowCheckable]=true [stepper]="stepper"></qrk-list-view>
 </div>
 <ng-container *ngTemplateOutlet="windowFooterView"></ng-container>
