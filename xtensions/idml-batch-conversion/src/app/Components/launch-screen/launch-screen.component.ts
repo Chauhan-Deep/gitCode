@@ -10,10 +10,11 @@ import { CloseDialogService } from '../../Service/close-dialog.service';
 })
 export class LaunchScreenComponent implements OnInit {
   @Input() stepper: MatStepper;
-
+  cancelString = false;
   constructor(private closeDialogService: CloseDialogService) { }
 
   ngOnInit() {
+    this.cancelString = this.getQueryString('calledFromMenu');
   }
 
   nextScreen() {
@@ -23,5 +24,12 @@ export class LaunchScreenComponent implements OnInit {
 
   closeDialog() {
     this.closeDialogService.closeDialog();
+  }
+  getQueryString(field) {
+    const url = new URL(window.location.href);
+    const queryString = url.search;
+    const searchParams = new URLSearchParams(queryString);
+
+    return (searchParams.get(field) === 'true');
   }
 }
