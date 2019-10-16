@@ -210,7 +210,9 @@ export class AppComponent implements OnInit, OnDestroy {
       if (boxId) {
         const rootBoxID = (window as any).app.components.flex.getFlexRoot(boxId);
         if (this.boxNodes[0].key !== rootBoxID) {
-          this.isDirty = true;
+          if (this.boxNodes[0].title !== ' ') {
+            this.isDirty = true;
+          }
         }
       }
     }
