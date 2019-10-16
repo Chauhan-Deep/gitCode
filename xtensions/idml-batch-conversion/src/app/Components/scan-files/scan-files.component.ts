@@ -48,7 +48,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.unsubscribeEvents();
   }
 
-  showSearchingWindow() {
+  showSearchingWindow(folderUrl: string) {
     this.headingText = this.translateService.localize('ids-lbl-searching-files');
     this.imgSrc = 'assets\\images\\img-searching.png';
 
@@ -56,11 +56,13 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.showResultWindow = false;
     this.hideScanView = true;
     this.closeDialogService.hideClose();
+    setTimeout(() => {
+      this.fileListService.callXPressFileEnumeration(folderUrl);
+    }, 1000);
   }
 
   performSystemScan() {
-    this.showSearchingWindow();
-    this.fileListService.callXPressFileEnumeration('');
+    this.showSearchingWindow('');
   }
 
   performCustomScan() {
@@ -70,8 +72,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
       folderUrl = (window as any).app.dialogs.openFolderDialog();
     }
     if (folderUrl != null) {
-      this.showSearchingWindow();
-      this.fileListService.callXPressFileEnumeration(folderUrl);
+      this.showSearchingWindow(folderUrl);
     }
   }
 
