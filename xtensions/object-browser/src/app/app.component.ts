@@ -231,12 +231,17 @@ export class AppComponent implements OnInit, OnDestroy {
       const boxID = (window as any).app.activeBoxes().boxIDs[0];
 
       if (boxID) {
-        const node = this.qxTreeComponent.getTreeNodeByKey(boxID);
-        if (node) {
-          if (node.isSelectable && !node.isSelected) {
-            node.isSelected = true;
-            const dcom = (node.component);
-            (dcom as any).elRef.nativeElement.scrollIntoView({
+        const selectedNode = this.qxTreeComponent.getTreeNodeByKey(boxID);
+        if (selectedNode) {
+          if (selectedNode.isSelectable && !selectedNode.isSelected) {
+              let node = selectedNode;
+              while (node != null) {
+                node.isExpanded = true;
+                node = node.parentNode;
+              }
+              selectedNode.isSelected = true;
+              const dcom = (selectedNode.component);
+              (dcom as any).elRef.nativeElement.scrollIntoView({
               behavior: 'smooth',
               block: 'center',
               inline: 'center'
