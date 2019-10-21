@@ -27,6 +27,14 @@
         text-align: left;
         vertical-align: middle;
         margin-right: 6pt;
+        flex-basis: 50%;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        qx-label {
+            display: inline;
+        }
     }
     
     .node-path {
