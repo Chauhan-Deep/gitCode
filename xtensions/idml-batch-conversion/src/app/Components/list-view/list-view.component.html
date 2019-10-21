@@ -27,15 +27,15 @@
     <div class="qx-tree-node-content-wrapper">
         <span class="qx-tree-title">
             <img class="file-icon" *ngIf="node.isLeaf" src="assets/images/ico-file.svg" />
-            <qx-label class="node-name">
+            <qx-label class="node-name" [title]="node.title">
                 {{ node.title }}
             </qx-label>
             <div class="node-path" [style.display]="node.origin?.fileConverted != undefined ? 'flex' : 'inline-block'">
-                <qx-label *ngIf="loadSearchData; else showQXPFileName">
+                <qx-label *ngIf="loadSearchData; else showQXPFileName" [title]="node?.origin?.pathURL">
                     {{ node?.origin?.pathURL }}
                 </qx-label>
                 <ng-template #showQXPFileName>
-                    <qx-label (click)="openFileLocation(node)">
+                    <qx-label (click)="openFileLocation(node)" [title]="node?.origin?.qxpFileName">
                         {{ node?.origin?.qxpFileName }}
                     </qx-label>
                 </ng-template>
