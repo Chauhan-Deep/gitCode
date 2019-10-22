@@ -15,8 +15,14 @@ body {
     height: 100%;
 }
 
+.qx-button-background {
+    border: 1px solid;
+    border-color: var(--separator-line-color);
+    background-color: var(--button-background-color);
+}
+
 .qx-button-focus {
-    background-color: #385ed0;
+    background-color: var(--focus-button-background-color);
 }
 
 .background-container {    
