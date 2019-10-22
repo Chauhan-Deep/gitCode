@@ -5,6 +5,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class CloseDialogService {
   private canCloseDialog = true;
+  private closeApiCalled = false;
   showHideCloseButtonEvent = new EventEmitter<any>();
 
   constructor() { }
@@ -28,7 +29,8 @@ export class CloseDialogService {
   }
 
   closeDialog() {
-    if (this.canCloseDialog && (window as any).XPress) {
+    if (this.canCloseDialog && !this.closeApiCalled && (window as any).XPress) {
+      this.closeApiCalled = true;
       (window as any).app.dialogs.closeDialog();
     }
   }
