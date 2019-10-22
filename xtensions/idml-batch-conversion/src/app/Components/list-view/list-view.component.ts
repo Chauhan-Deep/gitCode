@@ -207,20 +207,17 @@ export class ListViewComponent implements OnInit, OnDestroy {
         (window as any).app.constants.alertTypes.kNoteAlert);
     }
 
-    if (!allowInDesignUsage) {
-      // Remove In-Design files and convert only IDML files.
-      inddCheckedNodes = [];
+    if (allowInDesignUsage) {
+      const data = {
+        indd: inddCheckedNodes, idml: idmlCheckedNodes
+      };
+      const overwrite: boolean = this.overwriteCheckboxButton.state === CheckboxState.CHECKED;
+
+      this.stepper.selected.completed = true;
+      this.stepper.next();
+      this.fileListService.shouldOverwriteExisting = overwrite;
+      this.fileListService.callXPressFileConversion(data);
     }
-
-    const data = {
-      indd: inddCheckedNodes, idml: idmlCheckedNodes
-    };
-    const overwrite: boolean = this.overwriteCheckboxButton.state === CheckboxState.CHECKED;
-
-    this.stepper.selected.completed = true;
-    this.stepper.next();
-    this.fileListService.shouldOverwriteExisting = overwrite;
-    this.fileListService.callXPressFileConversion(data);
   }
 
   closeDialog() {

@@ -96,7 +96,7 @@ export class FileListDataService {
       this.ignoreINDDFiles = true;
 
       if (jsonResponse.status === ErrorCode.ERR_INDESIGN_NOTFOUND) {
-        this.ignoreINDDFiles = (window as any).app.dialogs.confirm(this.translateService.localize('ids-alert-indesign-not-available'),
+        (window as any).app.dialogs.alert(this.translateService.localize('ids-alert-indesign-not-available'),
           (window as any).app.constants.alertTypes.kNoteAlert);
       }
 
