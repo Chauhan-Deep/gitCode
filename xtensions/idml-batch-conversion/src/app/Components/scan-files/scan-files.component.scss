@@ -14,12 +14,13 @@
         border-radius: 4px;
         padding: 10px;
         min-width: 200px;
+        display: flex;
+        flex-direction: column;
 
         .sub-text {
             font-size: 60px;
             font-weight: 300;
-            line-height: 60px;
-            display: block;
+            line-height: 70px;
             margin: 20px 0;
         }
     
@@ -27,6 +28,7 @@
             text-align: center; 
             display: flex;
             justify-content: space-between;
+            margin: 20px 0;
     
             .button-text {
                 background: #666;
