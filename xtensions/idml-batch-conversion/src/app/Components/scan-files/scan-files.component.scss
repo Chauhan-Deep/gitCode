@@ -47,3 +47,7 @@
 .list-view {
     height: 100%;
 }
+
+::ng-deep .mat-spinner circle {
+    stroke: #385ed0;
+}

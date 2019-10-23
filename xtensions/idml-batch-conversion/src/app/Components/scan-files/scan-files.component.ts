@@ -25,6 +25,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
   numOfINDDFiles: number;
   numOfIDMLFiles: number;
   showFilesListView: boolean;
+  showSearchingView: boolean;
 
   constructor(
     private translateService: TranslateService,
@@ -41,6 +42,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.showResultWindow = false;
     this.showFilesListView = false;
     this.hideHeading = false;
+    this.showSearchingView = false;
     this.subscribeEvents();
   }
 
@@ -55,6 +57,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.showFilesListView = false;
     this.showResultWindow = false;
     this.hideScanView = true;
+    this.showSearchingView = true;
     this.closeDialogService.hideClose();
     setTimeout(() => {
       this.fileListService.callXPressFileEnumeration(folderUrl);
@@ -96,6 +99,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.showResultWindow = true;
     this.showFilesListView = false;
     this.showCancelButton = true;
+    this.showSearchingView = false;
 
     this.closeDialogService.showClose();
     this.fileListService.shouldRespondWithSearchData = true;
@@ -114,6 +118,7 @@ export class ScanFilesComponent implements OnInit, OnDestroy {
     this.showResultWindow = false;
     this.hideHeading = true;
     this.showFilesListView = true;
+    this.showSearchingView = false;
   }
 
   closeWindow() {
