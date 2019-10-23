@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatStepperModule, MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 
 import { QxModule } from '@quark/xpressng';
 
@@ -36,6 +35,7 @@ import { CloseDialogService } from './Service/close-dialog.service';
     BrowserAnimationsModule,
     MatStepperModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     QxModule,
     AppRoutingModule,
   ],

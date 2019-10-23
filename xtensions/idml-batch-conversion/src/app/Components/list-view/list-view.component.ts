@@ -174,7 +174,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     const treeFilesEnumData = this.fileListService.getFileList();
     let idmlCheckedNodes: QXIDFileDetailsData[] = [];
     let inddCheckedNodes: QXIDFileDetailsData[] = [];
-    let allowInDesignUsage: boolean;
+    let allowFileConversion = true;
 
     checkedKeyNodes.forEach((node): void => {
       const options: QxTreeNodeOptions = node.origin;
@@ -203,11 +203,11 @@ export class ListViewComponent implements OnInit, OnDestroy {
     });
 
     if (inddCheckedNodes.length > 0 && ((window as any).app)) {
-      allowInDesignUsage = (window as any).app.dialogs.confirm(this.translateService.localize('ids-alert-indesign-usage'),
+      allowFileConversion = (window as any).app.dialogs.confirm(this.translateService.localize('ids-alert-indesign-usage'),
         (window as any).app.constants.alertTypes.kNoteAlert);
     }
 
-    if (allowInDesignUsage) {
+    if (allowFileConversion) {
       const data = {
         indd: inddCheckedNodes, idml: idmlCheckedNodes
       };
