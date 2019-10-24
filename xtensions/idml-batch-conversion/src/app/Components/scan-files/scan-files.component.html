@@ -5,12 +5,7 @@
         </qx-label>
     </div>
     <div class="centered-container" [ngClass]="{ 'hidden': hideImage }">
-        <div *ngIf="!showSearchingView; else showSpinner">
-            <img class="image" [src]="imgSrc" />
-        </div>
-        <ng-template #showSpinner>
-            <mat-spinner diameter="60" strokeWidth="5"></mat-spinner>
-        </ng-template>
+        <img class="image" [src]="imgSrc" />
     </div>
     <div class="internal-text-container" [ngClass]="{ 'hidden': hideScanView }">
         <qx-label class="sub-text" [multiline]="true">
