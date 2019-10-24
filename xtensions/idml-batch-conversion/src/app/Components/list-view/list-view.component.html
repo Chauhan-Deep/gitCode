@@ -13,7 +13,7 @@
         <qx-checkbox class="footer-content" #overWriteCheckboxButton *ngIf="loadSearchData"
             [name]="'ids-lbl-overwrite-existing' | translate">
         </qx-checkbox>
-        <qx-button [disabled]="loadSearchData ? conversionDisabled : false" class="button" [focus]='true'
+        <qx-button [disabled]="loadSearchData ? conversionDisabled : false" class="button" [focus]="loadSearchData ? !conversionDisabled : true"
             [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
             [showBackground]='true' [isSelected]='false'
             (qxClick)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
