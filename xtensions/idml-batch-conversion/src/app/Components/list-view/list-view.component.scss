@@ -45,13 +45,18 @@
         flex-basis: 50%;
 
         qx-label {
+            text-overflow: ellipsis;
+            margin-left: auto;
+            overflow: hidden;
+    
             display: inline;
         }
     }
 
     .status-icon {
-        margin-left: auto;
+        margin-left: 12pt;
         display: flex;
+        align-self: center;
     }
 }
 
