@@ -119,14 +119,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
       idmlTreeNodeChildren.push(treeNodeChildrenData);
     });
 
-    let customNodeStr = '(' + inddTreeNodeChildren.length + ')';
+    let customNodeStr = ' (' + inddTreeNodeChildren.length + ')';
     let treeNodeData: QxTreeNodeOptions = {
       title: 'INDD' + customNodeStr, key: this.inddKey, selectable: false,
       expanded: true, pathURL: '', children: inddTreeNodeChildren
     };
 
     tempTreeNodeOptions.push(treeNodeData);
-    customNodeStr = '(' + idmlTreeNodeChildren.length + ')';
+    customNodeStr = ' (' + idmlTreeNodeChildren.length + ')';
     treeNodeData = {
       title: 'IDML' + customNodeStr, key: this.idmlKey, selectable: false,
       expanded: true, pathURL: '', children: idmlTreeNodeChildren
@@ -230,18 +230,20 @@ export class ListViewComponent implements OnInit, OnDestroy {
     if ((window as any).app) {
       const titleStr: string = this.translateService.localize('ids-lbl-conversion-results');
       const acceptTypes = [{ types: ['html'], typesName: 'HTML' }];
+      const fileName = titleStr + '.html';
 
-      folderUrl = (window as any).app.dialogs.saveFileDialog(titleStr, '', acceptTypes, 'Results.html');
+      folderUrl = (window as any).app.dialogs.saveFileDialog(titleStr, '', acceptTypes, fileName);
     }
 
     if (folderUrl != null) {
-      let htmlStr = '<HTML><HEAD><TITLE>Conversion Results</TITLE></HEAD>';
+      let htmlStr = '<HTML><HEAD><TITLE>';
+
+      htmlStr += this.translateService.localize('ids-lbl-conversion-results') + '</TITLE></HEAD>';
 
       htmlStr += '<BODY BGCOLOR="#FFFFFF">';
       htmlStr += '<H1>' + this.translateService.localize('ids-lbl-conversion-results') + '</H1>';
 
       htmlStr += '<UL>';
-      htmlStr += '<LI><B>' + this.totalNumOfFiles + ' ' + this.translateService.localize('ids-lbl-files-processed') + '</B></LI>';
       htmlStr += '<LI><B>' + this.numOfPassedFiles + ' ' + this.translateService.localize('ids-lbl-files-passed') + '</B></LI>';
       htmlStr += '<LI><B>' + this.numOfFailedFiles + ' ' + this.translateService.localize('ids-lbl-files-failed') + '</B></LI>';
       htmlStr += '</UL>';
@@ -267,15 +269,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
         itemStr += '</h3>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-destination') + ': </B>' + childItem.qxpPath + '</p>';
-        itemStr += '<hr width=85%>';
+        itemStr += '<hr width=100%>';
       } else {
         itemStr += '<h3>';
-        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed')
+        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-failed')
           + ': ' + '</FONT>' + childItem.name + '</p>';
-        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed') + '</FONT></p>';
         itemStr += '</h3>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
-        itemStr += '<hr width=85%>';
+        itemStr += '<hr width=100%>';
       }
     });
 
@@ -287,15 +288,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
         itemStr += '</h3>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-destination') + ': </B>' + childItem.qxpPath + '</p>';
-        itemStr += '<hr width=85%>';
+        itemStr += '<hr width=100%>';
       } else {
         itemStr += '<h3>';
-        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed')
+        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-failed')
           + ': ' + '</FONT>' + childItem.name + '</p>';
-        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed') + '</FONT></p>';
         itemStr += '</h3>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
-        itemStr += '<hr width=85%>';
+        itemStr += '<hr width=100%>';
       }
     });
     return itemStr;

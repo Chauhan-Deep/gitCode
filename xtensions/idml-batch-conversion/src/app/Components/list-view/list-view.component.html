@@ -4,7 +4,8 @@
     <qx-divider></qx-divider>
     <div class="tree-view">
         <qx-tree #qxTreeComponent [qxData]="treeNodeOptions" [qxCheckedKeys]="checkedKeysList"
-            [qxCheckable]="allowCheckable" [qxShowDivider]=true [qxTreeTemplate]="qxResultTreeTemplate" (qxCheckBoxChange)="qxCheck()">
+            [qxCheckable]="allowCheckable" [qxShowDivider]=true [qxTreeTemplate]="qxResultTreeTemplate"
+            (qxCheckBoxChange)="qxCheck()">
         </qx-tree>
     </div>
 </div>
@@ -13,7 +14,8 @@
         <qx-checkbox class="footer-content" #overWriteCheckboxButton *ngIf="loadSearchData"
             [name]="'ids-lbl-overwrite-existing' | translate">
         </qx-checkbox>
-        <qx-button [disabled]="loadSearchData ? conversionDisabled : false" class="button" [focus]="loadSearchData ? !conversionDisabled : true"
+        <qx-button [disabled]="loadSearchData ? conversionDisabled : false" class="button"
+            [focus]="loadSearchData ? !conversionDisabled : true"
             [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
             [showBackground]='true' [isSelected]='false'
             (qxClick)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
@@ -74,10 +76,10 @@
             [state]="selectAllState" [showElipsis]=false (stateChange)="onSelectAllChange($event)"
             style="font-size: 30px"></qx-checkbox>
         <qx-label class="file-status">
-            {{'ids-lbl-indd-files' | translate}}({{numOfINDDFiles}})
+            {{'ids-lbl-indd-files' | translate}} ({{numOfINDDFiles}})
         </qx-label>
         <qx-label class="file-status">
-            {{'ids-lbl-idml-files' | translate}}({{numOfIDMLFiles}})
+            {{'ids-lbl-idml-files' | translate}} ({{numOfIDMLFiles}})
         </qx-label>
     </div>
 </ng-template>
