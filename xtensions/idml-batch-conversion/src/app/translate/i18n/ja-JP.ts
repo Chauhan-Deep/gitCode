@@ -36,6 +36,7 @@ export const LANG_JA_JP_TRANS = {
     'ids-lbl-indd-files': 'INDDファイル',
     'ids-lbl-idml-files': 'IDMLファイル',
     'ids-lbl-scancompleted': 'スキャンが完了しました',
+    'ids-lbl-failed': '失敗：',
     'ids-alert-indesign-usage': 'ファイルによってはAdobe InDesignを起動する必要がありますこの処理中はAdobe InDesignは利用できなくなります',
     'ids-alert-indesign-not-available': 'Adobe InDesign利用不可.\n選択したファイルの変換にはAdobe InDesignが必要です',
 };

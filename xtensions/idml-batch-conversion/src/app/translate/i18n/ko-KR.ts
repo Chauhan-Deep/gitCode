@@ -36,6 +36,7 @@ export const LANG_KO_KR_TRANS = {
     'ids-lbl-indd-files': 'INDD 파일',
     'ids-lbl-idml-files': 'IDML 파일',
     'ids-lbl-scancompleted': '스캔 완료',
+    'ids-lbl-failed': '실패',
     'ids-alert-indesign-usage': '일부 파일을 변환하려면 Adobe InDesign을 실행해야 합니다. 이 프로세스가 실행되는 동안 Adobe InDesign을 사용하지 않아야 합니다.',
     'ids-alert-indesign-not-available': 'Adobe InDesign을 사용할 수 없음.\nAdobe InDesign이 필요한 INDD 파일을 변환하도록 선택했습니다.',
 };

@@ -36,6 +36,7 @@ export const LANG_RU_RU_TRANS = {
     'ids-lbl-indd-files': 'Файлы INDD',
     'ids-lbl-idml-files': 'Файлы IDML',
     'ids-lbl-scancompleted': 'Сканирование завершено',
+    'ids-lbl-failed': 'Сбой',
     'ids-alert-indesign-usage': 'Для некоторых файлов требуется, чтобы была запущена программа Adobe InDesign. Убедитесь в том, что пока выполняется этот процесс, программа Adobe InDesign не используется.',
     'ids-alert-indesign-not-available': 'Программа Adobe InDesign не доступна.\nДля преобразования выбраны файлы INDD, которым требуется Adobe InDesign.',
 };

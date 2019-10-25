@@ -102,11 +102,12 @@ export class FileListDataService {
 
       if (this.ignoreINDDFiles) {
         this.fileConversionIndex = this.convertFilesList.indd.length;
-        this.convertINDDIndex = this.convertFilesList.indd.length;
-        this.convertFilesList.indd.forEach((childItem): void => {
-          childItem.status = false;
+        this.convertFilesList.indd.forEach((childItem, index): void => {
+          if (index >= this.convertINDDIndex) {
+            childItem.status = false;
+          }
         });
-
+        this.convertINDDIndex = this.convertFilesList.indd.length;
         this.callXPressFileConversion(this.convertFilesList);
       }
     } else {
