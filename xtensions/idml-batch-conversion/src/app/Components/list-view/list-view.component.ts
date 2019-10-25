@@ -119,14 +119,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
       idmlTreeNodeChildren.push(treeNodeChildrenData);
     });
 
-    let customNodeStr = '(' + inddTreeNodeChildren.length + ')';
+    let customNodeStr = ' (' + inddTreeNodeChildren.length + ')';
     let treeNodeData: QxTreeNodeOptions = {
       title: 'INDD' + customNodeStr, key: this.inddKey, selectable: false,
       expanded: true, pathURL: '', children: inddTreeNodeChildren
     };
 
     tempTreeNodeOptions.push(treeNodeData);
-    customNodeStr = '(' + idmlTreeNodeChildren.length + ')';
+    customNodeStr = ' (' + idmlTreeNodeChildren.length + ')';
     treeNodeData = {
       title: 'IDML' + customNodeStr, key: this.idmlKey, selectable: false,
       expanded: true, pathURL: '', children: idmlTreeNodeChildren
