@@ -36,6 +36,7 @@ export const LANG_DA_DK_TRANS = {
     'ids-lbl-indd-files': 'INDD-filer',
     'ids-lbl-idml-files': 'IDML-filer',
     'ids-lbl-scancompleted': 'Scanning udført',
+    'ids-lbl-failed': 'Fejl',
     'ids-alert-indesign-usage': 'Nogle filer kræver, at Adobe InDesign startes. Sørg for, at Adobe InDesign ikke er i brug, mens denne proces kører.',
     'ids-alert-indesign-not-available': 'Adobe InDesign ikke tilgængelig.\nDu har valgt at konvertere INDD-filer, som kræver Adobe InDesign.',
 };

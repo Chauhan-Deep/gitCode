@@ -36,6 +36,7 @@ export const LANG_PT_BR_TRANS = {
     'ids-lbl-indd-files': 'arquivos INDD',
     'ids-lbl-idml-files': 'arquivos IDML',
     'ids-lbl-scancompleted': 'Verificação Concluída',
+    'ids-lbl-failed': 'Failure',
     'ids-alert-indesign-usage': 'Alguns arquivos necessitam que o Adobe InDesign seja iniciado. O Adobe InDesign não deve ser usado enquanto este processo estiver em execução.',
     'ids-alert-indesign-not-available': 'O Adobe InDesign não está disponível.\nVocê selecionou arquivos INDD para conversão e isso requer o Adobe InDesign.',
 };
