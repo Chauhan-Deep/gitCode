@@ -36,6 +36,7 @@ export const LANG_NL_NL_TRANS = {
     'ids-lbl-indd-files': 'INDD-bestanden',
     'ids-lbl-idml-files': 'IDML-bestanden',
     'ids-lbl-scancompleted': 'Scan voltooid',
+    'ids-lbl-failed': 'Mislukking',
     'ids-alert-indesign-usage': 'Sommige bestanden vereisen dat Adobe InDesign wordt gestart. Zorg dat Adobe InDesign niet wordt gebruikt terwijl dit proces wordt uitgevoerd.',
     'ids-alert-indesign-not-available': 'Adobe InDesign is niet beschikbaar.\nU hebt INDD-bestanden geselecteerd die moeten worden geconverteerd, waarvoor Adobe InDesign is vereist.',
 };

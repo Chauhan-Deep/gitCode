@@ -36,6 +36,7 @@ export const LANG_ZH_CHT_TRANS = {
     'ids-lbl-indd-files': 'INDD 檔',
     'ids-lbl-idml-files': 'IDML 檔',
     'ids-lbl-scancompleted': '掃描完成',
+    'ids-lbl-failed': 'Failure',
     'ids-alert-indesign-usage': '某些檔需要啟動 Adobe InDesign。請確保在運行此流程時不使用 Adobe InDesign。',
     'ids-alert-indesign-not-available': 'Adobe InDesign 不可用.\n您選擇了要轉換的 INDD 檔，這需要 Adobe InDesign。',
 };

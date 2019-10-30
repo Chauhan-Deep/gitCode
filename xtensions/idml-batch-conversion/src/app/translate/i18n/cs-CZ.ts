@@ -36,6 +36,7 @@ export const LANG_CS_CZ_TRANS = {
     'ids-lbl-indd-files': 'Soubory INDD',
     'ids-lbl-idml-files': 'Soubory IDML',
     'ids-lbl-scancompleted': 'Scan dokončen',
+    'ids-lbl-failed': 'Failure',
     'ids-alert-indesign-usage': 'Některé soubory vyžadují spuštění Adobe InDesignu. Zajistěte, aby při běhu tohoto procesu nebyl Adobe InDesign používán.',
     'ids-alert-indesign-not-available': 'Adobe InDesign není k dispozici.\nZvolili jste soubory INDD ke konverzi, což vyžaduje Adobe InDesign.',
 };

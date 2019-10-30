@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private _XT_FLEX_POST_DETATCH_ITEM: number;
   private _XT_FLEX_POST_REPARENT_ITEM: number;
   private _XT_POST_DELETEITEM: number;
-  private _XT_OPEN: number;
+  private _XT_PROJECT_READ_COMPLETE: number;
   private _XT_CLOSE: number;
   private _XT_UNDO: number;
   private _XT_REDO: number;
@@ -197,9 +197,11 @@ export class AppComponent implements OnInit, OnDestroy {
     const curPage = layout.getCurrentPage();
 
     if (this.mlayoutID === layoutID) {
-      if (this.mCurPage !== curPage) {
-        this.isDirty = true;
-        this.mCurPage = curPage;
+      if (layoutID !== -1) {
+        if (this.mCurPage !== curPage) {
+          this.isDirty = true;
+          this.mCurPage = curPage;
+        }
       }
     } else {
       this.isDirty = true;
@@ -240,10 +242,10 @@ export class AppComponent implements OnInit, OnDestroy {
               selectedNode.isSelected = true;
               const dcom = (selectedNode.component);
               (dcom as any).elRef.nativeElement.scrollIntoView({
-              behavior: 'smooth',
-              block: 'center',
-              inline: 'center'
-            });
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center'
+              });
           }
         }
       }
@@ -270,7 +272,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this._XT_REDO = (window as any).XPress.registerQXPCallbackHandler(0, 489, this.RedoItemCallBackHandler.bind(this));
 
       // open/Close doc
-      this._XT_OPEN = (window as any).XPress.registerQXPCallbackHandler(0, 46, this.OpenDocCallBackHandler.bind(this));
+      this._XT_PROJECT_READ_COMPLETE = (window as any).XPress.registerQXPCallbackHandler(0, 1065, this.OpenDocCallBackHandler.bind(this));
       this._XT_CLOSE = (window as any).XPress.registerQXPCallbackHandler(0, 32, this.CloseDocCallBackHandler.bind(this));
     }
     this.mInterval = setInterval(() => this.PeriodicRefresh('Repeat'), 10);
@@ -341,7 +343,7 @@ export class AppComponent implements OnInit, OnDestroy {
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 489, this._XT_REDO);
     // open/close doc
-    (window as any).XPress.deRegisterQXPCallbackHandler(0, 46, this._XT_OPEN);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1065, this._XT_PROJECT_READ_COMPLETE);
   }
 
   // Drag-Drop

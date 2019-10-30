@@ -36,6 +36,7 @@ export const LANG_FI_FI_TRANS = {
     'ids-lbl-indd-files': 'INDD-tiedostot',
     'ids-lbl-idml-files': 'IDML-tiedostot',
     'ids-lbl-scancompleted': 'Skannaus valmis',
+    'ids-lbl-failed': 'Failure',
     'ids-alert-indesign-usage': 'Osa tiedostoista edellyttää Adobe InDesignin käynnistämistä. Varmista, ettei Adobe InDesignia käytetä prosessin aikana.',
     'ids-alert-indesign-not-available': 'Adobe InDesign ei käytettävissä.\nOlet valinnut muunnettavaksi INDD-tiedostoja, mikä edellyttää Adobe InDesign -ohjelmaa.',
 };

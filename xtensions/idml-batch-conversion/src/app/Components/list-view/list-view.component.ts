@@ -119,14 +119,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
       idmlTreeNodeChildren.push(treeNodeChildrenData);
     });
 
-    let customNodeStr = '(' + inddTreeNodeChildren.length + ')';
+    let customNodeStr = ' (' + inddTreeNodeChildren.length + ')';
     let treeNodeData: QxTreeNodeOptions = {
       title: 'INDD' + customNodeStr, key: this.inddKey, selectable: false,
       expanded: true, pathURL: '', children: inddTreeNodeChildren
     };
 
     tempTreeNodeOptions.push(treeNodeData);
-    customNodeStr = '(' + idmlTreeNodeChildren.length + ')';
+    customNodeStr = ' (' + idmlTreeNodeChildren.length + ')';
     treeNodeData = {
       title: 'IDML' + customNodeStr, key: this.idmlKey, selectable: false,
       expanded: true, pathURL: '', children: idmlTreeNodeChildren
@@ -174,7 +174,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     const treeFilesEnumData = this.fileListService.getFileList();
     let idmlCheckedNodes: QXIDFileDetailsData[] = [];
     let inddCheckedNodes: QXIDFileDetailsData[] = [];
-    let allowInDesignUsage: boolean;
+    let allowFileConversion = true;
 
     checkedKeyNodes.forEach((node): void => {
       const options: QxTreeNodeOptions = node.origin;
@@ -203,24 +203,21 @@ export class ListViewComponent implements OnInit, OnDestroy {
     });
 
     if (inddCheckedNodes.length > 0 && ((window as any).app)) {
-      allowInDesignUsage = (window as any).app.dialogs.confirm(this.translateService.localize('ids-alert-indesign-usage'),
+      allowFileConversion = (window as any).app.dialogs.confirm(this.translateService.localize('ids-alert-indesign-usage'),
         (window as any).app.constants.alertTypes.kNoteAlert);
     }
 
-    if (!allowInDesignUsage) {
-      // Remove In-Design files and convert only IDML files.
-      inddCheckedNodes = [];
+    if (allowFileConversion) {
+      const data = {
+        indd: inddCheckedNodes, idml: idmlCheckedNodes
+      };
+      const overwrite: boolean = this.overwriteCheckboxButton.state === CheckboxState.CHECKED;
+
+      this.stepper.selected.completed = true;
+      this.stepper.next();
+      this.fileListService.shouldOverwriteExisting = overwrite;
+      this.fileListService.callXPressFileConversion(data);
     }
-
-    const data = {
-      indd: inddCheckedNodes, idml: idmlCheckedNodes
-    };
-    const overwrite: boolean = this.overwriteCheckboxButton.state === CheckboxState.CHECKED;
-
-    this.stepper.selected.completed = true;
-    this.stepper.next();
-    this.fileListService.shouldOverwriteExisting = overwrite;
-    this.fileListService.callXPressFileConversion(data);
   }
 
   closeDialog() {
@@ -233,18 +230,20 @@ export class ListViewComponent implements OnInit, OnDestroy {
     if ((window as any).app) {
       const titleStr: string = this.translateService.localize('ids-lbl-conversion-results');
       const acceptTypes = [{ types: ['html'], typesName: 'HTML' }];
+      const fileName = titleStr + '.html';
 
-      folderUrl = (window as any).app.dialogs.saveFileDialog(titleStr, '', acceptTypes, 'Results.html');
+      folderUrl = (window as any).app.dialogs.saveFileDialog(titleStr, '', acceptTypes, fileName);
     }
 
     if (folderUrl != null) {
-      let htmlStr = '<HTML><HEAD><TITLE>Conversion Results</TITLE></HEAD>';
+      let htmlStr = '<HTML><HEAD><TITLE>';
+
+      htmlStr += this.translateService.localize('ids-lbl-conversion-results') + '</TITLE></HEAD>';
 
       htmlStr += '<BODY BGCOLOR="#FFFFFF">';
       htmlStr += '<H1>' + this.translateService.localize('ids-lbl-conversion-results') + '</H1>';
 
       htmlStr += '<UL>';
-      htmlStr += '<LI><B>' + this.totalNumOfFiles + ' ' + this.translateService.localize('ids-lbl-files-processed') + '</B></LI>';
       htmlStr += '<LI><B>' + this.numOfPassedFiles + ' ' + this.translateService.localize('ids-lbl-files-passed') + '</B></LI>';
       htmlStr += '<LI><B>' + this.numOfFailedFiles + ' ' + this.translateService.localize('ids-lbl-files-failed') + '</B></LI>';
       htmlStr += '</UL>';
@@ -270,15 +269,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
         itemStr += '</h3>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-destination') + ': </B>' + childItem.qxpPath + '</p>';
-        itemStr += '<hr width=85%>';
+        itemStr += '<hr width=100%>';
       } else {
         itemStr += '<h3>';
-        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed')
+        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-failed')
           + ': ' + '</FONT>' + childItem.name + '</p>';
-        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed') + '</FONT></p>';
         itemStr += '</h3>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
-        itemStr += '<hr width=85%>';
+        itemStr += '<hr width=100%>';
       }
     });
 
@@ -290,15 +288,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
         itemStr += '</h3>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-destination') + ': </B>' + childItem.qxpPath + '</p>';
-        itemStr += '<hr width=85%>';
+        itemStr += '<hr width=100%>';
       } else {
         itemStr += '<h3>';
-        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed')
+        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-failed')
           + ': ' + '</FONT>' + childItem.name + '</p>';
-        itemStr += '<p><FONT color=red>' + this.translateService.localize('ids-lbl-files-failed') + '</FONT></p>';
         itemStr += '</h3>';
         itemStr += '<p><B>' + this.translateService.localize('ids-lbl-source') + ': </B>' + childItem.path + childItem.name + '</p>';
-        itemStr += '<hr width=85%>';
+        itemStr += '<hr width=100%>';
       }
     });
     return itemStr;
