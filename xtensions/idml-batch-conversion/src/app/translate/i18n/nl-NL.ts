@@ -30,7 +30,7 @@ export const LANG_NL_NL_TRANS = {
     'ids-btnlabel-help': 'Help!',
     'ids-lbl-conversion-results': 'Conversieresultaten',
     'ids-btn-lbl-export': 'Rapport exporteren',
-    'ids-lbl-success': 'Success',
+    'ids-lbl-success': 'Succes',
     'ids-lbl-source': 'Bron',
     'ids-lbl-destination': 'Bestemming',
     'ids-lbl-indd-files': 'INDD-bestanden',
