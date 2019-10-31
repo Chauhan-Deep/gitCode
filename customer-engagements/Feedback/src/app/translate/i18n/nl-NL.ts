@@ -1,5 +1,6 @@
 /* tslint:disable:max-line-length */
 export const LANG_NL_NL_NAME = 'nl-NL';
+export const LANG_NL_BE_NAME = 'nl-BE';
 
 export const LANG_NL_NL_TRANS = {
     'headerMessage': 'We willen QuarkXPress altijd verbeteren.<br />Vertel ons wat u van QuarkXPress vindt.',

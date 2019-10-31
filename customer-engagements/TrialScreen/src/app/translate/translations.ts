@@ -12,7 +12,7 @@ import { LANG_IT_IT_NAME, LANG_IT_IT_TRANS } from './i18n/it-IT';
 import { LANG_JA_JP_NAME, LANG_JA_JP_TRANS } from './i18n/ja-JP';
 import { LANG_KO_KR_NAME, LANG_KO_KR_TRANS } from './i18n/ko-KR';
 import { LANG_NB_NO_NAME, LANG_NB_NO_TRANS } from './i18n/nb-NO';
-import { LANG_NL_NL_NAME, LANG_NL_NL_TRANS } from './i18n/nl-NL';
+import { LANG_NL_NL_NAME, LANG_NL_BE_NAME, LANG_NL_NL_TRANS } from './i18n/nl-NL';
 import { LANG_PL_PL_NAME, LANG_PL_PL_TRANS } from './i18n/pl-PL';
 import { LANG_PT_BR_NAME, LANG_PT_BR_TRANS } from './i18n/pt-BR';
 import { LANG_PT_PT_NAME, LANG_PT_PT_TRANS } from './i18n/pt-PT';
@@ -43,7 +43,8 @@ export const dictionary = {
     [LANG_RU_RU_NAME]: LANG_RU_RU_TRANS,
     [LANG_SV_SE_NAME]: LANG_SV_SE_TRANS,
     [LANG_ZH_CHS_NAME]: LANG_ZH_CHS_TRANS,
-    [LANG_ZH_CHT_NAME]: LANG_ZH_CHT_TRANS
+    [LANG_ZH_CHT_NAME]: LANG_ZH_CHT_TRANS,
+    [LANG_NL_BE_NAME]: LANG_NL_NL_TRANS
 };
 
 export const TRANSLATION_PROVIDERS = [
