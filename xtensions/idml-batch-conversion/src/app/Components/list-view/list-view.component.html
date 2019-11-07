@@ -4,24 +4,24 @@
     <qx-divider></qx-divider>
     <div class="tree-view">
         <qx-tree #qxTreeComponent [qxData]="treeNodeOptions" [qxCheckedKeys]="checkedKeysList"
-            [qxCheckable]="allowCheckable" [qxTreeTemplate]="qxResultTreeTemplate">
+            [qxCheckable]="allowCheckable" [qxShowDivider]=true [qxTreeTemplate]="qxResultTreeTemplate"
+            (qxCheckBoxChange)="qxCheck()">
         </qx-tree>
     </div>
 </div>
 <qrk-footer>
     <div class="horizontal-container">
         <qx-checkbox class="footer-content" #overWriteCheckboxButton *ngIf="loadSearchData"
-            [name]="'ids-lbl-overwrite-existing' | translate" [tooltip]="'ids-lbl-overwrite-existing' | translate">
+            [name]="'ids-lbl-overwrite-existing' | translate">
         </qx-checkbox>
-        <qx-button [disabled]="false" class="button" [focus]='true'
+        <qx-button [disabled]="loadSearchData ? conversionDisabled : false" class="button"
+            [focus]="loadSearchData ? !conversionDisabled : true"
             [name]="loadSearchData ? ('ids-lbl-convert-selected' | translate) : ('ids-btn-lbl-close' | translate)"
             [showBackground]='true' [isSelected]='false'
-            (click)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
+            (qxClick)="loadSearchData ? convertSelectedDocuments() : closeDialog()">
         </qx-button>
-        <qx-button [disabled]="false" class="button" *ngIf="!loadSearchData"
-            [name]="('ids-btn-lbl-export' | translate)"
-            [showBackground]='true' [isSelected]='false'
-            (click)="exportReport()">
+        <qx-button [disabled]="false" class="button" *ngIf="!loadSearchData" [name]="('ids-btn-lbl-export' | translate)"
+            [showBackground]='true' [isSelected]='false' (qxClick)="exportReport()">
         </qx-button>
     </div>
 </qrk-footer>
@@ -29,15 +29,15 @@
     <div class="qx-tree-node-content-wrapper">
         <span class="qx-tree-title">
             <img class="file-icon" *ngIf="node.isLeaf" src="assets/images/ico-file.svg" />
-            <qx-label class="node-name">
+            <qx-label class="node-name" [title]="node.title">
                 {{ node.title }}
             </qx-label>
-            <div class="node-path">
-                <qx-label *ngIf="loadSearchData; else showQXPFileName">
+            <div class="node-path" [style.display]="node.origin?.fileConverted != undefined ? 'flex' : 'inline-block'">
+                <qx-label *ngIf="loadSearchData; else showQXPFileName" [title]="node?.origin?.pathURL">
                     {{ node?.origin?.pathURL }}
                 </qx-label>
                 <ng-template #showQXPFileName>
-                    <qx-label (click)="openFileLocation(node)">
+                    <qx-label (click)="openFileLocation(node)" [title]="node?.origin?.qxpFileName">
                         {{ node?.origin?.qxpFileName }}
                     </qx-label>
                 </ng-template>
@@ -51,7 +51,7 @@
 <ng-template #filesProcessed>
     <div class="header-container">
         <qx-label class="heading-text">
-            {{totalNumOfFiles}} {{'ids-lbl-files-processed' | translate}}
+            {{'ids-lbl-files-processed' | translate}}
         </qx-label>
         <div class="file-status-container">
             <div class="file-status">
@@ -76,10 +76,10 @@
             [state]="selectAllState" [showElipsis]=false (stateChange)="onSelectAllChange($event)"
             style="font-size: 30px"></qx-checkbox>
         <qx-label class="file-status">
-            {{numOfINDDFiles}} INDD
+            {{'ids-lbl-indd-files' | translate}} ({{numOfINDDFiles}})
         </qx-label>
         <qx-label class="file-status">
-            {{numOfIDMLFiles}} IDML
+            {{'ids-lbl-idml-files' | translate}} ({{numOfIDMLFiles}})
         </qx-label>
     </div>
 </ng-template>

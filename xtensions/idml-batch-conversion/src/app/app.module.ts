@@ -19,6 +19,7 @@ import { TranslateService } from './translate/translate.service';
 import { TranslatePipe } from './translate/translate.pipe';
 import { TRANSLATION_PROVIDERS } from './translate/translations';
 import { FileListDataService } from './Service/file-list-data.service';
+import { CloseDialogService } from './Service/close-dialog.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { FileListDataService } from './Service/file-list-data.service';
     QxModule,
     AppRoutingModule,
   ],
-  providers: [[TRANSLATION_PROVIDERS, TranslateService], FileListDataService],
+  providers: [[TRANSLATION_PROVIDERS, TranslateService], FileListDataService, CloseDialogService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [

@@ -5,14 +5,6 @@
         </div>
         <div class="text-container">
             <qx-label class="sub-text" [multiline]="true">
-                {{'ids-lbl-launch-screen-maintextln1' | translate}}
-            </qx-label>
-            <qx-label class="sub-text" [multiline]="true">
-                {{'ids-lbl-launch-screen-maintextln2' | translate}}
-            </qx-label>
-        </div>
-        <div class="internal-text-container">
-            <qx-label class="sub-text" [multiline]="true">
                 {{'ids-lbl-launch-screen-subtext' | translate}}
             </qx-label>
         </div>
@@ -20,12 +12,11 @@
 </div>
 <qrk-footer>
     <div class="horizontal-container">
-        <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-skip' | translate"
-            [tooltip]="'ids-ttp-skip' | translate" [showBackground]='true' (click)="closeDialog()">
+        <qx-button class="button" [disabled]="false" [name]="cancelString ? ('ids-btnlabel-cancel' | translate) : ('ids-btnlabel-skip' | translate)"
+            [showBackground]='true' (qxClick)="closeDialog()">
         </qx-button>
         <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-continue' | translate"
-            [tooltip]="'ids-ttp-continue' | translate" [showBackground]='true' [focus]='true'
-            (click)="nextScreen()">
+           [showBackground]='true' [focus]='true' (qxClick)="nextScreen()">
         </qx-button>
     </div>
 </qrk-footer>

@@ -5,14 +5,14 @@
     </mat-step>
     <mat-step class="qx-step" editable="false" completed=false>
         <ng-template matStepLabel><b>{{'ids-step-selectfiles' | translate}}</b></ng-template>
-        <div>
+        <div class="scan-files-content">
             <qrk-scan-files [stepper]="stepper"></qrk-scan-files>
         </div>
     </mat-step>
     <mat-step class="qx-step" editable="false" completed=false>
         <ng-template matStepLabel><b>{{'ids-step-convert' | translate}}</b></ng-template>
         <div>
-            <qrk-progress-bar [stepper]="stepper" ></qrk-progress-bar>
+            <qrk-progress-bar [stepper]="stepper"></qrk-progress-bar>
         </div>
     </mat-step>
     <mat-step class="qx-step" editable="false" completed=false>
@@ -22,3 +22,7 @@
         </div>
     </mat-step>
 </mat-horizontal-stepper>
+<div *ngIf="requiresCloseButton">
+    <qx-button class="close" [icon]="'assets/images/ico-close.svg'" (qxClick)="closeWindow()">
+    </qx-button>
+</div>

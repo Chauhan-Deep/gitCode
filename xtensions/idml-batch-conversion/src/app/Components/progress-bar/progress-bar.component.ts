@@ -4,6 +4,7 @@ import { MatStepper } from '@angular/material/stepper';
 
 import { TranslateService } from '../../translate/translate.service';
 import { FileListDataService } from '../../Service/file-list-data.service';
+import { CloseDialogService } from '../../Service/close-dialog.service';
 import { QXIDFileDetailsData } from '../../Interface/idml-interface';
 
 @Component({
@@ -28,7 +29,8 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
 
   constructor(
     private translateService: TranslateService,
-    private fileListService: FileListDataService) { }
+    private fileListService: FileListDataService,
+    private closeDialogService: CloseDialogService) {}
 
   ngOnInit() {
     this.subscribeEvents();
@@ -59,6 +61,11 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
   }
 
   updateProgressBar(data: QXIDFileDetailsData) {
+
+    if (this.closeDialogService.isCloseButtonVisible()) {
+      this.closeDialogService.hideClose();
+    }
+
     this.currentFileIndex = this.fileListService.getConversionIndex();
     this.filePath = data.path + data.name;
     this.updateConversionRateMsg();
@@ -83,5 +90,9 @@ export class ProgressBarComponent implements OnInit, OnDestroy, AfterContentInit
   getProgressValue() {
     this.progressValue = ((this.currentFileIndex - 1) * 100) / this.totalFiles; // 100% conversion for n-1 files
     this.progressValue += (50 / this.totalFiles); // 50% conversion for nth file
+  }
+
+  cancelConversion() {
+    this.fileListService.cancelDocumentsConversion(true);
   }
 }
