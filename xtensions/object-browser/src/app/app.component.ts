@@ -242,12 +242,17 @@ export class AppComponent implements OnInit, OnDestroy {
                 node = node.parentNode;
               }
               selectedNode.isSelected = true;
-              const dcom = (selectedNode.component);
-              (dcom as any).elRef.nativeElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-                inline: 'center'
-              });
+              if (selectedNode.children) {
+                const dcom = (selectedNode.component);
+                (dcom as any).elRef.nativeElement.scrollIntoView(true);
+              } else {
+                const dcom = (selectedNode.component);
+                (dcom as any).elRef.nativeElement.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'center',
+                  inline: 'center'
+                });
+            }
           }
         }
       }
