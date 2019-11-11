@@ -242,20 +242,25 @@ export class AppComponent implements OnInit, OnDestroy {
                 node = node.parentNode;
               }
               selectedNode.isSelected = true;
-              if (selectedNode.children) {
-                const dcom = (selectedNode.component);
-                (dcom as any).elRef.nativeElement.scrollIntoView(true);
-              } else {
-                const dcom = (selectedNode.component);
-                (dcom as any).elRef.nativeElement.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'center',
-                  inline: 'center'
-                });
-            }
+              setTimeout(() => this.scrollToVisible(selectedNode), 0);
           }
         }
       }
+    }
+  }
+
+  scrollToVisible(selectedNode: QxTreeNode) {
+    if (selectedNode.children.length > 0) {
+      const dcom = (selectedNode.component);
+      (dcom as any).elRef.nativeElement.scrollIntoView(true);
+
+    } else {
+      const dcom = (selectedNode.component);
+      (dcom as any).elRef.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center'
+      });
     }
   }
 
@@ -286,7 +291,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   docStateChangeHandler(response) {
-    console.log('docStateChange called from XPress...' + response);
+
   }
 
   PostAttachItemCallBackHandler(response) {
