@@ -133,9 +133,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   OnMouseOver(event: QxTreeEmitEvent): void {
-    console.log('-----------------------------------OnMouseOver----------------------------------');
     (window as any).app.components.flex.highlightMouseOver(event.node.key);
-  }  
+  }
 
   // async RebuildModel() {
   //   const t0 = performance.now();
