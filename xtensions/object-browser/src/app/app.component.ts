@@ -379,30 +379,9 @@ export class AppComponent implements OnInit, OnDestroy {
     // console.log("OnDragLeave=" + event.node.title);
   }
   OnDrop(event: QxTreeEmitEvent): void {
-    const UNDO_REPARENTFLEXITEM = 113;
-    const NOSUBUNDO = 0;
-
     console.log('OnDrop=' + event.node.title);
     if (this.isDragStarted) {
-      const draggedParentboxID = (window as any).app.components.flex.getFlexParent(this.draggedNodeKey);
-      (window as any).app.undo.beginCompoundUndo(UNDO_REPARENTFLEXITEM, NOSUBUNDO);
-      if (event.node.isLeaf) {
-        const isContainerBox = (window as any).app.components.flex.isFlexContainer(event.node.key);
-        if (isContainerBox) {
-          const dropNodeParentID = (window as any).app.components.flex.getFlexParent(this.draggedNodeKey);
-          (window as any).app.components.flex.flexRemoveChild(dropNodeParentID, this.draggedNodeKey);
-          (window as any).app.components.flex.flexAddChild(event.node.key, this.draggedNodeKey, 0);
-        } else {
-          const dropNodeParentID = (window as any).app.components.flex.getFlexParent(event.node.key);
-          const index = (window as any).app.components.flex.getFlexChildIndex(dropNodeParentID, event.node.key);
-          (window as any).app.components.flex.flexRemoveChild(draggedParentboxID, this.draggedNodeKey);
-          (window as any).app.components.flex.flexAddChild(dropNodeParentID, this.draggedNodeKey, index);
-        }
-      } else {
-        (window as any).app.components.flex.flexRemoveChild(draggedParentboxID, this.draggedNodeKey);
-        (window as any).app.components.flex.flexAddChild(event.node.key, this.draggedNodeKey, 0);
-      }
-      (window as any).app.undo.endCompoundUndo();
+      (window as any).app.components.flex.performDragDrop(this.draggedNodeKey, event.node.key);
       this.SelectBox(this.draggedNodeKey);
     }
   }
