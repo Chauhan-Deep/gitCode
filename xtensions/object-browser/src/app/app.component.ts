@@ -381,7 +381,8 @@ export class AppComponent implements OnInit, OnDestroy {
   OnDrop(event: QxTreeEmitEvent): void {
     console.log('OnDrop=' + event.node.title);
     if (this.isDragStarted) {
-      (window as any).app.components.flex.performDragDrop(this.draggedNodeKey, event.node.key);
+      const relPos = ((event.node.component) as any).dragPos;
+      (window as any).app.components.flex.performDragDrop(this.draggedNodeKey, event.node.key, relPos);
       this.SelectBox(this.draggedNodeKey);
     }
   }
