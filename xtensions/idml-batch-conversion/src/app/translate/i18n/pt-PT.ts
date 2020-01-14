@@ -14,7 +14,7 @@ export const LANG_PT_PT_TRANS = {
     'ids-lbl-scan-files-maintext': 'Selecionar ficheiros para converter',
     'ids-lbl-scan-files-subtext': 'O Smart Scan encontrará todos os ficheiros INDD e IDML.',
     'ids-step-getstarted': 'Começar',
-    'ids-step-selectfiles': 'Select files',
+    'ids-step-selectfiles': 'Selecionar ficheiros',
     'ids-step-convert': 'Converter',
     'ids-step-finish': 'Concluir',
     'ids-lbl-searching-files': 'Procurar ficheiros...',

@@ -14,7 +14,7 @@ export const LANG_FI_FI_TRANS = {
     'ids-lbl-scan-files-maintext': 'Valitse muunnettavat tiedostot',
     'ids-lbl-scan-files-subtext': 'Älykäs skannaus etsii kaikki INDD- ja IDML-tiedostot.',
     'ids-step-getstarted': 'Aloitus',
-    'ids-step-selectfiles': 'Select files',
+    'ids-step-selectfiles': 'Valitse tiedostot',
     'ids-step-convert': 'Käännä',
     'ids-step-finish': 'Finish',
     'ids-lbl-searching-files': 'Etsitään tiedostoja...',

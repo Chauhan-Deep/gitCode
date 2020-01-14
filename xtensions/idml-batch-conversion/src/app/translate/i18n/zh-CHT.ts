@@ -14,7 +14,7 @@ export const LANG_ZH_CHT_TRANS = {
     'ids-lbl-scan-files-maintext': '選擇要轉換的檔',
     'ids-lbl-scan-files-subtext': '智能掃描將查找所有 INDD 和 IDML 檔。',
     'ids-step-getstarted': '開始',
-    'ids-step-selectfiles': 'Select files',
+    'ids-step-selectfiles': '選擇檔',
     'ids-step-convert': '轉換',
     'ids-step-finish': 'Finish',
     'ids-lbl-searching-files': '搜尋檔...',
