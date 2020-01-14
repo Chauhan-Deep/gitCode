@@ -14,7 +14,7 @@ export const LANG_CS_CZ_TRANS = {
     'ids-lbl-scan-files-maintext': 'Zvolit soubory ke konverzi',
     'ids-lbl-scan-files-subtext': 'Smart Scan najde všechny soubory INDD a IDML.',
     'ids-step-getstarted': 'Začínáme',
-    'ids-step-selectfiles': 'Select files',
+    'ids-step-selectfiles': 'Zvolte soubory',
     'ids-step-convert': 'Převést',
     'ids-step-finish': 'Ukončit',
     'ids-lbl-searching-files': 'Hledání souborů...',

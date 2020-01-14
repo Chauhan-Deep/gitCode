@@ -14,7 +14,7 @@ export const LANG_PT_BR_TRANS = {
     'ids-lbl-scan-files-maintext': 'Selecionar os arquivos para conversão',
     'ids-lbl-scan-files-subtext': 'A Verificação Inteligente encontrará todos os arquivos INDD e IDML.',
     'ids-step-getstarted': 'Começar',
-    'ids-step-selectfiles': 'Select files',
+    'ids-step-selectfiles': 'Selecionar arquivos',
     'ids-step-convert': 'Converter',
     'ids-step-finish': 'Finalizar',
     'ids-lbl-searching-files': 'Procurando arquivos...',
