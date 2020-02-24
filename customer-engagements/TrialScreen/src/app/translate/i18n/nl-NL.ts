@@ -8,7 +8,7 @@ export const LANG_NL_NL_TRANS = {
     'welcomeKitMsg': 'In uw inbox vindt u het QuarkXpress-welkomstpakket met het volgende:',
     'serialNumber': 'Serienummer',
     'validationCode': 'Validatiecode',
-    'activationInstruction': 'Instructies voor activering',
+    'activationInstruction': 'Instructies voor activerin',
     'contactDetails': 'Als u QuarkXpress hebt aangeschaft maar het welkomstpakket niet hebt ontvangen, kunt u contact opnemen met ons ondersteuningsteam:',
     'contact1Location': 'Verenigde Staten',
     'contact1Time': '09.00 tot 20.00 uur EST',
