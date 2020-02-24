@@ -9,6 +9,6 @@ export const LANG_PL_PL_TRANS = {
     'qxAdvantage': 'Dzięki QuarkXPress Advantage możesz zaoszczędzić 25%',
     'thanksText': 'Dziękujemy za wypróbowanie programu QuarkXPress.',
     'evalText': 'Upłynął okres testowania tej kopii programu QuarkXPress. Odwiedź nasz sklep, aby dokonać zakupu.',
-    'buy': 'Kup teraz >',
+    'buy': 'Kup teraz',
     'activate': 'Aktywuj licencję'
 };

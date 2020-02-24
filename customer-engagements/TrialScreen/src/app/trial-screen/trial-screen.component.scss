@@ -51,13 +51,13 @@
             white-space: nowrap;
             font-family: 'Roboto Bold';
             font-size: 12vmin;
-            color: #1796e8;
+            color: #fb1e4e;
         }
 
         .days-remaining-text {
             font-family: 'Roboto Regular';
             font-size: 3vmin;
-            color: #1796e8;
+            color: #fb1e4e;
         }
 
         .trial-text {
@@ -100,6 +100,11 @@
             font-size: 6vmin;
             font-family: 'Roboto Bold';
             color: #ffffff;
+
+            img {
+                width: 70px;
+                height: auto;
+            }
         }
 
         .button-activate {

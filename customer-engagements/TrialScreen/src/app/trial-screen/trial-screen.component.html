@@ -8,11 +8,13 @@
       <span class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : "thanksText"] | translate }} </span>
       <span class="trial-text" [ngClass]="{ 'trial-text-margin' : numOfDays === 0 }"> {{ [numOfDays > 0 ? "trialText" : "evalText"] | translate }}</span>
     </div>
-    <div class="qx-advantage"> {{ "qxAdvantage" | translate }}</div>
+    <!-- <div class="qx-advantage"> {{ "qxAdvantage" | translate }}</div> -->
   </div>
 
   <div class="action-button">
-    <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}</div>
+    <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}
+      <img class='chevron' src="assets/images/chevron_right.png" />
+    </div>
     <div class="button-activate" (click)="activateLicense()"> {{ "activate" | translate }}</div>
   </div>
 </div>
