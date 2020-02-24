@@ -9,6 +9,6 @@ export const LANG_NB_NO_TRANS = {
     'qxAdvantage': 'Lagre 25% med QuarkXPress Advantage.',
     'thanksText': 'Takk for at du prøvde QuarkXPress.',
     'evalText': 'Evalueringsperioden for denne versjonen av QuarkXPress har nå utløpt. Besøk butikken vår for å kjøpe nå.',
-    'buy': 'Kjøp nå >',
+    'buy': 'Kjøp nå',
     'activate': 'Aktiver lisens'
 };
