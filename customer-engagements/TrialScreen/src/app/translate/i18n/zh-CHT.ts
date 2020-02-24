@@ -9,6 +9,6 @@ export const LANG_ZH_CHT_TRANS = {
     'qxAdvantage': '使用 QuarkXPress Advantage 儲存25%。',
     'thanksText': '感謝您嘗試 QuarkXPress。',
     'evalText': '此 QuarkXPress 副本的試用期已過期。訪問我們的商店立即購買。',
-    'buy': '立即購買 >',
+    'buy': '立即購買',
     'activate': '啟動許可證'
 };
