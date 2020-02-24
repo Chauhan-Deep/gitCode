@@ -22,5 +22,4 @@ export const LANG_NL_NL_TRANS = {
     'contact4Location': 'Frankrijk',
     'contact4Time': '08.30 tot 17.30 uur CEST',
     'contact4Phone': '800-913-457',
-    'activateLicense': 'Licentie activeren >',
 };

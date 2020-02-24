@@ -21,5 +21,4 @@ export const LANG_EN_GB_TRANS = {
     'contact4Location': 'France',
     'contact4Time': '8:30AM-5:30PM CEST',
     'contact4Phone': '800-913-457',
-    'activateLicense': 'Activate License >',
 };
