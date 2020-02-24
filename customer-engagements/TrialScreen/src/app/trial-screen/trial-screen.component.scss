@@ -10,9 +10,11 @@
 
     .background {
         display: block;
-        height: 110%;
+        height: fit-content;
+        position: absolute;
+        left: -241px;
         -webkit-user-drag: none;
-        width: 100%;
+        width: -webkit-fill-available;
     }
 
     .thanks-container {
@@ -27,21 +29,18 @@
 
         .thank-you-text {
             font-family: 'Roboto Bold';
-            font-size: 3.25vmin;
+            font-size: 4.25vmin;
             color: #ffffff;
-            text-transform: uppercase;
         }
     }
 
     .welcome-kit-container {
         position: absolute;
-        top: 28%;
-        left: 30%;
+        top: 30%;
+        left: 35%;
         font-family: 'Roboto Regular';
-        font-size: 2.5vmin;
+        font-size: 2.25vmin;
         color: #ffffff;
-        line-height: 1.4;
-        padding-right: 20px;
 
         ul {
             list-style: none; /* Remove default bullets */
@@ -74,13 +73,11 @@
         display: block;
         height: auto;
         text-align: center;
-        white-space: pre-wrap;
         -webkit-user-drag: none;
         user-select: none;
         font-family: 'Roboto Regular';
-        font-size: 3vmin;
+        font-size: 2.5vmin;
         color: #ffffff;
-        margin-top: 10px;
     }
 
     .close {
@@ -94,23 +91,20 @@
     .contact-container {
         position: absolute;
         top: 45%;
-        left: 30%;
+        left: 35%;
         display: flex;
         flex-direction: column;
         user-select: none;
         line-height: 1.65;
         color: #ffffff;
         font-family: 'Roboto Regular';
-        font-size: 2.8vmin;
-
-        .message {  
-            padding-top: 20px;
-        }
+        font-size: 2.25vmin;
 
         .contact-details-container {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            margin-top: 20px;
 
             .details {
                 display: flex;
@@ -120,7 +114,6 @@
                 margin-top: 20px;
 
                 .location {
-                    font-size: 2.8vmin;
                     font-family: 'Roboto Bold';
                     color: #1796e8;
                 }
