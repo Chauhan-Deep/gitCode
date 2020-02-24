@@ -2,6 +2,15 @@
 export const LANG_ES_ES_NAME = 'es-ES';
 
 export const LANG_ES_ES_TRANS = {
+    'days': '^1 Días',
+    'day': '^1 Día',
+    'remainingText': 'restantes de su periodo de prueba gratuita.',
+    'trialText': 'Su periodo de prueba de QuarkXPress está a punto de expirar. Visite nuestra tienda para comprar ahora.',
+    'qxAdvantage': 'Guardar 25% con QuarkXPress Advantage.',
+    'thanksText': 'Gracias por probar QuarkXPress.',
+    'evalText': 'El periodo de evaluación para esta copia de QuarkXPress ha expirado. Visite nuestra tienda para comprar ahora.',
+    'buy': 'Comprar ahora >',
+    'activate': 'Activar licencia',
     'thankYouMsg': '¡Gracias por explorar ^1 !',
     'trialEndMsg': 'Su periodo de prueba ha finalizado y ahora puede activar su licencia de por vida.',
     'welcomeKitMsg': 'Compruebe su bandeja de entrada para obtener su kit de bienvenida QuarkXPress, que incluye:',

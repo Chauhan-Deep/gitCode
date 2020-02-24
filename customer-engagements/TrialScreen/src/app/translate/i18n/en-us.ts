@@ -2,7 +2,16 @@
 export const LANG_EN_US_NAME = 'en-US';
 
 export const LANG_EN_US_TRANS = {
-    'thankYouMsg': 'THANK YOU FOR EXPLORING ^1',
+    'days': '^1 Days',
+    'day': '^1 Day',
+    'remainingText': 'remaining in your free trial.',
+    'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
+    'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',
+    'thanksText': 'Thank you for trying QuarkXPress.',
+    'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
+    'buy': 'Buy Now >',
+    'activate': 'Activate License',
+    'thankYouMsg': 'THANK YOU FOR EXPLORING ^',
     'trialEndMsg': 'Your trial period has ended and you can now activate your lifetime license.',
     'welcomeKitMsg': 'Please check your inbox for your QuarkXPress Welcome Kit, which includes:',
     'serialNumber': 'Serial Number',
@@ -21,5 +30,4 @@ export const LANG_EN_US_TRANS = {
     'contact4Location': 'France',
     'contact4Time': '8:30AM-5:30PM CEST',
     'contact4Phone': '800-913-457',
-    'activateLicense': 'Activate License >',
 };
