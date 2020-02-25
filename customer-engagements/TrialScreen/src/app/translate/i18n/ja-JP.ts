@@ -6,9 +6,10 @@ export const LANG_JA_JP_TRANS = {
     'day': '^1 日',
     'remainingText': '無料試用期間の残り',
     'trialText': 'QuarkXPressの試用期間が間もなく終了します。当社のストアにアクセスし、今すぐご購入ください。',
-    'qxAdvantage': 'QuarkXPress Advantageで25%を保存',
+    'qxAdvantage': 'QuarkXPress Advantageで10%を保存',
     'thanksText': 'QuarkXPressをお試しいただき、ありがとうございます。',
     'evalText': 'QuarkXPressの試用期間が終了しました。当社のストアにアクセスし、今すぐご購入ください。',
     'buy': '今すぐ購入',
-    'activate': 'ライセンスをアクティブ化'
+    'activate': 'ライセンスをアクティブ化',
+    'coupon': 'クーポンコード: QXPTRIAL10',
 };
