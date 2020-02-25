@@ -8,7 +8,7 @@
       <span class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : "thanksText"] | translate }} </span>
       <span class="trial-text" [ngClass]="{ 'trial-text-margin' : numOfDays === 0 }"> {{ [numOfDays > 0 ? "trialText" : "evalText"] | translate }}</span>
     </div>
-    <!-- <div class="qx-advantage"> {{ "qxAdvantage" | translate }}</div> -->
+    <div class="qx-advantage"> {{ "qxAdvantage" | translate }}<br>{{ "coupon" | translate }}</div>
   </div>
 
   <div class="action-button">
