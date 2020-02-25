@@ -6,9 +6,10 @@ export const LANG_EN_GB_TRANS = {
     'day': '^1 Day',
     'remainingText': 'remaining in your free trial.',
     'trialText': 'Your trial of QuarkXPress is about to expire. Visit our store to buy now.',
-    'qxAdvantage': 'Save 25% with QuarkXPress Advantage.',
+    'qxAdvantage': 'Save 10% with QuarkXPress Advantage.',
     'thanksText': 'Thank you for trying QuarkXPress.',
     'evalText': 'The evaluation period for this copy of QuarkXPress has expired. Visit our store to buy now.',
     'buy': 'Buy Now',
-    'activate': 'Activate License'
+    'activate': 'Activate License',
+    'coupon': 'Coupon Code: QXPTRIAL10',
 };

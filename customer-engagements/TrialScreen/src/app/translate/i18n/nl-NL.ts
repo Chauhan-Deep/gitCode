@@ -7,9 +7,10 @@ export const LANG_NL_NL_TRANS = {
     'day': '^1 Dag',
     'remainingText': 'resterend van uw gratis proefversie.',
     'trialText': 'Uw proefversie van QuarkXPress verloopt binnenkort. Koop de volledige versie nu in onze store.',
-    'qxAdvantage': 'Bespaar 25% met QuarkXPress Advantage.',
+    'qxAdvantage': 'Bespaar 10% met QuarkXPress Advantage.',
     'thanksText': 'Bedankt dat u QuarkXPress hebt geprobeerd.',
     'evalText': 'De evaluatieperiode van dit exemplaar van QuarkXPress is verlopen. Koop de volledige versie nu in onze store.',
     'buy': 'Nu kopen',
-    'activate': 'Licentie activeren'
+    'activate': 'Licentie activeren',
+    'coupon': 'Coupon: QXPTRIAL10',
 };

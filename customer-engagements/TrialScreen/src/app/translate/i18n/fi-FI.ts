@@ -6,9 +6,10 @@ export const LANG_FI_FI_TRANS = {
     'day': '^1 Päivä',
     'remainingText': 'kokeilujaksoa jäljellä.',
     'trialText': 'QuarkXPress-kokeilujaksosi on päättymässä. Vieraile kaupassamme ja osta tuote heti.',
-    'qxAdvantage': 'Säästä 25% QuarkXPress Advantagella.',
+    'qxAdvantage': 'Säästä 10% QuarkXPress Advantagella.',
     'thanksText': 'Kiitos, että kokeilit QuarkXPressiä.',
     'evalText': 'Tämän QuarkXPress-kokeiluversion käyttöaika on umpeutunut. Vieraile kaupassamme ja osta tuote heti.',
     'buy': 'Osta heti',
-    'activate': 'Aktivoi lisenssi'
+    'activate': 'Aktivoi lisenssi',
+    'coupon': 'Kuponki: QXPTRIAL10',
 };
