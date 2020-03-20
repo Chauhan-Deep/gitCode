@@ -1,0 +1,56 @@
+.sc-model {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    flex-basis: 100%;
+
+    .imported-list {
+        width: 100%;
+        flex-basis: 90%;
+        background-color: var(--active-area-background-color, #ffffff);
+        border: 1px solid;
+        border-color: var(--textbox-border-color, #000000);
+        margin: 10px 0px;
+        display: flex;
+        flex-direction: column;
+
+        div {     
+            &.selected {
+                background-color: var(--selected-row-color,#60bcfb);
+            }
+
+            span {
+                margin: 0 10px;
+            }
+        }
+    }
+
+    .actions-buttons {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 10%;
+
+        .list-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+
+            .import-actions {
+                display: flex;
+            }
+        }
+
+        .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        qx-button {
+            width: 100px;
+            height: 24px;
+            margin-right: 10px;
+        }
+    }
+}
