@@ -1,113 +1,129 @@
 .trial-window {
+    display: flex;
+    flex-direction: column;
     height: 100%;
 
     .background-container {
-        position: relative;
-        display: inline-block;
         width: 100%;
         height: 80%;
-    }
 
-    .background {
-        display: block;
-        margin: auto;
-        max-width: 100%;
-        height: 100%;
-        width: 100%;
-        -webkit-user-drag: none;
-    }
-
-    .logo {
-        position: absolute;
-        top: 5%;
-        left: 23%;
-        width: 100%;
-        max-width: 50%;
-        display: block;
-        margin: auto;
-        height: auto;
-        -webkit-user-drag: none;
-        user-select: none;
-    }
-
-    .close {
-        position: absolute;
-        top: 2%;
-        right: 1%;
-        -webkit-user-drag: none;
-        user-select: none;
-    }
-
-    .trial-text-container {
-        position: absolute;
-        top: 30%;
-        left: 50%;
-        display: flex;
-        flex-direction: column;
-        user-select: none;
-        margin-right: 10px;
-
-        .days-number {
-            white-space: nowrap;
-            font-family: 'Roboto Bold';
-            font-size: 12vmin;
-            color: #fb1e4e;
+        .background {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            height: 100%;
+            width: 100%;
+            -webkit-user-drag: none;
         }
 
-        .days-remaining-text {
-            font-family: 'Roboto Regular';
-            font-size: 3vmin;
-            color: #fb1e4e;
+        .logo {
+            position: absolute;
+            top: 5%;
+            left: 23%;
+            width: 100%;
+            max-width: 50%;
+            display: block;
+            margin: auto;
+            height: auto;
+            -webkit-user-drag: none;
+            user-select: none;
         }
 
-        .trial-text {
-            font-family: 'Roboto Regular';
-            font-size: 3.25vmin;
-            color: #ffffff;
-            margin-top: 20px;
+        .promo-static-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+    
+            .trial-text-container {
+                display: flex;
+                flex-direction: column;
+                user-select: none;
+                margin-right: 10px;
+
+                .trial-text {
+                    font-family: 'Roboto Regular';
+                    font-size: 3.25vmin;
+                    color: #ffffff;
+                    margin-top: 50px;
+                }
+
+                .qx-advantage {
+                    font-family: 'Roboto Bold';
+                    margin-top: 20px;
+                    margin-right: 10px;
+                    user-select: none;
+                    font-size: 2.7vmin;
+                    color: #fb1e4e;
+                    user-select: none;
+                }    
+            }
+
+            .button-buy {
+                margin-top: 50px;
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #fb1e4e;
+                font-size: 3.5vmin;
+                font-family: 'Roboto Regular';
+                color: #ffffff;
+                border: 0.5px solid #FFFFFF;
+                border-radius: 100px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
         }
 
-        .trial-text-margin {
-            margin-top: 50px;
+        .online-offer {
+            width: 100%;
+            height: 100%;
         }
+
+        .close {
+            position: absolute;
+            top: 2%;
+            right: 1%;
+            -webkit-user-drag: none;
+            user-select: none;
+        }    
+    
     }
 
-    .qx-advantage {
-        top: 78%;
-        position: absolute;
-        left: 50%;
-        font-family: 'Roboto Bold';
-        margin-top: 20px;
-        margin-right: 10px;
-        user-select: none;
-        font-size: 2.7vmin;
-        color: #fb1e4e;
-        user-select: none;
-    }
-
-    .action-button {
+    .bottom-container {
         width: 100%;
         height: 20%;
         display: flex;
         user-select: none;
 
-        .button-buy {
+        .trial-text-bottom-container {
             flex-grow: 3;
-            background-color: #fb1e4e;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 6vmin;
             font-family: 'Roboto Bold';
-            color: #ffffff;
-
-            img {
-                width: 70px;
-                height: auto;
+            background-color: #ffffff;
+            color: #000000;
+    
+            .days-number {
+                white-space: nowrap;
+                font-family: 'Roboto Bold';
+                font-size: 9vmin;
+            }
+    
+            .days-remaining-text {
+                font-family: 'Roboto Regular';
+                font-size: 4.5vmin;
+                text-align: center;
             }
         }
 
         .button-activate {
+            white-space: nowrap;
             flex-grow: 1;
             background-color: #d82649;
             display: flex;
@@ -117,6 +133,8 @@
             font-size: 4.5vmin;
             font-family: 'Roboto Regular';
             color: #ffffff;
+            padding-left: 10px;
+            padding-right: 10px;
         }
     }
 }
