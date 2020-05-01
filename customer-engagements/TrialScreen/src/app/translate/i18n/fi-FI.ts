@@ -9,6 +9,7 @@ export const LANG_FI_FI_TRANS = {
     'qxAdvantage': 'Säästä 10% QuarkXPress Advantagella.',
     'thanksText': 'Kiitos, että kokeilit QuarkXPressiä.',
     'evalText': 'Tämän QuarkXPress-kokeiluversion käyttöaika on umpeutunut. Vieraile kaupassamme ja osta tuote heti.',
+    'evalTextOnline': 'Tämän QuarkXPress-kokeiluversion käyttöaika on umpeutunut.',
     'buy': 'Osta heti',
     'activate': 'Aktivoi lisenssi',
     'coupon': 'Kuponki: QXPTRIAL10',

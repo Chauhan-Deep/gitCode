@@ -9,6 +9,7 @@ export const LANG_RU_RU_TRANS = {
     'qxAdvantage': 'Сэкономьте 10% с QuarkXPress Advantage.',
     'thanksText': 'Благодарим вас за интерес к программе QuarkXPress.',
     'evalText': 'Срок действия данной ознакомительной версии программы QuarkXPress истек. Посетите наш магазин, чтобы купить продукт.',
+    'evalTextOnline': 'Срок действия данной ознакомительной версии программы QuarkXPress истек.',
     'buy': 'Купить',
     'activate': 'Активировать лицензию',
     'coupon': 'Купон: QXPTRIAL10',
