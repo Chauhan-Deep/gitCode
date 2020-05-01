@@ -25,7 +25,7 @@ export class TrialScreenComponent implements OnInit {
       this.daysRemaining = this.translateService.localize('day').replace('^1', days);
     }
 
-    this.offerURL = "https://content.quark.com/" + this.translateService.currentLanguage + "/" + days + "/offer.png";
+    this.offerURL = 'https://content.quark.com/' + this.translateService.currentLanguage + '/' + days + '/offer.png';
     this.numOfDays = parseInt(days, 10);
   }
 
