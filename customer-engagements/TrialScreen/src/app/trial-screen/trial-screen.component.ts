@@ -9,11 +9,14 @@ import { TranslateService } from '../translate/translate.service';
 })
 export class TrialScreenComponent implements OnInit {
   daysRemaining;
+  offerURL;
   numOfDays: number;
+  offerAvailable: boolean;
 
   constructor(private translateService: TranslateService) { }
 
   ngOnInit() {
+    this.offerAvailable = (<any>window).navigator.onLine;
     const days = ((<any>window).XPress) ?
       (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : 29;
     if (days > 1) {
@@ -21,6 +24,8 @@ export class TrialScreenComponent implements OnInit {
     } else {
       this.daysRemaining = this.translateService.localize('day').replace('^1', days);
     }
+
+    this.offerURL = "https://content.quark.com/" + this.translateService.currentLanguage + "/" + days + "/offer.png";
     this.numOfDays = parseInt(days, 10);
   }
 
@@ -33,6 +38,10 @@ export class TrialScreenComponent implements OnInit {
     } else {
       window.open(buyUrl, '_blank');
     }
+  }
+
+  offerNotAvailable() {
+      this.offerAvailable = false;
   }
 
   closeDialog() {

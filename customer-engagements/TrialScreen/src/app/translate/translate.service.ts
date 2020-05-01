@@ -3,13 +3,17 @@ import { TRANSLATIONS } from './translations';
 
 @Injectable()
 export class TranslateService {
-    private currentLanguage: string;
+    private _currentLanguage: string;
 
     constructor(@Inject(TRANSLATIONS) private translations: any) {
     }
 
     public use(language: string): void {
-        this.currentLanguage = language;
+        this._currentLanguage = language;
+    }
+
+    get currentLanguage(): string {
+        return this._currentLanguage;
     }
 
     private translate(key: string): string {
