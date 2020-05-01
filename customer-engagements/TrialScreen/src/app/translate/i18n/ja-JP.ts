@@ -9,6 +9,7 @@ export const LANG_JA_JP_TRANS = {
     'qxAdvantage': 'QuarkXPress Advantageで10%を保存',
     'thanksText': 'QuarkXPressをお試しいただき、ありがとうございます。',
     'evalText': 'QuarkXPressの試用期間が終了しました。当社のストアにアクセスし、今すぐご購入ください。',
+    'evalTextOnline': 'QuarkXPressの試用期間が終了しました。当社のストアにアクセスし、今すぐご購入ください。',
     'buy': '今すぐ購入',
     'activate': 'ライセンスをアクティブ化',
     'coupon': 'クーポンコード: QXPTRIAL10',
