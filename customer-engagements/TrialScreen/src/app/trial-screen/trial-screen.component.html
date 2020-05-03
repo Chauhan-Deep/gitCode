@@ -1,19 +1,27 @@
 <div class="trial-window">
   <div class="background-container">
-    <img class='background' src="assets/images/background.png" />
-    <img class='logo' src="assets/images/logo.png" />
+    <div *ngIf="!offerAvailable; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <img class='background' src="assets/images/background.png" />
+      <img class='logo' src="assets/images/logo.png" />
+      <div class='promo-static-container'>
+        <div class='trial-text-container'>
+          <div class="trial-text"> {{ [numOfDays > 0 ? "trialText" : "evalText"] | translate }}</div>
+          <div class="qx-advantage"> {{ "qxAdvantage" | translate }}<br>{{ "coupon" | translate }}</div>
+        </div>
+        <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}</div>
+      </div>  
+    </ng-template>
+    <ng-template #elseBlock>
+      <img class='background' (click)="buyNow()" (error)="offerNotAvailable()" [src]="offerURL" />
+    </ng-template>  
     <img class='close' src="assets/images/close.png" (click)="closeDialog()" />
-    <div class='trial-text-container'>
-      <span class="days-number" *ngIf="numOfDays > 0">{{ daysRemaining }}</span>
-      <span class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : "thanksText"] | translate }} </span>
-      <span class="trial-text" [ngClass]="{ 'trial-text-margin' : numOfDays === 0 }"> {{ [numOfDays > 0 ? "trialText" : "evalText"] | translate }}</span>
-    </div>
-    <div class="qx-advantage"> {{ "qxAdvantage" | translate }}<br>{{ "coupon" | translate }}</div>
   </div>
 
-  <div class="action-button">
-    <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}
-      <img class='chevron' src="assets/images/chevron_right.png" />
+  <div class="bottom-container">
+    <div class="trial-text-bottom-container">
+      <div class="days-number" *ngIf="numOfDays > 0">{{ daysRemaining }}</div>
+      <div class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : offerAvailable ? "evalTextOnline" : "thanksText"] | translate }} </div>
     </div>
     <div class="button-activate" (click)="activateLicense()"> {{ "activate" | translate }}</div>
   </div>
