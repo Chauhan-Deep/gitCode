@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    cursor: default;
 
     .background-container {
         width: 100%;
@@ -14,6 +15,7 @@
             height: 100%;
             width: 100%;
             -webkit-user-drag: none;
+            border: 0;
         }
 
         .logo {
@@ -26,7 +28,6 @@
             margin: auto;
             height: auto;
             -webkit-user-drag: none;
-            user-select: none;
         }
 
         .promo-static-container {
@@ -40,7 +41,6 @@
             .trial-text-container {
                 display: flex;
                 flex-direction: column;
-                user-select: none;
                 margin-right: 10px;
 
                 .trial-text {
@@ -54,10 +54,8 @@
                     font-family: 'Roboto Bold';
                     margin-top: 20px;
                     margin-right: 10px;
-                    user-select: none;
                     font-size: 2.7vmin;
                     color: #fb1e4e;
-                    user-select: none;
                 }    
             }
 
@@ -78,17 +76,11 @@
             }
         }
 
-        .online-offer {
-            width: 100%;
-            height: 100%;
-        }
-
         .close {
             position: absolute;
             top: 2%;
             right: 1%;
             -webkit-user-drag: none;
-            user-select: none;
         }    
     
     }
@@ -97,7 +89,6 @@
         width: 100%;
         height: 20%;
         display: flex;
-        user-select: none;
 
         .trial-text-bottom-container {
             flex-grow: 3;
