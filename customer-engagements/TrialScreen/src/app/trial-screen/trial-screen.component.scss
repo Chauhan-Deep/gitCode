@@ -7,95 +7,6 @@
     .background-container {
         width: 100%;
         height: 80%;
-<<<<<<< HEAD
-
-        .background {
-            display: block;
-            margin: auto;
-            max-width: 100%;
-            height: 100%;
-            width: 100%;
-            -webkit-user-drag: none;
-        }
-
-        .logo {
-            position: absolute;
-            top: 5%;
-            left: 23%;
-            width: 100%;
-            max-width: 50%;
-            display: block;
-            margin: auto;
-            height: auto;
-            -webkit-user-drag: none;
-            user-select: none;
-        }
-
-        .promo-static-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: absolute;
-            top: 20%;
-            left: 50%;
-    
-            .trial-text-container {
-                display: flex;
-                flex-direction: column;
-                user-select: none;
-                margin-right: 10px;
-
-                .trial-text {
-                    font-family: 'Roboto Regular';
-                    font-size: 3.25vmin;
-                    color: #ffffff;
-                    margin-top: 50px;
-                }
-
-                .qx-advantage {
-                    font-family: 'Roboto Bold';
-                    margin-top: 20px;
-                    margin-right: 10px;
-                    user-select: none;
-                    font-size: 2.7vmin;
-                    color: #fb1e4e;
-                    user-select: none;
-                }    
-            }
-
-            .button-buy {
-                margin-top: 50px;
-                width: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: #fb1e4e;
-                font-size: 3.5vmin;
-                font-family: 'Roboto Regular';
-                color: #ffffff;
-                border: 0.5px solid #FFFFFF;
-                border-radius: 100px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-        }
-
-        .online-offer {
-            width: 100%;
-            height: 100%;
-        }
-
-        .close {
-            position: absolute;
-            top: 2%;
-            right: 1%;
-            -webkit-user-drag: none;
-            user-select: none;
-        }    
-    
-    }
-
-=======
 
         .background {
             display: block;
@@ -174,7 +85,6 @@
     
     }
 
->>>>>>> develop
     .bottom-container {
         width: 100%;
         height: 20%;

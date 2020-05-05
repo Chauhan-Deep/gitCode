@@ -26,12 +26,8 @@ export class TrialScreenComponent implements OnInit {
       this.daysRemaining = this.translateService.localize('day').replace('^1', days);
     }
 
-<<<<<<< HEAD
-    this.offerURL = 'https://content.quark.com/' + this.translateService.currentLanguage + '/' + days + '/offer.png';
-=======
     this.offerURL = this.domSanitizer.bypassSecurityTrustUrl('https://content.quark.com/' +
         this.translateService.currentLanguage + '/' + days + '/offer.png');
->>>>>>> develop
     this.numOfDays = parseInt(days, 10);
   }
 
@@ -47,11 +43,7 @@ export class TrialScreenComponent implements OnInit {
   }
 
   offerNotAvailable() {
-<<<<<<< HEAD
-      this.offerAvailable = false;
-=======
     this.offerAvailable = false;
->>>>>>> develop
   }
 
   closeDialog() {
