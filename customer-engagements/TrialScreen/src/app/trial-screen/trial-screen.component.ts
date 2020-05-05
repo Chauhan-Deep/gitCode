@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { TranslateService } from '../translate/translate.service';
 
@@ -26,7 +26,8 @@ export class TrialScreenComponent implements OnInit {
       this.daysRemaining = this.translateService.localize('day').replace('^1', days);
     }
 
-    this.offerURL = this.domSanitizer.bypassSecurityTrustUrl('https://content.quark.com/' + this.translateService.currentLanguage + '/' + days + '/offer.png');
+    this.offerURL = this.domSanitizer.bypassSecurityTrustUrl('https://content.quark.com/' +
+        this.translateService.currentLanguage + '/' + days + '/offer.png');
     this.numOfDays = parseInt(days, 10);
   }
 
@@ -42,7 +43,7 @@ export class TrialScreenComponent implements OnInit {
   }
 
   offerNotAvailable() {
-      this.offerAvailable = false;
+    this.offerAvailable = false;
   }
 
   closeDialog() {
