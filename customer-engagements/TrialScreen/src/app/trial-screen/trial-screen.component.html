@@ -6,7 +6,11 @@
       <img class='logo' src="assets/images/logo.png" />
       <div class='promo-static-container'>
         <div class='trial-text-container'>
+<<<<<<< HEAD
           <div class="trial-text"> {{ [numOfDays > 0 ? "trialText" : "evalText"] | translate }}</div>
+=======
+          <div class="trial-text"> {{ [numOfDays > 0 ? "trialText" : "thanksText"] | translate }}</div>
+>>>>>>> develop
           <div class="qx-advantage"> {{ "qxAdvantage" | translate }}<br>{{ "coupon" | translate }}</div>
         </div>
         <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}</div>
@@ -21,7 +25,11 @@
   <div class="bottom-container">
     <div class="trial-text-bottom-container">
       <div class="days-number" *ngIf="numOfDays > 0">{{ daysRemaining }}</div>
+<<<<<<< HEAD
       <div class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : offerAvailable ? "evalTextOnline" : "thanksText"] | translate }} </div>
+=======
+      <div class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : "evalTextOnline"] | translate }} </div>
+>>>>>>> develop
     </div>
     <div class="button-activate" (click)="activateLicense()"> {{ "activate" | translate }}</div>
   </div>
