@@ -32,7 +32,7 @@ export class TrialScreenComponent implements OnInit {
 
     this.httpClient.get('assets/settings.json').subscribe(
       data  => {
-        let testURL = data['testURL'];
+        const testURL = data['testURL'];
 
         if (testURL) {
           this.offerURLStr = testURL;
