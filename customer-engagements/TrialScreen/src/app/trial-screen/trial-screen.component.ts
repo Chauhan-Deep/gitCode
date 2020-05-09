@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient, HttpResponse} from '@angular/common/http';
 
 import { TranslateService } from '../translate/translate.service';
 
@@ -10,14 +11,15 @@ import { TranslateService } from '../translate/translate.service';
 })
 export class TrialScreenComponent implements OnInit {
   daysRemaining;
-  offerURL;
+  offerURLStr;
+  safeOfferURL;
   numOfDays: number;
-  offerAvailable: boolean;
+  isOnline: boolean;
 
-  constructor(private translateService: TranslateService, private domSanitizer: DomSanitizer) { }
+  constructor(private translateService: TranslateService, private domSanitizer: DomSanitizer, private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.offerAvailable = (<any>window).navigator.onLine;
+    this.isOnline = (<any>window).navigator.onLine;
     const days = ((<any>window).XPress) ?
       (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : 29;
     if (days > 1) {
@@ -26,9 +28,34 @@ export class TrialScreenComponent implements OnInit {
       this.daysRemaining = this.translateService.localize('day').replace('^1', days);
     }
 
-    this.offerURL = this.domSanitizer.bypassSecurityTrustUrl('https://content.quark.com/' +
-        this.translateService.currentLanguage + '/' + days + '/offer.png');
+    this.offerURLStr = 'https://accounts.quark.com/InAppOffers/' + this.translateService.currentLanguage + '/' + days + '.html';
+
+    this.httpClient.get('assets/settings.json').subscribe(
+      data  => {
+        let testURL = data['testURL'];
+
+        if (testURL) {
+          this.offerURLStr = testURL;
+        }
+        this.initOfferURL();
+      },
+      (error: Response) => {
+        this.initOfferURL();
+      },
+    );
+
     this.numOfDays = parseInt(days, 10);
+  }
+
+  initOfferURL() {
+    this.safeOfferURL = this.domSanitizer.bypassSecurityTrustResourceUrl(this.offerURLStr);
+    this.httpClient.head(this.offerURLStr).subscribe(
+      response => {
+      },
+      (error: Response) => {
+        this.isOnline = false;
+      }
+    );
   }
 
   buyNow() {
@@ -40,10 +67,6 @@ export class TrialScreenComponent implements OnInit {
     } else {
       window.open(buyUrl, '_blank');
     }
-  }
-
-  offerNotAvailable() {
-    this.offerAvailable = false;
   }
 
   closeDialog() {
