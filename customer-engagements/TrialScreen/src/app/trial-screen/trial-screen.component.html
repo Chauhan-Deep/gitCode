@@ -1,7 +1,10 @@
 <div class="trial-window">
   <div class="background-container">
-    <div *ngIf="!offerAvailable; then thenBlock else elseBlock"></div>
+    <div *ngIf="isOnline && safeOfferURL; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
+      <iframe class='background' [src]="safeOfferURL"></iframe>
+    </ng-template>  
+    <ng-template #elseBlock>
       <img class='background' src="assets/images/background.png" />
       <img class='logo' src="assets/images/logo.png" />
       <div class='promo-static-container'>
@@ -9,12 +12,9 @@
           <div class="trial-text"> {{ [numOfDays > 0 ? "trialText" : "thanksText"] | translate }}</div>
           <div class="qx-advantage"> {{ "qxAdvantage" | translate }}<br>{{ "coupon" | translate }}</div>
         </div>
-        <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}</div>
-      </div>  
+      </div>
+      <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}</div>
     </ng-template>
-    <ng-template #elseBlock>
-      <img class='background' (click)="buyNow()" (error)="offerNotAvailable()" [src]="offerURL" />
-    </ng-template>  
     <img class='close' src="assets/images/close.png" (click)="closeDialog()" />
   </div>
 
