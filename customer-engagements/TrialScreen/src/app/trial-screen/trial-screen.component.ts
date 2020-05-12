@@ -15,11 +15,11 @@ export class TrialScreenComponent implements OnInit {
   safeOfferURL;
   numOfDays: number;
   isOnline: boolean;
+  arrived: boolean;
 
   constructor(private translateService: TranslateService, private domSanitizer: DomSanitizer, private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.isOnline = (<any>window).navigator.onLine;
     const days = ((<any>window).XPress) ?
       (<any>window).XPress.api.invokeApi('XTGetPendingDaysOfTrialMode', '').numOfDays : 29;
     if (days > 1) {
@@ -51,9 +51,12 @@ export class TrialScreenComponent implements OnInit {
     this.safeOfferURL = this.domSanitizer.bypassSecurityTrustResourceUrl(this.offerURLStr);
     this.httpClient.head(this.offerURLStr).subscribe(
       response => {
+        this.isOnline = true;
+        this.arrived = true;
       },
       (error: Response) => {
         this.isOnline = false;
+        this.arrived = true;
       }
     );
   }
