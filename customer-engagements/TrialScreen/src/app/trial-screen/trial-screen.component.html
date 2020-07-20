@@ -10,9 +10,7 @@
       <div class='promo-static-container'>
         <div class='trial-text-container'>
           <div class="trial-text"> {{ [numOfDays > 0 ? "trialText" : "thanksText"] | translate }}</div>
-          <!--
           <div class="qx-advantage"> {{ "qxAdvantage" | translate }}<br>{{ "coupon" | translate }}</div>
-          -->
         </div>
         <div class="button-buy" (click)="buyNow()"> {{ "buy" | translate }}</div>
     </div>
@@ -25,8 +23,6 @@
       <div class="days-number" *ngIf="numOfDays > 0">{{ daysRemaining }}</div>
       <div class="days-remaining-text"> {{ [numOfDays > 0 ? "remainingText" : "evalTextOnline"] | translate }} </div>
     </div>
-    <!--
-      <div class="button-activate" (click)="activateLicense()"> {{ "activate" | translate }}</div>
-    -->
+    <div class="button-activate" (click)="activateLicense()"> {{ "activate" | translate }}</div>
   </div>
 </div>
