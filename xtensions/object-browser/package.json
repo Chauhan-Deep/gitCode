@@ -20,11 +20,7 @@
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
-<<<<<<< HEAD
-    "@quark/xpressng": "^2.0.1",
-=======
     "@quark/xpressng": "^2.0.3-snapshot.160",
->>>>>>> ObjectBroswer
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
