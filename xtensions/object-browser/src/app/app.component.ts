@@ -39,6 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private _XT_FLEX_POST_REORDER_ITEM: number;
   private _XT_POST_PICTURE_IMPORT: number;
   private _XT_POSTPICCONTENT_DELETE: number;
+  private _XT_BOX_ATTRIBUTE_CHANGE: number;
 
   boxNodes = [
     {
@@ -290,6 +291,8 @@ export class AppComponent implements OnInit, OnDestroy {
         = (window as any).XPress.registerQXPCallbackHandler(0, 586, this.PostPictureImportCallBackHandler.bind(this));
       this._XT_POSTPICCONTENT_DELETE
         = (window as any).XPress.registerQXPCallbackHandler(0, 857, this.PostPictureContentDeleteBackHandler.bind(this));
+      this._XT_BOX_ATTRIBUTE_CHANGE
+        = (window as any).XPress.registerQXPCallbackHandler(0, 1615, this.PostBoxAttributeChangeBackHandler.bind(this));
 
       // Undo/Redo
       this._XT_UNDO = (window as any).XPress.registerQXPCallbackHandler(0, 488, this.UndoItemCallBackHandler.bind(this));
@@ -316,6 +319,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isDirty = true;
   }
 
+  PostBoxAttributeChangeBackHandler(response) {
+    console.log('PostBoxAttributeChangeBackHandler' + response);
+    this.isDirty = true;
+  }
 
   PostAttachItemCallBackHandler(response) {
     console.log('PostAttachItemCallBackHandler' + response);
@@ -376,6 +383,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // Picture
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 586, this._XT_POST_PICTURE_IMPORT);
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 857, this._XT_POSTPICCONTENT_DELETE);
+    (window as any).XPress.deRegisterQXPCallbackHandler(0, 1615, this._XT_BOX_ATTRIBUTE_CHANGE);
 
     // undo/Redo
     (window as any).XPress.deRegisterQXPCallbackHandler(0, 488, this._XT_UNDO);
