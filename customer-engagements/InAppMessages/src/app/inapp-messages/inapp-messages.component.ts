@@ -10,8 +10,8 @@ import { TranslateService } from '../translate/translate.service';
     styleUrls: ['./inapp-messages.component.scss']
 })
 export class InAppMessagesComponent implements OnInit {
-@ViewChild('iframeX', { read: ElementRef }) 
-iframeX : ElementRef;
+@ViewChild('iframeX', { read: ElementRef })
+iframeX: ElementRef;
   daysRemaining;
   offerURLStr;
   safeOfferURL;
@@ -19,36 +19,44 @@ iframeX : ElementRef;
   isOnline: boolean;
   arrived: boolean;
 
-  digit1=0;
-  digit2=0;
-  dateStrId="";
+  numOfDaysStr;
+  digit1 = 0;
+  digit2 = 0;
+  dateStrId = '';
 
   constructor(private translateService: TranslateService, private domSanitizer: DomSanitizer, private httpClient: HttpClient) { }
-  
-  
-  onload(iframeElement)
-  {
-    console.log("onload --------------------");
 
-    console.log("onload = " + iframeElement.contentWindow.document.readyState);
+
+  onload(iframeElement) {
+    console.log('onload --------------------');
+
+    console.log('onload = ' + iframeElement.contentWindow.document.readyState);
     const hostElement = this.iframeX;
 
    // setTimeout(() => {
-     if (iframeElement.contentWindow.document.readyState == "complete") {
+     if (iframeElement.contentWindow.document.readyState === 'complete') {
       // console.log("setTimeout called" + iframeElement.contentWindow.document.body.innerHTML);
       // console.log("setTimeout called" + iframeElement.contentWindow.document.getElementById("digit-1").innerText);
       // console.log("setTimeout called" + iframeElement.contentWindow.document.getElementById("digit-2").innerText);
-      
-      iframeElement.contentWindow.document.getElementById("digit-1").innerText = this.digit1;
-      iframeElement.contentWindow.document.getElementById("digit-2").innerText = this.digit1;
 
-      iframeElement.contentWindow.document.getElementById("digit-3").innerText = this.digit2;
-      iframeElement.contentWindow.document.getElementById("digit-4").innerText = this.digit2;
-      iframeElement.contentWindow.document.getElementById("modal-one").setAttribute("style","padding:0px;");
+      iframeElement.contentWindow.document.getElementById('digit-1').innerText = this.digit1;
+      iframeElement.contentWindow.document.getElementById('digit-2').innerText = this.digit1;
 
-      iframeElement.contentWindow.document.getElementById("expiryDate").innerText = this.dateStrId;
+      iframeElement.contentWindow.document.getElementById('digit-3').innerText = this.digit2;
+      iframeElement.contentWindow.document.getElementById('digit-4').innerText = this.digit2;
+      // iframeElement.contentWindow.document.getElementById("modal-one").setAttribute("style","padding:0px;");
+
+      iframeElement.contentWindow.document.getElementById('expiryDate').innerText = this.dateStrId;
+
+      if (iframeElement.contentWindow.document.getElementById('daysDigits') != null) {
+        iframeElement.contentWindow.document.getElementById('daysDigits').innerText = this.numOfDaysStr;
+      }
      }
-      console.log("days =" + this.numOfDays); // function called 
+
+     console.log('days = ' + this.numOfDays); // function called
+     console.log('this.digit1 = ' + this.digit1); // function called
+     console.log('this.digit2 = ' + this.digit2); // function called
+     console.log('expiryDate = ' + this.dateStrId); // function called
 
    // }, 20);
   }
@@ -57,10 +65,12 @@ iframeX : ElementRef;
     const days = ((<any>window).XPress) ?
       (<any>window).XPress.api.invokeApi('XTGetAppMaintenanceExpiryDays', '').numOfDays : 29;
 
+      this.numOfDaysStr = days;
       const dateStr = ((<any>window).XPress) ?
-      (<any>window).XPress.api.invokeApi('XTGetAppMaintenanceExpiryDateString', '').dateString : "";
+      (<any>window).XPress.api.invokeApi('XTGetAppMaintenanceExpiryDateString', '').dateString : '_';
 
       this.dateStrId = dateStr;
+      console.log('dateString =' + this.dateStrId); // function called
 
     if (days > 1) {
       this.daysRemaining = this.translateService.localize('days').replace('^1', days);
@@ -68,36 +78,32 @@ iframeX : ElementRef;
       this.daysRemaining = this.translateService.localize('day').replace('^1', days);
     }
 
-    var urlDays = days;
+    let urlDays = days;
     if (days >= 0) {
       let noOfdays: number  = days;
       this.digit2 = noOfdays % 10;
-      noOfdays = Math.floor(noOfdays/10);
+      noOfdays = Math.floor(noOfdays / 10);
       this.digit1 = noOfdays % 10;
 
-      if (days <=60 && days > 45) {
+      if (days <= 60 && days > 45) {
         urlDays = 60;
-      }
-      else if (days <=45 && days > 30) {
+      } else if (days <= 45 && days > 30) {
         urlDays = 45;
-      }
-      else if (days <=30 && days > 15) {
+      } else if (days <= 30 && days > 15) {
         urlDays = 30;
-      }
-      else if (days <=15 && days > 7) {
+      } else if (days <= 15 && days > 7) {
         urlDays = 15;
-      }
-      else {
+      } else {
         urlDays = days;
       }
     }
 
    this.offerURLStr = 'https://www.quark.com/inapp-message/' + this.translateService.currentLanguage + '/' + urlDays + 'days.html';
-   if (urlDays == 0) {
-    this.offerURLStr = 'https://www.quark.com/inapp-message/en-US/expired.html';
+   if (urlDays === 0) {
+    this.offerURLStr = 'https://www.quark.com/inapp-message/' + this.translateService.currentLanguage + '/expired.html';
    }
 
-    console.log("offerURLStr =" + this.offerURLStr); // function called 
+    console.log('offerURLStr =' + this.offerURLStr); // function called
 
     this.httpClient.get('assets/settings.json').subscribe(
       data  => {
