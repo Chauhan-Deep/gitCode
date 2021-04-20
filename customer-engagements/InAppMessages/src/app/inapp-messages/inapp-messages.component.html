@@ -1,0 +1,14 @@
+<div class="InAppMessages-window" *ngIf="arrived">
+  <div class="background-container">
+    <div *ngIf="isOnline; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <iframe #iframeX class='background' [src]="safeOfferURL" (load)="onload(iframeX)"></iframe>
+    </ng-template>  
+    <img class='close' src="assets/images/close.png" (click)="closeDialog()" />
+  </div>
+
+  <div class="bottom-container">
+      <input class="button-checkbox" type="checkbox">
+    <div class='button-dontshow' (click)="activateLicense()"> Don't show again.</div>
+  </div>
+</div>
