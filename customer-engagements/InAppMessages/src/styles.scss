@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family:"Roboto Regular";
+    font-weight:100;
+    src: url("Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family:"Roboto Bold";
+    font-weight:100;
+    src: url("Roboto-Bold.ttf");
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: #2A2A2A;
+}
+
+body {
+    overflow: hidden;
+}

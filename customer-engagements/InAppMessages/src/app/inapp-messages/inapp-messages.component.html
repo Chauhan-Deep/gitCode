@@ -1,0 +1,19 @@
+<div class="InAppMessages-window" *ngIf="arrived">
+  <div class="background-container">
+    <div *ngIf="isOnline; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <iframe #iframeX class='background' [src]="safeOfferURL" (load)="onload(iframeX)"></iframe>
+    </ng-template>  
+    <img class='close' src="assets/images/close.png" (click)="closeDialog()" />
+  </div>
+
+  <div class="bottom-container">
+    <input class="button-checkbox" type="checkbox" [checked]="isRemindMeCheckChecked" (change)="RemindMeCheckValue($event)">
+    <div class='button-Remindme' (click)="remindMeAction($event)">{{ "remindLater" | translate }}</div>
+
+    <div class="remindme-container">
+    <input class="button-checkbox" type="checkbox" [checked]="isDontShowCheckChecked" (change)="DontShowCheckValue($event)">
+    <div class='button-dontshow' (click)="dontShowAction($event)"> {{ "dontshowagain" | translate }}</div>
+  </div>
+  </div>
+</div>
