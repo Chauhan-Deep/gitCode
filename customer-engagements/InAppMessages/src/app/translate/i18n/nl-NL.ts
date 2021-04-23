@@ -14,4 +14,6 @@ export const LANG_NL_NL_TRANS = {
     'buy': 'Nu kopen',
     'activate': 'Licentie activeren',
     'coupon': 'Coupon: QXPTRIAL10',
+    'remindLater': 'Help mij herinneren',
+    'dontshowagain': 'Niet opnieuw tonen',
 };

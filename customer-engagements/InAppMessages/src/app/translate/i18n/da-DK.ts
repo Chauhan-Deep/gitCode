@@ -13,4 +13,6 @@ export const LANG_DA_DK_TRANS = {
     'buy': 'Køb nu',
     'activate': 'Aktivér licens',
     'coupon': 'Kupon: QXPTRIAL10',
+    'remindLater': 'Mind mig om det senere',
+    'dontshowagain': 'Vis ikke igen',
 };

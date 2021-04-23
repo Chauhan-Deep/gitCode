@@ -13,4 +13,6 @@ export const LANG_FI_FI_TRANS = {
     'buy': 'Osta heti',
     'activate': 'Aktivoi lisenssi',
     'coupon': 'Kuponki: QXPTRIAL10',
+    'remindLater': 'Muistuta myöhemmin',
+    'dontshowagain': 'Älä näytä enää',
 };

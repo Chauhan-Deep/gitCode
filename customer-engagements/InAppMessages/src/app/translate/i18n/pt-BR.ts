@@ -13,4 +13,6 @@ export const LANG_PT_BR_TRANS = {
     'buy': 'Comprar agora',
     'activate': 'Ativar licença',
     'coupon': 'Cupom: QXPTRIAL10',
+    'remindLater': 'Lembrar-me mais tarde',
+    'dontshowagain': 'Não mostrar novamente',
 };

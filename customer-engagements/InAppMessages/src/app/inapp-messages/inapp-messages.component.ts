@@ -12,6 +12,9 @@ import { TranslateService } from '../translate/translate.service';
 export class InAppMessagesComponent implements OnInit {
 @ViewChild('iframeX', { read: ElementRef })
 iframeX: ElementRef;
+isRemindMeCheckChecked = false;
+isDontShowCheckChecked = false;
+
   daysRemaining;
   offerURLStr;
   safeOfferURL;
@@ -35,10 +38,6 @@ iframeX: ElementRef;
 
    // setTimeout(() => {
      if (iframeElement.contentWindow.document.readyState === 'complete') {
-      // console.log("setTimeout called" + iframeElement.contentWindow.document.body.innerHTML);
-      // console.log("setTimeout called" + iframeElement.contentWindow.document.getElementById("digit-1").innerText);
-      // console.log("setTimeout called" + iframeElement.contentWindow.document.getElementById("digit-2").innerText);
-
       iframeElement.contentWindow.document.getElementById('digit-1').innerText = this.digit1;
       iframeElement.contentWindow.document.getElementById('digit-2').innerText = this.digit1;
 
@@ -46,9 +45,13 @@ iframeX: ElementRef;
       iframeElement.contentWindow.document.getElementById('digit-4').innerText = this.digit2;
       // iframeElement.contentWindow.document.getElementById("modal-one").setAttribute("style","padding:0px;");
 
-      iframeElement.contentWindow.document.getElementById('expiryDate').innerText = this.dateStrId;
+      if (iframeElement.contentWindow.document.getElementById('expiryDate') != null) {
+        console.log('expiryDate.innerText set..'); // function called
+        iframeElement.contentWindow.document.getElementById('expiryDate').innerText = this.dateStrId;
+      }
 
       if (iframeElement.contentWindow.document.getElementById('daysDigits') != null) {
+        console.log('daysDigits.daysDigits set..'); // function called
         iframeElement.contentWindow.document.getElementById('daysDigits').innerText = this.numOfDaysStr;
       }
      }
@@ -70,6 +73,7 @@ iframeX: ElementRef;
       (<any>window).XPress.api.invokeApi('XTGetAppMaintenanceExpiryDateString', '').dateString : '_';
 
       this.dateStrId = dateStr;
+      console.log('days =' + days); // function called
       console.log('dateString =' + this.dateStrId); // function called
 
     if (days > 1) {
@@ -98,9 +102,9 @@ iframeX: ElementRef;
       }
     }
 
-   this.offerURLStr = 'https://www.quark.com/inapp-message/' + this.translateService.currentLanguage + '/' + urlDays + 'days.html';
-   if (urlDays === 0) {
-    this.offerURLStr = 'https://www.quark.com/inapp-message/' + this.translateService.currentLanguage + '/expired.html';
+    this.offerURLStr = 'https://www.quark.com/inapp-message/' + this.translateService.currentLanguage + '/' + urlDays + 'days.html';
+    if (urlDays === 0) {
+      this.offerURLStr = 'https://www.quark.com/inapp-message/'  + this.translateService.currentLanguage + '/expired.html';
    }
 
     console.log('offerURLStr =' + this.offerURLStr); // function called
@@ -136,26 +140,107 @@ iframeX: ElementRef;
     );
   }
 
-  buyNow() {
-    const buyUrl = 'https://www.quark.com/qxp-trial-purchase?utm_source=' +
-      encodeURIComponent('QXP_App&utm_medium=PopUp&utm_campaign=Trial_Conversion&utm_content=Countdown.v1');
-
-    if ((<any>window).app) {
-      (<any>window).app.launchApp(buyUrl);
+  RemindMeCheckValue(e) {
+    if (e.target.checked) {
+      if ((<any>window).app) {
+       const key = 'RemindMeAgain';
+       const value = '1';
+        const apiParams = {
+          key,
+          value
+      };
+        (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
+      }
     } else {
-      window.open(buyUrl, '_blank');
+      if ((<any>window).app) {
+        const key = 'RemindMeAgain';
+        const value = '0';
+         const apiParams = {
+           key,
+           value
+       };
+       (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
+      }
+    }
+  }
+
+  DontShowCheckValue(e) {
+    if (e.target.checked) {
+      if ((<any>window).app) {
+       const key = 'DontShowAgain';
+       const value = '1';
+        const apiParams = {
+          key,
+          value
+      };
+        (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
+      }
+    } else {
+      if ((<any>window).app) {
+        const key = 'DontShowAgain';
+        const value = '0';
+         const apiParams = {
+           key,
+           value
+       };
+       (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
+      }
+    }
+  }
+
+  remindMeAction(e) {
+    this.isRemindMeCheckChecked = !this.isRemindMeCheckChecked;
+    if (this.isRemindMeCheckChecked) {
+      if ((<any>window).app) {
+       const key = 'RemindMeAgain';
+       const value = '1';
+        const apiParams = {
+          key,
+          value
+      };
+        (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
+      }
+    } else {
+      if ((<any>window).app) {
+        const key = 'RemindMeAgain';
+        const value = '0';
+         const apiParams = {
+           key,
+           value
+       };
+       (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
+      }
+    }
+  }
+
+  dontShowAction(e) {
+    this.isDontShowCheckChecked = !this.isDontShowCheckChecked;
+
+    if (this.isDontShowCheckChecked) {
+      if ((<any>window).app) {
+       const key = 'DontShowAgain';
+       const value = '1';
+        const apiParams = {
+          key,
+          value
+      };
+        (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
+      }
+    } else {
+      if ((<any>window).app) {
+        const key = 'DontShowAgain';
+        const value = '0';
+         const apiParams = {
+           key,
+           value
+       };
+       (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
+      }
     }
   }
 
   closeDialog() {
     if ((<any>window).app) {
-      (<any>window).app.dialogs.closeDialog();
-    }
-  }
-
-  activateLicense() {
-    if ((<any>window).XPress) {
-      (<any>window).XPress.api.invokeGuiApi('XTShowEditLicenseDialog', '');
       (<any>window).app.dialogs.closeDialog();
     }
   }

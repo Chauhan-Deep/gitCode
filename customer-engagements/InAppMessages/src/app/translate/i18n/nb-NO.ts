@@ -13,4 +13,6 @@ export const LANG_NB_NO_TRANS = {
     'buy': 'Kjøp nå',
     'activate': 'Aktiver lisens',
     'coupon': 'Kupong: QXPTRIAL10',
+    'remindLater': 'Påminn meg senere',
+    'dontshowagain': 'Ikke vis igjen',
 };

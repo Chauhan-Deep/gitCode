@@ -13,4 +13,6 @@ export const LANG_KO_KR_TRANS = {
     'buy': '지금 구입하기',
     'activate': '라이센스 등록 검증',
     'coupon': '쿠폰: QXPTRIAL10',
+    'remindLater': '나중에 알림지 않음',
+    'dontshowagain': '다시 표시 안 함',
 };

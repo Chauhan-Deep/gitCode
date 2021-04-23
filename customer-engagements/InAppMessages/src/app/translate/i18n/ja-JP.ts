@@ -13,4 +13,6 @@ export const LANG_JA_JP_TRANS = {
     'buy': '今すぐ購入',
     'activate': 'ライセンスをアクティブ化',
     'coupon': 'クーポンコード: QXPTRIAL10',
+    'remindLater': '後で確認する',
+    'dontshowagain': '次回からは表示しない',
 };

@@ -13,4 +13,6 @@ export const LANG_ZH_CHT_TRANS = {
     'buy': '立即購買',
     'activate': '啟動許可證',
     'coupon': '票據|****|優惠券: QXPTRIAL10',
+    'remindLater': '以後提示我',
+    'dontshowagain': '不再顯示',
 };

@@ -13,4 +13,6 @@ export const LANG_CS_CZ_TRANS = {
     'buy': 'Koupit nyní',
     'activate': 'Aktivovat licenci',
     'coupon': 'Kupón: QXPTRIAL10',
+    'remindLater': 'Připomenout později',
+    'dontshowagain': 'Příště nezobrazovat',
 };

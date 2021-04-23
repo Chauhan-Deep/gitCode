@@ -13,4 +13,6 @@ export const LANG_FR_FR_TRANS = {
     'buy': 'Acheter maintenant',
     'activate': 'Activer la licence',
     'coupon': 'Code promo: QXPTRIAL10',
+    'remindLater': 'Me le rappeler ultérieurement',
+    'dontshowagain': 'Ne plus afficher',
 };

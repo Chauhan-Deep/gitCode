@@ -13,4 +13,6 @@ export const LANG_RU_RU_TRANS = {
     'buy': 'Купить',
     'activate': 'Активировать лицензию',
     'coupon': 'Купон: QXPTRIAL10',
+    'remindLater': 'Напомнить позднее',
+    'dontshowagain': 'Больше не показывать',
 };

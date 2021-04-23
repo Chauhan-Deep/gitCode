@@ -13,4 +13,6 @@ export const LANG_SV_SE_TRANS = {
     'buy': 'Köp nu',
     'activate': 'Aktivera licens',
     'coupon': 'Kupong: QXPTRIAL10',
+    'remindLater': 'Påminn mig senare',
+    'dontshowagain': 'Visa inte igen',
 };

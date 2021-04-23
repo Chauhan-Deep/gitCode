@@ -13,4 +13,6 @@ export const LANG_ZH_CHS_TRANS = {
     'buy': '立即购买',
     'activate': '激活许可证',
     'coupon': '优惠券|****|票据: QXPTRIAL10',
+    'remindLater': '以后提示我',
+    'dontshowagain': '不再显示',
 };
