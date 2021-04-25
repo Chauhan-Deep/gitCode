@@ -11,11 +11,10 @@ import { TranslateService } from '../translate/translate.service';
 })
 export class InAppMessagesComponent implements OnInit {
 @ViewChild('iframeX', { read: ElementRef })
-iframeX: ElementRef;
-isRemindMeCheckChecked = false;
-isDontShowCheckChecked = false;
+  iframeX: ElementRef;
+  isRemindMeCheckChecked = false;
+  isDontShowCheckChecked = false;
 
-  daysRemaining;
   offerURLStr;
   safeOfferURL;
   numOfDays: number;
@@ -37,24 +36,34 @@ isDontShowCheckChecked = false;
     const hostElement = this.iframeX;
 
    // setTimeout(() => {
-     if (iframeElement.contentWindow.document.readyState === 'complete') {
-      iframeElement.contentWindow.document.getElementById('digit-1').innerText = this.digit1;
-      iframeElement.contentWindow.document.getElementById('digit-2').innerText = this.digit1;
+     if (this.numOfDaysStr >= 0) {
+      if (iframeElement.contentWindow.document.readyState === 'complete') {
+        if (iframeElement.contentWindow.document.getElementById('digit-1') != null) {
+          iframeElement.contentWindow.document.getElementById('digit-1').innerText = this.digit1;
+        }
+        if (iframeElement.contentWindow.document.getElementById('digit-2') != null) {
+          iframeElement.contentWindow.document.getElementById('digit-2').innerText = this.digit1;
+        }
 
-      iframeElement.contentWindow.document.getElementById('digit-3').innerText = this.digit2;
-      iframeElement.contentWindow.document.getElementById('digit-4').innerText = this.digit2;
-      // iframeElement.contentWindow.document.getElementById("modal-one").setAttribute("style","padding:0px;");
+        if (iframeElement.contentWindow.document.getElementById('digit-3') != null) {
+          iframeElement.contentWindow.document.getElementById('digit-3').innerText = this.digit2;
+        }
+        if (iframeElement.contentWindow.document.getElementById('digit-4') != null) {
+          iframeElement.contentWindow.document.getElementById('digit-4').innerText = this.digit2;
+        }
+        // iframeElement.contentWindow.document.getElementById("modal-one").setAttribute("style","padding:0px;");
 
-      if (iframeElement.contentWindow.document.getElementById('expiryDate') != null) {
-        console.log('expiryDate.innerText set..'); // function called
-        iframeElement.contentWindow.document.getElementById('expiryDate').innerText = this.dateStrId;
+        if (iframeElement.contentWindow.document.getElementById('expiryDate') != null) {
+          console.log('expiryDate.innerText set..'); // function called
+          iframeElement.contentWindow.document.getElementById('expiryDate').innerText = this.dateStrId;
+        }
+
+        if (iframeElement.contentWindow.document.getElementById('daysDigits') != null) {
+          console.log('daysDigits.daysDigits set..'); // function called
+          iframeElement.contentWindow.document.getElementById('daysDigits').innerText = this.numOfDaysStr;
+        }
       }
-
-      if (iframeElement.contentWindow.document.getElementById('daysDigits') != null) {
-        console.log('daysDigits.daysDigits set..'); // function called
-        iframeElement.contentWindow.document.getElementById('daysDigits').innerText = this.numOfDaysStr;
-      }
-     }
+    }
 
      console.log('days = ' + this.numOfDays); // function called
      console.log('this.digit1 = ' + this.digit1); // function called
@@ -68,44 +77,42 @@ isDontShowCheckChecked = false;
     const days = ((<any>window).XPress) ?
       (<any>window).XPress.api.invokeApi('XTGetAppMaintenanceExpiryDays', '').numOfDays : 29;
 
-      this.numOfDaysStr = days;
-      const dateStr = ((<any>window).XPress) ?
-      (<any>window).XPress.api.invokeApi('XTGetAppMaintenanceExpiryDateString', '').dateString : '_';
+    this.numOfDaysStr = days;
+    const dateStr = ((<any>window).XPress) ?
+    (<any>window).XPress.api.invokeApi('XTGetAppMaintenanceExpiryDateString', '').dateString : '_';
 
-      this.dateStrId = dateStr;
-      console.log('days =' + days); // function called
-      console.log('dateString =' + this.dateStrId); // function called
-
-    if (days > 1) {
-      this.daysRemaining = this.translateService.localize('days').replace('^1', days);
-    } else {
-      this.daysRemaining = this.translateService.localize('day').replace('^1', days);
-    }
+    this.dateStrId = dateStr;
+    console.log('days =' + days); // function called
+    console.log('dateString =' + this.dateStrId); // function called
 
     let urlDays = days;
-    if (days >= 0) {
-      let noOfdays: number  = days;
-      this.digit2 = noOfdays % 10;
-      noOfdays = Math.floor(noOfdays / 10);
-      this.digit1 = noOfdays % 10;
+    let noOfdays: number  = days;
+    this.digit2 = noOfdays % 10;
+    noOfdays = Math.floor(noOfdays / 10);
+    this.digit1 = noOfdays % 10;
 
-      if (days <= 60 && days > 45) {
-        urlDays = 60;
-      } else if (days <= 45 && days > 30) {
-        urlDays = 45;
-      } else if (days <= 30 && days > 15) {
-        urlDays = 30;
-      } else if (days <= 15 && days > 7) {
-        urlDays = 15;
-      } else {
-        urlDays = days;
-      }
+    if (days > 60) {
+      urlDays = 60;
+    } else if (days <= 60 && days > 30) {
+      urlDays = 60;
+    } else if (days <= 30 && days > 15) {
+      urlDays = 30;
+    } else if (days <= 15 && days > 3) {
+      urlDays = 15;
+    } else if (days <= 3 && days >= 0) {
+      urlDays = 3;
+    } else if (days < 0 && days > -5) {
+      urlDays = -2;
+    } else if (days <= -5) {
+      urlDays = -5;
     }
 
     this.offerURLStr = 'https://www.quark.com/inapp-message/' + this.translateService.currentLanguage + '/' + urlDays + 'days.html';
-    if (urlDays === 0) {
-      this.offerURLStr = 'https://www.quark.com/inapp-message/'  + this.translateService.currentLanguage + '/expired.html';
-   }
+    if (urlDays === -2) {
+      this.offerURLStr = 'https://www.quark.com/inapp-message/'  + this.translateService.currentLanguage + '/2expired.html';
+    } else if (urlDays === -5) {
+      this.offerURLStr = 'https://www.quark.com/inapp-message/'  + this.translateService.currentLanguage + '/5expired.html';
+    }
 
     console.log('offerURLStr =' + this.offerURLStr); // function called
 
