@@ -12,7 +12,6 @@ import { TranslateService } from '../translate/translate.service';
 export class InAppMessagesComponent implements OnInit {
 @ViewChild('iframeX', { read: ElementRef })
   iframeX: ElementRef;
-  isRemindMeCheckChecked = false;
   isDontShowCheckChecked = false;
 
   offerURLStr;
@@ -109,9 +108,9 @@ export class InAppMessagesComponent implements OnInit {
 
     this.offerURLStr = 'https://www.quark.com/inapp-message/' + this.translateService.currentLanguage + '/' + urlDays + 'days.html';
     if (urlDays === -2) {
-      this.offerURLStr = 'https://www.quark.com/inapp-message/'  + this.translateService.currentLanguage + '/2expired.html';
+      this.offerURLStr = 'https://www.quark.com/inapp-message/'  + this.translateService.currentLanguage + '/2daysexpired.html';
     } else if (urlDays === -5) {
-      this.offerURLStr = 'https://www.quark.com/inapp-message/'  + this.translateService.currentLanguage + '/5expired.html';
+      this.offerURLStr = 'https://www.quark.com/inapp-message/'  + this.translateService.currentLanguage + '/5daysexpired.html';
     }
 
     console.log('offerURLStr =' + this.offerURLStr); // function called
@@ -147,30 +146,6 @@ export class InAppMessagesComponent implements OnInit {
     );
   }
 
-  RemindMeCheckValue(e) {
-    if (e.target.checked) {
-      if ((<any>window).app) {
-       const key = 'RemindMeAgain';
-       const value = '1';
-        const apiParams = {
-          key,
-          value
-      };
-        (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
-      }
-    } else {
-      if ((<any>window).app) {
-        const key = 'RemindMeAgain';
-        const value = '0';
-         const apiParams = {
-           key,
-           value
-       };
-       (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
-      }
-    }
-  }
-
   DontShowCheckValue(e) {
     if (e.target.checked) {
       if ((<any>window).app) {
@@ -185,31 +160,6 @@ export class InAppMessagesComponent implements OnInit {
     } else {
       if ((<any>window).app) {
         const key = 'DontShowAgain';
-        const value = '0';
-         const apiParams = {
-           key,
-           value
-       };
-       (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
-      }
-    }
-  }
-
-  remindMeAction(e) {
-    this.isRemindMeCheckChecked = !this.isRemindMeCheckChecked;
-    if (this.isRemindMeCheckChecked) {
-      if ((<any>window).app) {
-       const key = 'RemindMeAgain';
-       const value = '1';
-        const apiParams = {
-          key,
-          value
-      };
-        (<any>window).XPress.api.invokeGuiApi('XTSetInAppPreferenceKeyValue', apiParams);
-      }
-    } else {
-      if ((<any>window).app) {
-        const key = 'RemindMeAgain';
         const value = '0';
          const apiParams = {
            key,
