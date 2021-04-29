@@ -14,5 +14,5 @@ export const LANG_EN_US_TRANS = {
     'activate': 'Activate License',
     'coupon': 'Coupon Code: QXPTRIAL10',
     'remindLater': 'Remind Me Later',
-    'dontshowagain': 'Dont Show Again',
+    'dontshowagain': 'Don\'t Show Again',
 };
