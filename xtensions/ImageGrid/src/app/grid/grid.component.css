@@ -1,0 +1,12 @@
+.picture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    justify-items: center;
+    grid-gap: 5px;
+    grid-row-gap: 0px;
+    grid-column-gap: 5px;
+}
+
+.grid-box img {
+    width: 100%;
+}
