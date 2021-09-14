@@ -18,6 +18,12 @@ export class GridComponent implements OnInit {
         this.images.push(event.data.PreviewImage[x]);
       }
     }
+
+    if ("PreviewNextPageImages" in event.data) { 
+        for (const x in event.data.PreviewNextPageImages) {
+          this.images.push(event.data.PreviewNextPageImages[x]);
+       }
+    }
     });
   }
 
