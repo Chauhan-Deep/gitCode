@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ImageGrid';
+
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      console.log("Reached Bottom");
+  }
+}
 }
