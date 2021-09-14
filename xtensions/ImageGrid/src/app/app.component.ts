@@ -11,8 +11,20 @@ export class AppComponent {
 
   @HostListener("window:scroll", [])
   onScroll(): void {
+    console.log(window.innerHeight);
+    console.log(window.scrollY);
+    console.log(document.body.offsetHeight);
+
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
       window?.chrome?.webview?.postMessage("NextPageImages");
   }
 }
+
+@HostListener("document:wheel", [])
+mousewheel (): void {
+  if (!(document.body.clientHeight > window.innerHeight)) {
+    window?.chrome?.webview?.postMessage("NextPageImages");
+  }
+}
+
 }
