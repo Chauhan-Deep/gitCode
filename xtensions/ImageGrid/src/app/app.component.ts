@@ -12,7 +12,7 @@ export class AppComponent {
   @HostListener("window:scroll", [])
   onScroll(): void {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      console.log("Reached Bottom");
+      window?.chrome?.webview?.postMessage("NextPageImages");
   }
 }
 }
