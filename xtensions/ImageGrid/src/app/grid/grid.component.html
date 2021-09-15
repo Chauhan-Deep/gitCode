@@ -1,3 +1,5 @@
 <div class="picture-grid">
-    <div class="grid-box" *ngFor = "let image of images"><img [src]= "image" /></div>
+    <div *ngFor="let image of images">
+        <image-component [imageData]="image"></image-component>        
+    </div>
 </div>
