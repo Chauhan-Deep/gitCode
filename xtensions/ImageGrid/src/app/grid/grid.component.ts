@@ -6,14 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grid.component.css']
 })
 export class GridComponent implements OnInit {
-  images : string[] = [];
+  images : ImageData[] = [];
 
   constructor() 
   {
     window?.chrome?.webview?.addEventListener('message', (event : any) => {
       if ("PreviewImage" in event.data) {
-       this.images = [];
-       
+       this.images = [];       
       for (const x in event.data.PreviewImage) {
         this.images.push(event.data.PreviewImage[x]);
       }
@@ -31,6 +30,22 @@ export class GridComponent implements OnInit {
   }
 
 }
+
+export class ImageData {
+  mPreviewImage?: string;
+  mImageID?: string;
+  mUserID?: string;
+  imageFileType?: string;
+  mUserHTMLURL?:string;
+  mImageHTMLURL?:string;
+  mImageHeight?:string;
+  mImageWidth?:string;
+  //mImageDescription?:string;
+  mPhotographarURL?:string;
+  mPhotographarName?:string;
+  mDownloadURL?:string;
+  mIsUserPresent?:string;
+};
 
 // add chrome to the Window context so typescript stops complaining
 declare global {
