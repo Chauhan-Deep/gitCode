@@ -12,7 +12,9 @@ export class GridComponent implements OnInit {
   {
     window?.chrome?.webview?.addEventListener('message', (event : any) => {
       if ("PreviewImage" in event.data) {
-       this.images = [];       
+       this.images = [];
+       window.scrollTo(0, 0);
+             
       for (const x in event.data.PreviewImage) {
         this.images.push(event.data.PreviewImage[x]);
       }
