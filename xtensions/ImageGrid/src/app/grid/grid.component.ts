@@ -14,7 +14,7 @@ export class GridComponent implements OnInit {
       if ("PreviewImage" in event.data) {
        this.images = [];
        window.scrollTo(0, 0);
-             
+
       for (const x in event.data.PreviewImage) {
         this.images.push(event.data.PreviewImage[x]);
       }
@@ -42,7 +42,7 @@ export class ImageData {
   mImageHTMLURL?:string;
   mImageHeight?:string;
   mImageWidth?:string;
-  //mImageDescription?:string;
+  mImageDescription?:string;
   mPhotographarURL?:string;
   mPhotographarName?:string;
   mDownloadURL?:string;
