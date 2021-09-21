@@ -47,6 +47,7 @@ export class ImageData {
   mPhotographarName?:string;
   mDownloadURL?:string;
   mIsUserPresent?:string;
+  mImageProvider?:string;
 };
 
 // add chrome to the Window context so typescript stops complaining
