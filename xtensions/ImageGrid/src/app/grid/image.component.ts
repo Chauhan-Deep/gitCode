@@ -25,6 +25,6 @@ export class ImageComponent implements OnInit {
 
     console.log(JSON.parse(downloadjson));
 
-    window?.chrome?.webview?.postMessage(downloadjson);
-   }
+    window.chrome.webview.postMessage(downloadjson);
+  }
 }

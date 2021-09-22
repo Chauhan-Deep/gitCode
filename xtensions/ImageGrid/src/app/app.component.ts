@@ -13,14 +13,14 @@ export class AppComponent {
   onScroll(): void {
 
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      window?.chrome?.webview?.postMessage("NextPageImages");
+      window.chrome.webview.postMessage("NextPageImages");
   }
 }
 
 @HostListener("document:wheel", [])
 mousewheel (): void {
   if (!(document.body.clientHeight > window.innerHeight)) {
-    window?.chrome?.webview?.postMessage("NextPageImages");
+    window.chrome.webview.postMessage("NextPageImages");
   }
 }
 
