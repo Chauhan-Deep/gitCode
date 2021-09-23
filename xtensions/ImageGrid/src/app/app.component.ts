@@ -9,19 +9,18 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 export class AppComponent {
   title = 'ImageGrid';
 
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onScroll(): void {
 
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      window.chrome.webview.postMessage("NextPageImages");
+      window.chrome.webview.postMessage('NextPageImages');
   }
 }
 
-@HostListener("document:wheel", [])
-mousewheel (): void {
+@HostListener('document:wheel', [])
+mousewheel(): void {
   if (!(document.body.clientHeight > window.innerHeight)) {
-    window.chrome.webview.postMessage("NextPageImages");
+    window.chrome.webview.postMessage('NextPageImages');
   }
 }
-
 }
