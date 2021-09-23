@@ -7,7 +7,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ImageGrid';
+  title = 'StockImageGrid';
 
   @HostListener('window:scroll', [])
   onScroll(): void {

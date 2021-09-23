@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to ImageGrid!');
+    expect(page.getTitleText()).toEqual('Welcome to StockImageGrid!');
   });
 
   afterEach(async () => {
