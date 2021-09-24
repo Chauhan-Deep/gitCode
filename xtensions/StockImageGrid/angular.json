@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ImageGrid": {
+    "StockImageGrid": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ImageGrid",
+            "outputPath": "dist/StockImageGrid",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -58,18 +58,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ImageGrid:build"
+            "browserTarget": "StockImageGrid:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ImageGrid:build:production"
+              "browserTarget": "StockImageGrid:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ImageGrid:build"
+            "browserTarget": "StockImageGrid:build"
           }
         },
         "test": {
@@ -106,15 +106,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ImageGrid:serve"
+            "devServerTarget": "StockImageGrid:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ImageGrid:serve:production"
+              "devServerTarget": "StockImageGrid:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "ImageGrid"
+  "defaultProject": "StockImageGrid"
 }
