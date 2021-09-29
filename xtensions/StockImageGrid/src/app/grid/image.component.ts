@@ -21,10 +21,8 @@ export class ImageComponent implements OnInit {
     let downloadjson: string;
 
     downloadjson = '{\"dropImage\":[{\"url\":\"' + this.imageData.mDownloadURL + '\",'
-      + '\"imageprovider\":\"' + this.imageData.mImageProvider + '\",' + '\"imageid\":\"'
-      + this.imageData.mImageID + '\"}]}';
-
-    console.log(JSON.parse(downloadjson));
+        + '\"imageprovider\":\"' + this.imageData.mImageProvider + '\",' + '\"imageid\":\"'
+        + this.imageData.mImageID + '\", ' + '\"previewURL\":\"' + this.imageData.mPreviewImage + '\"}]}';
 
     window.chrome.webview.postMessage(downloadjson);
   }

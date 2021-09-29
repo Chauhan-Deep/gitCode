@@ -9,6 +9,13 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 export class AppComponent {
   title = 'StockImageGrid';
 
+  constructor() {
+    window.chrome.webview.addEventListener('message', (event: any) => {
+      if ('QXPThemeColor' in event.data) {
+        document.body.style.backgroundColor = event.data.QXPThemeColor[0].qxpTheme;
+      }
+    });
+  }
   @HostListener('window:scroll', [])
   onScroll(): void {
 
