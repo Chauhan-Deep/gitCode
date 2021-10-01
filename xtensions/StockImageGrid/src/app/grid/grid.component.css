@@ -1,0 +1,10 @@
+.picture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-items: stretch;
+  grid-gap: 5px;
+  grid-row-gap: 0px;
+  grid-column-gap: 5px;
+  align-items: center;
+  object-fit: cover;
+ }
