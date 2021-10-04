@@ -34,6 +34,7 @@ export class GridComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.chrome.webview.postMessage('AppIsRunning');
   }
 
 }
