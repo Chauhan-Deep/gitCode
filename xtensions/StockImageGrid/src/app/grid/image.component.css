@@ -12,9 +12,11 @@
 
 #info-icon {
     position: absolute;
-    bottom: 8px;
-    right: 4px;
+    bottom: 5px;
+    right: 2px;
     visibility: hidden;
+    height: 16px;
+    width: 16px;
 }
 
 #container:hover > #info-icon { visibility: visible; }
