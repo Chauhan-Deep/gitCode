@@ -32,6 +32,15 @@ export class ImageComponent implements OnInit {
     window.chrome.webview.postMessage(imageInfoJson);
   }
 
+  doubleClick() {
+    let doubleClickedimageInfoJson: string;
+
+    doubleClickedimageInfoJson =  '{\"doubleClickedimage\":[{\"url\":\"' + this.imageData.mDownloadURL + '\",'
+        + '\"imageprovider\":\"' + this.imageData.mImageProvider + '\",' + '\"imageid\":\"'
+        + this.imageData.mImageID + '\", ' + '\"previewURL\":\"' + this.imageData.mPreviewImage + '\"}]}';
+    window.chrome.webview.postMessage(doubleClickedimageInfoJson);
+  }
+
   @HostListener('dragstart', ['$event']) public onDragStart(event: DragEvent) {
     event.preventDefault();
 
