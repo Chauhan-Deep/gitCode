@@ -30,4 +30,9 @@ mousewheel(): void {
     window.chrome.webview.postMessage('NextPageImages');
   }
 }
+
+@HostListener('window:keydown.control.p', ['$event'])
+  keyboardInput(event: any) {
+    event.preventDefault();
+  }
 }
