@@ -1,4 +1,5 @@
 <div id = "container">
+    <img id = "favorite-icon" (click) = "FavoriteIconClicked()" src = "./assets/AddFavourite.svg">
     <img id = "main-image" [src]="imageData.mPreviewImage" title="{{imageData.mPhotographarName}}" (dblclick)="doubleClick()"/>
     <img id = "info-icon" (click) = "ImageInfoIconClicked()" src = "./assets/info_icon_16x16.svg">
 </div>
