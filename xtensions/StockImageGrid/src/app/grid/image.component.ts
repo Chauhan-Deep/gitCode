@@ -32,6 +32,26 @@ export class ImageComponent implements OnInit {
     window.chrome.webview.postMessage(imageInfoJson);
   }
 
+  FavoriteIconClicked() {
+    let favouriteimageInfoJson: string;
+
+    favouriteimageInfoJson = '{\"FavouriteimageInfo\":[{\"photographarURL\":\"' + this.imageData.mPhotographarURL + '\",'
+        + '\"imageProvider\":\"'    + this.imageData.mImageProvider    + '\",'
+        + '\"downloadurl\":\"'      + this.imageData.mDownloadURL      + '\",'
+        + '\"previewURL\":\"'       + this.imageData.mPreviewImage     + '\",'
+        + '\"imageid\":\"'          + this.imageData.mImageID          + '\",'
+        + '\"photographarName\":\"' + this.imageData.mPhotographarName + '\",'
+        + '\"imageHTMLURL\":\"'     + this.imageData.mImageHTMLURL     + '\",'
+        + '\"isUserPresent\":\"'    + this.imageData.mIsUserPresent    + '\",'
+        + '\"userID\":\"'           + this.imageData.mUserID           + '\",'
+        + '\"userHTMLURL\":\"'      + this.imageData.mUserHTMLURL      + '\",'
+        + '\"imageDescription\":\"' + this.imageData.mImageDescription + '\",'
+        + '\"imageFileType\":\"'    + this.imageData.imageFileType     + '\",'
+        + '\"imageWidth\":\"'       + this.imageData.mImageWidth       + '\",'
+        + '\"imageHeight\":\"'      + this.imageData.mImageHeight      + '\"}]}';
+    window.chrome.webview.postMessage(favouriteimageInfoJson);
+  }
+
   doubleClick() {
     let doubleClickedimageInfoJson: string;
 
