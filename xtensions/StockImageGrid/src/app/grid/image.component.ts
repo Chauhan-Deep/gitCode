@@ -35,11 +35,12 @@ export class ImageComponent implements OnInit {
   FavoriteIconClicked() {
     let favouriteimageInfoJson: string;
 
+    this.imageData.mIsFavourite = this.imageData.mIsFavourite === 'YES' ? 'NO' : 'YES';
     favouriteimageInfoJson = '{\"FavouriteimageInfo\":[{\"photographarURL\":\"' + this.imageData.mPhotographarURL + '\",'
         + '\"imageProvider\":\"'    + this.imageData.mImageProvider    + '\",'
         + '\"downloadurl\":\"'      + this.imageData.mDownloadURL      + '\",'
         + '\"previewURL\":\"'       + this.imageData.mPreviewImage     + '\",'
-        + '\"imageid\":\"'          + this.imageData.mImageID          + '\",'
+        + '\"imageid\":\"'          + this.imageData.mImageID          +  '\",'
         + '\"photographarName\":\"' + this.imageData.mPhotographarName + '\",'
         + '\"imageHTMLURL\":\"'     + this.imageData.mImageHTMLURL     + '\",'
         + '\"isUserPresent\":\"'    + this.imageData.mIsUserPresent    + '\",'
