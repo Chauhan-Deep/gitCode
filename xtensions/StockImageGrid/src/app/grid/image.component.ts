@@ -20,6 +20,8 @@ export class ImageComponent implements OnInit {
 
     imageInfoJson = '{\"imageInfo\":[{\"photographarURL\":\"' + this.imageData.mPhotographarURL + '\",'
         + '\"imageProvider\":\"'    + this.imageData.mImageProvider    + '\",'
+        + '\"previewURL\":\"'      + this.imageData.mPreviewImage      + '\",'
+        + '\"imageid\":\"'          + this.imageData.mImageID          +  '\",'
         + '\"photographarName\":\"' + this.imageData.mPhotographarName + '\",'
         + '\"imageHTMLURL\":\"'     + this.imageData.mImageHTMLURL     + '\",'
         + '\"isUserPresent\":\"'    + this.imageData.mIsUserPresent    + '\",'
