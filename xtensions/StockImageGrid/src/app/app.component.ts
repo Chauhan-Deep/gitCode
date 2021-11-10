@@ -35,4 +35,11 @@ mousewheel(): void {
   keyboardInput(event: any) {
     event.preventDefault();
   }
+
+  MouseDownEvent(e) {
+      if (e.which === 2) {
+        e.preventDefault();
+        return false;
+      }
+  }
 }
