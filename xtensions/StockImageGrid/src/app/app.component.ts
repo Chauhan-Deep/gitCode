@@ -37,9 +37,8 @@ mousewheel(): void {
   }
 
   MouseDownEvent(e) {
-      if (e.which == 2) {
+      if (e.which === 2) {
         e.preventDefault();
-        
         return false;
       }
   }
