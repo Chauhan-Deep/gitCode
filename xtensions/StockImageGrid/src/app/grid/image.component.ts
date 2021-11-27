@@ -31,7 +31,10 @@ export class ImageComponent implements OnInit {
         + '\"imageFileType\":\"'    + this.imageData.imageFileType     + '\",'
         + '\"imageWidth\":\"'       + this.imageData.mImageWidth       + '\",'
         + '\"imageHeight\":\"'      + this.imageData.mImageHeight      + '\"}]}';
-    window.chrome.webview.postMessage(imageInfoJson);
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', imageInfoJson);
+    }
   }
 
   FavoriteIconClicked() {
@@ -52,7 +55,10 @@ export class ImageComponent implements OnInit {
         + '\"imageFileType\":\"'    + this.imageData.imageFileType     + '\",'
         + '\"imageWidth\":\"'       + this.imageData.mImageWidth       + '\",'
         + '\"imageHeight\":\"'      + this.imageData.mImageHeight      + '\"}]}';
-    window.chrome.webview.postMessage(favouriteimageInfoJson);
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', favouriteimageInfoJson);
+    }
   }
 
   doubleClick() {
@@ -61,7 +67,10 @@ export class ImageComponent implements OnInit {
     doubleClickedimageInfoJson =  '{\"doubleClickedimage\":[{\"url\":\"' + this.imageData.mDownloadURL + '\",'
         + '\"imageprovider\":\"' + this.imageData.mImageProvider + '\",' + '\"imageid\":\"'
         + this.imageData.mImageID + '\", ' + '\"previewURL\":\"' + this.imageData.mPreviewImage + '\"}]}';
-    window.chrome.webview.postMessage(doubleClickedimageInfoJson);
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', doubleClickedimageInfoJson);
+    }
   }
 
   @HostListener('dragstart', ['$event']) public onDragStart(event: DragEvent) {
@@ -73,6 +82,9 @@ export class ImageComponent implements OnInit {
         + '\"imageprovider\":\"' + this.imageData.mImageProvider + '\",' + '\"imageid\":\"'
         + this.imageData.mImageID + '\", ' + '\"previewURL\":\"' + this.imageData.mPreviewImage + '\"}]}';
 
-    window.chrome.webview.postMessage(downloadjson);
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', downloadjson);
+    }
   }
 }

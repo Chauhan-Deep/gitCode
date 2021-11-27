@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-grid',
@@ -7,36 +7,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GridComponent implements OnInit {
   images: ImageData[] = [];
+  private _XT_SENDMESSAGE: number;
+  ngZone: NgZone;
 
-  constructor() {
-    window.chrome.webview.addEventListener('message', (event: any) => {
-      if ('PreviewImage' in event.data) {
-        this.images = [];
-        window.scrollTo(0, 0);
-        // for (const x in event.data.PreviewImage) {
-        //     this.images.push(event.data.PreviewImage[x]);
-        // }
-        // To appease TSLint
-        Object.keys(event.data.PreviewImage).map(key2 => {
-          this.images.push(event.data.PreviewImage[key2]);
-        });
-      }
-      if ('PreviewNextPageImages' in event.data) {
-        // for (const x in event.data.PreviewNextPageImages) {
-        //     this.images.push(event.data.PreviewNextPageImages[x]);
-        // }
-        // To appease TSLint
-        Object.keys(event.data.PreviewNextPageImages).map(key2 => {
-          this.images.push(event.data.PreviewNextPageImages[key2]);
-        });
-      }
-    });
+  constructor(ngZone: NgZone, private ref: ChangeDetectorRef) {
+    this.ngZone = ngZone;
   }
 
   ngOnInit(): void {
-    window.chrome.webview.postMessage('AppIsRunning');
+    const stockImageXTID = 1431525457;
+    if ((window as any).app) {
+      this._XT_SENDMESSAGE = (window as any).XPress.registerQXPCallbackHandler(0, 1636, this.SendMessageCallBackHandler.bind(this));
+    }
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', 'AppIsRunning');
+    }
   }
+  SendMessageCallBackHandler(response) {
+  const jsonResponse = JSON.parse(response);
+  const jsonResponseData = JSON.parse(jsonResponse.data);
 
+  console.log('response=', response);
+  console.log('jsonResponse=', jsonResponse);
+  console.log('jsonResponseData=', jsonResponseData);
+  {
+    // TODO  if (response.message == "PreviewImage") {
+      {
+          this.images = [];
+          window.scrollTo(0, 0);
+          // To appease TSLint
+          Object.keys(jsonResponseData).map(key2 => {
+            this.images.push(jsonResponseData[key2]);
+          });
+          this.ref.detectChanges();
+        }
+      if (response.message === 'PreviewNextPageImages') {
+          this.images = [];
+          window.scrollTo(0, 0);
+          // To appease TSLint
+          Object.keys(jsonResponseData).map(key2 => {
+            this.images.push(jsonResponseData[key2]);
+          });
+          this.ref.detectChanges();
+        }
+    }
+  }
 }
 
 export class ImageData {

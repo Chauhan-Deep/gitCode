@@ -10,24 +10,29 @@ export class AppComponent {
   title = 'StockImageGrid';
 
   constructor() {
-    window.chrome.webview.addEventListener('message', (event: any) => {
-      if ('QXPThemeColor' in event.data) {
-        document.body.style.backgroundColor = event.data.QXPThemeColor[0].qxpTheme;
-      }
-    });
+    // window.chrome.webview.addEventListener('message', (event: any) => {
+    //   if ('QXPThemeColor' in event.data) {
+    //     document.body.style.backgroundColor = event.data.QXPThemeColor[0].qxpTheme;
+    //   }
+    // });
   }
   @HostListener('window:scroll', [])
   onScroll(): void {
-
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      window.chrome.webview.postMessage('NextPageImages');
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', 'NextPageImages');
+    }
   }
 }
 
 @HostListener('document:wheel', [])
 mousewheel(): void {
   if (!(document.body.clientHeight > window.innerHeight)) {
-    window.chrome.webview.postMessage('NextPageImages');
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', 'NextPageImages');
+    }
   }
 }
 
