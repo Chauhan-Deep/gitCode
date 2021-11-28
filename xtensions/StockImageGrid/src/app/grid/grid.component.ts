@@ -30,9 +30,9 @@ export class GridComponent implements OnInit {
   console.log('response=', response);
   console.log('jsonResponse=', jsonResponse);
   console.log('jsonResponseData=', jsonResponseData);
+
   {
-    // TODO  if (response.message == "PreviewImage") {
-      {
+      if (jsonResponse.message === 'PreviewImages') {
           this.images = [];
           window.scrollTo(0, 0);
           // To appease TSLint
@@ -41,14 +41,15 @@ export class GridComponent implements OnInit {
           });
           this.ref.detectChanges();
         }
-      if (response.message === 'PreviewNextPageImages') {
-          this.images = [];
-          window.scrollTo(0, 0);
+      if (jsonResponse.message === 'PreviewNextPageImages') {
           // To appease TSLint
           Object.keys(jsonResponseData).map(key2 => {
             this.images.push(jsonResponseData[key2]);
           });
           this.ref.detectChanges();
+        }
+      if (jsonResponse.message === 'QXPThemeColor') {
+          document.body.style.backgroundColor = jsonResponseData[0].qxpTheme;
         }
     }
   }
