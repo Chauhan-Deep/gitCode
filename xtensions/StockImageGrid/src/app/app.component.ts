@@ -36,9 +36,9 @@ mousewheel(): void {
   }
 }
 
-@HostListener('window:keydown',['$event'])
+@HostListener('window:keydown', ['$event'])
     onKeyPress(event: KeyboardEvent) {
-    if(event.ctrlKey || event.altKey || event.metaKey) {
+    if (event.ctrlKey || event.altKey || event.metaKey) {
       event.preventDefault();
     }
   }

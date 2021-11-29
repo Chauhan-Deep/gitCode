@@ -23,11 +23,15 @@ export class GridComponent implements OnInit {
       (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', 'AppIsRunning');
     }
 
-    window.addEventListener("dragover", e => {
-      e && e.preventDefault();
+    window.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.effectAllowed = 'none';
+      e.dataTransfer.dropEffect = 'none';
     }, false);
-    window.addEventListener("drop", e => {
-      e && e.preventDefault();
+    window.addEventListener('drop', e => {
+      e.preventDefault();
+      e.dataTransfer.effectAllowed = 'none';
+      e.dataTransfer.dropEffect = 'none';
     }, false);
   }
   SendMessageCallBackHandler(response) {
