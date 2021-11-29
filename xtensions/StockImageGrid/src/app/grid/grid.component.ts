@@ -22,14 +22,17 @@ export class GridComponent implements OnInit {
     if ((window as any).XPress) {
       (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', 'AppIsRunning');
     }
+
+    window.addEventListener("dragover", e => {
+      e && e.preventDefault();
+    }, false);
+    window.addEventListener("drop", e => {
+      e && e.preventDefault();
+    }, false);
   }
   SendMessageCallBackHandler(response) {
   const jsonResponse = JSON.parse(response);
   const jsonResponseData = JSON.parse(jsonResponse.data);
-
-  console.log('response=', response);
-  console.log('jsonResponse=', jsonResponse);
-  console.log('jsonResponseData=', jsonResponseData);
 
   {
       if (jsonResponse.message === 'PreviewImages') {
