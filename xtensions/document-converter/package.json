@@ -1,5 +1,5 @@
 {
-  "name": "document-converter-ui",
+  "name": "document-converter",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
