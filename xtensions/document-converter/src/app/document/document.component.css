@@ -1,0 +1,17 @@
+.document-container{
+    background-color: white;
+    height: 48px;
+    width: 100%;
+    border-radius: 4px; 
+    margin-bottom: 8px;
+}
+
+.document-name-container{
+    box-sizing: border-box;
+    padding-left: 25px;
+    padding-top: 8px;
+}
+.document-name-text{
+    color: #006AEF; /* Set a font color */
+    font-size: 13px; /* Set a font size */
+}
