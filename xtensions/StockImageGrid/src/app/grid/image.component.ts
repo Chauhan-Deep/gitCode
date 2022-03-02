@@ -61,6 +61,9 @@ export class ImageComponent implements OnInit {
     }
   }
 
+  AddImageToCollectionIconClicked() {
+  }
+
   doubleClick() {
     let doubleClickedimageInfoJson: string;
 

@@ -30,4 +30,14 @@
     width: 16px;
 }
 
+#collection-icon {
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    visibility: hidden;
+    height: 16px;
+    width: 16px;
+}
+
 #container:hover > #favorite-icon { visibility: visible; }
+#container:hover > #collection-icon { visibility: visible; }
