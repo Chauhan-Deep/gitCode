@@ -13,8 +13,6 @@ export class DocumentsListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    document.body.style.backgroundColor = '#525252';
-    document.body.style.overflow = 'hidden';
   }
 
 }

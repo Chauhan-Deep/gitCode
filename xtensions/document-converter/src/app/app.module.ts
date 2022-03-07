@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+import { QxModule } from '@quark/xpressng';
 
 import { AppComponent } from './app.component';
 import { BrowseButtonComponent } from './browse-button/browse-button.component';
@@ -14,8 +16,10 @@ import { DocumentsListComponent } from './documents-list/documents-list.componen
     DocumentsListComponent
   ],
   imports: [
+    QxModule,
     BrowserModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,6 @@
-<div id ="converted-documents" >Converted Documents</div>
+<div class ="qxlabel-container">
+    <qx-label [multiline]="false">Converted Documents</qx-label>
+</div>
 <div class="scroll">
     <ng-container *ngFor="let document of documents">
         <app-document [documentName]="document"></app-document>    

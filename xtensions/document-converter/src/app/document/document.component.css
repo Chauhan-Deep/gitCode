@@ -1,8 +1,8 @@
 .document-container{
-    background-color: white;
+    background-color: var(--active-area-background-color);
     height: 48px;
     width: 100%;
-    border-radius: 4px; 
+    border-radius: 5px; 
     margin-bottom: 8px;
 }
 
@@ -12,6 +12,7 @@
     padding-top: 8px;
 }
 .document-name-text{
-    color: #006AEF; /* Set a font color */
-    font-size: 13px; /* Set a font size */
+    color: var(--palette-text-color); /* Set a font color */
+    font-size: var(--font-size, 11px); /* Set a font size */
+    text-decoration: underline;
 }
