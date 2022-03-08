@@ -1,5 +1,7 @@
 <ng-container>
-  <app-browse-button></app-browse-button>
+  <qx-button class="btn" [disabled] ="false" [icon] = "'assets/cloud-upload-icon.svg'" [name]="' Browse Document'"
+    [focus]='true' [showBackground]='true' (qxClick)="browseButtonClicked()">
+  </qx-button>
 </ng-container>
 <ng-container>
   <app-documents-list></app-documents-list>

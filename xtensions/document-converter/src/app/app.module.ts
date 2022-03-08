@@ -4,14 +4,12 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { QxModule } from '@quark/xpressng';
 
 import { AppComponent } from './app.component';
-import { BrowseButtonComponent } from './browse-button/browse-button.component';
 import { DocumentComponent } from './document/document.component';
 import { DocumentsListComponent } from './documents-list/documents-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BrowseButtonComponent,
     DocumentComponent,
     DocumentsListComponent
   ],
