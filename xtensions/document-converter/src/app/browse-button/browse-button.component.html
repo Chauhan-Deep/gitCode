@@ -1,8 +1,3 @@
-<button class="btn" (click) = "onClick()">
-    <span id="image" style="float:left;">
-      <img alt="" src="./assets/cloud-upload-icon.svg" height ="28" width="28"/>
-    </span>
-    <span id="texts" style="float:right; line-height: 32px;"> 
-      Browse Document
-    </span>
-</button>
+<qx-button class="btn" [disabled]="false" [icon] = "'assets/cloud-upload-icon.svg'" [name]="' Browse Document'"
+  [focus]='true' [showBackground]='true' (qxClick)="onClick()">
+</qx-button>

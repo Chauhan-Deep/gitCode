@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background: var(--palette-background-color, #666666);
+    overflow: hidden;
+}
+
+.qx-button {
+    font-weight: 500;
+    font-size: 13px;
+    color: white;
+}
+
+.qx-label {
+    font-size: var(--font-size, 11px);
+}
