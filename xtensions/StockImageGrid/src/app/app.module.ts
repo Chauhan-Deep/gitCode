@@ -8,14 +8,17 @@ import { ImageComponent } from './grid/image.component';
 import { QxModule } from '@quark/xpressng';
 import { AddImageToCollectionsComponent } from './addImageToCollections/addimgtocollections.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { CollectionComponent } from './collection/collection.component';
+import { CollectionsComponent } from './collection-list/collection-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GridComponent,
     ImageComponent,
-    AddImageToCollectionsComponent
+    AddImageToCollectionsComponent,
+    CollectionComponent,
+    CollectionsComponent
   ],
   imports: [
     QxModule,

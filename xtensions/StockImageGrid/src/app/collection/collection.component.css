@@ -1,0 +1,17 @@
+.collection-container{
+    background-color: var(--active-area-background-color);
+    height: 48px;
+    width: 100%;
+    border-radius: 5px; 
+    margin-bottom: 8px;
+}
+
+.collection-name-container{
+    box-sizing: border-box;
+    padding-left: 25px;
+    padding-top: 8px;
+}
+.collection-name-text{
+    color: var(--palette-text-color); /* Set a font color */
+    font-size: var(--font-size, 11px); /* Set a font size */
+}

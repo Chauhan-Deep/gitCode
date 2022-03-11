@@ -1,1 +1,8 @@
-<div>Welcome to add image in collections</div>
+<ng-container>
+    <qx-button class="btn" [disabled] ="false" [name]="' Create a new collection...'"
+      [focus]='true' [showBackground]='true' (qxClick)="handleButtonClicked()">
+    </qx-button>
+  </ng-container>
+  <ng-container>
+    <app-collecton-list></app-collecton-list>
+  </ng-container>
