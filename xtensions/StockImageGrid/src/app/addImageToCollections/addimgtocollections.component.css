@@ -11,3 +11,13 @@
 .btn {
     height: 36px;
 }
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+.button {
+    margin: 10px;
+}

@@ -1,8 +1,18 @@
 <ng-container>
     <qx-button class="btn" [disabled] ="false" [name]="' Create a new collection...'"
-      [focus]='true' [showBackground]='true' (qxClick)="handleButtonClicked()">
+      [focus]='false' [showBackground]='true' (qxClick)="handleButtonClicked()">
     </qx-button>
   </ng-container>
   <ng-container>
     <app-collecton-list></app-collecton-list>
+  </ng-container>
+  <ng-container>
+    <div class="horizontal-container" style="padding: 10px;">
+        <qx-button class="button" [disabled]="false" [name]="'OK'" [focus]='true'
+            [showBackground]='true' (qxClick)="closeDialog()" style="height: 20px;  width: 60px;">
+        </qx-button>
+        <qx-button class="button" [disabled]="false" [name]="'Cancel'"
+           [showBackground]='true' [focus]='false' (qxClick)="nextScreen()" style="height: 20px;width: 60px;">
+        </qx-button>
+    </div>
   </ng-container>
