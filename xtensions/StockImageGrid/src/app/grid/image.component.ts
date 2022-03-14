@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, HostListener  } from '@angular/core';
+import { Component, Input, OnInit, HostListener  } from '@angular/core';
 
 @Component({
   selector: 'app-image-component',
