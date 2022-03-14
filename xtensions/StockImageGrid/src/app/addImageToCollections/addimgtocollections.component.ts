@@ -34,6 +34,13 @@ export class AddImageToCollectionsComponent implements OnInit {
   const jsonResponseData = JSON.parse(jsonResponse.data);
 
   }
+
+  handleButtonClicked() {
+  }
+  closeOKDialog() {
+  }
+  closeCancelDialog() {
+  }
 }
 
 // add chrome to the Window context so typescript stops complaining
