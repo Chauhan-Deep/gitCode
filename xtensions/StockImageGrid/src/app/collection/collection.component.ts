@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-collection',
@@ -8,7 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CollectionComponent implements OnInit {
   @Input() collectionImageData: any;
 
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
   }
@@ -16,8 +17,10 @@ export class CollectionComponent implements OnInit {
   changeImageState() {
     if (this.collectionImageData.mImageState === '2') {
       this.collectionImageData.mImageState = '3';
-    } else if (this.collectionImageData.mImageState === '1') {
+      this.ref.detectChanges();
+    } else if (this.collectionImageData.mImageState === '1' || this.collectionImageData.mImageState === '3') {
       this.collectionImageData.mImageState = '2';
+      this.ref.detectChanges();
     }
   }
 }
