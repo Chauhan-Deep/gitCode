@@ -12,9 +12,6 @@ export class AddImageToCollectionsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  handleButtonClicked() {
-  }
   closeOKDialog() {
   }
   closeCancelDialog() {

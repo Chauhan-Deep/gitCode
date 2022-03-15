@@ -1,3 +1,10 @@
+<div>
+  <ng-container>
+    <qx-button class="btn" [disabled] ="false" [name]="' Create a new collection...'"
+      [focus]='false' [showBackground]='true' (qxClick)="handleButtonClicked()">
+    </qx-button>
+  </ng-container>
+</div>
 <div class="scroll">
     <ng-container *ngFor="let collection of imageCollectionData">
         <app-collection [collectionImageData]="collection"></app-collection>    

@@ -48,8 +48,26 @@ export class CollectionsComponent implements OnInit {
       });
       this.ref.detectChanges();
     }
+    if (jsonResponse.message === 'NewCollectionData') {
+      Object.keys(jsonResponseData).map(key2 => {
+        this.imageCollectionData.push(jsonResponseData[key2]);
+      });
+      this.ref.detectChanges();
+    }
+  }
   }
 
+  handleButtonClicked() {
+    let addImageToCollectionsJson: string;
+    const arrayToString = JSON.stringify(this.imageCollectionData);
+
+    addImageToCollectionsJson = '{\"AddNewCollectionForImage\":';
+    addImageToCollectionsJson += arrayToString;
+    addImageToCollectionsJson += '}';
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', addImageToCollectionsJson);
+    }
   }
 }
 
