@@ -1,0 +1,52 @@
+#collection-container{
+    background-color: var(--active-area-background-color);
+    height: 48px;
+    width: 100%;
+    border-radius: 5px; 
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.collection-name-container{
+    box-sizing: border-box;
+    padding-left: 25px;
+    padding-top: 12px;
+}
+.collection-name-text{
+    color: var(--palette-text-color); /* Set a font color */
+    font-size: var(--font-size, 11px); /* Set a font size */
+    text-align: left;
+}
+
+#imagestatus-icon {
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    height: 16px;
+    width: 16px;
+    padding-top: 12px;
+}
+
+#imageaddstatus-icon {
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    visibility: hidden;
+    height: 16px;
+    width: 16px;
+    padding-top: 12px;
+}
+
+#imagedeletestatus-icon {
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    visibility: hidden;
+    height: 16px;
+    width: 16px;
+    padding-top: 12px;
+}
+
+#collection-container:hover > #imagestatus-icon { visibility: hidden; }
+#collection-container:hover > #imageaddstatus-icon { visibility: visible; }
+#collection-container:hover > #imagedeletestatus-icon { visibility: visible; }

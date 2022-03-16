@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, HostListener  } from '@angular/core';
+import { Component, Input, OnInit, HostListener  } from '@angular/core';
 
 @Component({
   selector: 'app-image-component',
@@ -62,6 +62,26 @@ export class ImageComponent implements OnInit {
   }
 
   AddImageToCollectionIconClicked() {
+    let addImageToCollectionsJson: string;
+
+    addImageToCollectionsJson = '{\"AddImageToCollections\":[{\"photographarURL\":\"' + this.imageData.mPhotographarURL + '\",'
+        + '\"imageProvider\":\"'    + this.imageData.mImageProvider    + '\",'
+        + '\"downloadurl\":\"'      + this.imageData.mDownloadURL      + '\",'
+        + '\"previewURL\":\"'       + this.imageData.mPreviewImage     + '\",'
+        + '\"imageid\":\"'          + this.imageData.mImageID          +  '\",'
+        + '\"photographarName\":\"' + this.imageData.mPhotographarName + '\",'
+        + '\"imageHTMLURL\":\"'     + this.imageData.mImageHTMLURL     + '\",'
+        + '\"isUserPresent\":\"'    + this.imageData.mIsUserPresent    + '\",'
+        + '\"userID\":\"'           + this.imageData.mUserID           + '\",'
+        + '\"userHTMLURL\":\"'      + this.imageData.mUserHTMLURL      + '\",'
+        + '\"imageDescription\":\"' + this.imageData.mImageDescription + '\",'
+        + '\"imageFileType\":\"'    + this.imageData.imageFileType     + '\",'
+        + '\"imageWidth\":\"'       + this.imageData.mImageWidth       + '\",'
+        + '\"imageHeight\":\"'      + this.imageData.mImageHeight      + '\"}]}';
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', addImageToCollectionsJson);
+    }
   }
 
   doubleClick() {

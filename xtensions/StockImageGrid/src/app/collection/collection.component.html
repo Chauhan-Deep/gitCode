@@ -1,0 +1,15 @@
+<div id="collection-container" (click)="changeImageState()">
+    <div class="collection-name-container">
+        <span class = "collection-name-text qx-font">{{collectionImageData.mCollectionName}}</span>
+    </div>
+    <ng-container *ngIf="collectionImageData.mImageState == '2'">
+        <img id = "imagestatus-icon" src = "./assets/ImageAddedInCollection.svg">
+        <img id = "imagedeletestatus-icon" src = "./assets/DeleteImageFromCollection.svg" >
+    </ng-container>
+    <ng-container *ngIf="collectionImageData.mImageState == '1'">
+        <img id = "imageaddstatus-icon" src = "./assets/AddImageToCollection.svg">
+    </ng-container>
+    <ng-container *ngIf="collectionImageData.mImageState == '3'">
+        <img id = "imageaddstatus-icon" src = "./assets/AddImageToCollection.svg">
+    </ng-container>
+</div>
