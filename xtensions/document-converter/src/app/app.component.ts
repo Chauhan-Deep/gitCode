@@ -37,14 +37,14 @@ export class AppComponent implements OnInit, OnDestroy {
       } else if (jsonResponseData.DocumentConvertorPhase === 'InitDocumentConvertorPhase') {
         (document.getElementById('qxButton') as HTMLInputElement).disabled = true;
       }
-    } else if(jsonResponse.message === 'AddToList') {
+    } else if (jsonResponse.message === 'AddToList') {
         this.documentPaths.unshift(jsonResponseData.DocumentPath);
         this.cdRef.detectChanges();
-    } else if(jsonResponse.message === 'AppIsLoadedPopulateList') {
-      for (let i in jsonResponseData.DocumentsPath) {
-        this.documentPaths.push(jsonResponseData.DocumentsPath[i]);
-      }
-      this.cdRef.detectChanges();
+    } else if (jsonResponse.message === 'AppIsLoadedPopulateList') {
+        jsonResponseData.DocumentsPath.map(doc => {
+          this.documentPaths.push(doc);
+        });
+        this.cdRef.detectChanges();
     }
   }
 
