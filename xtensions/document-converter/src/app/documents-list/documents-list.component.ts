@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-documents-list',
@@ -6,9 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documents-list.component.css']
 })
 export class DocumentsListComponent implements OnInit {
-  documents: string[] = ['Document 1.qxp', 'Document 2.qxp', 'Document 3.qxp',
-                         'Document 4.qxp', 'Document 5.qxp', 'Document 6.qxp',
-                         'Document 7.qxp', 'Document 8.qxp', 'Document 9.qxp'];
+  @Input() documents: string[] = [];
 
   constructor() { }
 

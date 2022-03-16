@@ -1,0 +1,23 @@
+.qx-button {
+    font-weight: 500;
+    font-size: 13px;
+    color: white;
+}
+
+.qx-label {
+    font-size: var(--font-size, 11px);
+}
+
+.btn {
+    height: 36px;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+.button {
+    margin: 10px;
+}

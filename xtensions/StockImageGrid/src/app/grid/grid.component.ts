@@ -55,9 +55,6 @@ export class GridComponent implements OnInit {
           });
           this.ref.detectChanges();
         }
-      if (jsonResponse.message === 'QXPThemeColor') {
-          document.body.style.backgroundColor = jsonResponseData[0].qxpTheme;
-        }
     }
   }
 }
