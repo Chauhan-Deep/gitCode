@@ -56,7 +56,24 @@ export class CollectionsComponent implements OnInit {
     }
   }
   }
+  closeOKDialog() {
+    let addImageToCollectionsJson: string;
+    const arrayToString = JSON.stringify(this.imageCollectionData);
 
+    addImageToCollectionsJson = '{\"AddImageInCollectionsOK\":';
+    addImageToCollectionsJson += arrayToString;
+    addImageToCollectionsJson += '}';
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', addImageToCollectionsJson);
+    }
+  }
+  closeCancelDialog() {
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', 'AddImageToCollectionDialogCanceled');
+    }
+  }
   handleButtonClicked() {
     let addImageToCollectionsJson: string;
     const arrayToString = JSON.stringify(this.imageCollectionData);

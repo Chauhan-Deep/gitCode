@@ -12,14 +12,6 @@ export class AddImageToCollectionsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  closeOKDialog() {
-  }
-  closeCancelDialog() {
-    const stockImageXTID = 1431525457;
-    if ((window as any).XPress) {
-      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', 'AddImageToCollectionDialogCanceled');
-    }
-  }
 }
 
 // add chrome to the Window context so typescript stops complaining
