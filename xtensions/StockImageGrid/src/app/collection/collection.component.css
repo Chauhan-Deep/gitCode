@@ -16,6 +16,11 @@
     color: var(--palette-text-color); /* Set a font color */
     font-size: var(--font-size, 11px); /* Set a font size */
     text-align: left;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    width:220px;
+    display:inline-block;
 }
 
 #imagestatus-icon {
@@ -24,7 +29,7 @@
     right: 23px;
     height: 16px;
     width: 16px;
-    padding-top: 12px;
+    padding-top: 10px;
 }
 
 #imageaddstatus-icon {
@@ -34,7 +39,7 @@
     visibility: hidden;
     height: 16px;
     width: 16px;
-    padding-top: 12px;
+    padding-top: 10px;
 }
 
 #imagedeletestatus-icon {
@@ -44,7 +49,7 @@
     visibility: hidden;
     height: 16px;
     width: 16px;
-    padding-top: 12px;
+    padding-top: 10px;
 }
 
 #collection-container:hover > #imagestatus-icon { visibility: hidden; }
