@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, HostListener  } from '@angular/core';
+import { Component, Input, OnInit, HostListener, ChangeDetectorRef  } from '@angular/core';
 
 @Component({
   selector: 'app-image-component',
@@ -9,7 +9,7 @@ import { Component, Input, OnInit, HostListener  } from '@angular/core';
 export class ImageComponent implements OnInit {
   @Input() imageData: any;
 
-  constructor() {
+  constructor(private ref: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -41,6 +41,7 @@ export class ImageComponent implements OnInit {
     let favouriteimageInfoJson: string;
 
     this.imageData.mIsFavourite = this.imageData.mIsFavourite === 'YES' ? 'NO' : 'YES';
+    this.ref.detectChanges();
     favouriteimageInfoJson = '{\"FavouriteimageInfo\":[{\"photographarURL\":\"' + this.imageData.mPhotographarURL + '\",'
         + '\"imageProvider\":\"'    + this.imageData.mImageProvider    + '\",'
         + '\"downloadurl\":\"'      + this.imageData.mDownloadURL      + '\",'
