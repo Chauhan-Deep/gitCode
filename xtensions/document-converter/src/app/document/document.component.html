@@ -1,5 +1,11 @@
 <div class="document-container">
     <div class="document-name-container">
-        <span class = "document-name-text qx-font">{{documentName}}</span>
+        <span (click)="documentNameClicked()" class = "document-name-text qx-font">{{documentData.mDocumentName}}</span>
     </div>
+    <ng-container *ngIf="documentData.mDocumentStatus == '1'">
+        <img id = "true-status-icon" src = "./assets/green-tick.svg">
+    </ng-container>
+    <ng-container *ngIf="documentData.mDocumentStatus == '0'">
+        <img id = "false-status-icon" src = "./assets/cross.svg">
+    </ng-container>
 </div>

@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./documents-list.component.css']
 })
 export class DocumentsListComponent implements OnInit {
-  @Input() documents: string[] = [];
+  @Input() documents: any;
 
   constructor() { }
 

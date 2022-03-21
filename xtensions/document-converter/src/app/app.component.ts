@@ -8,7 +8,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'document-converter';
   private _XT_SENDMESSAGE: number;
-  documentPaths: string[] = [];
+  documents: DocumentData[] = [];
 
   constructor(private cdRef: ChangeDetectorRef) {}
 
@@ -38,13 +38,11 @@ export class AppComponent implements OnInit, OnDestroy {
         (document.getElementById('qxButton') as HTMLInputElement).disabled = true;
       }
     } else if (jsonResponse.message === 'AddToList') {
-        this.documentPaths.unshift(jsonResponseData.DocumentPath);
-        this.cdRef.detectChanges();
+      this.documents.unshift(jsonResponseData);
+      this.cdRef.detectChanges();
     } else if (jsonResponse.message === 'AppIsLoadedPopulateList') {
-        jsonResponseData.DocumentsPath.map(doc => {
-          this.documentPaths.push(doc);
-        });
-        this.cdRef.detectChanges();
+      this.documents = jsonResponseData;
+      this.cdRef.detectChanges();
     }
   }
 
@@ -55,4 +53,10 @@ export class AppComponent implements OnInit, OnDestroy {
       (window as any).XPress.api.invokeXTApi(documentConverterXTID, 'XTSendMessage', 'BrowseButtonClicked');
     }
   }
+}
+
+export class DocumentData {
+  mDocumentPath?: string;
+  mDocumentName?: string;
+  mDocumentStatus?: string;
 }
