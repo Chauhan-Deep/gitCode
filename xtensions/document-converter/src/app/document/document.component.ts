@@ -6,11 +6,19 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./document.component.css']
 })
 export class DocumentComponent implements OnInit {
-  @Input() documentName: string;
+  @Input() documentData: any;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  documentNameClicked() {
+    const documentPathJson: string = '{\"ClickedDocPath\":\"' + this.documentData.mDocumentPath + '\"}';
+    const documentConverterXTID = 1128552529;
+
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(documentConverterXTID, 'XTSendMessage', documentPathJson);
+    }
+  }
 }
