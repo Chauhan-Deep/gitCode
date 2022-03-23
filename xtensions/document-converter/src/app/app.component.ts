@@ -1,25 +1,33 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
   title = 'document-converter';
   private _XT_SENDMESSAGE: number;
   documents: DocumentData[] = [];
+  appisLoading: boolean;
 
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(private cdRef: ChangeDetectorRef) {
+    this.appisLoading = true;
+  }
 
   ngOnInit() {
-    const documentConverterXTID = 1128552529;
-
     if ((window as any).app) {
       this._XT_SENDMESSAGE = (window as any).XPress.registerQXPCallbackHandler(0, 1636, this.SendMessageCallBackHandler.bind(this));
     }
-    if ((window as any).XPress) {
-      (window as any).XPress.api.invokeXTApi(documentConverterXTID, 'XTSendMessage', 'AppIsRunning');
+  }
+
+  ngAfterViewChecked() {
+    if (this.appisLoading) {
+      const documentConverterXTID = 1128552529;
+
+      if ((window as any).XPress) {
+        (window as any).XPress.api.invokeXTApi(documentConverterXTID, 'XTSendMessage', 'AppIsRunning');
+      }
     }
   }
 
@@ -40,7 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
     } else if (jsonResponse.message === 'AddToList') {
       this.documents.unshift(jsonResponseData);
       this.cdRef.detectChanges();
-    } else if (jsonResponse.message === 'AppIsLoadedPopulateList') {
+    } else if (jsonResponse.message === 'AppIsLoadedPopulateList' && (this.appisLoading)) {
+      this.appisLoading = false;
       this.documents = jsonResponseData;
       this.cdRef.detectChanges();
     }
