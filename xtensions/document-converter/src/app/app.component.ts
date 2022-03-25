@@ -52,6 +52,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
       this.appisLoading = false;
       this.documents = jsonResponseData;
       this.cdRef.detectChanges();
+    } else if (jsonResponse.message === 'RefreshList') {
+      this.documents = jsonResponseData;
+      this.cdRef.detectChanges();
     }
   }
 
