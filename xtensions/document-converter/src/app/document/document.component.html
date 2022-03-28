@@ -1,5 +1,14 @@
 <div class="document-container">
     <div class="document-name-container">
-        <span class = "document-name-text qx-font">{{documentName}}</span>
+        <span (click)="documentNameClicked()" class = "document-name-text qx-font">{{documentData.mDocumentName}}</span>
     </div>
+    <ng-container *ngIf="documentData.mDocumentStatus == '0'"> <!-- kStatusSuccess -->
+        <img id = "true-status-icon" src = "./assets/green-tick.svg">
+    </ng-container>
+    <ng-container *ngIf="documentData.mDocumentStatus == '1'"> <!-- kStatusFailure -->
+        <img id = "false-status-icon" src = "./assets/error.svg">
+    </ng-container>
+    <ng-container *ngIf="documentData.mDocumentStatus == '2'"> <!-- kStatusInConversion -->
+        <img id = "in-conversion-status-icon" (click) = "StopConversionClicked()" src = "./assets/cross.svg">
+    </ng-container>
 </div>

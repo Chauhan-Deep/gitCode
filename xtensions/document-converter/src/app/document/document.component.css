@@ -4,6 +4,7 @@
     width: 100%;
     border-radius: 5px; 
     margin-bottom: 8px;
+    position: relative; 
 }
 
 .document-name-container{
@@ -17,4 +18,32 @@
     font-size: var(--font-size, 11px); /* Set a font size */
     text-decoration: underline;
     white-space: nowrap;
+    cursor: pointer;
+}
+
+#true-status-icon {
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    height: 16px;
+    width: 16px;
+    padding-top: 10px;
+}
+
+#false-status-icon {
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    height: 16px;
+    width: 16px;
+    padding-top: 10px;
+}
+
+#in-conversion-status-icon {
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    height: 16px;
+    width: 16px;
+    padding-top: 10px;
 }
