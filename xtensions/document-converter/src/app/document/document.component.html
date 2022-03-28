@@ -10,5 +10,10 @@
     </ng-container>
     <ng-container *ngIf="documentData.mDocumentStatus == '2'"> <!-- kStatusInConversion -->
         <img id = "in-conversion-status-icon" (click) = "StopConversionClicked()" src = "./assets/cross.svg">
+        <div class="progress-bar-container">
+            <div class="progress-bar">
+                <div class="progress-bar-value"></div>
+            </div>
+        </div>
     </ng-container>
 </div>
