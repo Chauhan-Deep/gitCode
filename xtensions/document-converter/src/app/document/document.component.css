@@ -38,3 +38,12 @@
     width: 16px;
     padding-top: 10px;
 }
+
+#in-conversion-status-icon {
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    height: 16px;
+    width: 16px;
+    padding-top: 10px;
+}
