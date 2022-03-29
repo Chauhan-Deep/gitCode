@@ -13,7 +13,16 @@ export class DocumentComponent implements OnInit {
   ngOnInit() {
   }
 
-  documentNameClicked() {
+  DocumentNameClicked() {
+    const documentPathJson: string = '{\"OpenDocument\":\"' + this.documentData.mDocumentPath + '\"}';
+    const documentConverterXTID = 1128552529;
+
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(documentConverterXTID, 'XTSendMessage', documentPathJson);
+    }
+  }
+
+  ShowInFolderClicked() {
     const documentPathJson: string = '{\"ClickedDocPath\":\"' + this.documentData.mDocumentPath + '\"}';
     const documentConverterXTID = 1128552529;
 
@@ -28,5 +37,17 @@ export class DocumentComponent implements OnInit {
     if ((window as any).XPress) {
       (window as any).XPress.api.invokeXTApi(documentConverterXTID, 'XTSendMessage', 'StopConversionClicked');
     }
+  }
+
+  DisplayShowInFolderText() {
+    const isWindows: boolean = navigator.platform.toLowerCase() === 'win32';
+    let displayText: string;
+
+    if (isWindows) {
+      displayText = 'Show in folder';
+    } else {
+      displayText = 'Show in Finder';
+    }
+    return displayText;
   }
 }
