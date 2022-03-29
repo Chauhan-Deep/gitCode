@@ -1,12 +1,18 @@
 <div class="document-container">
     <div class="document-name-container">
-        <span (click)="documentNameClicked()" class = "document-name-text qx-font">{{documentData.mDocumentName}}</span>
+        <span (click)="DocumentNameClicked()" class = "document-name-text qx-font">{{documentData.mDocumentName}}</span>
     </div>
     <ng-container *ngIf="documentData.mDocumentStatus == '0'"> <!-- kStatusSuccess -->
         <img id = "true-status-icon" src = "./assets/green-tick.svg">
+        <div class="conversion-status-container">
+            <span (click)="ShowInFolderClicked()"class = "conversion-success-text qx-font">{{DisplayShowInFolderText()}}</span>
+        </div>
     </ng-container>
     <ng-container *ngIf="documentData.mDocumentStatus == '1'"> <!-- kStatusFailure -->
         <img id = "false-status-icon" src = "./assets/error.svg">
+        <div class="conversion-status-container">
+            <span class = "conversion-failed-text qx-font">Conversion failed</span>
+        </div>
     </ng-container>
     <ng-container *ngIf="documentData.mDocumentStatus == '2'"> <!-- kStatusInConversion -->
         <img id = "in-conversion-status-icon" (click) = "StopConversionClicked()" src = "./assets/cross.svg">

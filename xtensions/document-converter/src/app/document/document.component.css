@@ -10,16 +10,41 @@
 .document-name-container{
     box-sizing: border-box;
     padding-left: 25px;
-    padding-top: 8px;
+    padding-top: 7px;
     overflow: hidden;
 }
 .document-name-text{
     color: var(--palette-text-color); /* Set a font color */
-    font-size: var(--font-size, 11px); /* Set a font size */
-    text-decoration: underline;
+    font-size: 12px; /* Set a font size */
     white-space: nowrap;
     cursor: pointer;
 }
+
+.document-name-text:hover {
+    border-bottom: 1px solid var(--palette-text-color);
+}
+
+.conversion-status-container {
+    padding-left: 25px;
+    padding-top: 0px;
+}
+
+.conversion-failed-text{
+    color: var(--palette-text-color); /* Set a font color */
+    font-size: 9px; /* Set a font size */
+    cursor: default;
+}
+
+.conversion-success-text{
+    color: var(--palette-text-color); /* Set a font color */
+    font-size: 9px; /* Set a font size */
+    cursor: pointer;
+}
+
+.conversion-success-text:hover {
+    border-bottom: 0.5px solid var(--palette-text-color);
+}
+
 
 #true-status-icon {
     position: absolute;
