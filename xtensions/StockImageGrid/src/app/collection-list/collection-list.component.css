@@ -10,7 +10,7 @@ div.scroll {
     background-color: transparent;
     padding-right: 8px;
     width: calc(100vw - 16px);
-    height: calc(100vh - 105px);
+    height: calc(100vh - 125px);
     overflow-x: hidden;
     overflow-y: auto;
     margin-top: 10px;
