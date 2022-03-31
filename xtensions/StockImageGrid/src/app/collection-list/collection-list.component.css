@@ -10,20 +10,14 @@ div.scroll {
     background-color: transparent;
     padding-right: 8px;
     width: calc(100vw - 16px);
-    height: calc(100vh - 125px);
+    height: calc(100vh - 150px);
     overflow-x: hidden;
     overflow-y: auto;
-    margin-top: 10px;
-}
-
-.qx-button {
-    font-weight: 500;
-    font-size: 13px;
-    color: white;
+    margin-top: 20px;
 }
 
 .btn {
-    height: 36px;
+    height: 48px;
 }
 
 .horizontal-container {
@@ -33,5 +27,5 @@ div.scroll {
     align-items: flex-start;
 }
 .button {
-    margin: 10px;
+    margin: 5px;
 }

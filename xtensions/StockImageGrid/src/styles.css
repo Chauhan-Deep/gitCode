@@ -2,4 +2,16 @@
 body {
     background: var(--palette-background-color, #666666);
     overflow-x: hidden;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.qx-button {
+    font-weight: 500;
+    color: white;
+    font-size: 13px;
 }
