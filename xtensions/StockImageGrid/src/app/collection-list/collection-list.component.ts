@@ -38,7 +38,6 @@ export class CollectionsComponent implements OnInit {
   const jsonResponse = JSON.parse(response);
   const jsonResponseData = JSON.parse(jsonResponse.data);
   {
-    alert(jsonResponseData);
     if (jsonResponse.message === 'CollectionImageData') {
       this.imageCollectionData = [];
       window.scrollTo(0, 0);

@@ -10,6 +10,9 @@ import { AddImageToCollectionsComponent } from './addImageToCollections/addimgto
 import { AppRoutingModule } from './app-routing.module';
 import { CollectionComponent } from './collection/collection.component';
 import { CollectionsComponent } from './collection-list/collection-list.component';
+import { ManageCollectionComponent } from './manageCollection/manageCollection.component';
+import { ManageCollectionsComponent } from './manageCollections/manageCollections.component';
+import { ManageCollectionsListComponent } from './manageCollection-list/manageCollection-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { CollectionsComponent } from './collection-list/collection-list.componen
     ImageComponent,
     AddImageToCollectionsComponent,
     CollectionComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    ManageCollectionsComponent,
+    ManageCollectionsListComponent,
+    ManageCollectionComponent
   ],
   imports: [
     QxModule,
