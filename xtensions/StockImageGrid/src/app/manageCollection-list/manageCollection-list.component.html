@@ -8,7 +8,9 @@
 </div>
 <div class="scroll">
     <ng-container *ngFor="let collection of collectionsData">
+      <ng-container *ngIf="collection.mMarkDeleted == 'false'">
         <app-managecollection [collectionData]="collection"></app-managecollection>    
+      </ng-container>
     </ng-container>
 </div>
 <div>
