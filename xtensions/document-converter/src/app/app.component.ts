@@ -19,6 +19,17 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
     if ((window as any).app) {
       this._XT_SENDMESSAGE = (window as any).XPress.registerQXPCallbackHandler(0, 1636, this.SendMessageCallBackHandler.bind(this));
     }
+    
+    window.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.effectAllowed = 'none';
+      e.dataTransfer.dropEffect = 'none';
+    }, false);
+    window.addEventListener('drop', e => {
+      e.preventDefault();
+      e.dataTransfer.effectAllowed = 'none';
+      e.dataTransfer.dropEffect = 'none';
+    }, false);
   }
 
   ngAfterViewChecked() {
