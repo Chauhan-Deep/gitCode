@@ -13,4 +13,9 @@ export class ManageCollectionComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  deleteCollection() {
+    this.collectionData.mMarkDeleted = 'true';
+    this.ref.detectChanges();
+  }
 }

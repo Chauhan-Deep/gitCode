@@ -13,12 +13,11 @@ div.scroll {
     height: calc(100vh - 145px);
     overflow-x: hidden;
     overflow-y: auto;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .btn {
     height: 48px;
-
 }
 
 .horizontal-container {

@@ -1,7 +1,9 @@
+<ng-container *ngIf="collectionData.mMarkDeleted == 'false'">
 <div id="collection-container">
     <div class="collection-name-container">
         <span class = "collection-name-text qx-font">{{collectionData.mCollectionName}}</span>
         <img id = "editcollection-icon" src = "./assets/EditCollection.svg">
-        <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg">
+        <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()">
     </div>
 </div>
+</ng-container>
