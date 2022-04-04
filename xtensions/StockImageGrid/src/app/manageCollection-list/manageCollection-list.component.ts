@@ -47,6 +47,12 @@ export class ManageCollectionsListComponent implements OnInit {
       });
       this.ref.detectChanges();
     }
+    if (jsonResponse.message === 'ManageNewCollectionData') {
+      Object.keys(jsonResponseData).map(key2 => {
+        this.collectionsData.push(jsonResponseData[key2]);
+      });
+      this.ref.detectChanges();
+    }
   }
   }
   closeOKDialog() {
@@ -71,7 +77,7 @@ export class ManageCollectionsListComponent implements OnInit {
     let manageCollectionsJson: string;
     const arrayToString = JSON.stringify(this.collectionsData);
 
-    manageCollectionsJson = '{\"AddNewCollection\":';
+    manageCollectionsJson = '{\"ManageNewCollection\":';
     manageCollectionsJson += arrayToString;
     manageCollectionsJson += '}';
     const stockImageXTID = 1431525457;
