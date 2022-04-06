@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-collecton-list',
@@ -84,6 +84,12 @@ export class CollectionsComponent implements OnInit {
     if ((window as any).XPress) {
       (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', addImageToCollectionsJson);
     }
+  }
+  @HostListener('document:keydown.enter', ['$event']) onKeydownEnterHandler(event: KeyboardEvent) {
+    this.closeOKDialog();
+  }
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.closeCancelDialog();
   }
 }
 
