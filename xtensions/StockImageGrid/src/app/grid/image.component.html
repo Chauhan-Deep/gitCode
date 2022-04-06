@@ -1,10 +1,10 @@
 <div id = "container" draggable="true">
-    <img id = "collection-icon" (click) = "AddImageToCollectionIconClicked()" src = "./assets/Add-ImageTo-Collections.svg">
+    <img id = "collection-icon" (click) = "AddImageToCollectionIconClicked()" src = "./assets/Add-ImageTo-Collections.svg" title="Add image to collections">
     <ng-container *ngIf="imageData.mIsFavourite == 'YES'">
-        <img id = "favorite-icon" (click) = "FavoriteIconClicked()" src = "./assets/DeleteFavourite.svg">
+        <img id = "favorite-icon" (click) = "FavoriteIconClicked()" src = "./assets/DeleteFavourite.svg" title="Remove image from favorites">
     </ng-container>
     <ng-container *ngIf="imageData.mIsFavourite == 'NO'">
-        <img id = "favorite-icon" (click) = "FavoriteIconClicked()" src = "./assets/AddFavourite.svg">
+        <img id = "favorite-icon" (click) = "FavoriteIconClicked()" src = "./assets/AddFavourite.svg" title="Add image to favorites">
     </ng-container>
     <img id = "main-image" [src]="imageData.mPreviewImage" title="{{imageData.mPhotographarName}}" (dblclick)="doubleClick()"/>
     <img id = "info-icon" (click) = "ImageInfoIconClicked()" src = "./assets/info_icon_16x16.svg">

@@ -1,9 +1,9 @@
 <ng-container *ngIf="collectionData.mMarkDeleted == 'false'">
 <div id="collection-container">
     <div class="collection-name-container">
-        <span class = "collection-name-text qx-font">{{collectionData.mCollectionName}}</span>
-        <img id = "editcollection-icon" src = "./assets/EditCollection.svg">
-        <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()">
+        <span class = "collection-name-text qx-font">{{collectionData.mEditedCollectionName}}</span>
+        <img id = "editcollection-icon" src = "./assets/EditCollection.svg" (click)="editCollection()" title="Edit Collection">
+        <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()" title="Delete Collection">
     </div>
 </div>
 </ng-container>
