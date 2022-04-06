@@ -53,6 +53,28 @@ export class ManageCollectionsListComponent implements OnInit {
       });
       this.ref.detectChanges();
     }
+    if (jsonResponse.message === 'ManageEditCollectionData') {
+      for (const cData of this.collectionsData) {
+        if (cData.mCollectionName === jsonResponseData[0].mCollectionName) {
+          cData.mEditedCollectionName = jsonResponseData[0].mEditedCollectionName;
+          this.ref.detectChanges();
+
+          break;
+        }
+      }
+    }
+    if (jsonResponse.message === 'EditCollectionData') {
+      let manageCollectionsJson: string;
+      const arrayToString = JSON.stringify(this.collectionsData);
+
+      manageCollectionsJson = '{\"EditCollectionDataList\":';
+      manageCollectionsJson += arrayToString;
+      manageCollectionsJson += '}';
+      const stockImageXTID = 1431525457;
+      if ((window as any).XPress) {
+        (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', manageCollectionsJson);
+      }
+    }
   }
   }
   closeOKDialog() {
