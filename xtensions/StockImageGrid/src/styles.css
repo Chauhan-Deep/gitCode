@@ -1,5 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family:"Roboto";
+    font-weight:100;
+    src: url("assets/fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family:"Roboto Bold";
+    font-weight:100;
+    src: url("assets/fonts/Roboto-Bold.ttf");
+}
+
 body {
+    font-family: 'Roboto';
     background: var(--palette-background-color, #666666);
     overflow-x: hidden;
     -webkit-user-drag: none;
@@ -8,10 +21,21 @@ body {
     -o-user-drag: none;
     -ms-user-select: none;
     user-select: none;
+    --font-family: 'Roboto';
 }
 
 .qx-button {
     font-weight: 500;
-    color: white;
     font-size: 13px;
+}
+
+.qx-button-background {
+    border: 1px solid;
+    border-color: var(--separator-line-color);
+    background-color: var(--button-background-color);
+}
+
+.qx-button-focus {
+    background-color: var(--focus-button-background-color);
+    color: white;
 }
