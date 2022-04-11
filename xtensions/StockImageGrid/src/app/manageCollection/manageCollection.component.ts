@@ -15,8 +15,16 @@ export class ManageCollectionComponent implements OnInit {
   }
 
   deleteCollection() {
-    this.collectionData.mMarkDeleted = 'true';
-    this.ref.detectChanges();
+    let deleteCollectionsJson: string;
+    const arrayToString = JSON.stringify(this.collectionData);
+
+    deleteCollectionsJson = '{\"DeleteCollection\":';
+    deleteCollectionsJson += arrayToString;
+    deleteCollectionsJson += '}';
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', deleteCollectionsJson);
+    }
   }
   editCollection() {
     let editCollectionsJson: string;

@@ -75,6 +75,16 @@ export class ManageCollectionsListComponent implements OnInit {
         (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', manageCollectionsJson);
       }
     }
+    if (jsonResponse.message === 'DeleteCollectionData') {
+      for (const cData of this.collectionsData) {
+        if (cData.mCollectionName === jsonResponseData[0].mCollectionName) {
+          cData.mMarkDeleted = 'true';
+          this.ref.detectChanges();
+
+          break;
+        }
+      }
+    }
   }
   }
   closeOKDialog() {
