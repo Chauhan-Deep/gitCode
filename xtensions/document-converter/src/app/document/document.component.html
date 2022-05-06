@@ -1,9 +1,10 @@
 <div class="document-container">
+    <img id = "qxp-icon" src = "./assets/Application.png">
     <ng-container *ngIf="documentData.mDocumentStatus == '0'"> <!-- kStatusSuccess -->
         <div class="document-name-container">
             <span (click)="DocumentNameClicked()" class = "doc-name-text-hyperlink qx-font">{{documentData.mDocumentName}}</span>
         </div>
-        <img id = "true-status-icon" src = "./assets/green-tick.svg">
+        <img id = "status-icon" src = "./assets/green-tick.svg">
         <div class="conversion-status-container">
             <span (click)="ShowInFolderClicked()"class = "conversion-success-text qx-font">{{DisplayShowInFolderText()}}</span>
         </div>
@@ -12,7 +13,7 @@
         <div class="document-name-container">
             <span class = "doc-name-text-static qx-font">{{documentData.mDocumentName}}</span>
         </div>
-        <img id = "false-status-icon" src = "./assets/error.svg">
+        <img id = "status-icon" src = "./assets/error.svg">
         <div class="conversion-status-container">
             <span class = "conversion-failed-text qx-font">Conversion failed</span>
         </div>
@@ -21,7 +22,7 @@
         <div class="document-name-container">
             <span class = "doc-name-text-static qx-font">{{documentData.mDocumentName}}</span>
         </div>
-        <img id = "in-conversion-status-icon" (click) = "StopConversionClicked()" src = "./assets/cross.svg">
+        <img id = "status-icon" (click) = "StopConversionClicked()" src = "./assets/cross.svg">
         <div class="progress-bar-container">
             <div class="progress-bar">
                 <div class="progress-bar-value"></div>

@@ -1,7 +1,9 @@
 <ng-container>
-  <qx-button class="btn" [disabled] ="false" [icon] = "'assets/cloud-upload-icon.svg'" [name]="' Browse Document'"
-    [focus]='true' [showBackground]='true' (qxClick)="browseButtonClicked()">
-  </qx-button>
+  <div class="button-container">
+    <qx-button class="btn" [disabled] ="false" [icon] = "'assets/cloud-upload-icon.svg'" [name]="' Browse Document'"
+      [focus]='true' [showBackground]='true' (qxClick)="browseButtonClicked()">
+    </qx-button>
+  </div>
 </ng-container>
 <ng-container>
   <app-documents-list [documents]="documents"></app-documents-list>

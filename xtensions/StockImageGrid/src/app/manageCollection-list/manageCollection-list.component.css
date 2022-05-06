@@ -10,16 +10,21 @@ div.scroll {
     background-color: transparent;
     padding-right: 8px;
     width: calc(100vw - 16px);
-    height: calc(100vh - 145px);
+    height: calc(100vh - 150px);
     overflow-x: hidden;
     overflow-y: auto;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .btn {
     height: 48px;
 }
 
+.button-container {
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
 .horizontal-container {
     display: flex;
     flex-direction: row;
