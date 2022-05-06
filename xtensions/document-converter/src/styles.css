@@ -17,5 +17,5 @@ body {
 }
 
 .qx-label {
-    font-size: var(--font-size, 11px);
+    font-size: 14px;
 }
