@@ -1,8 +1,6 @@
 #collection-container{
     background-color: var(--active-area-background-color);
     height: 48px;
-    margin-left: 8px;
-    margin-right: 8px;
     padding-left: 8px;
     padding-right: 8px;
     border-radius: 5px; 
@@ -12,8 +10,8 @@
 
 .collection-name-container{
     box-sizing: border-box;
-    padding-left: 25px;
-    padding-top: 12px;
+    padding-left: 15px;
+    padding-top: 15px;
 }
 .collection-name-text{
     color: var(--palette-text-color); /* Set a font color */
@@ -22,7 +20,7 @@
     overflow: hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
-    width:220px;
+    width:210px;
     display:inline-block;
 }
 
