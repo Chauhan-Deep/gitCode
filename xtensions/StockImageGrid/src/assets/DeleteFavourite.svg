@@ -1,18 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 25.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 90 90" style="enable-background:new 0 0 90 90;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#E7E7E7;}
-</style>
-<g>
-	<path class="st0" d="M45.7,75.9L14.6,44.8c0,0-14.5-14.6,2.9-27.5c0,0,8.3-5.8,17.8-0.9c0,0,4.3,2.4,7.4,6.2c0,0,2.9,4.3,6.5-0.5
-		c0,0,4.7-5.2,8.1-6.3c0,0,8.6-4,16.7,1.5c0,0,10.5,6.2,7.3,19.8c0,0-1.7,4.6-3.4,6.4L45.7,75.9z"/>
-	<path d="M79.3,17.1c-4.3-4.3-10-6.6-16-6.6s-11.7,2.4-16,6.6L45.4,19l-1.9-1.9c-4.3-4.3-10-6.6-16-6.6s-11.7,2.4-16,6.6
-		c-4.3,4.3-6.6,10-6.6,16s2.4,11.7,6.6,16l32,32c0.5,0.5,1.2,0.8,1.9,0.8s1.4-0.3,1.9-0.8l32-32C88.2,40.3,88.2,26,79.3,17.1
-		L79.3,17.1z M75.5,45.3l-30,30l-30-30c-3.2-3.2-5-7.5-5-12.1s1.8-8.9,5-12.1s7.5-5,12.1-5s8.9,1.8,12.1,5l3.8,3.8
-		c1.1,1.1,2.8,1.1,3.9,0l3.8-3.8c3.2-3.2,7.5-5,12.1-5s8.9,1.8,12.1,5C82.2,27.7,82.2,38.6,75.5,45.3z"/>
-	<path d="M54.4,43.8H36.5c-1.3,0-2.4,1.1-2.4,2.4c0,1.3,1.1,2.4,2.4,2.4h17.9c1.3,0,2.4-1.1,2.4-2.4C56.8,44.8,55.7,43.8,54.4,43.8z
-		"/>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <filter id="Rectangle_85" x="-0.5" y="5.5" width="49" height="39" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-Remove_Favorites_-_90x90">
+      <rect width="48" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="Remove_Favorites_-_90x90" data-name="Remove Favorites - 90x90" clip-path="url(#clip-Remove_Favorites_-_90x90)">
+    <g id="Group_107" data-name="Group 107" transform="translate(-324.917 -254.838)">
+      <g transform="matrix(1, 0, 0, 1, 324.92, 254.84)" filter="url(#Rectangle_85)">
+        <rect id="Rectangle_85-2" data-name="Rectangle 85" width="46" height="36" rx="2" transform="translate(1 6)" fill="#fff"/>
+      </g>
+      <path id="Path_145" data-name="Path 145" d="M1803.227,1761.312c-.4-4.378-3.528-7.556-7.435-7.556a7.306,7.306,0,0,0-5.939,3.043,7.1,7.1,0,0,0-5.808-3.045c-3.906,0-7.033,3.175-7.435,7.544a7.792,7.792,0,0,0,.224,2.884,12.063,12.063,0,0,0,3.707,6.192l9.289,8.429,9.448-8.427a12.043,12.043,0,0,0,3.706-6.186A7.831,7.831,0,0,0,1803.227,1761.312Z" transform="translate(-1441.559 -1486.678)" fill="#454444"/>
+      <path id="Path_190" data-name="Path 190" d="M1626.4,1886.454h-9.9v1.462h9.9Z" transform="translate(-1273.094 -1608.644)" fill="#fff"/>
+    </g>
+  </g>
 </svg>
