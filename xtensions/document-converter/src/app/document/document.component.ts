@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DocumentComponent implements OnInit {
   @Input() documentData: any;
+  isWindows = navigator.platform.toLowerCase() === 'win32';
 
   constructor() { }
 
@@ -14,7 +15,15 @@ export class DocumentComponent implements OnInit {
   }
 
   DocumentNameClicked() {
-    const documentPathJson: string = '{\"OpenDocument\":\"' + this.documentData.mDocumentPath + '\"}';
+    let documentPathStr: string;
+
+    if (this.isWindows) {
+      documentPathStr = this.documentData.mDocumentPath;
+    } else {
+      const tempStr: string  = this.documentData.mDocumentPath.replace(/\\/g, '\\\\');
+      documentPathStr = tempStr.replace(/\"/g, '\\\"');
+    }
+    const documentPathJson: string = '{\"OpenDocument\":\"' + documentPathStr + '\"}';
     const documentConverterXTID = 1128552529;
 
     if ((window as any).XPress) {
@@ -23,7 +32,15 @@ export class DocumentComponent implements OnInit {
   }
 
   ShowInFolderClicked() {
-    const documentPathJson: string = '{\"ClickedDocPath\":\"' + this.documentData.mDocumentPath + '\"}';
+    let documentPathStr: string;
+
+    if (this.isWindows) {
+      documentPathStr = this.documentData.mDocumentPath;
+    } else {
+      const tempStr: string  = this.documentData.mDocumentPath.replace(/\\/g, '\\\\');
+      documentPathStr = tempStr.replace(/\"/g, '\\\"');
+    }
+    const documentPathJson: string = '{\"ClickedDocPath\":\"' + documentPathStr + '\"}';
     const documentConverterXTID = 1128552529;
 
     if ((window as any).XPress) {
@@ -40,10 +57,9 @@ export class DocumentComponent implements OnInit {
   }
 
   DisplayShowInFolderText() {
-    const isWindows: boolean = navigator.platform.toLowerCase() === 'win32';
     let displayText: string;
 
-    if (isWindows) {
+    if (this.isWindows) {
       displayText = 'Show in folder';
     } else {
       displayText = 'Show in Finder';
