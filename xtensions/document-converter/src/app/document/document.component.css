@@ -1,8 +1,8 @@
 .document-container{
     background-color: var(--active-area-background-color);
     height: 48px;
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: 0px;
+    margin-right: 0px;
     padding-left: 8px;
     padding-right: 8px;
     border-radius: 5px; 
@@ -13,10 +13,10 @@
 
 .document-name-container{
     box-sizing: border-box;
-    padding-left: 39px;
-    padding-top: 7px;
+    padding-left: 46px;
+    padding-top: 6px;
     overflow: hidden;
-    margin-right: 58px;
+    margin-right: 52px;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: var(--palette-text-color); /* Set a font color */
@@ -40,8 +40,9 @@
 }
 
 .conversion-status-container {
-    padding-left: 39px;
+    padding-left: 46px;
     padding-top: 0px;
+    margin-top: -2px;
 }
 
 .conversion-failed-text{
@@ -63,26 +64,26 @@
 
 #status-icon {
     position: absolute;
-    top: 5px;
+    top: 8.5px;
     right: 20px;
-    height: 24px;
-    width: 24px;
+    height: 17px;
+    width: 17px;
     padding-top: 7px;
 }
 
 #qxp-icon {
     position: absolute;
-    top: 5px;
+    top: 3px;
     left: 16px;
-    height: 24px;
-    width: 24px;
+    height: 28px;
+    width: 28px;
     padding-top: 7px;
 }
   
 .progress-bar-container {
     position: absolute;
     overflow: hidden;
-    left: 48px;
+    left: 55px;
     right: 58px;
     padding-top: 6px;
 }
