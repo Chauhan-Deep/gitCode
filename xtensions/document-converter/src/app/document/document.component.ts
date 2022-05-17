@@ -60,7 +60,7 @@ export class DocumentComponent implements OnInit {
     let displayText: string;
 
     if (this.isWindows) {
-      displayText = 'Show in folder';
+      displayText = 'Show in Folder';
     } else {
       displayText = 'Show in Finder';
     }
