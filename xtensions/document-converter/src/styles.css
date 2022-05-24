@@ -17,5 +17,7 @@ body {
 }
 
 .qx-label {
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
 }

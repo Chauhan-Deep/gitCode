@@ -1,22 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
   <defs>
-    <filter id="Rectangle_84" x="-0.5" y="5.5" width="49" height="39" filterUnits="userSpaceOnUse">
-      <feOffset dy="1" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="0.5" result="blur"/>
-      <feFlood flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-    <clipPath id="clip-Add_Image_-_90x90">
+    <clipPath id="clip-Add_Image_-_48x48">
       <rect width="48" height="48"/>
     </clipPath>
   </defs>
-  <g id="Add_Image_-_90x90" data-name="Add Image - 90x90" clip-path="url(#clip-Add_Image_-_90x90)">
+  <g id="Add_Image_-_48x48" data-name="Add Image - 48x48" clip-path="url(#clip-Add_Image_-_48x48)">
     <g id="Group_103" data-name="Group 103" transform="translate(-262.872 -255.991)">
-      <g transform="matrix(1, 0, 0, 1, 262.87, 255.99)" filter="url(#Rectangle_84)">
-        <rect id="Rectangle_84-2" data-name="Rectangle 84" width="46" height="36" rx="2" transform="translate(1 6)" fill="#fff" opacity="0.999"/>
-      </g>
-      <path id="Path_162" data-name="Path 162" d="M1637.738,1892.727h-9.051v-9.05h-3.136v9.05h-9.05v3.136h9.05v9.051h3.136v-9.051h9.051Z" transform="translate(-1340.657 -1614.232)" fill="#454444"/>
+      <rect id="Rectangle_84" data-name="Rectangle 84" width="46" height="36" rx="2" transform="translate(263.872 261.991)" fill="#fff" opacity="0.999"/>
+      <path id="Path_162" data-name="Path 162" d="M1635.229,1891.657h-7.981v-7.981h-2.766v7.981H1616.5v2.766h7.981v7.982h2.766v-7.982h7.981Z" transform="translate(-1338.629 -1612.685)" fill="#454444"/>
     </g>
   </g>
 </svg>

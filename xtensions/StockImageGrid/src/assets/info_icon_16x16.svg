@@ -1,27 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
   <defs>
-    <filter id="Rectangle_86" x="-0.5" y="5.5" width="49" height="39" filterUnits="userSpaceOnUse">
-      <feOffset dy="1" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="0.5" result="blur"/>
-      <feFlood flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-    <clipPath id="clip-Add_Information_-_90x90">
+    <clipPath id="clip-Add_Information_-_48x48">
       <rect width="48" height="48"/>
     </clipPath>
   </defs>
-  <g id="Add_Information_-_90x90" data-name="Add Information - 90x90" clip-path="url(#clip-Add_Information_-_90x90)">
+  <g id="Add_Information_-_48x48" data-name="Add Information - 48x48" clip-path="url(#clip-Add_Information_-_48x48)">
     <g id="Group_106" data-name="Group 106" transform="translate(-324.959 -480.871)">
-      <g transform="matrix(1, 0, 0, 1, 324.96, 480.87)" filter="url(#Rectangle_86)">
-        <rect id="Rectangle_86-2" data-name="Rectangle 86" width="46" height="36" rx="2" transform="translate(1 6)" fill="#fff"/>
-      </g>
-      <g id="Group_88" data-name="Group 88" transform="translate(336.836 493.613)">
-        <path id="Path_163" data-name="Path 163" d="M2127.656,1343.073l-1.583-4.611a11.692,11.692,0,0,0,1.17-5.067,11.611,11.611,0,1,0-11.62,11.6,11.734,11.734,0,0,0,5.086-1.171l4.61,1.584a1.815,1.815,0,0,0,.594.1,1.859,1.859,0,0,0,1.3-.538A1.826,1.826,0,0,0,2127.656,1343.073Z" transform="translate(-2104 -1321.755)" fill="#454444"/>
-        <g id="Group_87" data-name="Group 87" transform="translate(10.577 6.019)">
-          <path id="Path_164" data-name="Path 164" d="M2136.44,1342.093a1.349,1.349,0,0,0,.982-.392,1.241,1.241,0,0,0,.344-.906,1.26,1.26,0,0,0-1.294-1.305,1.281,1.281,0,0,0-1.31,1.31A1.258,1.258,0,0,0,2136.44,1342.093Z" transform="translate(-2135.162 -1339.489)" fill="#fff"/>
-          <rect id="Rectangle_87" data-name="Rectangle 87" width="2.265" height="8.641" transform="translate(0.177 3.076)" fill="#fff"/>
-        </g>
+      <rect id="Rectangle_86" data-name="Rectangle 86" width="46" height="36" rx="2" transform="translate(325.959 486.871)" fill="#fff"/>
+      <g id="Group_106-2" data-name="Group 106" transform="translate(-1272.191 -1385.593)">
+        <path id="Path_190" data-name="Path 190" d="M1623.841,1889.653c.661-1.473.827-3.762-1.224-4.727-2.842-1.336-4.911,1.61-4.287,2.568.224.215.652-.059,1.021-.244.411-.206.75-.3.653.513-.163,1.365-3.372,9.462-.96,12.07,1.37,1.479,3.653.767,4.626-.122a1.569,1.569,0,0,0,.561-1.193c-.012-.428-.636-.406-.755-.391-2.1.269-1.369-2.45-1.25-2.97C1622.506,1893.943,1623.495,1890.424,1623.841,1889.653Z" transform="translate(0 0.013)" fill="#454444"/>
+        <circle id="Ellipse_15" data-name="Ellipse 15" cx="2.191" cy="2.191" r="2.191" transform="translate(1619.459 1879.464)" fill="#454444"/>
       </g>
     </g>
   </g>
