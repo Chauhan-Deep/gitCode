@@ -55,6 +55,16 @@ export class GridComponent implements OnInit {
           });
           this.ref.detectChanges();
         }
+      if (jsonResponse.message === 'ImageCollectionAddedInfo') {
+          for (const obj of this.images) {
+            if (jsonResponseData[0].imageProvider === obj.mImageProvider && jsonResponseData[0].imageID === obj.mImageID) {
+              obj.mIsAddedInCollections = jsonResponseData[0].mIsAddedInCollections;
+              this.ref.detectChanges();
+
+              break;
+          }
+        }
+      }
     }
   }
 }
@@ -75,6 +85,7 @@ export class ImageData {
   mIsUserPresent?: string;
   mImageProvider?: string;
   mIsFavourite?: boolean;
+  mIsAddedInCollections?: boolean;
 }
 
 // add chrome to the Window context so typescript stops complaining
