@@ -1,4 +1,4 @@
-<div id="collection-container" (click)="changeImageState()">
+<div id="collection-container" (click)="changeImageState()" [class.greenBorder]="collectionImageData.mIsDefaultCollection === 'true'">
     <div class="collection-name-container">
         <span class = "collection-name-text qx-font">{{collectionImageData.mCollectionName}}</span>
     </div>
