@@ -48,15 +48,28 @@ export class ManageCollectionsListComponent implements OnInit {
       this.ref.detectChanges();
     }
     if (jsonResponse.message === 'ManageNewCollectionData') {
+      if (jsonResponseData[0].mIsDefaultCollection === 'true') {
+        for (const cData of this.collectionsData) {
+            cData.mIsDefaultCollection = 'false';
+        }
+        this.ref.detectChanges();
+      }
       Object.keys(jsonResponseData).map(key2 => {
         this.collectionsData.push(jsonResponseData[key2]);
       });
       this.ref.detectChanges();
     }
     if (jsonResponse.message === 'ManageEditCollectionData') {
+      if (jsonResponseData[0].mIsDefaultCollection === 'true') {
+        for (const cData of this.collectionsData) {
+            cData.mIsDefaultCollection = 'false';
+        }
+        this.ref.detectChanges();
+      }
       for (const cData of this.collectionsData) {
         if (cData.mCollectionName === jsonResponseData[0].mCollectionName) {
           cData.mEditedCollectionName = jsonResponseData[0].mEditedCollectionName;
+          cData.mIsDefaultCollection = jsonResponseData[0].mIsDefaultCollection;
           this.ref.detectChanges();
 
           break;
@@ -130,6 +143,7 @@ export class CollectionsData {
   mEditedCollectionName?: string;
   mMarkDeleted?: string;
   mIsNewCollection?: string;
+  mIsDefaultCollection?: string;
 }
 
 // add chrome to the Window context so typescript stops complaining
