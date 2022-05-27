@@ -1,5 +1,5 @@
 <ng-container *ngIf="collectionData.mMarkDeleted == 'false'">
-<div id="collection-container">
+<div id="collection-container"  [class.greenBorder]="collectionData.mIsDefaultCollection === 'true'">
     <div class="collection-name-container">
         <span class = "collection-name-text qx-font">{{collectionData.mEditedCollectionName}}</span>
         <img id = "editcollection-icon" src = "./assets/EditCollection.svg" (click)="editCollection()" title="Edit Collection">

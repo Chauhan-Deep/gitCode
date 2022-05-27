@@ -48,6 +48,12 @@ export class CollectionsComponent implements OnInit {
       this.ref.detectChanges();
     }
     if (jsonResponse.message === 'NewCollectionData') {
+      if (jsonResponseData[0].mIsDefaultCollection === 'true') {
+        for (const cData of this.imageCollectionData) {
+            cData.mIsDefaultCollection = 'false';
+        }
+        this.ref.detectChanges();
+      }
       Object.keys(jsonResponseData).map(key2 => {
         this.imageCollectionData.push(jsonResponseData[key2]);
       });
@@ -98,6 +104,7 @@ export class ImageCollectionData {
   mImageState?: string;
   mOldState?: string;
   mCollectionState?: string;
+  mIsDefaultCollection?: string;
 }
 
 // add chrome to the Window context so typescript stops complaining
