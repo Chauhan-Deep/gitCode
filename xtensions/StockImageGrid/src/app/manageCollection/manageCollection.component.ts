@@ -12,7 +12,7 @@ export class ManageCollectionComponent implements OnInit {
   public disableBasicMenu = false;
   public items: any[];
 
-  constructor(private contextMenuService: ContextMenuService) {
+  constructor(private contextMenuService: ContextMenuService, private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
