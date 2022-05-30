@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 
+import { TranslateService } from './translate/translate.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +13,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
   documents: DocumentData[] = [];
   appisLoading: boolean;
 
-  constructor(private cdRef: ChangeDetectorRef) {
+  constructor(private cdRef: ChangeDetectorRef, private translateService: TranslateService) {
+    let browserLang = 'en-US';
+
+    if ((window as any).app) {
+      browserLang = (window as any).app.language.code;
+    }
+
+    this.translateService.use(browserLang);
     this.appisLoading = true;
   }
 
