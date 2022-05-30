@@ -50,6 +50,11 @@
 .ngx-contextmenu a {
     display: block;
     padding: 0.5em 1em;
+    text-decoration: none;
+}
+
+.ngx-contextmenu a:hover {
+    color:blue;
 }
 
 #imagestatus-icon {

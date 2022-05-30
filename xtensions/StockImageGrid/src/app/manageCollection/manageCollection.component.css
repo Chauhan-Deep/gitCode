@@ -43,6 +43,10 @@
     font-size: 13px;
 }
 
+.ngx-contextmenu a:hover {
+    color:blue;
+}
+
 .ngx-contextmenu li:first-child {
     border-top:none;
 }
@@ -50,6 +54,7 @@
 .ngx-contextmenu a {
     display: block;
     padding: 0.5em 1em;
+    text-decoration: none;
 }
     
 #editcollection-icon {
