@@ -31,7 +31,7 @@
   }
 
 .ngx-contextmenu .dropdown-menu {        
-    background-color: white;
+    background-color: var(--palette-background-color, #666666);
     padding: 0;
 }
       
@@ -39,12 +39,6 @@
     display: block;      
     text-align: left;
     width: 100%;
-    --font-family: 'Roboto';
-    font-size: 13px;
-}
-
-.ngx-contextmenu a:hover {
-    color:blue;
 }
 
 .ngx-contextmenu li:first-child {
@@ -55,6 +49,9 @@
     display: block;
     padding: 0.5em 1em;
     text-decoration: none;
+    --font-family: 'Roboto';
+    color: var(--palette-text-color); /* Set a font color */
+    font-size: var(--font-size, 12px); /* Set a font size */
 }
     
 #editcollection-icon {
