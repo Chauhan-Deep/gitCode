@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef,ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ContextMenuService, ContextMenuComponent } from 'ngx-contextmenu';
 
 @Component({
@@ -10,6 +10,7 @@ import { ContextMenuService, ContextMenuComponent } from 'ngx-contextmenu';
 export class ManageCollectionComponent implements OnInit {
   @Input() collectionData: any;
   public disableBasicMenu = false;
+  public items: any[];
 
   constructor(private contextMenuService: ContextMenuService) {
   }
@@ -43,7 +44,7 @@ export class ManageCollectionComponent implements OnInit {
   }
 
   public onContextMenu($event: MouseEvent, item: any): void {
-    this.contextMenuService.show.next({ event: $event, item: item });
+    this.contextMenuService.show.next({ event: $event, item: this.collectionData });
     $event.preventDefault();
   }
 
@@ -52,7 +53,7 @@ export class ManageCollectionComponent implements OnInit {
     let editCollectionsJson: string;
     const arrayToString = JSON.stringify(this.collectionData);
 
-    editCollectionsJson = '{\"DefaultCollection\":';
+    editCollectionsJson = '{\"DefaultManageCollection\":';
     editCollectionsJson += arrayToString;
     editCollectionsJson += '}';
     const stockImageXTID = 1431525457;
