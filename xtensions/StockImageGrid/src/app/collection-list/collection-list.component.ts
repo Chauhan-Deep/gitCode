@@ -59,6 +59,22 @@ export class CollectionsComponent implements OnInit {
       });
       this.ref.detectChanges();
     }
+    if (jsonResponse.message === 'ManageImageEditCollectionData') {
+      if (jsonResponseData[0].mIsDefaultCollection === 'true') {
+        for (const cData of this.imageCollectionData) {
+            cData.mIsDefaultCollection = 'false';
+        }
+        this.ref.detectChanges();
+      }
+      for (const cData of this.imageCollectionData) {
+        if (cData.mCollectionName === jsonResponseData[0].mCollectionName) {
+          cData.mIsDefaultCollection = jsonResponseData[0].mIsDefaultCollection;
+          this.ref.detectChanges();
+
+          break;
+        }
+      }
+    }
   }
   }
   closeOKDialog() {

@@ -1,5 +1,5 @@
 <div *ngIf="documents.length != 0" class ="qxlabel-container">
-    <qx-label [multiline]="false">Converted Documents</qx-label>
+    <qx-label [multiline]="false">{{'ids-lbl-converted-documents' | translate}}</qx-label>
 </div>
 <div class="scroll">
     <ng-container *ngFor="let document of documents">
