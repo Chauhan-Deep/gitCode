@@ -30,6 +30,28 @@
     border-color: green;
   }
 
+.ngx-contextmenu .dropdown-menu {        
+    background-color: white;
+    padding: 0;
+}
+      
+.ngx-contextmenu li {
+    display: block;      
+    text-align: left;
+    width: 100%;
+    --font-family: 'Roboto';
+    font-size: 13px;
+}
+
+.ngx-contextmenu li:first-child {
+    border-top:none;
+}
+
+.ngx-contextmenu a {
+    display: block;
+    padding: 0.5em 1em;
+}
+    
 #editcollection-icon {
     position: absolute;
     top: 5px;
