@@ -1,15 +1,22 @@
-<div id="collection-container" (click)="changeImageState()" [class.greenBorder]="collectionImageData.mIsDefaultCollection === 'true'">
-    <div class="collection-name-container">
-        <span class = "collection-name-text qx-font">{{collectionImageData.mCollectionName}}</span>
+<div  style="pointer-events: none">
+    <div id="collection-container" (click)="changeImageState()" [class.greenBorder]="collectionImageData.mIsDefaultCollection === 'true'" style="pointer-events: all; "  [contextMenu]="componentMenu">
+        <div class="collection-name-container">
+            <span class = "collection-name-text qx-font">{{collectionImageData.mCollectionName}}</span>
+        </div>
+        <ng-container *ngIf="collectionImageData.mImageState == '2'">
+            <img id = "imagestatus-icon" src = "./assets/ImageAddedInCollection.svg">
+            <img id = "imagedeletestatus-icon" src = "./assets/DeleteImageFromCollection.svg" >
+         </ng-container>
+        <ng-container *ngIf="collectionImageData.mImageState == '1'">
+            <img id = "imageaddstatus-icon" src = "./assets/AddImageToCollection.svg">
+        </ng-container>
+         <ng-container *ngIf="collectionImageData.mImageState == '3'">
+         <img id = "imageaddstatus-icon" src = "./assets/AddImageToCollection.svg">
+        </ng-container>
+        <context-menu #componentMenu>
+            <ng-template contextMenuItem (execute)="showMessage($event)">
+                Set as Default Target Collection
+         </ng-template>  
+        </context-menu>
     </div>
-    <ng-container *ngIf="collectionImageData.mImageState == '2'">
-        <img id = "imagestatus-icon" src = "./assets/ImageAddedInCollection.svg">
-        <img id = "imagedeletestatus-icon" src = "./assets/DeleteImageFromCollection.svg" >
-    </ng-container>
-    <ng-container *ngIf="collectionImageData.mImageState == '1'">
-        <img id = "imageaddstatus-icon" src = "./assets/AddImageToCollection.svg">
-    </ng-container>
-    <ng-container *ngIf="collectionImageData.mImageState == '3'">
-        <img id = "imageaddstatus-icon" src = "./assets/AddImageToCollection.svg">
-    </ng-container>
 </div>

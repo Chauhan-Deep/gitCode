@@ -30,6 +30,30 @@
     border-color: green;
   }
   
+  .ngx-contextmenu .dropdown-menu {        
+    background-color: var(--palette-background-color, #666666);
+    padding: 0;
+}
+      
+.ngx-contextmenu li {
+    display: block;      
+    text-align: left;
+    width: 100%;
+}
+
+.ngx-contextmenu li:first-child {
+    border-top:none;
+}
+
+.ngx-contextmenu a {
+    display: block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    --font-family: 'Roboto';
+    color: var(--palette-text-color); /* Set a font color */
+    font-size: var(--font-size, 12px); /* Set a font size */
+}
+
 #imagestatus-icon {
     position: absolute;
     top: 5px;

@@ -1,9 +1,17 @@
-<ng-container *ngIf="collectionData.mMarkDeleted == 'false'">
-<div id="collection-container"  [class.greenBorder]="collectionData.mIsDefaultCollection === 'true'">
-    <div class="collection-name-container">
-        <span class = "collection-name-text qx-font">{{collectionData.mEditedCollectionName}}</span>
-        <img id = "editcollection-icon" src = "./assets/EditCollection.svg" (click)="editCollection()" title="Edit Collection">
-        <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()" title="Delete Collection">
-    </div>
+
+<div  style="pointer-events: none">
+  <ng-container *ngIf="collectionData.mMarkDeleted == 'false'">
+      <div id="collection-container"  [class.greenBorder]="collectionData.mIsDefaultCollection === 'true'" style="pointer-events: all; "  [contextMenu]="componentMenu">
+          <div class="collection-name-container">
+              <span class = "collection-name-text qx-font">{{collectionData.mEditedCollectionName}}</span>
+              <img id = "editcollection-icon" src = "./assets/EditCollection.svg" (click)="editCollection()" title="Edit Collection">
+          <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()" title="Delete Collection">
+       </div>
+   </div>
+  <context-menu #componentMenu>
+      <ng-template contextMenuItem (execute)="showMessage($event)">
+        Set as Default Target Collection
+      </ng-template>  
+    </context-menu>
+  </ng-container>
 </div>
-</ng-container>

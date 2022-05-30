@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TranslateService } from '../translate/translate.service';
 
 @Component({
   selector: 'app-document',
@@ -9,7 +10,7 @@ export class DocumentComponent implements OnInit {
   @Input() documentData: any;
   isWindows = navigator.platform.toLowerCase() === 'win32';
 
-  constructor() { }
+  constructor(private translateService: TranslateService) { }
 
   ngOnInit() {
   }
@@ -60,9 +61,9 @@ export class DocumentComponent implements OnInit {
     let displayText: string;
 
     if (this.isWindows) {
-      displayText = 'Show in Folder';
+      displayText = this.translateService.localize('ids-lbl-show-in-folder');
     } else {
-      displayText = 'Show in Finder';
+      displayText = this.translateService.localize('ids-lbl-show-in-finder');
     }
     return displayText;
   }

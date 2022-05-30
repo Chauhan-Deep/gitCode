@@ -1,14 +1,18 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { ContextMenuService, ContextMenuComponent } from 'ngx-contextmenu';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'app-managecollection',
   templateUrl: './manageCollection.component.html',
   styleUrls: ['./manageCollection.component.css']
 })
 export class ManageCollectionComponent implements OnInit {
   @Input() collectionData: any;
+  public disableBasicMenu = false;
+  public items: any[];
 
-  constructor(private ref: ChangeDetectorRef) {
+  constructor(private contextMenuService: ContextMenuService, private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -31,6 +35,25 @@ export class ManageCollectionComponent implements OnInit {
     const arrayToString = JSON.stringify(this.collectionData);
 
     editCollectionsJson = '{\"EditCollection\":';
+    editCollectionsJson += arrayToString;
+    editCollectionsJson += '}';
+    const stockImageXTID = 1431525457;
+    if ((window as any).XPress) {
+      (window as any).XPress.api.invokeXTApi(stockImageXTID, 'XTSendMessage', editCollectionsJson);
+    }
+  }
+
+  public onContextMenu($event: MouseEvent, item: any): void {
+    this.contextMenuService.show.next({ event: $event, item: this.collectionData });
+    $event.preventDefault();
+  }
+
+  public showMessage(message: any): void {
+    this.collectionData.mIsDefaultCollection = this.collectionData.mIsDefaultCollection === 'true' ? 'false' : 'true';
+    let editCollectionsJson: string;
+    const arrayToString = JSON.stringify(this.collectionData);
+
+    editCollectionsJson = '{\"DefaultManageCollection\":';
     editCollectionsJson += arrayToString;
     editCollectionsJson += '}';
     const stockImageXTID = 1431525457;
