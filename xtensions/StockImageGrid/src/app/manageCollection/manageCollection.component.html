@@ -4,8 +4,8 @@
       <div id="collection-container"  [class.greenBorder]="collectionData.mIsDefaultCollection === 'true'" style="pointer-events: all; "  [contextMenu]="componentMenu">
           <div class="collection-name-container">
               <span class = "collection-name-text qx-font">{{collectionData.mEditedCollectionName}}</span>
-              <img id = "editcollection-icon" src = "./assets/EditCollection.svg" (click)="editCollection()" title="'ids-lbl-edit-collection' | translate">
-          <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()" title="'ids-lbl-delete-collection' | translate">
+              <img id = "editcollection-icon" src = "./assets/EditCollection.svg" (click)="editCollection()" title="{{'ids-lbl-edit-collection' | translate}}">
+          <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()" title="{{'ids-lbl-delete-collection' | translate}}">
        </div>
    </div>
   <context-menu #componentMenu>
