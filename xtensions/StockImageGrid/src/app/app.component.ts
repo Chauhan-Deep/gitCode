@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
+import { TranslateService } from './translate/translate.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +11,14 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 export class AppComponent {
   title = 'StockImageGrid';
 
-  constructor() {
+  constructor(private translateService: TranslateService) {
+    let browserLang = 'en-US';
+
+    if ((window as any).app) {
+      browserLang = (window as any).app.language.code;
+    }
+
+    this.translateService.use(browserLang);
   }
   @HostListener('window:scroll', [])
   onScroll(): void {

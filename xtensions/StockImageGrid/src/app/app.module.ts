@@ -16,6 +16,10 @@ import { ManageCollectionsComponent } from './manageCollections/manageCollection
 import { ManageCollectionsListComponent } from './manageCollection-list/manageCollection-list.component';
 import { ContextMenuModule } from 'ngx-contextmenu';
 
+import { TranslateService } from './translate/translate.service';
+import { TranslatePipe } from './translate/translate.pipe';
+import { TRANSLATION_PROVIDERS } from './translate/translations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +30,8 @@ import { ContextMenuModule } from 'ngx-contextmenu';
     CollectionsComponent,
     ManageCollectionsComponent,
     ManageCollectionsListComponent,
-    ManageCollectionComponent
+    ManageCollectionComponent,
+    TranslatePipe
   ],
   imports: [
     QxModule,
@@ -41,7 +46,7 @@ import { ContextMenuModule } from 'ngx-contextmenu';
   ],
   exports: [RouterModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [[TRANSLATION_PROVIDERS, TranslateService]],
   bootstrap: [AppComponent]
 })
 

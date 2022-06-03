@@ -1,7 +1,7 @@
 <div>
   <div class="button-container">
   <ng-container>
-    <qx-button class="btn" [disabled] ="false" [name]="' Create a new collection...'"
+    <qx-button class="btn" [disabled] ="false" [name]="'ids-btnlabel-create-new-collection' | translate"
       [focus]='false' [showBackground]='true' (qxClick)="handleButtonClicked()">
     </qx-button>
   </ng-container>
@@ -14,10 +14,10 @@
 <div>
 <ng-container>
   <div class="horizontal-container" style="padding-top: 20px;">
-      <qx-button class="button" [disabled]="false" [name]="'OK'" [focus]='true'
+      <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-ok' | translate" [focus]='true'
           [showBackground]='true' (qxClick)="closeOKDialog()" style="height: 25px;  width: 80px;">
       </qx-button>
-      <qx-button class="button" [disabled]="false" [name]="'Cancel'"
+      <qx-button class="button" [disabled]="false" [name]="'ids-btnlabel-cancel' | translate"
          [showBackground]='true' [focus]='false' (qxClick)="closeCancelDialog()" style="height: 25px;width: 80px;">
       </qx-button>
   </div>

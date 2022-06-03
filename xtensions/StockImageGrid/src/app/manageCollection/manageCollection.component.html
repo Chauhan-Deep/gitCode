@@ -4,13 +4,13 @@
       <div id="collection-container"  [class.greenBorder]="collectionData.mIsDefaultCollection === 'true'" style="pointer-events: all; "  [contextMenu]="componentMenu">
           <div class="collection-name-container">
               <span class = "collection-name-text qx-font">{{collectionData.mEditedCollectionName}}</span>
-              <img id = "editcollection-icon" src = "./assets/EditCollection.svg" (click)="editCollection()" title="Edit Collection">
-          <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()" title="Delete Collection">
+              <img id = "editcollection-icon" src = "./assets/EditCollection.svg" (click)="editCollection()" title="{{'ids-lbl-edit-collection' | translate}}">
+          <img id = "deletecollection-icon" src = "./assets/DeleteCollection.svg" (click)="deleteCollection()" title="{{'ids-lbl-delete-collection' | translate}}">
        </div>
    </div>
   <context-menu #componentMenu>
       <ng-template contextMenuItem (execute)="showMessage($event)">
-        Set as Default Target Collection
+        {{'ids-lbl-set-default-target-collection' | translate}}
       </ng-template>  
     </context-menu>
   </ng-container>
