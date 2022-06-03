@@ -9,6 +9,7 @@ export class GridComponent implements OnInit {
   images: ImageData[] = [];
   private _XT_SENDMESSAGE: number;
   ngZone: NgZone;
+  errorMessage: string;
 
   constructor(ngZone: NgZone, private ref: ChangeDetectorRef) {
     this.ngZone = ngZone;
@@ -64,6 +65,12 @@ export class GridComponent implements OnInit {
               break;
           }
         }
+      }
+      if (jsonResponse.message === 'ImagesErrorMessage') {
+        this.images = [];
+        this.errorMessage = jsonResponseData[0].errorMessage;
+
+        this.ref.detectChanges();
       }
     }
   }
