@@ -3,3 +3,8 @@
         <app-image-component [imageData]="image"></app-image-component>        
     </div>
 </div>
+<div *ngIf="images && images.length == 0">
+    <span class="message-text">{{errorMessage}}</span>
+</div>
+
+    

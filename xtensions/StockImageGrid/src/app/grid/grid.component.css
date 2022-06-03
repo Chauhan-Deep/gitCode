@@ -8,3 +8,13 @@
   align-items: center;
   object-fit: cover;
  }
+
+ .message-text {
+  color: var(--palette-text-color); /* Set a font color */
+  font-size: var(--font-size, 14px); /* Set a font size */
+  text-align: center;
+  display: block;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto
+}
