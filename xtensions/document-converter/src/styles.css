@@ -21,3 +21,14 @@ body {
     font-weight: 800;
     letter-spacing: 0.2px;
 }
+
+.qx-button:disabled {
+    background-color: var(--button-focus-color, #40a8f8);
+    opacity: 0.3;
+}
+
+.qx-button:active:not(:disabled) {
+    background-color: #0e8beb  !important;
+    filter: invert(0%);
+    border-radius: 5px;
+}
