@@ -12,6 +12,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
   private _XT_SENDMESSAGE: number;
   documents: DocumentData[] = [];
   appisLoading: boolean;
+  browseButtonDisabled: boolean;
 
   constructor(private cdRef: ChangeDetectorRef, private translateService: TranslateService) {
     let browserLang = 'en-US';
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.translateService.use(browserLang);
     this.appisLoading = true;
+    this.browseButtonDisabled = false;
   }
 
   ngOnInit() {
@@ -61,9 +63,11 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     if (jsonResponse.message === 'UpdateUI') {
       if (jsonResponseData.DocumentConvertorPhase === 'DeInitDocumentConvertorPhase') {
-        (document.getElementById('qxButton') as HTMLInputElement).disabled = false;
+           this.browseButtonDisabled = false;
+           this.cdRef.detectChanges();
       } else if (jsonResponseData.DocumentConvertorPhase === 'InitDocumentConvertorPhase') {
-        (document.getElementById('qxButton') as HTMLInputElement).disabled = true;
+           this.browseButtonDisabled = true;
+           this.cdRef.detectChanges();
       }
     } else if (jsonResponse.message === 'AddToList') {
       this.documents.unshift(jsonResponseData);
@@ -83,6 +87,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     if ((window as any).XPress) {
       (window as any).XPress.api.invokeXTApi(documentConverterXTID, 'XTSendMessage', 'BrowseButtonClicked');
+      this.browseButtonDisabled = true;
+      this.cdRef.detectChanges();
     }
   }
 }
