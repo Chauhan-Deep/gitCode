@@ -2,9 +2,9 @@
 export const LANG_ES_ES_NAME = 'es-ES';
 
 export const LANG_ES_ES_TRANS = {
-    'ids-btnlabel-browse': ' Browse Document',
-    'ids-lbl-converted-documents': 'Converted Documents',
-    'ids-lbl-conversion-failed': 'Conversion Failed',
-    'ids-lbl-show-in-folder': 'Show in Folder',
-    'ids-lbl-show-in-finder': 'Show in Finder',
+    'ids-btnlabel-browse': ' Explorar documento',
+    'ids-lbl-converted-documents': 'Documentos convertidos',
+    'ids-lbl-conversion-failed': 'Conversión fallida',
+    'ids-lbl-show-in-folder': 'Mostrar en carpeta',
+    'ids-lbl-show-in-finder': 'Mostrar en Finder',
 };
