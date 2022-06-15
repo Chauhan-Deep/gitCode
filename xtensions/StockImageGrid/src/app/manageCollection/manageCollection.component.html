@@ -9,9 +9,11 @@
        </div>
    </div>
   <context-menu #componentMenu>
-      <ng-template contextMenuItem (execute)="showMessage($event)">
-        {{'ids-lbl-set-default-target-collection' | translate}}
-      </ng-template>  
+    <ng-container *ngIf="collectionData.mIsDefaultCollection === 'false'">
+        <ng-template contextMenuItem (execute)="showMessage($event)">
+          {{'ids-lbl-set-default-target-collection' | translate}}
+        </ng-template>  
+    </ng-container>
     </context-menu>
   </ng-container>
 </div>
