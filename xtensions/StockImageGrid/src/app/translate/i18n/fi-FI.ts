@@ -2,13 +2,13 @@
 export const LANG_FI_FI_NAME = 'fi-FI';
 
 export const LANG_FI_FI_TRANS = {
-    'ids-lbl-set-default-target-collection': 'Set as Default Target Collection',
-    'ids-btnlabel-create-new-collection': ' Create a new collection...',
+    'ids-lbl-set-default-target-collection': 'Aseta oletuskohdekokoelmaksi',
+    'ids-btnlabel-create-new-collection': ' Luo uusi kokoelma...',
     'ids-btnlabel-ok': 'OK',
-    'ids-btnlabel-cancel': 'Cancel',
-    'ids-lbl-add-image-to-collection': 'Add image to collections',
-    'ids-lbl-remove-image-from-favorites': 'Remove image from favorites',
-    'ids-lbl-add-image-to-favorites': 'Add image to favorites',
-    'ids-lbl-edit-collection': 'Edit Collection',
-    'ids-lbl-delete-collection': 'Delete Collection',
+    'ids-btnlabel-cancel': 'Peruuta',
+    'ids-lbl-add-image-to-collection': 'Lisää kuva kokoelmiin',
+    'ids-lbl-remove-image-from-favorites': 'Poista kuva suosikeista',
+    'ids-lbl-add-image-to-favorites': 'Lisää kuva suosikkeihin',
+    'ids-lbl-edit-collection': 'Muokkaa kokoelmaa',
+    'ids-lbl-delete-collection': 'Poista kokoelma',
 };
