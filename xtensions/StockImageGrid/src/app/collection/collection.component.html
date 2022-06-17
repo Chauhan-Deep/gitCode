@@ -14,9 +14,11 @@
          <img id = "imageaddstatus-icon" src = "./assets/AddImageToCollection.svg">
         </ng-container>
         <context-menu #componentMenu>
-            <ng-template contextMenuItem (execute)="showMessage($event)">
-                {{'ids-lbl-set-default-target-collection' | translate}}
-         </ng-template>  
+            <ng-container *ngIf="collectionImageData.mIsDefaultCollection === 'false'">
+                <ng-template contextMenuItem (execute)="showMessage($event)">
+                    {{'ids-lbl-set-default-target-collection' | translate}}
+            </ng-template>  
+        </ng-container>
         </context-menu>
     </div>
 </div>

@@ -2,13 +2,13 @@
 export const LANG_DE_DE_NAME = 'de-DE';
 
 export const LANG_DE_DE_TRANS = {
-    'ids-lbl-set-default-target-collection': 'Set as Default Target Collection',
-    'ids-btnlabel-create-new-collection': ' Create a new collection...',
+    'ids-lbl-set-default-target-collection': 'Als Standard-Zielsammlung festlegen',
+    'ids-btnlabel-create-new-collection': ' Erstellen Sie eine neue Sammlung...',
     'ids-btnlabel-ok': 'OK',
-    'ids-btnlabel-cancel': 'Cancel',
-    'ids-lbl-add-image-to-collection': 'Add image to collections',
-    'ids-lbl-remove-image-from-favorites': 'Remove image from favorites',
-    'ids-lbl-add-image-to-favorites': 'Add image to favorites',
-    'ids-lbl-edit-collection': 'Edit Collection',
-    'ids-lbl-delete-collection': 'Delete Collection',
+    'ids-btnlabel-cancel': 'Abbrechen',
+    'ids-lbl-add-image-to-collection': 'Bild zu Sammlungen hinzufügen',
+    'ids-lbl-remove-image-from-favorites': 'Bild aus Favoriten entfernen',
+    'ids-lbl-add-image-to-favorites': 'Bild zu Favoriten hinzufügen',
+    'ids-lbl-edit-collection': 'Sammlung bearbeiten',
+    'ids-lbl-delete-collection': 'Sammlung löschen',
 };
