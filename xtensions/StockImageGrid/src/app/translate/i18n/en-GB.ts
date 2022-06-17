@@ -6,9 +6,9 @@ export const LANG_EN_GB_TRANS = {
     'ids-btnlabel-create-new-collection': ' Create a new collection...',
     'ids-btnlabel-ok': 'OK',
     'ids-btnlabel-cancel': 'Cancel',
-    'ids-lbl-add-image-to-collection': 'Add image to collections',
-    'ids-lbl-remove-image-from-favorites': 'Remove image from favorites',
-    'ids-lbl-add-image-to-favorites': 'Add image to favorites',
+    'ids-lbl-add-image-to-collection': 'Add Image to Collections',
+    'ids-lbl-remove-image-from-favorites': 'Remove Image from Favourites',
+    'ids-lbl-add-image-to-favorites': 'Add Image to Favourites',
     'ids-lbl-edit-collection': 'Edit Collection',
     'ids-lbl-delete-collection': 'Delete Collection',
 };
