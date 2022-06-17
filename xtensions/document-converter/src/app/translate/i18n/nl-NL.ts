@@ -3,10 +3,10 @@ export const LANG_NL_NL_NAME = 'nl-NL';
 export const LANG_NL_BE_NAME = 'nl-BE';
 
 export const LANG_NL_NL_TRANS = {
-    'ids-btnlabel-browse': ' Browse Document',
-    'ids-lbl-converted-documents': 'Converted Documents',
-    'ids-lbl-conversion-failed': 'Conversion Failed',
-    'ids-lbl-show-in-folder': 'Show in Folder',
-    'ids-lbl-show-in-finder': 'Show in Finder',
+    'ids-btnlabel-browse': ' Document zoeken',
+    'ids-lbl-converted-documents': 'Geconverteerde documenten',
+    'ids-lbl-conversion-failed': 'Conversie mislukt',
+    'ids-lbl-show-in-folder': 'In map tonen',
+    'ids-lbl-show-in-finder': 'In Finder tonen',
 };
 
