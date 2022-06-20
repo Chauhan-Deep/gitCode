@@ -11,19 +11,31 @@ export class CollectionComponent implements OnInit {
   @Input() collectionImageData: any;
   public disableBasicMenu = false;
   public items: any[];
+  public imageAdded: boolean;
 
   constructor(private contextMenuService: ContextMenuService, private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    this.imageAdded = false;
   }
-
+  enter() {
+    this.imageAdded = false;
+  }
+  leave() {
+    if (this.imageAdded === true) {
+      this.imageAdded = false;
+      this.ref.detectChanges();
+    }
+  }
   changeImageState() {
     if (this.collectionImageData.mImageState === '2') {
       this.collectionImageData.mImageState = '3';
+      this.imageAdded = false;
       this.ref.detectChanges();
     } else if (this.collectionImageData.mImageState === '1' || this.collectionImageData.mImageState === '3') {
       this.collectionImageData.mImageState = '2';
+      this.imageAdded = true;
       this.ref.detectChanges();
     }
   }
