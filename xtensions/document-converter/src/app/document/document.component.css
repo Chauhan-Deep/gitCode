@@ -49,12 +49,14 @@
     color: var(--palette-text-color); /* Set a font color */
     font-size: 9px; /* Set a font size */
     cursor: default;
+    line-height: 20px; /*For adding top space in Chinese and Portuguese.*/
 }
 
 .conversion-success-text{
     color: var(--palette-text-color); /* Set a font color */
     font-size: 9px; /* Set a font size */
     cursor: pointer;
+    line-height: 20px; /*For adding top space in Chinese and Portuguese.*/
 }
 
 .conversion-success-text:hover {
