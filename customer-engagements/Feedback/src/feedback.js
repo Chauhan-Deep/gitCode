@@ -73,15 +73,6 @@ try {
 
             if (compareVersion(oldVersion, newVersion) === 1) {
                 updateFeedbackStatus(FEEDBACK.PENDING);
-
-                if (compareDays()) {
-                    if (canShowDialog) {
-                        showFeedbackDialog();
-                    } else {
-                        canShowDialog = true;
-                    }
-                }
-            }
         }
 
         function compareDays() {
@@ -99,14 +90,14 @@ try {
             }
 
             const daysDiff = daysBetween(fileModifiedDate, currentDate);
-            let days = 5;
+            let days = 30;
 
             if (cachedData && cachedData['appdata']) {
                 days = cachedData.appdata['days_rule'];
                 if (days) {
                     days = parseInt(days, 10);
                     if (isNaN(days)) {
-                        days = 5;
+                        days = 30;
                     }
                 }
             }
@@ -232,7 +223,7 @@ try {
             const appdata = {
                 'submitted': status,
                 'version_rule': 2,
-                'days_rule': 5,
+                'days_rule': 30,
                 'total_retries': 5,
                 'retries': 0
             }
@@ -253,7 +244,7 @@ try {
                         const appdata = {
                             'submitted': FEEDBACK.SUBMITTED,
                             'version_rule': 2,
-                            'days_rule': 5,
+                            'days_rule': 30,
                             'total_retries': 5,
                             'retries': 0
                         }
