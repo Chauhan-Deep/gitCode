@@ -73,6 +73,7 @@ try {
 
             if (compareVersion(oldVersion, newVersion) === 1) {
                 updateFeedbackStatus(FEEDBACK.PENDING);
+            }
         }
 
         function compareDays() {
